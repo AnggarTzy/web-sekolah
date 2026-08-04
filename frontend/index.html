@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SMP Muhammadiyah 6 Krian | Sekolah Berkemajuan</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Manrope:wght@400;600&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link href="./src/output.css" rel="stylesheet">
+
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-fixed": "#ffdbce",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "outline-variant": "#c4c6d2",
+              outline: "#747782",
+              "surface-dim": "#cbdbf5",
+              surface: "#f8f9ff",
+              "tertiary-container": "#621f01",
+              "surface-container-highest": "#d3e4fe",
+              "on-primary-fixed-variant": "#1e448b",
+              secondary: "#1b6d24",
+              "surface-container-low": "#eff4ff",
+              "primary-fixed": "#d9e2ff",
+              background: "#f8f9ff",
+              "on-surface": "#0b1c30",
+              "on-secondary-container": "#207128",
+              "on-primary-container": "#7c9ce9",
+              primary: "#001d4e",
+              "secondary-container": "#a0f499",
+              "on-surface-variant": "#434651",
+              "on-secondary-fixed": "#002204",
+              "on-tertiary": "#ffffff",
+              error: "#ba1a1a",
+              "on-primary-fixed": "#001945",
+              "on-secondary-fixed-variant": "#005312",
+              "on-error": "#ffffff",
+              "primary-fixed-dim": "#b0c6ff",
+              "on-tertiary-container": "#e6845d",
+              "inverse-on-surface": "#eaf1ff",
+              "surface-tint": "#3a5ca4",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#793010",
+              tertiary: "#3f1000",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed-dim": "#ffb59a",
+              "surface-container-high": "#dce9ff",
+              "on-background": "#0b1c30",
+              "on-tertiary-fixed": "#380d00",
+              "primary-container": "#003178",
+              "inverse-surface": "#213145",
+              "surface-bright": "#f8f9ff",
+              "surface-container": "#e5eeff",
+              "secondary-fixed-dim": "#87d982",
+              "surface-variant": "#d3e4fe",
+              "error-container": "#ffdad6",
+              "secondary-fixed": "#a3f69c",
+              "inverse-primary": "#b0c6ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+              "3xl": "1.5rem",
+              full: "9999px",
+            },
+            spacing: {
+              "section-gap": "80px",
+              "container-max": "1280px",
+              "stack-lg": "32px",
+              "stack-md": "16px",
+              gutter: "24px",
+              "stack-sm": "8px",
+              "margin-mobile": "16px",
+            },
+            fontFamily: {
+              "headline-lg-mobile": ["Plus Jakarta Sans", "sans-serif"],
+              "body-md": ["Manrope", "sans-serif"],
+              "body-lg": ["Manrope", "sans-serif"],
+              "headline-xl": ["Plus Jakarta Sans", "sans-serif"],
+              "headline-lg": ["Plus Jakarta Sans", "sans-serif"],
+              "label-md": ["Plus Jakarta Sans", "sans-serif"],
+              "headline-md": ["Plus Jakarta Sans", "sans-serif"],
+            },
+            fontSize: {
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "1.2", fontWeight: "700" },
+              ],
+              "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+              "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }],
+              "headline-xl": [
+                "48px",
+                {
+                  lineHeight: "1.2",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg": ["36px", { lineHeight: "1.2", fontWeight: "700" }],
+              "label-md": [
+                "14px",
+                { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" },
+              ],
+              "headline-md": ["24px", { lineHeight: "1.3", fontWeight: "600" }],
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      /* ============================================================
+           CUSTOM STYLES - Tanpa @layer
+           ============================================================ */
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        overscroll-behavior: none;
+      }
+
+      ::-webkit-scrollbar {
+        display: none;
+      }
+
+      main > :first-child {
+        margin-top: 0 !important;
+      }
+      main > :last-child {
+        margin-bottom: 0 !important;
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+        display: inline-block;
+        line-height: 1;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: normal;
+        white-space: nowrap;
+        direction: ltr;
+      }
+
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .animate-marquee {
+        animation: marquee 30s linear infinite;
+        display: flex;
+        width: max-content;
+      }
+
+      @keyframes bounce-slow {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+      .animate-bounce-slow {
+        animation: bounce-slow 3s ease-in-out infinite;
+      }
+
+      @keyframes pulse-soft {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      .animate-pulse-soft {
+        animation: pulse-soft 2s ease-in-out infinite;
+      }
+
+      .bg-gradient-to-t {
+        background-image: linear-gradient(to top, var(--tw-gradient-stops));
+      }
+      .from-primary\/80 {
+        --tw-gradient-from: rgba(0, 29, 78, 0.8);
+        --tw-gradient-stops: var(--tw-gradient-from),
+          var(--tw-gradient-to, transparent);
+      }
+      .from-secondary\/80 {
+        --tw-gradient-from: rgba(27, 109, 36, 0.8);
+        --tw-gradient-stops: var(--tw-gradient-from),
+          var(--tw-gradient-to, transparent);
+      }
+      .via-transparent {
+        --tw-gradient-to: transparent;
+        --tw-gradient-stops: var(--tw-gradient-from), transparent,
+          var(--tw-gradient-to);
+      }
+      .to-transparent {
+        --tw-gradient-to: transparent;
+      }
+
+      .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .backdrop-blur-xl {
+        backdrop-filter: blur(20px);
+      }
+      .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+      }
+
+      .shadow-\[0_1px_8px_rgba\(0\,0\,0\,0\.04\)\] {
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+      }
+
+      .group-hover\:translate-x-2:hover .group-hover\:translate-x-2 {
+        transform: translateX(8px);
+      }
+      .group-hover\:translate-y-2:hover .group-hover\:translate-y-2 {
+        transform: translateY(8px);
+      }
+      .group-hover\:scale-105:hover .group-hover\:scale-105 {
+        transform: scale(1.05);
+      }
+      .group-hover\:scale-110:hover .group-hover\:scale-110 {
+        transform: scale(1.1);
+      }
+      .group-hover\:text-secondary:hover .group-hover\:text-secondary {
+        color: #1b6d24;
+      }
+      .group-hover\:gap-4:hover .group-hover\:gap-4 {
+        gap: 16px;
+      }
+      .group-hover\:gap-5:hover .group-hover\:gap-5 {
+        gap: 20px;
+      }
+
+      .hover\:translate-y-1:hover {
+        transform: translateY(-4px);
+      }
+      .hover\:scale-105:hover {
+        transform: scale(1.05);
+      }
+      .hover\:rotate-0:hover {
+        transform: rotate(0deg);
+      }
+      .hover\:gap-5:hover {
+        gap: 20px;
+      }
+      .hover\:grayscale-0:hover {
+        filter: grayscale(0);
+      }
+      .hover\:bg-primary:hover {
+        background-color: #001d4e;
+      }
+      .hover\:bg-on-secondary-container:hover {
+        background-color: #207128;
+      }
+      .hover\:bg-secondary\/90:hover {
+        background-color: rgba(27, 109, 36, 0.9);
+      }
+      .hover\:bg-white\/20:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      .hover\:bg-primary-fixed:hover {
+        background-color: #d9e2ff;
+      }
+      .hover\:text-on-primary:hover {
+        color: #ffffff;
+      }
+      .hover\:text-primary:hover {
+        color: #001d4e;
+      }
+      .hover\:shadow-xl:hover {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      }
+      .hover\:shadow-primary\/20:hover {
+        box-shadow: 0 10px 40px rgba(0, 29, 78, 0.2);
+      }
+      .hover\:shadow-2xl:hover {
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+      }
+
+      .transition-all {
+        transition: all 0.3s ease;
+      }
+      .transition-transform {
+        transition: transform 0.5s ease;
+      }
+      .transition-colors {
+        transition: color 0.3s ease, background-color 0.3s ease;
+      }
+      .duration-300 {
+        transition-duration: 300ms;
+      }
+      .duration-500 {
+        transition-duration: 500ms;
+      }
+      .duration-700 {
+        transition-duration: 700ms;
+      }
+      .duration-1000 {
+        transition-duration: 1000ms;
+      }
+
+      .blur-3xl {
+        filter: blur(64px);
+      }
+      .blur-\[100px\] {
+        filter: blur(100px);
+      }
+      .blur-\[80px\] {
+        filter: blur(80px);
+      }
+
+      .grayscale {
+        filter: grayscale(1);
+      }
+
+      .invert {
+        filter: invert(1);
+      }
+      .brightness-0 {
+        filter: brightness(0);
+      }
+
+      .bg-white\/10 {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+      .bg-white\/20 {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+      .border-white\/10 {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      .border-white\/20 {
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+      .border-outline-variant\/10 {
+        border-color: rgba(196, 198, 210, 0.1);
+      }
+
+      .tracking-\[0\.2em\] {
+        letter-spacing: 0.2em;
+      }
+      .tracking-\[0\.3em\] {
+        letter-spacing: 0.3em;
+      }
+
+      .rounded-\[40px\] {
+        border-radius: 40px;
+      }
+      .rounded-\[48px\] {
+        border-radius: 48px;
+      }
+      .rounded-\[60px\] {
+        border-radius: 60px;
+      }
+      .rounded-\[32px\] {
+        border-radius: 32px;
+      }
+      .rounded-l-\[120px\] {
+        border-radius: 0 0 0 120px;
+      }
+
+      /* Shadow utilities yg tidak ada di Tailwind CDN */
+      .shadow-xl {
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+      }
+      .shadow-2xl {
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+      }
+      .shadow-lg {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+      .shadow-sm {
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      }
+
+      .rounded-3xl {
+        border-radius: 1.5rem;
+      }
+      .rounded-2xl {
+        border-radius: 1rem;
+      }
+      .rounded-xl {
+        border-radius: 0.75rem;
+      }
+
+      /* Text opacity */
+      .text-on-primary\/80 {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      .text-on-primary\/70 {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .text-on-primary\/60 {
+        color: rgba(255, 255, 255, 0.6);
+      }
+      .text-on-surface-variant {
+        color: #434651;
+      }
+
+      /* Responsive fixes */
+      @media (max-width: 1024px) {
+        .lg\:text-\[64px\] {
+          font-size: 36px !important;
+        }
+        .lg\:text-headline-xl {
+          font-size: 36px !important;
+        }
+        .lg\:text-headline-lg {
+          font-size: 28px !important;
+        }
+        .lg\:px-gutter {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .lg\:p-20 {
+          padding: 24px !important;
+        }
+        .lg\:py-section-gap {
+          padding-top: 60px !important;
+          padding-bottom: 60px !important;
+        }
+        .lg\:col-span-7 {
+          grid-column: span 12 !important;
+        }
+        .lg\:col-span-5 {
+          grid-column: span 12 !important;
+        }
+        .lg\:col-span-4 {
+          grid-column: span 12 !important;
+        }
+        .lg\:col-span-3 {
+          grid-column: span 6 !important;
+        }
+        .lg\:grid-cols-12 {
+          grid-template-columns: 1fr !important;
+        }
+        .lg\:grid-cols-3 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .lg\:grid-cols-4 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .lg\:flex-row {
+          flex-direction: column !important;
+        }
+        .lg\:items-end {
+          align-items: flex-start !important;
+        }
+        .lg\:block {
+          display: none !important;
+        }
+        .lg\:hidden {
+          display: block !important;
+        }
+        .lg\:h-\[600px\] {
+          height: auto !important;
+        }
+        .lg\:pb-32 {
+          padding-bottom: 64px !important;
+        }
+        .lg\:mb-16 {
+          margin-bottom: 32px !important;
+        }
+        .lg\:gap-12 {
+          gap: 24px !important;
+        }
+        .lg\:gap-16 {
+          gap: 32px !important;
+        }
+        .lg\:gap-8 {
+          gap: 16px !important;
+        }
+        .rounded-\[40px\] {
+          border-radius: 24px !important;
+        }
+        .rounded-\[48px\] {
+          border-radius: 24px !important;
+        }
+        .rounded-\[60px\] {
+          border-radius: 24px !important;
+        }
+        .rounded-\[32px\] {
+          border-radius: 20px !important;
+        }
+        .xl\:flex {
+          display: none !important;
+        }
+        .xl\:hidden {
+          display: flex !important;
+        }
+        .xl\:items-center {
+          align-items: center !important;
+        }
+        .xl\:gap-6 {
+          gap: 16px !important;
+        }
+        .md\:col-span-2 {
+          grid-column: span 2 !important;
+        }
+        .md\:grid-cols-2 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .md\:grid-cols-3 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .md\:grid-cols-4 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .md\:col-span-3 {
+          grid-column: span 3 !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .md\:grid-cols-2 {
+          grid-template-columns: 1fr !important;
+        }
+        .md\:grid-cols-3 {
+          grid-template-columns: 1fr !important;
+        }
+        .md\:grid-cols-4 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .md\:col-span-2 {
+          grid-column: span 1 !important;
+        }
+        .md\:col-span-3 {
+          grid-column: span 1 !important;
+        }
+        .md\:col-span-4 {
+          grid-column: span 1 !important;
+        }
+        .md\:flex-row {
+          flex-direction: column !important;
+        }
+        .md\:justify-between {
+          justify-content: center !important;
+        }
+        .md\:items-center {
+          align-items: center !important;
+        }
+        .md\:text-center {
+          text-align: center !important;
+        }
+        .md\:w-auto {
+          width: 100% !important;
+        }
+        .md\:w-1\/2 {
+          width: 100% !important;
+        }
+        .md\:w-1\/3 {
+          width: 100% !important;
+        }
+        .md\:w-2\/3 {
+          width: 100% !important;
+        }
+        .md\:text-headline-lg {
+          font-size: 28px !important;
+        }
+        .md\:text-headline-xl {
+          font-size: 32px !important;
+        }
+        .md\:px-section-padding {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .md\:py-20 {
+          padding-top: 48px !important;
+          padding-bottom: 48px !important;
+        }
+        .md\:gap-8 {
+          gap: 16px !important;
+        }
+        .md\:gap-12 {
+          gap: 24px !important;
+        }
+        .md\:col-span-1 {
+          grid-column: span 1 !important;
+        }
+        .md\:gap-4 {
+          gap: 12px !important;
+        }
+        .md\:gap-6 {
+          gap: 16px !important;
+        }
+        .grid-cols-2 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .grid-cols-1 {
+          grid-template-columns: 1fr !important;
+        }
+        .text-headline-lg-mobile {
+          font-size: 28px !important;
+          line-height: 1.2 !important;
+        }
+        .lg\:text-headline-xl {
+          font-size: 28px !important;
+        }
+        .lg\:text-\[64px\] {
+          font-size: 28px !important;
+        }
+        .lg\:text-headline-lg {
+          font-size: 24px !important;
+        }
+        .lg\:text-left {
+          text-align: center !important;
+        }
+        .lg\:text-right {
+          text-align: center !important;
+        }
+        .lg\:mt-0 {
+          margin-top: 16px !important;
+        }
+        .lg\:mb-0 {
+          margin-bottom: 16px !important;
+        }
+        .lg\:w-1\/2 {
+          width: 100% !important;
+        }
+        .lg\:w-1\/3 {
+          width: 100% !important;
+        }
+        .lg\:w-2\/3 {
+          width: 100% !important;
+        }
+        .lg\:w-auto {
+          width: 100% !important;
+        }
+        .lg\:h-\[600px\] {
+          height: auto !important;
+        }
+        .lg\:rounded-\[60px\] {
+          border-radius: 24px !important;
+        }
+        .lg\:p-20 {
+          padding: 16px !important;
+        }
+        .lg\:pb-32 {
+          padding-bottom: 48px !important;
+        }
+        .lg\:gap-stack-lg {
+          gap: 16px !important;
+        }
+        .lg\:flex {
+          display: flex !important;
+        }
+        .lg\:grid {
+          display: grid !important;
+        }
+        .lg\:flex-wrap {
+          flex-wrap: wrap !important;
+        }
+        .lg\:items-end {
+          align-items: center !important;
+        }
+        .lg\:justify-end {
+          justify-content: center !important;
+        }
+        .px-margin-mobile {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .section-gap {
+          padding-top: 40px !important;
+          padding-bottom: 40px !important;
+        }
+        .py-section-gap {
+          padding-top: 40px !important;
+          padding-bottom: 40px !important;
+        }
+        .py-20 {
+          padding-top: 48px !important;
+          padding-bottom: 48px !important;
+        }
+        .py-24 {
+          padding-top: 48px !important;
+          padding-bottom: 48px !important;
+        }
+        .p-8 {
+          padding: 16px !important;
+        }
+        .px-8 {
+          padding-left: 16px !important;
+          padding-right: 16px !important;
+        }
+        .px-10 {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+        }
+        .py-8 {
+          padding-top: 16px !important;
+          padding-bottom: 16px !important;
+        }
+        .gap-12 {
+          gap: 16px !important;
+        }
+        .gap-8 {
+          gap: 12px !important;
+        }
+        .gap-6 {
+          gap: 12px !important;
+        }
+        .gap-4 {
+          gap: 8px !important;
+        }
+        .gap-16 {
+          gap: 24px !important;
+        }
+        .gap-stack-lg {
+          gap: 16px !important;
+        }
+        .gap-stack-md {
+          gap: 12px !important;
+        }
+        .space-y-stack-md > * + * {
+          margin-top: 12px !important;
+        }
+        .space-y-stack-lg > * + * {
+          margin-top: 16px !important;
+        }
+        .space-y-6 > * + * {
+          margin-top: 16px !important;
+        }
+        .space-y-4 > * + * {
+          margin-top: 12px !important;
+        }
+        .space-y-2 > * + * {
+          margin-top: 6px !important;
+        }
+        .mb-16 {
+          margin-bottom: 24px !important;
+        }
+        .mt-16 {
+          margin-top: 24px !important;
+        }
+        .mt-stack-lg {
+          margin-top: 16px !important;
+        }
+        .pt-8 {
+          padding-top: 16px !important;
+        }
+        .pt-12 {
+          padding-top: 24px !important;
+        }
+        .pt-20 {
+          padding-top: 56px !important;
+        }
+        .pb-24 {
+          padding-bottom: 48px !important;
+        }
+        .w-64 {
+          width: 128px !important;
+        }
+        .h-64 {
+          height: 128px !important;
+        }
+        .w-96 {
+          width: 192px !important;
+        }
+        .h-96 {
+          height: 192px !important;
+        }
+        .w-1\/2 {
+          width: 100% !important;
+        }
+        .w-full {
+          width: 100% !important;
+        }
+        .h-full {
+          height: auto !important;
+        }
+        .aspect-\[4\/5\] {
+          aspect-ratio: auto !important;
+        }
+        .aspect-\[16\/10\] {
+          aspect-ratio: auto !important;
+        }
+        .h-20 {
+          height: 64px !important;
+        }
+        .h-12 {
+          height: 40px !important;
+        }
+        .min-h-screen {
+          min-height: auto !important;
+        }
+        .xl\:flex {
+          display: none !important;
+        }
+        .xl\:hidden {
+          display: flex !important;
+        }
+        .xl\:items-center {
+          align-items: center !important;
+        }
+        .xl\:gap-6 {
+          gap: 12px !important;
+        }
+        .grid-cols-1 {
+          grid-template-columns: 1fr !important;
+        }
+        .grid-cols-2 {
+          grid-template-columns: 1fr 1fr !important;
+        }
+        .grid-cols-3 {
+          grid-template-columns: 1fr !important;
+        }
+        .font-headline-xl {
+          font-size: 28px !important;
+        }
+        .font-headline-lg {
+          font-size: 24px !important;
+        }
+        .font-headline-md {
+          font-size: 20px !important;
+        }
+        .font-body-lg {
+          font-size: 16px !important;
+        }
+        .font-body-md {
+          font-size: 14px !important;
+        }
+        .font-label-md {
+          font-size: 12px !important;
+        }
+        .text-headline-lg-mobile {
+          font-size: 24px !important;
+        }
+        .text-on-primary\/80 {
+          color: rgba(255, 255, 255, 0.8) !important;
+        }
+        .text-on-primary\/70 {
+          color: rgba(255, 255, 255, 0.7) !important;
+        }
+        .text-on-primary\/60 {
+          color: rgba(255, 255, 255, 0.6) !important;
+        }
+        .text-on-surface-variant {
+          color: #434651 !important;
+        }
+        .opacity-100 {
+          opacity: 1 !important;
+        }
+        .translate-y-0 {
+          transform: translateY(0) !important;
+        }
+        .translate-y-10 {
+          transform: translateY(0) !important;
+        }
+        .-translate-y-1 {
+          transform: translateY(0) !important;
+        }
+        .translate-x-2 {
+          transform: translateX(0) !important;
+        }
+        .translate-x-4 {
+          transform: translateX(0) !important;
+        }
+        .translate-y-2 {
+          transform: translateY(0) !important;
+        }
+        .translate-y-4 {
+          transform: translateY(0) !important;
+        }
+        .rotate-2 {
+          transform: rotate(0) !important;
+        }
+        .rotate-12 {
+          transform: rotate(0) !important;
+        }
+        .shadow-xl {
+          box-shadow: none !important;
+        }
+        .shadow-2xl {
+          box-shadow: none !important;
+        }
+        .shadow-lg {
+          box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06) !important;
+        }
+        .shadow-sm {
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .grid-cols-2 {
+          grid-template-columns: 1fr !important;
+        }
+        .flex-col {
+          flex-direction: column !important;
+        }
+        .flex-row {
+          flex-direction: column !important;
+        }
+        .items-end {
+          align-items: center !important;
+        }
+        .justify-between {
+          justify-content: center !important;
+        }
+        .text-center {
+          text-align: center !important;
+        }
+        .gap-4 {
+          gap: 8px !important;
+        }
+        .gap-3 {
+          gap: 6px !important;
+        }
+        .gap-2 {
+          gap: 4px !important;
+        }
+        .px-4 {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+        .px-6 {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+        .py-2 {
+          padding-top: 6px !important;
+          padding-bottom: 6px !important;
+        }
+        .py-3 {
+          padding-top: 8px !important;
+          padding-bottom: 8px !important;
+        }
+        .py-4 {
+          padding-top: 10px !important;
+          padding-bottom: 10px !important;
+        }
+        .h-20 {
+          height: 56px !important;
+        }
+        .h-12 {
+          height: 36px !important;
+        }
+        .h-8 {
+          height: 28px !important;
+        }
+        .w-8 {
+          width: 28px !important;
+        }
+        .w-12 {
+          width: 36px !important;
+        }
+        .text-base {
+          font-size: 14px !important;
+        }
+        .text-sm {
+          font-size: 12px !important;
+        }
+        .text-xs {
+          font-size: 10px !important;
+        }
+        .font-headline-xl {
+          font-size: 24px !important;
+        }
+        .font-headline-lg {
+          font-size: 20px !important;
+        }
+        .font-headline-md {
+          font-size: 18px !important;
+        }
+        .font-body-lg {
+          font-size: 14px !important;
+        }
+        .font-body-md {
+          font-size: 13px !important;
+        }
+        .font-label-md {
+          font-size: 11px !important;
+        }
+        .rounded-\[40px\] {
+          border-radius: 16px !important;
+        }
+        .rounded-\[48px\] {
+          border-radius: 16px !important;
+        }
+        .rounded-\[60px\] {
+          border-radius: 16px !important;
+        }
+        .rounded-\[32px\] {
+          border-radius: 14px !important;
+        }
+        .rounded-3xl {
+          border-radius: 16px !important;
+        }
+        .rounded-2xl {
+          border-radius: 12px !important;
+        }
+        .rounded-xl {
+          border-radius: 10px !important;
+        }
+        .p-8 {
+          padding: 12px !important;
+        }
+        .px-8 {
+          padding-left: 12px !important;
+          padding-right: 12px !important;
+        }
+        .py-8 {
+          padding-top: 12px !important;
+          padding-bottom: 12px !important;
+        }
+        .py-20 {
+          padding-top: 32px !important;
+          padding-bottom: 32px !important;
+        }
+        .py-24 {
+          padding-top: 32px !important;
+          padding-bottom: 32px !important;
+        }
+        .section-gap {
+          padding-top: 32px !important;
+          padding-bottom: 32px !important;
+        }
+        .py-section-gap {
+          padding-top: 32px !important;
+          padding-bottom: 32px !important;
+        }
+        .mb-16 {
+          margin-bottom: 20px !important;
+        }
+        .mt-16 {
+          margin-top: 20px !important;
+        }
+        .mb-8 {
+          margin-bottom: 16px !important;
+        }
+        .mt-8 {
+          margin-top: 16px !important;
+        }
+        .space-y-6 > * + * {
+          margin-top: 12px !important;
+        }
+        .space-y-4 > * + * {
+          margin-top: 10px !important;
+        }
+        .space-y-2 > * + * {
+          margin-top: 4px !important;
+        }
+        .gap-12 {
+          gap: 12px !important;
+        }
+        .gap-8 {
+          gap: 10px !important;
+        }
+        .gap-6 {
+          gap: 10px !important;
+        }
+        .gap-4 {
+          gap: 8px !important;
+        }
+        .gap-stack-lg {
+          gap: 12px !important;
+        }
+        .gap-stack-md {
+          gap: 10px !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-background font-body-md text-on-surface">
+    <!-- ============================================================ -->
+    <!-- HEADER / NAVIGATION -->
+    <!-- ============================================================ -->
+    <header
+      class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
+    >
+      <div
+        class="h-20 max-w-container-max mx-auto px-margin-mobile lg:px-gutter flex items-center justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <img
+            alt="Logo SMP Muhammadiyah 6 Krian"
+            class="h-12 w-auto object-contain"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__OC99g7VsrI_gvYNpa34JiTgwwRJds43Lq17kE8F-jtwcu5L1MSUFx-XxkYCD3r3iiIL9VViNGSm6F80mSRAD_9eSj-teh4IkUj5XLSFVoKjwDqMmEFxdaCth4Qhnx3k62PQaIArYF1TFYE43iJ05bEnNRl-xUd2MpAWqzmEQexTzJoHQT0PaGVktdbnC7nxQYobyseaCw2-kEdCBdKg5Dwk2ndZotROW3YoRCL6HLr16Qidynfo4w"
+          />
+          <div class="flex flex-col">
+            <span class="font-headline-md text-primary leading-none"
+              >SMPM 6</span
+            >
+            <span
+              class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold"
+              >Krian - Sidoarjo</span
+            >
+          </div>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden xl:flex items-center gap-6 h-full">
+          <a
+            aria-current="page"
+            class="transition-colors py-2 text-primary font-bold border-b-2 border-primary"
+            href="#"
+            >Beranda</a
+          >
+          <a
+            class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+            href="infromasi.html"
+            >Tentang Kami</a
+          >
+          <a
+            class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+            href="#"
+            >Akademik</a
+          >
+          <a
+            class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+            href="#"
+            >Kesiswaan</a
+          >
+          <a
+            class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+            href="#"
+            >Berita</a
+          >
+          <a
+            class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+            href="#"
+            >Prestasi</a
+          >
+          <a
+            class="ml-4 px-6 py-2 bg-secondary text-on-secondary rounded-full text-label-md hover:bg-on-secondary-container transition-all"
+            href="#"
+            >PPDB</a
+          >
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <div class="flex items-center gap-4">
+          <div
+            class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-on-primary text-[18px]"
+              >person</span
+            >
+          </div>
+          <button
+            class="xl:hidden text-on-surface"
+            id="mobileMenuBtn"
+            onclick="document.getElementById('mobileNav').classList.toggle('hidden')"
+          >
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Nav -->
+      <div
+        class="hidden xl:hidden bg-surface border-t border-outline-variant"
+        id="mobileNav"
+      >
+        <div class="max-w-container-max mx-auto px-margin-mobile py-4">
+          <div class="flex flex-col gap-3">
+            <a
+              class="text-label-md text-primary font-bold border-b-2 border-primary py-2"
+              href="#"
+              >Beranda</a
+            >
+            <a
+              class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+              href="#"
+              >Tentang Kami</a
+            >
+            <a
+              class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+              href="#"
+              >Akademik</a
+            >
+            <a
+              class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+              href="#"
+              >Kesiswaan</a
+            >
+            <a
+              class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+              href="#"
+              >Berita</a
+            >
+            <a
+              class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
+              href="#"
+              >Prestasi</a
+            >
+            <a
+              class="px-6 py-2 bg-secondary text-on-secondary rounded-full text-label-md text-center hover:bg-on-secondary-container transition-all"
+              href="#"
+              >PPDB</a
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================================ -->
+    <!-- MAIN CONTENT -->
+    <!-- ============================================================ -->
+    <main class="w-full pt-20 bg-background">
+      <div class="flex flex-col w-full">
+        <!-- ============================================================ -->
+        <!-- HERO SECTION -->
+        <!-- ============================================================ -->
+        <section
+          class="relative w-full overflow-hidden bg-surface pt-12 pb-24 lg:pb-32"
+        >
+          <!-- Decorative background elements -->
+          <div
+            class="absolute top-0 right-0 w-1/2 h-full bg-primary/5 rounded-l-[120px] -mr-24 rotate-12 hidden lg:block"
+          ></div>
+          <div
+            class="absolute -bottom-24 -left-24 w-96 h-96 bg-secondary/5 rounded-full blur-3xl"
+          ></div>
+
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter relative"
+          >
+            <div
+              class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-center"
+            >
+              <!-- Text Content -->
+              <div class="lg:col-span-7 space-y-stack-lg z-10">
+                <div
+                  class="inline-flex items-center gap-2 px-4 py-2 bg-primary-fixed rounded-full"
+                >
+                  <span
+                    class="w-2 h-2 rounded-full bg-primary animate-pulse-soft"
+                  ></span>
+                  <span
+                    class="font-label-md text-on-primary-fixed uppercase tracking-widest"
+                    >Pendaftaran Siswa Baru 2024/2025</span
+                  >
+                </div>
+                <h1
+                  class="font-headline-xl text-primary text-headline-lg-mobile lg:text-[64px] leading-[1.1]"
+                >
+                  Unggul dalam Prestasi,<br />
+                  <span class="text-secondary italic">Berakhlakul Karimah</span>
+                </h1>
+                <p class="font-body-lg text-on-surface-variant max-w-2xl">
+                  Selamat datang di SMP Muhammadiyah 6 Krian. Kami membentuk
+                  generasi cerdas teknologi yang berlandaskan nilai-nilai
+                  keislaman yang kuat untuk menghadapi tantangan masa depan.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                  <a
+                    class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2"
+                    href="#"
+                  >
+                    Daftar Sekarang
+                    <span class="material-symbols-outlined">arrow_forward</span>
+                  </a>
+                  <a
+                    class="px-8 py-4 bg-white text-primary border border-primary/20 rounded-xl font-label-md hover:bg-primary-fixed transition-all"
+                    href="#"
+                  >
+                    Jelajahi Program
+                  </a>
+                </div>
+              </div>
+
+              <!-- Image Composition -->
+              <div class="lg:col-span-5 relative">
+                <div
+                  class="relative z-10 rounded-[40px] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500"
+                >
+                  <img
+                    class="w-full aspect-[4/5] object-cover"
+                    alt="Students collaborating on laptops"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoaeDHkY-Wt4TH7yjeIH7Wrk06OLB-PivzVdNY-BOU06ZDIgDzjs0WoEmtB1_TrmtopMlUsNNI3nKk4KaSuoGFb3efmp7qI-bictV19XfzL1kbzG2Aqvc3rvaHi0CSGLUjkjFCaqzgouKDopQM23lfNJ9N4JgY9e7SRAbxuWNbj_qP88OiWRB_omnzEx-T-UL76uO0kccXz4R2TmEhbJO5FkHhHa5mCh_3oEKHLhfehGHKeqzyrlta6g"
+                  />
+                </div>
+                <div
+                  class="absolute -top-6 -right-6 w-full h-full border-2 border-secondary rounded-[40px] -z-10"
+                ></div>
+
+                <!-- Floating Stats Badge -->
+                <div
+                  class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-2xl z-20 flex items-center gap-4 animate-bounce-slow"
+                >
+                  <div
+                    class="w-12 h-12 bg-secondary/10 rounded-full flex items-center justify-center text-secondary"
+                  >
+                    <span class="material-symbols-outlined">verified</span>
+                  </div>
+                  <div>
+                    <p class="font-headline-md text-primary leading-none">A+</p>
+                    <p class="font-label-md text-on-surface-variant">
+                      Akreditasi
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- MARQUEE SECTION -->
+        <!-- ============================================================ -->
+        <div class="w-full bg-primary py-8 overflow-hidden">
+          <div class="flex whitespace-nowrap animate-marquee">
+            <div class="flex items-center gap-12 px-6">
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >star</span
+                >
+                Berkarakter
+              </span>
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >favorite</span
+                >
+                Peduli
+              </span>
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >auto_awesome</span
+                >
+                Berprestasi
+              </span>
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >school</span
+                >
+                Islami
+              </span>
+            </div>
+            <!-- Duplicate for infinite scroll -->
+            <div class="flex items-center gap-12 px-6">
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >star</span
+                >
+                Berkarakter
+              </span>
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >favorite</span
+                >
+                Peduli
+              </span>
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >auto_awesome</span
+                >
+                Berprestasi
+              </span>
+              <span
+                class="font-headline-md text-on-primary uppercase flex items-center gap-4"
+              >
+                <span class="material-symbols-outlined text-secondary-container"
+                  >school</span
+                >
+                Islami
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- PRINCIPAL'S WELCOME -->
+        <!-- ============================================================ -->
+        <section class="w-full py-section-gap bg-white">
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter"
+          >
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+              <div class="lg:col-span-5">
+                <div class="relative group">
+                  <div
+                    class="absolute inset-0 bg-primary/10 rounded-[60px] translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform"
+                  ></div>
+                  <img
+                    alt="Kepala Sekolah SMP Muhammadiyah 6 Krian"
+                    class="relative z-10 w-full rounded-[60px] shadow-lg grayscale hover:grayscale-0 transition-all duration-700"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyvcisDnawXBOI2fjPbf3X4Gp4HvCoOldNRHOpxQ3WW29LtFJXzQk7qNfs6Po1FHCFU5mesaZDB_ucW8eQeN2KZj2JyMW1mVMCeNysB3ALAzIEUwasUfrZnqTVVMABo28wjWyJ3zM9o7Iw9jTmUmjuGoA2ydPDn6MXWIygk5RRNoT_0xqzUe8qCgcbuaMzL2Cd7fG9jPvDNrEPYJYeTWhRoK_Cmyi4fHyY7VLSZeAqBYMoYnDCqqzQA"
+                  />
+                </div>
+              </div>
+              <div class="lg:col-span-7 space-y-stack-md">
+                <span
+                  class="font-label-md text-secondary uppercase tracking-[0.2em] font-bold"
+                  >Sambutan Kepala Sekolah</span
+                >
+                <h2
+                  class="font-headline-lg text-primary text-headline-lg-mobile lg:text-headline-lg"
+                >
+                  Membangun Masa Depan Dengan
+                  <span class="text-secondary">Akhlaqul Karimah</span>
+                </h2>
+                <div
+                  class="w-20 h-1.5 bg-secondary-container rounded-full mb-8"
+                ></div>
+                <div class="space-y-6">
+                  <p
+                    class="font-body-lg text-on-surface-variant leading-relaxed"
+                  >
+                    "Selamat datang di SMP Muhammadiyah 6 Krian. Kami
+                    berkomitmen untuk menyelenggarakan pendidikan yang seimbang
+                    antara ilmu pengetahuan umum dan nilai-nilai keislaman."
+                  </p>
+                  <p
+                    class="font-body-lg text-on-surface-variant leading-relaxed italic border-l-4 border-primary-fixed pl-6 py-2 bg-surface"
+                  >
+                    "Bersama kita wujudkan generasi yang cerdas intelektualnya,
+                    mulia budi pekertinya, dan kuat imannya."
+                  </p>
+                </div>
+                <div class="pt-8">
+                  <p class="font-headline-md text-primary">
+                    Drs. H. Ahmad Muhajir, M.Pd
+                  </p>
+                  <p class="font-label-md text-on-surface-variant uppercase">
+                    Kepala Sekolah SMPM 6 Krian
+                  </p>
+                </div>
+                <a
+                  class="inline-flex items-center gap-3 text-primary font-label-md hover:gap-5 transition-all group mt-4"
+                  href="#"
+                >
+                  Baca Selengkapnya
+                  <span class="material-symbols-outlined text-secondary"
+                    >arrow_right_alt</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- STATISTICS COUNTER -->
+        <!-- ============================================================ -->
+        <section
+          class="w-full py-20 bg-surface-container-low border-y border-outline-variant/10"
+        >
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter"
+          >
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-stack-lg">
+              <div class="text-center space-y-2 group">
+                <span
+                  class="font-headline-xl text-primary block transition-transform group-hover:scale-110"
+                  >850+</span
+                >
+                <p
+                  class="font-label-md text-on-surface-variant uppercase tracking-widest"
+                >
+                  Siswa Aktif
+                </p>
+              </div>
+              <div class="text-center space-y-2 group">
+                <span
+                  class="font-headline-xl text-secondary block transition-transform group-hover:scale-110"
+                  >45</span
+                >
+                <p
+                  class="font-label-md text-on-surface-variant uppercase tracking-widest"
+                >
+                  Tenaga Pendidik
+                </p>
+              </div>
+              <div class="text-center space-y-2 group">
+                <span
+                  class="font-headline-xl text-primary block transition-transform group-hover:scale-110"
+                  >120</span
+                >
+                <p
+                  class="font-label-md text-on-surface-variant uppercase tracking-widest"
+                >
+                  Penghargaan
+                </p>
+              </div>
+              <div class="text-center space-y-2 group">
+                <span
+                  class="font-headline-xl text-secondary block transition-transform group-hover:scale-110"
+                  >24+</span
+                >
+                <p
+                  class="font-label-md text-on-surface-variant uppercase tracking-widest"
+                >
+                  Ekstrakurikuler
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- FACILITIES - BENTO GRID -->
+        <!-- ============================================================ -->
+        <section class="w-full py-section-gap bg-white overflow-hidden">
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter"
+          >
+            <div
+              class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-6"
+            >
+              <div class="max-w-2xl">
+                <span
+                  class="font-label-md text-secondary uppercase tracking-widest font-bold"
+                  >Fasilitas Sekolah</span
+                >
+                <h2 class="font-headline-lg text-primary mt-4">
+                  Sarana Modern Penunjang Kreativitas Siswa
+                </h2>
+              </div>
+              <a
+                class="px-6 py-3 bg-surface text-primary rounded-full font-label-md hover:bg-primary hover:text-on-primary transition-colors"
+                href="#"
+                >Lihat Semua Fasilitas</a
+              >
+            </div>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto lg:h-[600px]"
+            >
+              <!-- Card 1 - Large -->
+              <div
+                class="md:col-span-2 relative group overflow-hidden rounded-[32px] shadow-lg"
+              >
+                <img
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  alt="Computer lab"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxbhb_xw1eAv8H4aHcPjM8ICvJUuf6ILlzcwYcUw53VjgaHnnXtL5DX80pazWsqtMQnpAapymgI8zxx4HT3X_kEdThYvz8_CIU1VfXMrKdHY9wKngjBHlHHJySJz-XV3Fv4d8Y8aAWKew5OKfpn9NHpZWnlFH1dvS_jkNKR6EzBvZBM6g63iNOAwvK5gyDe2qpH3NUuic6tB4o5UDyPZdIum5uVyHhMxa_YrfEd8fhMm6kIsMDDzLEWQ"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
+                ></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                  <p
+                    class="font-label-md text-secondary-container uppercase tracking-widest mb-2"
+                  >
+                    Digital Learning
+                  </p>
+                  <h3 class="font-headline-md text-on-primary">
+                    Lab Komputer &amp; Multimedia
+                  </h3>
+                  <p class="font-body-md text-on-primary/70 mt-2">
+                    Dukungan teknologi terkini untuk literasi digital era 4.0
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 2 -->
+              <div
+                class="relative group overflow-hidden rounded-[32px] shadow-lg"
+              >
+                <img
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  alt="Library"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFbrcx3CER0S3bm0XhT__WUa3GXXzE4OjNrryAXw-sDbp4wQBPQOPm7CgBGiICPlx9e3d3ePqHQ_cfSa1x5wVuTV0sooixzGm4-qHP0ZXLPaPyDKXhuAFW2MKNES5BKS6vBAp92jwEY2souTKnMQvaSogMu2ip9EvanxeSeSaILYb18LyAHFajyUFGtI2-72uAHWHWxdfNxECaeDOXj09wXAkw5nvw-nYDJhkWzlYeM2LWaJ34UX2zuA"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent"
+                ></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                  <h3 class="font-headline-md text-on-primary">
+                    Smart Library
+                  </h3>
+                  <p class="font-body-md text-on-primary/70 mt-2">
+                    Ribuan koleksi literasi fisik &amp; digital.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 3 -->
+              <div
+                class="relative group overflow-hidden rounded-[32px] shadow-lg"
+              >
+                <img
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  alt="Sports center"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKtIXl0MTC8_RxlaQ7ZBqgBv5RJfb6f6ROqbUrWoJyoZJjIvYbK5Vd4qQcJ_NKUPE-c2zYwRheHSBZ4UWJgwrsfvcUA1E3JRNaeQlLqJ-kWi55_60JrzIRshEb3xVZTs-U19ravssbTsP-UNZaSCjSLUrgYQTmfFvwKzSnAINqWxjKlQUqmAt829kaHcnzuFT9F3sMlJ-ef5_NN4X06kbZDbyebUwSnF0HDMfhpEzClnhjOCdN1qhzew"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
+                ></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                  <h3 class="font-headline-md text-on-primary">Sport Center</h3>
+                  <p class="font-body-md text-on-primary/70 mt-2">
+                    Fasilitas olahraga indoor &amp; outdoor lengkap.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card 4 - Large -->
+              <div
+                class="md:col-span-2 relative group overflow-hidden rounded-[32px] shadow-lg"
+              >
+                <img
+                  class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  alt="Prayer hall"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9nCZSwYa90xrae14eW1R2AHsGLRVcMrdl13FgLZjqQa0TDA0xvPnk1zpfmkQuyvfpqbWUV4014spNGKcahroiF0dIy9UFqz4dvPyU4WsMIPIYem0QgBlnnuh5MgBWEcLr0c4WWNkb4j7_Q1WJUx2DDYj-5t91_WlKjg6ThBSCOGvkH9oNKiTl1Cpz2rU6bDXh077fBuDHfPgfMmDnMjgP7AD_yAk4TXBRbCY61lDVGSxTvTO4yktvNQ"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
+                ></div>
+                <div class="absolute bottom-8 left-8 right-8">
+                  <h3 class="font-headline-md text-on-primary">
+                    Masjid Al-Ikhlas
+                  </h3>
+                  <p class="font-body-md text-on-primary/70 mt-2">
+                    Pusat pembinaan spiritual dan akhlak siswa.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- NEWS & ACHIEVEMENTS -->
+        <!-- ============================================================ -->
+        <section class="w-full py-section-gap bg-surface">
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter"
+          >
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+              <span
+                class="font-label-md text-primary uppercase tracking-[0.3em] font-bold"
+                >Warta Sekolah</span
+              >
+              <h2 class="font-headline-lg text-primary">
+                Berita &amp; Prestasi Terbaru
+              </h2>
+              <p class="font-body-lg text-on-surface-variant">
+                Update terkini mengenai aktivitas akademik, prestasi siswa, dan
+                agenda penting sekolah kami.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- News Item 1 -->
+              <article
+                class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
+              >
+                <div class="relative overflow-hidden aspect-[16/10]">
+                  <img
+                    class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    alt="Robotics competition"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOvxVGzsaotUxf7NQdqQbZHFHiUK8S0fqqH6EJi_KYAJq_gYAqVe6jeWLk4zIqPOf9swCU0aBYE8_2ZpDZjSxNfI4dNBKrBO1HMV6N5n_792ollsNzQ-bTsMRb5j34KABPGu05warSDky9tpdyeSJvRhcfdGzEbBHa9hHVSEahwdtsvnGK9pt1nW5Q9sxVy_ocOInVAHUqyKgFRge1KNz2iYq5z733YZ-UmlwWGjhZ9-JwT90K_e1vg"
+                  />
+                  <div
+                    class="absolute top-4 left-4 bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md"
+                  >
+                    Prestasi
+                  </div>
+                </div>
+                <div class="p-8 space-y-4">
+                  <div
+                    class="flex items-center gap-2 text-on-surface-variant font-label-md"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >calendar_today</span
+                    >
+                    12 Maret 2024
+                  </div>
+                  <h3
+                    class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors"
+                  >
+                    Juara 1 Lomba Robotik Nasional Tingkat SMP
+                  </h3>
+                  <p class="text-on-surface-variant line-clamp-2">
+                    Siswa SMPM 6 Krian kembali mengukir prestasi gemilang dengan
+                    meraih medali emas dalam ajang...
+                  </p>
+                  <a
+                    class="inline-flex items-center gap-2 font-label-md text-primary group-hover:gap-4 transition-all"
+                    href="#"
+                  >
+                    Selengkapnya
+                    <span class="material-symbols-outlined">chevron_right</span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- News Item 2 -->
+              <article
+                class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
+              >
+                <div class="relative overflow-hidden aspect-[16/10]">
+                  <img
+                    class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    alt="Social activity"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Gd08iwbv1BxpKbCVl9eUoaf5LPronJbfyhreBMtFqjVAjaUXSVfVt1897F9Uaa1Wl9g-j8RRErG6sF43X2CORC7BpBQd5_fEB0bqn0LDCk5cI8Z5GOWSCGpa-Illr5H2QQxIHiQfdwyuYep9QrVHMOb5wK3sJ4Spa_w-ONfTIEJkBC_hke1zeb55XPRA4-sW9Gfd2q8AeTPdTyXc8F8-QCPmDBDxJQxAu6QTdHcND2yueFqNFW73pg"
+                  />
+                  <div
+                    class="absolute top-4 left-4 bg-primary text-on-primary px-4 py-1 rounded-full font-label-md"
+                  >
+                    Kegiatan
+                  </div>
+                </div>
+                <div class="p-8 space-y-4">
+                  <div
+                    class="flex items-center gap-2 text-on-surface-variant font-label-md"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >calendar_today</span
+                    >
+                    08 Maret 2024
+                  </div>
+                  <h3
+                    class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors"
+                  >
+                    Semarak Ramadhan: Berbagi Kebahagiaan Bersama
+                  </h3>
+                  <p class="text-on-surface-variant line-clamp-2">
+                    Mengawali bulan suci Ramadhan, keluarga besar SMP
+                    Muhammadiyah 6 Krian mengadakan aksi sosial...
+                  </p>
+                  <a
+                    class="inline-flex items-center gap-2 font-label-md text-primary group-hover:gap-4 transition-all"
+                    href="#"
+                  >
+                    Selengkapnya
+                    <span class="material-symbols-outlined">chevron_right</span>
+                  </a>
+                </div>
+              </article>
+
+              <!-- News Item 3 -->
+              <article
+                class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group"
+              >
+                <div class="relative overflow-hidden aspect-[16/10]">
+                  <img
+                    class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                    alt="Digital workshop"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDljOojaPak1pyMVfZX9_tfY3Q73hwHzU5FrLIK26CTjaoxmS4b-2ZbdFqJSBCtfBh_dhtZ5sNMRjFvFdoVZ6jyroFlF0VWpiI5heJHnJmhJY8TAbvWa7_VvSni6lbv7BYroiGAu-Pgnjh0MOftOArQzCInCINtMs1StblnjuipJh7qL8cL5QrAfk2_2EL6h0sw7LOIQjERCr1OTyhVcfaQK8nhEuYZXehFBwTXoZA2NleIvRRDZKgpbg"
+                  />
+                  <div
+                    class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full font-label-md"
+                  >
+                    Akademik
+                  </div>
+                </div>
+                <div class="p-8 space-y-4">
+                  <div
+                    class="flex items-center gap-2 text-on-surface-variant font-label-md"
+                  >
+                    <span class="material-symbols-outlined text-[16px]"
+                      >calendar_today</span
+                    >
+                    05 Maret 2024
+                  </div>
+                  <h3
+                    class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors"
+                  >
+                    Workshop Literasi Digital &amp; Pengenalan AI
+                  </h3>
+                  <p class="text-on-surface-variant line-clamp-2">
+                    Membekali siswa dengan pemahaman mendalam tentang
+                    pemanfaatan AI yang bijak dalam proses belajar...
+                  </p>
+                  <a
+                    class="inline-flex items-center gap-2 font-label-md text-primary group-hover:gap-4 transition-all"
+                    href="#"
+                  >
+                    Selengkapnya
+                    <span class="material-symbols-outlined">chevron_right</span>
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="mt-16 text-center">
+              <button
+                class="px-10 py-4 bg-primary text-on-primary rounded-full shadow-lg hover:shadow-primary/20 hover:-translate-y-1 transition-all"
+              >
+                Lihat Semua Berita &amp; Prestasi
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- CTA SECTION -->
+        <!-- ============================================================ -->
+        <section class="w-full px-margin-mobile lg:px-gutter py-24">
+          <div
+            class="max-w-container-max mx-auto bg-primary rounded-[48px] p-8 lg:p-20 relative overflow-hidden"
+          >
+            <div
+              class="absolute top-0 right-0 w-64 h-64 bg-secondary/20 rounded-full blur-[100px] -mr-32 -mt-32"
+            ></div>
+            <div
+              class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] -ml-32 -mb-32"
+            ></div>
+            <div class="relative z-10 text-center space-y-stack-md">
+              <h2
+                class="font-headline-xl text-on-primary text-headline-lg-mobile lg:text-headline-xl"
+              >
+                Mulai Perjalanan Prestasimu Bersama Kami
+              </h2>
+              <p class="font-body-lg text-on-primary/80 max-w-2xl mx-auto">
+                Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2024/2025
+                telah dibuka. Segera amankan kuota untuk masa depan yang lebih
+                cerah.
+              </p>
+              <div class="flex flex-col sm:flex-row justify-center gap-4 pt-8">
+                <a
+                  class="bg-secondary text-on-secondary px-10 py-4 rounded-xl font-label-md hover:bg-secondary/90 transition-all shadow-xl flex items-center justify-center gap-2"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined">edit_square</span>
+                  Daftar PPDB Online
+                </a>
+                <a
+                  class="bg-white/10 backdrop-blur-md text-on-primary px-10 py-4 rounded-xl font-label-md hover:bg-white/20 transition-all flex items-center justify-center gap-2"
+                  href="#"
+                >
+                  <span class="material-symbols-outlined">download</span>
+                  Unduh Brosur
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- FOOTER -->
+        <!-- ============================================================ -->
+        <footer class="w-full bg-primary text-on-primary py-section-gap">
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter grid grid-cols-1 md:grid-cols-3 gap-stack-lg"
+          >
+            <div class="space-y-stack-md">
+              <div
+                class="flex items-center gap-3 bg-white/10 p-4 rounded-xl w-fit"
+              >
+                <img
+                  alt="Logo"
+                  class="h-10 w-auto invert brightness-0"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__OC99g7VsrI_gvYNpa34JiTgwwRJds43Lq17kE8F-jtwcu5L1MSUFx-XxkYCD3r3iiIL9VViNGSm6F80mSRAD_9eSj-teh4IkUj5XLSFVoKjwDqMmEFxdaCth4Qhnx3k62PQaIArYF1TFYE43iJ05bEnNRl-xUd2MpAWqzmEQexTzJoHQT0PaGVktdbnC7nxQYobyseaCw2-kEdCBdKg5Dwk2ndZotROW3YoRCL6HLr16Qidynfo4w"
+                />
+                <span class="font-headline-md">SMPM 6 Krian</span>
+              </div>
+              <p class="text-body-md text-on-primary/80">
+                Mewujudkan generasi islami yang unggul dalam prestasi dan
+                berakhlakul karimah.
+              </p>
+            </div>
+
+            <div class="space-y-stack-md">
+              <h4 class="font-headline-md">Kontak Kami</h4>
+              <ul class="space-y-3 text-on-primary/80">
+                <li class="flex items-start gap-3">
+                  <span
+                    class="material-symbols-outlined text-secondary-container"
+                    >location_on</span
+                  >
+                  <span>Jl. Kyai Mojo No. 12, Krian, Sidoarjo, Jawa Timur</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span
+                    class="material-symbols-outlined text-secondary-container"
+                    >call</span
+                  >
+                  <span>(031) 8971234</span>
+                </li>
+                <li class="flex items-center gap-3">
+                  <span
+                    class="material-symbols-outlined text-secondary-container"
+                    >mail</span
+                  >
+                  <span>info@smpm6krian.sch.id</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="space-y-stack-md">
+              <h4 class="font-headline-md">Ikuti Kami</h4>
+              <div class="flex gap-4">
+                <a
+                  class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
+                  href="#"
+                  ><span class="material-symbols-outlined">share</span></a
+                >
+                <a
+                  class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
+                  href="#"
+                  ><span class="material-symbols-outlined">public</span></a
+                >
+                <a
+                  class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
+                  href="#"
+                  ><span class="material-symbols-outlined">videocam</span></a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter mt-stack-lg pt-stack-md border-t border-white/10 text-center text-on-primary/60 text-label-md"
+          >
+            © 2024 SMP Muhammadiyah 6 Krian. All rights reserved.
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- AOS ANIMATION -->
+    <!-- ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 600,
+        once: true,
+        offset: 40,
+        easing: "ease-out-cubic",
+      });
+
+      // Mobile menu toggle
+      document.addEventListener("click", function (e) {
+        const menu = document.getElementById("mobileNav");
+        const btn = document.getElementById("mobileMenuBtn");
+        if (menu && btn) {
+          if (!menu.contains(e.target) && !btn.contains(e.target)) {
+            menu.classList.add("hidden");
+          }
+        }
+      });
+
+      // Navbar scroll effect
+      document.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
+        } else {
+          header.style.boxShadow = "0 1px 8px rgba(0,0,0,0.04)";
+        }
+      });
+    </script>
+
+    <!-- ============================================================ -->
+    <!-- INTERSECTION OBSERVER FOR ANIMATIONS -->
+    <!-- ============================================================ -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const observerOptions = {
+          threshold: 0.1,
+        };
+
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("opacity-100", "translate-y-0");
+              entry.target.classList.remove("opacity-0", "translate-y-10");
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll("article, section > div, .group").forEach(
+          function (el) {
+            el.classList.add(
+              "transition-all",
+              "duration-1000",
+              "opacity-0",
+              "translate-y-10"
+            );
+            observer.observe(el);
+          }
+        );
+      });
+    </script>
+  </body>
+</html>
