@@ -209,7 +209,42 @@
       animation: pulse-soft 2s ease-in-out infinite;
     }
 
-    /* Utility Classes - Fixed */
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(2deg);
+      }
+    }
+
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+    .animate-shimmer {
+      background: linear-gradient(90deg,
+          rgba(255, 255, 255, 0) 0%,
+          rgba(255, 255, 255, 0.3) 50%,
+          rgba(255, 255, 255, 0) 100%);
+      background-size: 200% 100%;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Utility Classes */
     .bg-gradient-to-t {
       background-image: linear-gradient(to top, var(--tw-gradient-stops));
     }
@@ -237,14 +272,13 @@
     }
 
     .line-clamp-2 {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-}
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
 
-    /* Fixed typo: 2opx → 20px */
     .backdrop-blur-xl {
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -407,6 +441,10 @@
       transform: translateY(-4px);
     }
 
+    .hover\:-translate-y-2:hover {
+      transform: translateY(-8px);
+    }
+
     .hover\:scale-105:hover {
       transform: scale(1.05);
     }
@@ -461,15 +499,15 @@
 
     /* Transitions */
     .transition-all {
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .transition-transform {
-      transition: transform 0.5s ease;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .transition-colors {
-      transition: color 0.3s ease, background-color 0.3s ease;
+      transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .duration-300 {
@@ -499,6 +537,24 @@
 
     .brightness-0 {
       filter: brightness(0);
+    }
+
+    /* Dropdown Styles */
+    .dropdown-menu {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .group:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .group:hover .dropdown-arrow {
+      transform: rotate(180deg);
     }
 
     /* ============================================================
@@ -1271,7 +1327,7 @@
 
 <body class="bg-background font-body-md text-on-surface">
   <!-- ============================================================ -->
-  <!-- HEADER / NAVIGATION - IMPROVED ACCESSIBILITY -->
+  <!-- HEADER / NAVIGATION - SEPERTI GAMBAR -->
   <!-- ============================================================ -->
   <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]"
     role="banner">
@@ -1285,49 +1341,137 @@
         </div>
       </div>
 
-      <!-- Desktop Nav -->
+      <!-- Desktop Nav - SEPERTI GAMBAR: Beranda | Tentang Kami ▼ | Informasi ▼ | Publikasi | Ruang Aspirasi | PPDB -->
       <nav class="hidden xl:flex items-center gap-6 h-full" role="navigation" aria-label="Navigasi Utama">
         <a aria-current="page" class="transition-colors py-2 text-primary font-bold border-b-2 border-primary"
           href="#">Beranda</a>
-        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
-          href="infromasi.html">Tentang Kami</a>
-        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Akademik</a>
-        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
-          href="#">Kesiswaan</a>
-        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Berita</a>
-        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Prestasi</a>
-        <a class="ml-4 px-6 py-2 bg-secondary text-on-secondary rounded-full text-label-md hover:bg-on-secondary-container transition-all"
+
+        <!-- Dropdown: Tentang Kami -->
+        <div class="relative group h-full flex items-center">
+          <button class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 flex items-center gap-1 group-hover:text-primary"
+            aria-haspopup="true" aria-expanded="false">
+            Tentang Kami
+            <span class="material-symbols-outlined text-[18px] transition-transform duration-300 dropdown-arrow">expand_more</span>
+          </button>
+          <div class="dropdown-menu absolute top-full left-0 pt-2 w-56 bg-surface rounded-xl shadow-xl border border-outline-variant/10 overflow-hidden">
+            <a href="infromasi.html" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary">
+              <span class="material-symbols-outlined text-secondary text-[20px]">school</span>
+              <span class="font-body-md">Profil Sekolah</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary">
+              <span class="material-symbols-outlined text-secondary text-[20px]">groups</span>
+              <span class="font-body-md">Profil Tenaga Pendidik</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary">
+              <span class="material-symbols-outlined text-secondary text-[20px]">build</span>
+              <span class="font-body-md">Sarana & Prasarana</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary border-t border-outline-variant/10">
+              <span class="material-symbols-outlined text-secondary text-[20px]">contact_support</span>
+              <span class="font-body-md">Kontak Informasi</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dropdown: Informasi -->
+        <div class="relative group h-full flex items-center">
+          <button class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 flex items-center gap-1 group-hover:text-primary"
+            aria-haspopup="true" aria-expanded="false">
+            Informasi
+            <span class="material-symbols-outlined text-[18px] transition-transform duration-300 dropdown-arrow">expand_more</span>
+          </button>
+          <div class="dropdown-menu absolute top-full left-0 pt-2 w-56 bg-surface rounded-xl shadow-xl border border-outline-variant/10 overflow-hidden">
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary">
+              <span class="material-symbols-outlined text-secondary text-[20px]">calendar_month</span>
+              <span class="font-body-md">Kalender Akademik</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary">
+              <span class="material-symbols-outlined text-secondary text-[20px]">event_note</span>
+              <span class="font-body-md">Pengumuman</span>
+            </a>
+            <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-primary-fixed transition-colors text-on-surface-variant hover:text-primary">
+              <span class="material-symbols-outlined text-secondary text-[20px]">description</span>
+              <span class="font-body-md">Dokumen Sekolah</span>
+            </a>
+          </div>
+        </div>
+
+        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Publikasi</a>
+        <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Ruang Aspirasi</a>
+
+        <!-- Tombol PPDB -->
+        <a class="ml-4 px-6 py-2 bg-secondary text-on-secondary rounded-full text-label-md hover:bg-on-secondary-container transition-all hover:shadow-lg hover:-translate-y-1"
           href="#">PPDB</a>
       </nav>
 
       <!-- Mobile Menu Button -->
-      <div class="flex items-center gap-4">
-        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center" aria-hidden="true">
-          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-        </div>
-        <button class="xl:hidden text-on-surface" id="mobileMenuBtn" aria-label="Toggle mobile navigation menu"
-          aria-expanded="false" onclick="toggleMobileMenu()">
-          <span class="material-symbols-outlined">menu</span>
-        </button>
-      </div>
+      <button class="xl:hidden text-on-surface" id="mobileMenuBtn" aria-label="Toggle mobile navigation menu"
+        aria-expanded="false" onclick="toggleMobileMenu()">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
     </div>
 
     <!-- Mobile Nav -->
-    <div class="hidden xl:hidden bg-surface border-t border-outline-variant" id="mobileNav" role="navigation"
-      aria-label="Mobile Navigation">
+    <div class="hidden xl:hidden bg-surface border-t border-outline-variant/10 max-h-[80vh] overflow-y-auto" id="mobileNav"
+      role="navigation" aria-label="Mobile Navigation">
       <div class="max-w-container-max mx-auto px-margin-mobile py-4">
-        <div class="flex flex-col gap-3">
-          <a class="text-label-md text-primary font-bold border-b-2 border-primary py-2" href="#">Beranda</a>
-          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Tentang
-            Kami</a>
-          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
-            href="#">Akademik</a>
-          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
-            href="#">Kesiswaan</a>
-          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2" href="#">Berita</a>
-          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2"
-            href="#">Prestasi</a>
-          <a class="px-6 py-2 bg-secondary text-on-secondary rounded-full text-label-md text-center hover:bg-on-secondary-container transition-all"
+        <div class="flex flex-col gap-2">
+          <a class="text-label-md text-primary font-bold border-b-2 border-primary py-2 px-3" href="#">Beranda</a>
+
+          <!-- Mobile Dropdown: Tentang Kami -->
+          <div class="mobile-dropdown">
+            <button class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 px-3 flex items-center justify-between w-full"
+              onclick="toggleMobileDropdown(this)">
+              <span>Tentang Kami</span>
+              <span class="material-symbols-outlined text-[20px] transition-transform duration-300">expand_more</span>
+            </button>
+            <div class="mobile-dropdown-content hidden pl-4 space-y-1 overflow-hidden transition-all duration-300">
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">school</span>
+                Profil Sekolah
+              </a>
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">groups</span>
+                Profil Tenaga Pendidik
+              </a>
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">build</span>
+                Sarana & Prasarana
+              </a>
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">contact_support</span>
+                Kontak Informasi
+              </a>
+            </div>
+          </div>
+
+          <!-- Mobile Dropdown: Informasi -->
+          <div class="mobile-dropdown">
+            <button class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 px-3 flex items-center justify-between w-full"
+              onclick="toggleMobileDropdown(this)">
+              <span>Informasi</span>
+              <span class="material-symbols-outlined text-[20px] transition-transform duration-300">expand_more</span>
+            </button>
+            <div class="mobile-dropdown-content hidden pl-4 space-y-1 overflow-hidden transition-all duration-300">
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">calendar_month</span>
+                Kalender Akademik
+              </a>
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">event_note</span>
+                Pengumuman
+              </a>
+              <a href="#" class="flex items-center gap-3 px-3 py-2.5 hover:bg-primary-fixed rounded-lg transition-colors text-sm text-on-surface-variant hover:text-primary">
+                <span class="material-symbols-outlined text-secondary text-[18px]">description</span>
+                Dokumen Sekolah
+              </a>
+            </div>
+          </div>
+
+          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 px-3" href="#">Publikasi</a>
+          <a class="text-label-md text-on-surface-variant hover:text-primary transition-colors py-2 px-3" href="#">Ruang Aspirasi</a>
+
+          <a class="px-6 py-3 bg-secondary text-on-secondary rounded-full text-label-md text-center hover:bg-on-secondary-container transition-all mt-2"
             href="#">PPDB</a>
         </div>
       </div>
@@ -1352,9 +1496,9 @@
         <div class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter relative">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg items-center">
             <!-- Text Content -->
-            <div class="lg:col-span-7 space-y-stack-lg z-10">
-              <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-fixed rounded-full">
-                <span class="w-2 h-2 rounded-full bg-primary animate-pulse-soft" aria-hidden="true"></span>
+            <div class="lg:col-span-7 space-y-stack-lg z-10" data-aos="fade-right" data-aos-duration="800">
+              <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-fixed rounded-full animate-pulse-soft">
+                <span class="w-2 h-2 rounded-full bg-primary" aria-hidden="true"></span>
                 <span class="font-label-md text-on-primary-fixed uppercase tracking-widest">Pendaftaran Siswa Baru
                   2024/2025</span>
               </div>
@@ -1363,18 +1507,19 @@
                 Unggul dalam Prestasi,<br />
                 <span class="text-secondary italic">Berakhlakul Karimah</span>
               </h1>
-              <p class="font-body-lg text-on-surface-variant max-w-2xl">
+              <p class="font-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
                 Selamat datang di SMP Muhammadiyah 6 Krian. Kami membentuk
                 generasi cerdas teknologi yang berlandaskan nilai-nilai
                 keislaman yang kuat untuk menghadapi tantangan masa depan.
               </p>
               <div class="flex flex-wrap gap-4 pt-4">
-                <a class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2"
+                <a class="px-8 py-4 bg-primary text-on-primary rounded-xl font-label-md hover:shadow-xl hover:-translate-y-1 transition-all flex items-center gap-2 group"
                   href="#">
                   Daftar Sekarang
-                  <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+                  <span class="material-symbols-outlined transition-transform group-hover:translate-x-1"
+                    aria-hidden="true">arrow_forward</span>
                 </a>
-                <a class="px-8 py-4 bg-white text-primary border border-primary/20 rounded-xl font-label-md hover:bg-primary-fixed transition-all"
+                <a class="px-8 py-4 bg-white text-primary border border-primary/20 rounded-xl font-label-md hover:bg-primary-fixed transition-all hover:-translate-y-1"
                   href="#">
                   Jelajahi Program
                 </a>
@@ -1382,9 +1527,9 @@
             </div>
 
             <!-- Image Composition -->
-            <div class="lg:col-span-5 relative">
+            <div class="lg:col-span-5 relative" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
               <div
-                class="relative z-10 rounded-[40px] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+                class="relative z-10 rounded-[40px] overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-500">
                 <img class="w-full aspect-[4/5] object-cover"
                   alt="Siswa SMP Muhammadiyah 6 Krian sedang berkolaborasi menggunakan laptop dalam kegiatan pembelajaran digital"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoaeDHkY-Wt4TH7yjeIH7Wrk06OLB-PivzVdNY-BOU06ZDIgDzjs0WoEmtB1_TrmtopMlUsNNI3nKk4KaSuoGFb3efmp7qI-bictV19XfzL1kbzG2Aqvc3rvaHi0CSGLUjkjFCaqzgouKDopQM23lfNJ9N4JgY9e7SRAbxuWNbj_qP88OiWRB_omnzEx-T-UL76uO0kccXz4R2TmEhbJO5FkHhHa5mCh_3oEKHLhfehGHKeqzyrlta6g" />
@@ -1413,8 +1558,10 @@
       <!-- ============================================================ -->
       <!-- MARQUEE SECTION -->
       <!-- ============================================================ -->
-      <div class="w-full bg-primary py-8 overflow-hidden" aria-hidden="true">
-        <div class="flex whitespace-nowrap animate-marquee">
+      <div class="w-full bg-primary py-8 overflow-hidden relative" aria-hidden="true">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-secondary/10 to-transparent animate-shimmer"
+          aria-hidden="true"></div>
+        <div class="flex whitespace-nowrap animate-marquee relative z-10">
           <div class="flex items-center gap-12 px-6">
             <span class="font-headline-md text-on-primary uppercase flex items-center gap-4">
               <span class="material-symbols-outlined text-secondary-container">star</span>
@@ -1461,17 +1608,18 @@
       <section class="w-full py-section-gap bg-white" aria-labelledby="principal-title">
         <div class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            <div class="lg:col-span-5">
-              <div class="relative group">
+            <div class="lg:col-span-5" data-aos="fade-right" data-aos-duration="700">
+              <div class="relative">
                 <div
-                  class="absolute inset-0 bg-primary/10 rounded-[60px] translate-x-4 translate-y-4 group-hover:translate-x-2 group-hover:translate-y-2 transition-transform"
+                  class="absolute inset-0 bg-primary/10 rounded-[60px] translate-x-4 translate-y-4 transition-all duration-500"
                   aria-hidden="true"></div>
                 <img alt="Drs. H. Ahmad Muhajir, M.Pd - Kepala Sekolah SMP Muhammadiyah 6 Krian"
                   class="relative z-10 w-full rounded-[60px] shadow-lg grayscale hover:grayscale-0 transition-all duration-700"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyvcisDnawXBOI2fjPbf3X4Gp4HvCoOldNRHOpxQ3WW29LtFJXzQk7qNfs6Po1FHCFU5mesaZDB_ucW8eQeN2KZj2JyMW1mVMCeNysB3ALAzIEUwasUfrZnqTVVMABo28wjWyJ3zM9o7Iw9jTmUmjuGoA2ydPDn6MXWIygk5RRNoT_0xqzUe8qCgcbuaMzL2Cd7fG9jPvDNrEPYJYeTWhRoK_Cmyi4fHyY7VLSZeAqBYMoYnDCqqzQA" />
               </div>
             </div>
-            <div class="lg:col-span-7 space-y-stack-md">
+            <div class="lg:col-span-7 space-y-stack-md" data-aos="fade-left" data-aos-duration="700"
+              data-aos-delay="150">
               <span class="font-label-md text-secondary uppercase tracking-[0.2em] font-bold">Sambutan Kepala
                 Sekolah</span>
               <h2 id="principal-title"
@@ -1503,7 +1651,8 @@
               <a class="inline-flex items-center gap-3 text-primary font-label-md hover:gap-5 transition-all group mt-4"
                 href="#">
                 Baca Selengkapnya
-                <span class="material-symbols-outlined text-secondary" aria-hidden="true">arrow_right_alt</span>
+                <span class="material-symbols-outlined text-secondary transition-transform group-hover:translate-x-1"
+                  aria-hidden="true">arrow_right_alt</span>
               </a>
             </div>
           </div>
@@ -1517,26 +1666,30 @@
         aria-label="Statistik Sekolah">
         <div class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter">
           <div class="grid grid-cols-2 lg:grid-cols-4 gap-stack-lg">
-            <div class="text-center space-y-2 group">
-              <span class="font-headline-xl text-primary block transition-transform group-hover:scale-110">850+</span>
+            <div class="text-center space-y-2 group" data-aos="fade-up" data-aos-duration="500" data-aos-delay="0">
+              <span
+                class="font-headline-xl text-primary block transition-all duration-500 group-hover:scale-110 group-hover:text-secondary">850+</span>
               <p class="font-label-md text-on-surface-variant uppercase tracking-widest">
                 Siswa Aktif
               </p>
             </div>
-            <div class="text-center space-y-2 group">
-              <span class="font-headline-xl text-secondary block transition-transform group-hover:scale-110">45</span>
+            <div class="text-center space-y-2 group" data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+              <span
+                class="font-headline-xl text-secondary block transition-all duration-500 group-hover:scale-110 group-hover:text-primary">45</span>
               <p class="font-label-md text-on-surface-variant uppercase tracking-widest">
                 Tenaga Pendidik
               </p>
             </div>
-            <div class="text-center space-y-2 group">
-              <span class="font-headline-xl text-primary block transition-transform group-hover:scale-110">120</span>
+            <div class="text-center space-y-2 group" data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+              <span
+                class="font-headline-xl text-primary block transition-all duration-500 group-hover:scale-110 group-hover:text-secondary">120</span>
               <p class="font-label-md text-on-surface-variant uppercase tracking-widest">
                 Penghargaan
               </p>
             </div>
-            <div class="text-center space-y-2 group">
-              <span class="font-headline-xl text-secondary block transition-transform group-hover:scale-110">24+</span>
+            <div class="text-center space-y-2 group" data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+              <span
+                class="font-headline-xl text-secondary block transition-all duration-500 group-hover:scale-110 group-hover:text-primary">24+</span>
               <p class="font-label-md text-on-surface-variant uppercase tracking-widest">
                 Ekstrakurikuler
               </p>
@@ -1546,94 +1699,113 @@
       </section>
 
       <!-- ============================================================ -->
-      <!-- FACILITIES - BENTO GRID -->
+      <!-- ALUMNI SECTION - JEJAK ALUMNI -->
       <!-- ============================================================ -->
-      <section class="w-full py-section-gap bg-white overflow-hidden" aria-labelledby="facilities-title">
+      <section class="w-full py-section-gap bg-white" aria-labelledby="alumni-title">
         <div class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter">
-          <div class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-6">
-            <div class="max-w-2xl">
-              <span class="font-label-md text-secondary uppercase tracking-widest font-bold">Fasilitas Sekolah</span>
-              <h2 id="facilities-title" class="font-headline-lg text-primary mt-4">
-                Sarana Modern Penunjang Kreativitas Siswa
-              </h2>
-            </div>
-            <a class="px-6 py-3 bg-surface text-primary rounded-full font-label-md hover:bg-primary hover:text-on-primary transition-colors"
-              href="#">Lihat Semua Fasilitas</a>
+          <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up" data-aos-duration="600">
+            <span class="font-label-md text-secondary uppercase tracking-widest font-bold inline-block mb-3">Jejak Alumni</span>
+            <h2 id="alumni-title" class="font-headline-lg text-primary mb-4">
+              Jejak Alumni <span class="text-secondary">SMPM 6 Krian!</span>
+            </h2>
+            <p class="font-body-lg text-on-surface-variant">
+              Mereka adalah bukti nyata bahwa pendidikan di SMP Muhammadiyah 6 Krian
+              membentuk generasi yang berprestasi dan berakhlak mulia.
+            </p>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-auto lg:h-[600px]">
-            <!-- Card 1 - Large -->
-            <div class="md:col-span-2 relative group overflow-hidden rounded-[32px] shadow-lg">
-              <img
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Laboratorium komputer modern SMP Muhammadiyah 6 Krian dengan fasilitas digital learning"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxbhb_xw1eAv8H4aHcPjM8ICvJUuf6ILlzcwYcUw53VjgaHnnXtL5DX80pazWsqtMQnpAapymgI8zxx4HT3X_kEdThYvz8_CIU1VfXMrKdHY9wKngjBHlHHJySJz-XV3Fv4d8Y8aAWKew5OKfpn9NHpZWnlFH1dvS_jkNKR6EzBvZBM6g63iNOAwvK5gyDe2qpH3NUuic6tB4o5UDyPZdIum5uVyHhMxa_YrfEd8fhMm6kIsMDDzLEWQ" />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
-                aria-hidden="true"></div>
-              <div class="absolute bottom-8 left-8 right-8">
-                <p class="font-label-md text-secondary-container uppercase tracking-widest mb-2">
-                  Digital Learning
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Alumni 1 -->
+            <div class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group text-center"
+              data-aos="fade-up" data-aos-duration="500" data-aos-delay="0">
+              <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                <div class="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-[64px]">person</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-primary">Aisha Ayu Prameswari</h3>
+                <p class="text-sm text-secondary font-bold mt-1">Alumni Angkatan 36</p>
+                <p class="text-sm text-on-surface-variant mt-2">
+                  Ketua MPK SMK Telkom Sidoarjo 2026
                 </p>
-                <h3 class="font-headline-md text-on-primary">
-                  Lab Komputer &amp; Multimedia
-                </h3>
-                <p class="font-body-md text-on-primary/70 mt-2">
-                  Dukungan teknologi terkini untuk literasi digital era 4.0
-                </p>
+                <div class="mt-4 flex justify-center gap-2">
+                  <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-semibold">Berprestasi</span>
+                  <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-semibold">Leader</span>
+                </div>
               </div>
             </div>
 
-            <!-- Card 2 -->
-            <div class="relative group overflow-hidden rounded-[32px] shadow-lg">
-              <img
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Perpustakaan pintar (Smart Library) dengan koleksi literasi fisik dan digital"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFbrcx3CER0S3bm0XhT__WUa3GXXzE4OjNrryAXw-sDbp4wQBPQOPm7CgBGiICPlx9e3d3ePqHQ_cfSa1x5wVuTV0sooixzGm4-qHP0ZXLPaPyDKXhuAFW2MKNES5BKS6vBAp92jwEY2souTKnMQvaSogMu2ip9EvanxeSeSaILYb18LyAHFajyUFGtI2-72uAHWHWxdfNxECaeDOXj09wXAkw5nvw-nYDJhkWzlYeM2LWaJ34UX2zuA" />
-              <div class="absolute inset-0 bg-gradient-to-t from-secondary/80 via-transparent to-transparent"
-                aria-hidden="true"></div>
-              <div class="absolute bottom-8 left-8 right-8">
-                <h3 class="font-headline-md text-on-primary">
-                  Smart Library
-                </h3>
-                <p class="font-body-md text-on-primary/70 mt-2">
-                  Ribuan koleksi literasi fisik &amp; digital.
+            <!-- Alumni 2 -->
+            <div class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group text-center"
+              data-aos="fade-up" data-aos-duration="500" data-aos-delay="100">
+              <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                <div class="w-32 h-32 rounded-full bg-secondary/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-secondary text-[64px]">person</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-primary">Made Kelvin Gymnastio</h3>
+                <p class="text-sm text-secondary font-bold mt-1">Alumni Angkatan 37</p>
+                <p class="text-sm text-on-surface-variant mt-2">
+                  Berprestasi di bidang akademik dan non-akademik
                 </p>
+                <div class="mt-4 flex justify-center gap-2">
+                  <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-semibold">Berprestasi</span>
+                  <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-semibold">Akademik</span>
+                </div>
               </div>
             </div>
 
-            <!-- Card 3 -->
-            <div class="relative group overflow-hidden rounded-[32px] shadow-lg">
-              <img
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Pusat olahraga (Sport Center) dengan fasilitas indoor dan outdoor"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKtIXl0MTC8_RxlaQ7ZBqgBv5RJfb6f6ROqbUrWoJyoZJjIvYbK5Vd4qQcJ_NKUPE-c2zYwRheHSBZ4UWJgwrsfvcUA1E3JRNaeQlLqJ-kWi55_60JrzIRshEb3xVZTs-U19ravssbTsP-UNZaSCjSLUrgYQTmfFvwKzSnAINqWxjKlQUqmAt829kaHcnzuFT9F3sMlJ-ef5_NN4X06kbZDbyebUwSnF0HDMfhpEzClnhjOCdN1qhzew" />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
-                aria-hidden="true"></div>
-              <div class="absolute bottom-8 left-8 right-8">
-                <h3 class="font-headline-md text-on-primary">Sport Center</h3>
-                <p class="font-body-md text-on-primary/70 mt-2">
-                  Fasilitas olahraga indoor &amp; outdoor lengkap.
+            <!-- Alumni 3 -->
+            <div class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group text-center"
+              data-aos="fade-up" data-aos-duration="500" data-aos-delay="200">
+              <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                <div class="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-[64px]">person</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-primary">Mikhail Firdaus Aldino</h3>
+                <p class="text-sm text-secondary font-bold mt-1">Alumni Angkatan 37</p>
+                <p class="text-sm text-on-surface-variant mt-2">
+                  Berprestasi di bidang teknologi dan inovasi
                 </p>
+                <div class="mt-4 flex justify-center gap-2">
+                  <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-semibold">Berprestasi</span>
+                  <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-semibold">Teknologi</span>
+                </div>
               </div>
             </div>
 
-            <!-- Card 4 - Large -->
-            <div class="md:col-span-2 relative group overflow-hidden rounded-[32px] shadow-lg">
-              <img
-                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                alt="Masjid Al-Ikhlas sebagai pusat pembinaan spiritual dan akhlak siswa"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9nCZSwYa90xrae14eW1R2AHsGLRVcMrdl13FgLZjqQa0TDA0xvPnk1zpfmkQuyvfpqbWUV4014spNGKcahroiF0dIy9UFqz4dvPyU4WsMIPIYem0QgBlnnuh5MgBWEcLr0c4WWNkb4j7_Q1WJUx2DDYj-5t91_WlKjg6ThBSCOGvkH9oNKiTl1Cpz2rU6bDXh077fBuDHfPgfMmDnMjgP7AD_yAk4TXBRbCY61lDVGSxTvTO4yktvNQ" />
-              <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"
-                aria-hidden="true"></div>
-              <div class="absolute bottom-8 left-8 right-8">
-                <h3 class="font-headline-md text-on-primary">
-                  Masjid Al-Ikhlas
-                </h3>
-                <p class="font-body-md text-on-primary/70 mt-2">
-                  Pusat pembinaan spiritual dan akhlak siswa.
+            <!-- Alumni 4 -->
+            <div class="bg-surface rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group text-center"
+              data-aos="fade-up" data-aos-duration="500" data-aos-delay="300">
+              <div class="relative overflow-hidden aspect-square bg-gradient-to-br from-primary/5 to-secondary/5 flex items-center justify-center">
+                <div class="w-32 h-32 rounded-full bg-secondary/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-secondary text-[64px]">person</span>
+                </div>
+              </div>
+              <div class="p-6">
+                <h3 class="font-headline-md text-primary">Nagara Angger Maheswara</h3>
+                <p class="text-sm text-secondary font-bold mt-1">Alumni Angkatan 37</p>
+                <p class="text-sm text-on-surface-variant mt-2">
+                  Berprestasi di bidang seni dan budaya
                 </p>
+                <div class="mt-4 flex justify-center gap-2">
+                  <span class="px-3 py-1 bg-secondary/10 text-secondary text-xs rounded-full font-semibold">Berprestasi</span>
+                  <span class="px-3 py-1 bg-primary/10 text-primary text-xs rounded-full font-semibold">Seni</span>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div class="text-center mt-12" data-aos="fade-up" data-aos-duration="600" data-aos-delay="400">
+            <a class="inline-flex items-center gap-2 px-8 py-3 bg-primary text-on-primary rounded-full font-label-md hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-lg"
+              href="#">
+              Lihat Semua Alumni
+              <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+            </a>
           </div>
         </div>
       </section>
@@ -1643,7 +1815,7 @@
       <!-- ============================================================ -->
       <section class="w-full py-section-gap bg-surface" aria-labelledby="news-title">
         <div class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter">
-          <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div class="text-center max-w-3xl mx-auto mb-16 space-y-4" data-aos="fade-up" data-aos-duration="600">
             <span class="font-label-md text-primary uppercase tracking-[0.3em] font-bold">Warta Sekolah</span>
             <h2 id="news-title" class="font-headline-lg text-primary">
               Berita &amp; Prestasi Terbaru
@@ -1656,10 +1828,10 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <!-- News Item 1 -->
-            <article
-              class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group hover:-translate-y-2"
+              data-aos="fade-up" data-aos-duration="600" data-aos-delay="0">
               <div class="relative overflow-hidden aspect-[16/10]">
-                <img class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   alt="Siswa SMP Muhammadiyah 6 Krian meraih Juara 1 Lomba Robotik Nasional tingkat SMP"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOvxVGzsaotUxf7NQdqQbZHFHiUK8S0fqqH6EJi_KYAJq_gYAqVe6jeWLk4zIqPOf9swCU0aBYE8_2ZpDZjSxNfI4dNBKrBO1HMV6N5n_792ollsNzQ-bTsMRb5j34KABPGu05warSDky9tpdyeSJvRhcfdGzEbBHa9hHVSEahwdtsvnGK9pt1nW5Q9sxVy_ocOInVAHUqyKgFRge1KNz2iYq5z733YZ-UmlwWGjhZ9-JwT90K_e1vg" />
                 <div class="absolute top-4 left-4 bg-secondary text-on-secondary px-4 py-1 rounded-full font-label-md">
@@ -1671,7 +1843,7 @@
                   <span class="material-symbols-outlined text-[16px]" aria-hidden="true">calendar_today</span>
                   12 Maret 2024
                 </div>
-                <h3 class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors">
+                <h3 class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors duration-300">
                   Juara 1 Lomba Robotik Nasional Tingkat SMP
                 </h3>
                 <p class="text-on-surface-variant line-clamp-2">
@@ -1681,16 +1853,17 @@
                 <a class="inline-flex items-center gap-2 font-label-md text-primary group-hover:gap-4 transition-all"
                   href="#">
                   Selengkapnya
-                  <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                  <span class="material-symbols-outlined transition-transform group-hover:translate-x-1"
+                    aria-hidden="true">chevron_right</span>
                 </a>
               </div>
             </article>
 
             <!-- News Item 2 -->
-            <article
-              class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group hover:-translate-y-2"
+              data-aos="fade-up" data-aos-duration="600" data-aos-delay="100">
               <div class="relative overflow-hidden aspect-[16/10]">
-                <img class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   alt="Kegiatan Semarak Ramadhan dan aksi sosial berbagi kebahagiaan bersama"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Gd08iwbv1BxpKbCVl9eUoaf5LPronJbfyhreBMtFqjVAjaUXSVfVt1897F9Uaa1Wl9g-j8RRErG6sF43X2CORC7BpBQd5_fEB0bqn0LDCk5cI8Z5GOWSCGpa-Illr5H2QQxIHiQfdwyuYep9QrVHMOb5wK3sJ4Spa_w-ONfTIEJkBC_hke1zeb55XPRA4-sW9Gfd2q8AeTPdTyXc8F8-QCPmDBDxJQxAu6QTdHcND2yueFqNFW73pg" />
                 <div class="absolute top-4 left-4 bg-primary text-on-primary px-4 py-1 rounded-full font-label-md">
@@ -1702,7 +1875,7 @@
                   <span class="material-symbols-outlined text-[16px]" aria-hidden="true">calendar_today</span>
                   08 Maret 2024
                 </div>
-                <h3 class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors">
+                <h3 class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors duration-300">
                   Semarak Ramadhan: Berbagi Kebahagiaan Bersama
                 </h3>
                 <p class="text-on-surface-variant line-clamp-2">
@@ -1712,20 +1885,20 @@
                 <a class="inline-flex items-center gap-2 font-label-md text-primary group-hover:gap-4 transition-all"
                   href="#">
                   Selengkapnya
-                  <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                  <span class="material-symbols-outlined transition-transform group-hover:translate-x-1"
+                    aria-hidden="true">chevron_right</span>
                 </a>
               </div>
             </article>
 
             <!-- News Item 3 -->
-            <article
-              class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group">
+            <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group hover:-translate-y-2"
+              data-aos="fade-up" data-aos-duration="600" data-aos-delay="200">
               <div class="relative overflow-hidden aspect-[16/10]">
-                <img class="w-full h-full object-cover transition-transform group-hover:scale-105"
+                <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   alt="Workshop Literasi Digital dan Pengenalan AI untuk siswa SMP Muhammadiyah 6 Krian"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDljOojaPak1pyMVfZX9_tfY3Q73hwHzU5FrLIK26CTjaoxmS4b-2ZbdFqJSBCtfBh_dhtZ5sNMRjFvFdoVZ6jyroFlF0VWpiI5heJHnJmhJY8TAbvWa7_VvSni6lbv7BYroiGAu-Pgnjh0MOftOArQzCInCINtMs1StblnjuipJh7qL8cL5QrAfk2_2EL6h0sw7LOIQjERCr1OTyhVcfaQK8nhEuYZXehFBwTXoZA2NleIvRRDZKgpbg" />
-                <div
-                  class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full font-label-md">
+                <div class="absolute top-4 left-4 bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full font-label-md">
                   Akademik
                 </div>
               </div>
@@ -1734,7 +1907,7 @@
                   <span class="material-symbols-outlined text-[16px]" aria-hidden="true">calendar_today</span>
                   05 Maret 2024
                 </div>
-                <h3 class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors">
+                <h3 class="font-headline-md text-primary leading-tight group-hover:text-secondary transition-colors duration-300">
                   Workshop Literasi Digital &amp; Pengenalan AI
                 </h3>
                 <p class="text-on-surface-variant line-clamp-2">
@@ -1744,15 +1917,16 @@
                 <a class="inline-flex items-center gap-2 font-label-md text-primary group-hover:gap-4 transition-all"
                   href="#">
                   Selengkapnya
-                  <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+                  <span class="material-symbols-outlined transition-transform group-hover:translate-x-1"
+                    aria-hidden="true">chevron_right</span>
                 </a>
               </div>
             </article>
           </div>
 
-          <div class="mt-16 text-center">
+          <div class="mt-16 text-center" data-aos="fade-up" data-aos-duration="600" data-aos-delay="300">
             <button
-              class="px-10 py-4 bg-primary text-on-primary rounded-full shadow-lg hover:shadow-primary/20 hover:-translate-y-1 transition-all">
+              class="px-10 py-4 bg-primary text-on-primary rounded-full shadow-lg hover:shadow-primary/20 hover:-translate-y-2 transition-all duration-300">
               Lihat Semua Berita &amp; Prestasi
             </button>
           </div>
@@ -1760,93 +1934,138 @@
       </section>
 
       <!-- ============================================================ -->
-      <!-- CTA SECTION -->
+      <!-- FOOTER - PROFESSIONAL -->
       <!-- ============================================================ -->
-      <section class="w-full px-margin-mobile lg:px-gutter py-24" aria-labelledby="cta-title">
-        <div class="max-w-container-max mx-auto bg-primary rounded-[48px] p-8 lg:p-20 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-64 h-64 bg-secondary/20 rounded-full blur-[100px] -mr-32 -mt-32"
-            aria-hidden="true"></div>
-          <div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] -ml-32 -mb-32"
-            aria-hidden="true"></div>
-          <div class="relative z-10 text-center space-y-stack-md">
-            <h2 id="cta-title" class="font-headline-xl text-on-primary text-headline-lg-mobile lg:text-headline-xl">
-              Mulai Perjalanan Prestasimu Bersama Kami
-            </h2>
-            <p class="font-body-lg text-on-primary/80 max-w-2xl mx-auto">
-              Pendaftaran Peserta Didik Baru (PPDB) Tahun Ajaran 2024/2025
-              telah dibuka. Segera amankan kuota untuk masa depan yang lebih
-              cerah.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4 pt-8">
-              <a class="bg-secondary text-on-secondary px-10 py-4 rounded-xl font-label-md hover:bg-secondary/90 transition-all shadow-xl flex items-center justify-center gap-2"
-                href="#">
-                <span class="material-symbols-outlined" aria-hidden="true">edit_square</span>
-                Daftar PPDB Online
-              </a>
-              <a class="bg-white/10 backdrop-blur-md text-on-primary px-10 py-4 rounded-xl font-label-md hover:bg-white/20 transition-all flex items-center justify-center gap-2"
-                href="#">
-                <span class="material-symbols-outlined" aria-hidden="true">download</span>
-                Unduh Brosur
-              </a>
+      <footer class="w-full bg-primary text-on-primary pt-16 pb-0" role="contentinfo">
+        <div class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter">
+          <!-- Main Footer Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 pb-12 border-b border-white/10">
+            <!-- Brand Column -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-3 bg-white/10 p-4 rounded-xl w-fit">
+                <img alt="Logo SMP Muhammadiyah 6 Krian - footer" class="h-10 w-auto invert brightness-0"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__OC99g7VsrI_gvYNpa34JiTgwwRJds43Lq17kE8F-jtwcu5L1MSUFx-XxkYCD3r3iiIL9VViNGSm6F80mSRAD_9eSj-teh4IkUj5XLSFVoKjwDqMmEFxdaCth4Qhnx3k62PQaIArYF1TFYE43iJ05bEnNRl-xUd2MpAWqzmEQexTzJoHQT0PaGVktdbnC7nxQYobyseaCw2-kEdCBdKg5Dwk2ndZotROW3YoRCL6HLr16Qidynfo4w" />
+                <span class="font-headline-md">SMPM 6 Krian</span>
+              </div>
+              <p class="text-body-md text-on-primary/70 leading-relaxed">
+                Mewujudkan generasi islami yang unggul dalam prestasi dan
+                berakhlakul karimah.
+              </p>
+              <div class="flex gap-3 pt-2">
+                <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  href="#" aria-label="Facebook">
+                  <span class="material-symbols-outlined text-on-primary/80" aria-hidden="true">facebook</span>
+                </a>
+                <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  href="#" aria-label="Instagram">
+                  <span class="material-symbols-outlined text-on-primary/80" aria-hidden="true">photo_camera</span>
+                </a>
+                <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  href="#" aria-label="YouTube">
+                  <span class="material-symbols-outlined text-on-primary/80" aria-hidden="true">videocam</span>
+                </a>
+                <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  href="#" aria-label="WhatsApp">
+                  <span class="material-symbols-outlined text-on-primary/80" aria-hidden="true">chat</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="space-y-4">
+              <h4 class="font-headline-md text-on-primary">Tautan Cepat</h4>
+              <ul class="space-y-2.5">
+                <li><a class="text-on-primary/70 hover:text-on-primary transition-colors flex items-center gap-2 hover:gap-3"
+                    href="#">
+                    <span class="material-symbols-outlined text-secondary-container text-[18px]"
+                      aria-hidden="true">chevron_right</span>
+                    Beranda
+                  </a></li>
+                <li><a class="text-on-primary/70 hover:text-on-primary transition-colors flex items-center gap-2 hover:gap-3"
+                    href="#">
+                    <span class="material-symbols-outlined text-secondary-container text-[18px]"
+                      aria-hidden="true">chevron_right</span>
+                    Tentang Kami
+                  </a></li>
+                <li><a class="text-on-primary/70 hover:text-on-primary transition-colors flex items-center gap-2 hover:gap-3"
+                    href="#">
+                    <span class="material-symbols-outlined text-secondary-container text-[18px]"
+                      aria-hidden="true">chevron_right</span>
+                    Informasi
+                  </a></li>
+                <li><a class="text-on-primary/70 hover:text-on-primary transition-colors flex items-center gap-2 hover:gap-3"
+                    href="#">
+                    <span class="material-symbols-outlined text-secondary-container text-[18px]"
+                      aria-hidden="true">chevron_right</span>
+                    Publikasi
+                  </a></li>
+                <li><a class="text-on-primary/70 hover:text-on-primary transition-colors flex items-center gap-2 hover:gap-3"
+                    href="#">
+                    <span class="material-symbols-outlined text-secondary-container text-[18px]"
+                      aria-hidden="true">chevron_right</span>
+                    Ruang Aspirasi
+                  </a></li>
+              </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="space-y-4">
+              <h4 class="font-headline-md text-on-primary">Kontak Kami</h4>
+              <ul class="space-y-3 text-on-primary/70">
+                <li class="flex items-start gap-3 hover:text-on-primary transition-colors">
+                  <span class="material-symbols-outlined text-secondary-container flex-shrink-0"
+                    aria-hidden="true">location_on</span>
+                  <span class="text-sm">Jl. Kyai Mojo No. 12, Krian, Sidoarjo, Jawa Timur</span>
+                </li>
+                <li class="flex items-center gap-3 hover:text-on-primary transition-colors">
+                  <span class="material-symbols-outlined text-secondary-container flex-shrink-0"
+                    aria-hidden="true">call</span>
+                  <span>(031) 8971234</span>
+                </li>
+                <li class="flex items-center gap-3 hover:text-on-primary transition-colors">
+                  <span class="material-symbols-outlined text-secondary-container flex-shrink-0"
+                    aria-hidden="true">mail</span>
+                  <span>info@smpm6krian.sch.id</span>
+                </li>
+                <li class="flex items-center gap-3 hover:text-on-primary transition-colors">
+                  <span class="material-symbols-outlined text-secondary-container flex-shrink-0"
+                    aria-hidden="true">schedule</span>
+                  <span>Senin - Jumat, 07:00 - 16:00</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="space-y-4">
+              <h4 class="font-headline-md text-on-primary">Newsletter</h4>
+              <p class="text-on-primary/70 text-sm">
+                Dapatkan informasi terbaru dari sekolah kami.
+              </p>
+              <form class="space-y-3" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!')">
+                <div class="flex">
+                  <input class="flex-1 px-4 py-3 bg-white/10 rounded-l-xl text-on-primary placeholder:text-on-primary/50 text-sm focus:outline-none focus:ring-2 focus:ring-secondary"
+                    placeholder="Email Anda" type="email" required />
+                  <button class="px-4 py-3 bg-secondary text-on-secondary rounded-r-xl hover:bg-secondary/90 transition-colors"
+                    type="submit">
+                    <span class="material-symbols-outlined">send</span>
+                  </button>
+                </div>
+              </form>
+              <p class="text-on-primary/50 text-xs">
+                Kami tidak akan mengirim spam. Berhenti berlangganan kapan saja.
+              </p>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- ============================================================ -->
-      <!-- FOOTER -->
-      <!-- ============================================================ -->
-      <footer class="w-full bg-primary text-on-primary py-section-gap" role="contentinfo">
-        <div
-          class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
-          <div class="space-y-stack-md">
-            <div class="flex items-center gap-3 bg-white/10 p-4 rounded-xl w-fit">
-              <img alt="Logo SMP Muhammadiyah 6 Krian - footer" class="h-10 w-auto invert brightness-0"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB__OC99g7VsrI_gvYNpa34JiTgwwRJds43Lq17kE8F-jtwcu5L1MSUFx-XxkYCD3r3iiIL9VViNGSm6F80mSRAD_9eSj-teh4IkUj5XLSFVoKjwDqMmEFxdaCth4Qhnx3k62PQaIArYF1TFYE43iJ05bEnNRl-xUd2MpAWqzmEQexTzJoHQT0PaGVktdbnC7nxQYobyseaCw2-kEdCBdKg5Dwk2ndZotROW3YoRCL6HLr16Qidynfo4w" />
-              <span class="font-headline-md">SMPM 6 Krian</span>
-            </div>
-            <p class="text-body-md text-on-primary/80">
-              Mewujudkan generasi islami yang unggul dalam prestasi dan
-              berakhlakul karimah.
-            </p>
-          </div>
-
-          <div class="space-y-stack-md">
-            <h4 class="font-headline-md">Kontak Kami</h4>
-            <ul class="space-y-3 text-on-primary/80">
-              <li class="flex items-start gap-3">
-                <span class="material-symbols-outlined text-secondary-container" aria-hidden="true">location_on</span>
-                <span>Jl. Kyai Mojo No. 12, Krian, Sidoarjo, Jawa Timur</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-secondary-container" aria-hidden="true">call</span>
-                <span>(031) 8971234</span>
-              </li>
-              <li class="flex items-center gap-3">
-                <span class="material-symbols-outlined text-secondary-container" aria-hidden="true">mail</span>
-                <span>info@smpm6krian.sch.id</span>
-              </li>
-            </ul>
-          </div>
-
-          <div class="space-y-stack-md">
-            <h4 class="font-headline-md">Ikuti Kami</h4>
-            <div class="flex gap-4">
-              <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-                href="#" aria-label="Share"><span class="material-symbols-outlined" aria-hidden="true">share</span></a>
-              <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-                href="#" aria-label="Website"><span class="material-symbols-outlined"
-                  aria-hidden="true">public</span></a>
-              <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary transition-colors"
-                href="#" aria-label="Video"><span class="material-symbols-outlined"
-                  aria-hidden="true">videocam</span></a>
+          <!-- Bottom Bar -->
+          <div class="flex flex-col md:flex-row justify-between items-center gap-4 py-6 text-on-primary/60 text-label-md">
+            <p>© 2024 SMP Muhammadiyah 6 Krian. All rights reserved.</p>
+            <div class="flex gap-6">
+              <a class="hover:text-on-primary transition-colors" href="#">Kebijakan Privasi</a>
+              <a class="hover:text-on-primary transition-colors" href="#">Syarat &amp; Ketentuan</a>
+              <a class="hover:text-on-primary transition-colors" href="#">Sitemap</a>
             </div>
           </div>
-        </div>
-
-        <div
-          class="max-w-container-max mx-auto px-margin-mobile lg:px-gutter mt-stack-lg pt-stack-md border-t border-white/10 text-center text-on-primary/60 text-label-md">
-          © 2024 SMP Muhammadiyah 6 Krian. All rights reserved.
         </div>
       </footer>
     </div>
@@ -1867,9 +2086,10 @@
       once: true,
       offset: 40,
       easing: "ease-out-cubic",
+      disable: window.innerWidth < 768 ? true : false,
     });
 
-    // 2. Mobile Menu Toggle with improved logic
+    // 2. Mobile Menu Toggle
     function toggleMobileMenu() {
       const menu = document.getElementById("mobileNav");
       const btn = document.getElementById("mobileMenuBtn");
@@ -1878,9 +2098,11 @@
         if (isHidden) {
           menu.classList.remove("hidden");
           btn?.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
         } else {
           menu.classList.add("hidden");
           btn?.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
         }
       }
     }
@@ -1893,11 +2115,24 @@
         if (!menu.contains(e.target) && !btn.contains(e.target)) {
           menu.classList.add("hidden");
           btn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
         }
       }
     });
 
-    // 3. Navbar scroll effect with debounce for performance
+    // 3. Mobile Dropdown Toggle
+    function toggleMobileDropdown(button) {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.material-symbols-outlined');
+      if (content) {
+        content.classList.toggle("hidden");
+        if (icon) {
+          icon.classList.toggle("rotate-180");
+        }
+      }
+    }
+
+    // 4. Navbar scroll effect with debounce
     let ticking = false;
     document.addEventListener("scroll", function () {
       if (!ticking) {
@@ -1905,8 +2140,10 @@
           const header = document.querySelector("header");
           if (window.scrollY > 50) {
             header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
+            header.style.backgroundColor = "rgba(248, 249, 255, 0.95)";
           } else {
             header.style.boxShadow = "0 1px 8px rgba(0,0,0,0.04)";
+            header.style.backgroundColor = "rgba(248, 249, 255, 0.9)";
           }
           ticking = false;
         });
@@ -1914,7 +2151,7 @@
       }
     });
 
-    // 4. Intersection Observer for fade-in animations - optimized
+    // 5. Intersection Observer for fade-in animations
     document.addEventListener("DOMContentLoaded", function () {
       const observerOptions = {
         threshold: 0.1,
@@ -1931,13 +2168,11 @@
         });
       }, observerOptions);
 
-      // Use a more specific selector to avoid performance issues
       document
         .querySelectorAll(
           "article, .group:not(.no-animate), section > .max-w-container-max > *"
         )
         .forEach(function (el) {
-          // Skip elements that already have animation classes
           if (
             !el.classList.contains("opacity-100") &&
             !el.classList.contains("no-animate")
@@ -1951,6 +2186,25 @@
             observer.observe(el);
           }
         });
+    });
+
+    // 6. Close dropdowns on outside click (desktop)
+    document.addEventListener("click", function (e) {
+      document.querySelectorAll('.relative.group .dropdown-menu').forEach(function (dropdown) {
+        const parent = dropdown.closest('.relative.group');
+        if (parent && !parent.contains(e.target)) {
+          dropdown.style.opacity = "0";
+          dropdown.style.visibility = "hidden";
+          dropdown.style.transform = "translateY(-8px)";
+          const btn = parent.querySelector('button');
+          if (btn) {
+            const icon = btn.querySelector('.dropdown-arrow');
+            if (icon) {
+              icon.style.transform = "rotate(0deg)";
+            }
+          }
+        }
+      });
     });
   </script>
 </body>
