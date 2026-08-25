@@ -1,33 +1,29 @@
 <?php
 session_start();
 
-if (isset($_SESSION['login'])) {
+// Path BENAR: naik 1 level dari admin ke backend, lalu masuk ke config
+include '../config/koneksi.php';
+
+// Cek koneksi
+if (!$conn) {
+    die("Koneksi gagal: " . mysqli_connect_error());
+}
+
+$username = $_POST['username'];
+$password = $_POST['password'];
+
+// Query login
+$query = mysqli_query($conn, "SELECT * FROM admin WHERE username='$username' AND password='$password'");
+
+if (!$query) {
+    die("Query error: " . mysqli_error($conn));
+}
+
+if (mysqli_num_rows($query) > 0) {
+    $_SESSION['login'] = true;
+    $_SESSION['username'] = $username;
     header("Location: dashboard.php");
-    exit;
+} else {
+    header("Location: login.php?error=1");
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Login Admin</title>
-</head>
-<body>
-
-<h2>Login Admin</h2>
-
-<form action="proses_login.php" method="POST">
-
-    <label>Username</label><br>
-    <input type="text" name="username"><br><br>
-
-    <label>Password</label><br>
-    <input type="password" name="password"><br><br>
-
-    <button type="submit">Login</button>
-
-</form>
-
-</body>
-</html>
