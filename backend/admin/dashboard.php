@@ -152,7 +152,7 @@ $username = $_SESSION['username'] ?? 'Admin';
                 </div>
             </div>
 
-            <!-- Tabel Berita Terbaru -->
+            <!- Tabel Berita Terbaru ->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
                     <h2 class="font-headline font-bold text-lg text-primary">Berita Terbaru</h2>
