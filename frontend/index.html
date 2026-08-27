@@ -9,8 +9,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,13 +28,13 @@
                 extend: {
                     colors: {
                         mho: {
-                            blue: '#0D5C96',
-                            'blue-hover': '#0A4B7C',
-                            'blue-light': '#F0F6FA',
-                            green: '#059669',
-                            'green-hover': '#047857',
-                            'green-light': '#ECFDF5',
-                            dark: '#091E36',
+                            blue: '#1E65B5',
+                            'blue-hover': '#165196',
+                            'blue-light': '#F0F6FC',
+                            green: '#E58A2B',
+                            'green-hover': '#D07A22',
+                            'green-light': '#FEF7F0',
+                            dark: '#0B1F36',
                             bg: '#FFFFFF',
                             surface: '#F8FAFC'
                         }
@@ -53,30 +57,51 @@
         }
 
         @keyframes marqueeScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
+
         .animate-marquee {
             display: flex;
             width: 200%;
             animation: marqueeScroll 22s linear infinite;
         }
+
         .animate-marquee:hover {
             animation-play-state: paused;
         }
 
         @keyframes spinSlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
+
         .animate-spin-slow {
             animation: spinSlow 30s linear infinite;
         }
 
         @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
+
         .animate-float {
             animation: floatSlow 4s ease-in-out infinite;
         }
@@ -84,22 +109,31 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
 
         .text-gradient-custom {
-            background: linear-gradient(135deg, #0D5C96 0%, #059669 100%);
+            background: linear-gradient(135deg, #F97316 0%, #FACC15 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         @keyframes pulseSkeleton {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
         }
+
         .skeleton-loader {
             background: #e2e8f0;
             animation: pulseSkeleton 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -108,44 +142,61 @@
     </style>
 </head>
 
-<body class="bg-white font-sans text-slate-600 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
+<body
+    class="bg-white font-sans text-slate-600 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
 
     <!-- ============================================================ -->
     <!-- HEADER NAVBAR -->
     <!-- ============================================================ -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/90 backdrop-blur-md" id="mainHeader">
+    <header
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/90 backdrop-blur-md shadow-sm/5"
+        id="mainHeader">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
 
                 <!-- Logo Identitas - PAKAI LOGO LOKAL -->
                 <a href="index.html" class="flex items-center gap-3.5 group">
-                    <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" src="assets/images/smpmeka.png" />
+                    <img alt="Logo SMP Muhammadiyah 6 Krian"
+                        class="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+                        src="assets/images/smpmeka.png" />
                     <div class="flex flex-col">
-                        <span class="font-headline font-extrabold text-lg text-mho-blue leading-none tracking-tight">SMP MEKA</span>
-                        <span class="text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami • Unggul • Berkemajuan</span>
+                        <span class="font-headline font-extrabold text-lg text-mho-blue leading-none tracking-tight">SMP
+                            MEKA</span>
+                        <span class="text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami •
+                            Unggul • Berkemajuan</span>
                     </div>
                 </a>
 
                 <!-- Navigasi Desktop -->
                 <nav class="hidden lg:flex items-center gap-1.5">
-                    <a href="index.html" class="px-4 py-2 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light border border-mho-blue/20">Beranda</a>
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light border border-mho-blue/20">Beranda</a>
 
                     <!-- Dropdown: Tentang Kami -->
                     <div class="relative group">
-                        <button class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
                             Tentang Kami
-                            <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
                         </button>
-                        <div class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
-                                <a href="profile.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">school</span> Profil Sekolah
+                        <div
+                            class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="profile.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">school</span> Profil
+                                    Sekolah
                                 </a>
-                                <a href="pendidik.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
-                                    <span class="material-symbols-outlined text-mho-green text-lg">groups</span> Tenaga Pendidik
+                                <a href="pendidik.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
+                                    <span class="material-symbols-outlined text-mho-green text-lg">groups</span> Tenaga
+                                    Pendidik
                                 </a>
-                                <a href="fasilitas.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">apartment</span> Sarana & Prasarana
+                                <a href="fasilitas.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">apartment</span>
+                                    Sarana & Prasarana
                                 </a>
                             </div>
                         </div>
@@ -153,25 +204,36 @@
 
                     <!-- Dropdown: Informasi -->
                     <div class="relative group">
-                        <button class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
                             Informasi
-                            <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
                         </button>
-                        <div class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
-                                <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span> Kalender Akademik
+                        <div
+                            class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="#"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span>
+                                    Kalender Akademik
                                 </a>
-                                <a href="berita.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">campaign</span> Pengumuman
+                                <a href="berita.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">campaign</span>
+                                    Pengumuman
                                 </a>
                                 <!-- Ekstrakurikuler -->
-                                <a href="ekstrakurikuler.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
-                                    <span class="material-symbols-outlined text-mho-green text-lg">sports_kabaddi</span> Ekstrakurikuler
+                                <a href="ekstrakurikuler.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
+                                    <span class="material-symbols-outlined text-mho-green text-lg">sports_kabaddi</span>
+                                    Ekstrakurikuler
                                 </a>
                                 <!-- Program Sekolah -->
-                                <a href="program-sekolah.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">menu_book</span> Program Sekolah
+                                <a href="program-sekolah.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">menu_book</span>
+                                    Program Sekolah
                                 </a>
                             </div>
                         </div>
@@ -179,39 +241,52 @@
 
                     <!-- MENU PUBLIKASI - dengan submenu dropdown -->
                     <div class="relative group">
-                        <button class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
                             Publikasi
-                            <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
                         </button>
-                        <div class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
-                                <a href="berita.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">newspaper</span> Berita
+                        <div
+                            class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="berita.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">newspaper</span>
+                                    Berita
                                 </a>
-                                <a href="galeri.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
-                                    <span class="material-symbols-outlined text-mho-green text-lg">photo_library</span> Galeri
+                                <a href="galeri.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
+                                    <span class="material-symbols-outlined text-mho-green text-lg">photo_library</span>
+                                    Galeri
                                 </a>
-                                <a href="prestasi.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
-                                    <span class="material-symbols-outlined text-mho-blue text-lg">emoji_events</span> Prestasi
+                                <a href="prestasi.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">emoji_events</span>
+                                    Prestasi
                                 </a>
                             </div>
                         </div>
                     </div>
 
                     <!-- MENU RUANG ASPIRASI (dulunya Alumni) -->
-                    <a href="#alumni" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 transition-all">Ruang Aspirasi</a>
+                    <a href="#alumni"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 transition-all">Ruang
+                        Aspirasi</a>
                 </nav>
 
                 <!-- Right Action -->
                 <div class="hidden lg:flex items-center gap-4">
-                    <a href="daftar.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                    <a href="daftar.html"
+                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
                         <span>PPDB Online</span>
                         <span class="material-symbols-outlined text-sm">open_in_new</span>
                     </a>
                 </div>
 
                 <!-- Mobile Menu Toggle -->
-                <button id="mobileMenuBtn" onclick="toggleMobileNav()" class="lg:hidden p-2 rounded-xl text-mho-blue hover:bg-slate-100 transition-all">
+                <button id="mobileMenuBtn" onclick="toggleMobileNav()"
+                    class="lg:hidden p-2 rounded-xl text-mho-blue hover:bg-slate-100 transition-all">
                     <span class="material-symbols-outlined text-3xl">menu</span>
                 </button>
             </div>
@@ -219,15 +294,28 @@
 
         <!-- Mobile Navigation Menu -->
         <div id="mobileNav" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-3">
-            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">Beranda</a>
-            <a href="profile.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Profil Sekolah</a>
-            <a href="berita.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Informasi & Berita</a>
-            <a href="ekstrakurikuler.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Ekstrakurikuler</a>
-            <a href="program-sekolah.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Program Sekolah</a>
-            <a href="prestasi.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Publikasi</a>
-            <a href="galeri.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Galeri</a>
-            <a href="#alumni" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Ruang Aspirasi</a>
-            <a href="daftar.html" class="block w-full text-center py-3.5 rounded-xl bg-mho-green text-white font-headline font-extrabold text-xs uppercase tracking-wider">
+            <a href="index.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">Beranda</a>
+            <a href="profile.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Profil
+                Sekolah</a>
+            <a href="berita.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Informasi &
+                Berita</a>
+            <a href="ekstrakurikuler.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Ekstrakurikuler</a>
+            <a href="program-sekolah.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Program
+                Sekolah</a>
+            <a href="prestasi.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Publikasi</a>
+            <a href="galeri.html"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Galeri</a>
+            <a href="#alumni"
+                class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Ruang
+                Aspirasi</a>
+            <a href="daftar.html"
+                class="block w-full text-center py-3.5 rounded-xl bg-mho-green text-white font-headline font-extrabold text-xs uppercase tracking-wider">
                 Daftar PPDB Online
             </a>
         </div>
@@ -238,43 +326,59 @@
         <!-- ============================================================ -->
         <!-- HERO SECTION -->
         <!-- ============================================================ -->
-        <section class="relative min-h-[88vh] flex items-center bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 overflow-hidden z-10 pb-16 lg:pb-0">
-            
-            <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-30">
-                <svg class="relative block w-full h-32 sm:h-48 lg:h-64" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z" fill="#0D5C96" fill-opacity="0.15"></path>
-                    <path d="M0,30 C200,100 450,10 700,70 C950,130 1100,20 1200,50 L1200,120 L0,120 Z" fill="#059669" fill-opacity="0.2"></path>
+        <section
+            class="relative min-h-[88vh] flex items-center bg-gradient-to-b from-slate-50/60 via-white to-slate-50/40 border-b border-slate-100 overflow-hidden z-10 pb-16 lg:pb-0">
+
+            <div
+                class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-20">
+                <svg class="relative block w-full h-32 sm:h-48 lg:h-64" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z" fill="#1E65B5"
+                        fill-opacity="0.12"></path>
+                    <path d="M0,30 C200,100 450,10 700,70 C950,130 1100,20 1200,50 L1200,120 L0,120 Z" fill="#E58A2B"
+                        fill-opacity="0.15"></path>
                 </svg>
             </div>
 
-            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-mho-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-mho-green/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-mho-blue/5 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div class="absolute bottom-10 right-10 w-96 h-96 bg-mho-green/5 rounded-full blur-3xl pointer-events-none">
+            </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
 
                     <div class="lg:col-span-7 space-y-7" data-aos="fade-right" data-aos-duration="700">
-                        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-mho-green-light border border-mho-green/20 shadow-xs">
+                        <div
+                            class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-mho-green-light border border-mho-green/20 shadow-xs">
                             <span class="w-2 h-2 rounded-full bg-mho-green animate-pulse"></span>
-                            <span class="text-xs font-bold text-mho-green uppercase tracking-wider">PPDB TA 2026/2027 Dibuka</span>
+                            <span class="text-xs font-bold text-mho-green uppercase tracking-wider">PPDB TA 2026/2027
+                                Dibuka</span>
                         </div>
 
-                        <h1 class="font-headline font-extrabold text-slate-900 text-4xl sm:text-5xl lg:text-6xl leading-[1.15] tracking-tight">
+                        <h1
+                            class="font-headline font-extrabold text-slate-900 text-4xl sm:text-5xl lg:text-6xl leading-[1.12] tracking-tight">
                             <span class="text-gradient-custom">Berakhlak, Peduli</span><br />
                             <span class="text-slate-900">& Berprestasi</span><br />
-                            <span class="font-serifAcc italic font-bold text-mho-blue text-3xl sm:text-4xl lg:text-5xl">Di Era Teknologi</span>
+                            <span
+                                class="font-serifAcc italic font-bold text-mho-blue text-3xl sm:text-4xl lg:text-5xl">Di
+                                Era Teknologi</span>
                         </h1>
 
                         <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
-                            SMP Muhammadiyah 6 Krian menyelenggarakan pendidikan unggul berbasis Al-Islam dan Kemuhammadiyahan yang terintegrasi dengan penguasaan sains, teknologi, serta kepemimpinan masa depan.
+                            SMP Muhammadiyah 6 Krian menyelenggarakan pendidikan unggul berbasis Al-Islam dan
+                            Kemuhammadiyahan yang terintegrasi dengan penguasaan sains, teknologi, serta kepemimpinan
+                            masa depan.
                         </p>
 
                         <div class="flex flex-wrap gap-4 pt-2">
-                            <a href="daftar.html" class="inline-flex items-center gap-3 px-7 py-3.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+                            <a href="daftar.html"
+                                class="inline-flex items-center gap-3 px-7 py-3.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-mho-blue/20 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
                                 <span>Daftar PPDB Online</span>
                                 <span class="material-symbols-outlined text-lg">arrow_forward</span>
                             </a>
-                            <button onclick="toggleVideoModal()" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-mho-green-light text-mho-green font-headline font-semibold text-xs uppercase tracking-wider border border-mho-green/30 transition-all shadow-xs hover:shadow-sm">
+                            <button onclick="toggleVideoModal()"
+                                class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-mho-green-light text-mho-green font-headline font-semibold text-xs uppercase tracking-wider border border-mho-green/30 transition-all shadow-xs hover:shadow-sm">
                                 <span class="material-symbols-outlined text-lg">play_circle</span>
                                 <span>Tur Sekolah</span>
                             </button>
@@ -282,14 +386,21 @@
                     </div>
 
                     <div class="lg:col-span-5 relative mt-8 lg:mt-0" data-aos="zoom-in" data-aos-duration="800">
-                        <div class="relative w-full max-w-lg mx-auto flex justify-center items-end min-h-[440px] sm:min-h-[500px]">
-                            <div class="absolute bottom-6 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-white border border-mho-blue/20 shadow-sm flex items-center justify-center overflow-hidden">
-                                <div class="w-[92%] h-[92%] rounded-full border border-dashed border-mho-blue/30 animate-spin-slow opacity-60"></div>
+                        <div
+                            class="relative w-full max-w-lg mx-auto flex justify-center items-end min-h-[440px] sm:min-h-[500px]">
+                            <div
+                                class="absolute bottom-6 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-white border border-slate-100 shadow-xl shadow-slate-100 flex items-center justify-center overflow-hidden">
+                                <div
+                                    class="w-[92%] h-[92%] rounded-full border border-dashed border-mho-blue/20 animate-spin-slow opacity-60">
+                                </div>
                             </div>
-                            <img src="assets/images/woman.png" alt="Siswi SMP Muhammadiyah 6 Krian" class="relative z-10 w-auto h-[460px] sm:h-[520px] max-w-none object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.08)] -mb-12 sm:-mb-16" />
+                            <img src="assets/images/woman.png" alt="Siswi SMP Muhammadiyah 6 Krian"
+                                class="relative z-10 w-auto h-[460px] sm:h-[520px] max-w-none object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.06)] -mb-12 sm:-mb-16" />
 
-                            <div class="absolute top-8 left-0 sm:-left-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-4 shadow-xl border border-slate-200/80 flex items-center gap-3.5 animate-float">
-                                <div class="w-10 h-10 rounded-xl bg-mho-green-light text-mho-green flex items-center justify-center font-bold">
+                            <div
+                                class="absolute top-8 left-0 sm:-left-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3.5 animate-float">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-mho-green-light text-mho-green flex items-center justify-center font-bold">
                                     <span class="material-symbols-outlined text-2xl">verified</span>
                                 </div>
                                 <div>
@@ -298,8 +409,10 @@
                                 </div>
                             </div>
 
-                            <div class="absolute bottom-16 right-0 sm:-right-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-4 shadow-xl border border-slate-200/80 flex items-center gap-3.5 animate-float" style="animation-delay: 2s;">
-                                <div class="w-10 h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center font-bold">
+                            <div class="absolute bottom-16 right-0 sm:-right-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3.5 animate-float"
+                                style="animation-delay: 2s;">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center font-bold">
                                     <span class="material-symbols-outlined text-2xl">menu_book</span>
                                 </div>
                                 <div>
@@ -318,24 +431,36 @@
         <!-- MARQUEE BERGAYA BANNER MIRING - SEAMLESS (FIXED CLIP-PATH) -->
         <!-- ============================================================ -->
         <div class="relative z-30 -mt-6 overflow-hidden py-4 select-none">
-            <div class="bg-mho-blue shadow-xl py-3" style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
+            <div class="bg-mho-blue shadow-lg py-3.5" style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
                 <div class="flex overflow-hidden whitespace-nowrap">
                     <!-- KONTEN 1 -->
-                    <div class="animate-marquee flex items-center gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white">
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">verified</span> Berakhlak, Peduli & Berprestasi Di Era Teknologi</span>
+                    <div
+                        class="animate-marquee flex items-center gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white">
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-base">verified</span> Berakhlak, Peduli &
+                            Berprestasi Di Era Teknologi</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">star</span> Unggul & Berkemajuan</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-base">star</span> Unggul & Berkemajuan</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">school</span> Islamic & Technology School</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-base">school</span> Islamic & Technology
+                            School</span>
                         <span class="text-white/40">•</span>
                     </div>
                     <!-- KONTEN 2 (DUPLIKAT UNTUK SEAMLESS) -->
-                    <div class="animate-marquee flex items-center gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white" aria-hidden="true">
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">verified</span> Berakhlak, Peduli & Berprestasi Di Era Teknologi</span>
+                    <div class="animate-marquee flex items-center gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white"
+                        aria-hidden="true">
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-base">verified</span> Berakhlak, Peduli &
+                            Berprestasi Di Era Teknologi</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">star</span> Unggul & Berkemajuan</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-base">star</span> Unggul & Berkemajuan</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">school</span> Islamic & Technology School</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-base">school</span> Islamic & Technology
+                            School</span>
                         <span class="text-white/40">•</span>
                     </div>
                 </div>
@@ -347,23 +472,33 @@
         <!-- ============================================================ -->
         <section class="relative z-20 py-12">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-white border border-slate-200/80 rounded-2xl p-8 sm:p-10 shadow-sm hover:shadow-md transition-shadow">
-                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+                <div
+                    class="bg-white border border-slate-100 rounded-2xl p-8 sm:p-10 shadow-xl shadow-slate-100 transition-shadow">
+                    <div
+                        class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
                         <div class="p-2" data-aos="fade-up" data-aos-delay="0">
-                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-mho-blue" data-target="850" data-suffix="+">0</p>
-                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Siswa Aktif</p>
+                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-mho-blue" data-target="850"
+                                data-suffix="+">0</p>
+                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Siswa Aktif
+                            </p>
                         </div>
                         <div class="p-2 pt-6 sm:pt-2" data-aos="fade-up" data-aos-delay="100">
-                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-slate-900" data-target="45" data-suffix="">0</p>
-                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Guru & Pendidik</p>
+                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-slate-900" data-target="45"
+                                data-suffix="">0</p>
+                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Guru &
+                                Pendidik</p>
                         </div>
                         <div class="p-2 pt-6 sm:pt-2" data-aos="fade-up" data-aos-delay="200">
-                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-mho-green" data-target="120" data-suffix="+">0</p>
-                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Penghargaan Juara</p>
+                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-mho-green"
+                                data-target="120" data-suffix="+">0</p>
+                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Penghargaan
+                                Juara</p>
                         </div>
                         <div class="p-2 pt-6 sm:pt-2" data-aos="fade-up" data-aos-delay="300">
-                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-mho-blue" data-target="24" data-suffix="+">0</p>
-                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">Ekstrakurikuler</p>
+                            <p class="font-headline font-extrabold text-4xl sm:text-5xl text-mho-blue" data-target="24"
+                                data-suffix="+">0</p>
+                            <p class="text-xs font-semibold text-slate-500 mt-2 uppercase tracking-widest">
+                                Ekstrakurikuler</p>
                         </div>
                     </div>
                 </div>
@@ -379,14 +514,22 @@
 
                     <div class="lg:col-span-5" data-aos="fade-right" data-aos-duration="600">
                         <div class="relative max-w-md mx-auto">
-                            <div class="absolute -inset-3 bg-mho-blue-light rounded-3xl transform -rotate-2 border border-mho-blue/10"></div>
-                            
-                            <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-50 aspect-[3/4] group">
-                                <img alt="Drs. H. Ahmad Muhajir, M.Pd" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyvcisDnawXBOI2fjPbf3X4Gp4HvCoOldNRHOpxQ3WW29LtFJXzQk7qNfs6Po1FHCFU5mesaZDB_ucW8eQeN2KZj2JyMW1mVMCeNysB3ALAzIEUwasUfrZnqTVVMABo28wjWyJ3zM9o7Iw9jTmUmjuGoA2ydPDn6MXWIygk5RRNoT_0xqzUe8qCgcbuaMzL2Cd7fG9jPvDNrEPYJYeTWhRoK_Cmyi4fHyY7VLSZeAqBYMoYnDCqqzQA" loading="lazy" />
+                            <div
+                                class="absolute -inset-3 bg-mho-blue-light rounded-3xl transform -rotate-2 border border-mho-blue/10">
                             </div>
 
-                            <div class="absolute -bottom-6 -right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-200/80 flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center">
+                            <div
+                                class="relative rounded-2xl overflow-hidden shadow-xl border border-slate-100 bg-slate-50 aspect-[3/4] group">
+                                <img alt="Drs. H. Ahmad Muhajir, M.Pd"
+                                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyvcisDnawXBOI2fjPbf3X4Gp4HvCoOldNRHOpxQ3WW29LtFJXzQk7qNfs6Po1FHCFU5mesaZDB_ucW8eQeN2KZj2JyMW1mVMCeNysB3ALAzIEUwasUfrZnqTVVMABo28wjWyJ3zM9o7Iw9jTmUmjuGoA2ydPDn6MXWIygk5RRNoT_0xqzUe8qCgcbuaMzL2Cd7fG9jPvDNrEPYJYeTWhRoK_Cmyi4fHyY7VLSZeAqBYMoYnDCqqzQA"
+                                    loading="lazy" />
+                            </div>
+
+                            <div
+                                class="absolute -bottom-6 -right-4 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center">
                                     <span class="material-symbols-outlined text-2xl">format_quote</span>
                                 </div>
                                 <div>
@@ -398,12 +541,15 @@
                     </div>
 
                     <div class="lg:col-span-7 space-y-6" data-aos="fade-left" data-aos-duration="600">
-                        <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green">
+                        <div
+                            class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green">
                             <span class="w-2 h-2 rounded-full bg-mho-green"></span>
-                            <span>Sambutan <span class="font-serifAcc italic capitalize text-slate-800 text-sm">Kepala Sekolah</span></span>
+                            <span>Sambutan <span class="font-serifAcc italic capitalize text-slate-800 text-sm">Kepala
+                                    Sekolah</span></span>
                         </div>
 
-                        <h2 class="font-headline font-extrabold text-3xl sm:text-4xl text-slate-900 leading-tight tracking-tight">
+                        <h2
+                            class="font-headline font-extrabold text-3xl sm:text-4xl text-slate-900 leading-tight tracking-tight">
                             Menuntun Akhlak, Menempa Prestasi Generasi Muda
                         </h2>
 
@@ -412,17 +558,23 @@
                                 Assalamu’alaikum Warahmatullahi Wabarakatuh.
                             </p>
                             <p>
-                                Kepercayaan para bapak, ibu, dan wali murid adalah amanah utama bagi seluruh civitas akademika SMP Muhammadiyah 6 Krian. Di lembaga ini, kami mengintegrasikan pembiasaan ibadah harian, penguatan akidah, serta bimbingan akademik terstruktur.
+                                Kepercayaan para bapak, ibu, dan wali murid adalah amanah utama bagi seluruh civitas
+                                akademika SMP Muhammadiyah 6 Krian. Di lembaga ini, kami mengintegrasikan pembiasaan
+                                ibadah harian, penguatan akidah, serta bimbingan akademik terstruktur.
                             </p>
                             <p>
-                                Kami membekali para siswa tidak hanya dengan kecerdasan intelektual (Iptek), tetapi juga benteng imtaq yang kokoh agar siap menghadapi dinamika zaman tanpa kehilangan jati diri keislaman.
+                                Kami membekali para siswa tidak hanya dengan kecerdasan intelektual (Iptek), tetapi juga
+                                benteng imtaq yang kokoh agar siap menghadapi dinamika zaman tanpa kehilangan jati diri
+                                keislaman.
                             </p>
                         </div>
 
-                        <div class="pt-6 border-t border-slate-200 flex items-center justify-between">
+                        <div class="pt-6 border-t border-slate-100 flex items-center justify-between">
                             <div>
-                                <p class="font-headline font-bold text-lg text-slate-900">Drs. H. Ahmad Muhajir, M.Pd</p>
-                                <p class="text-xs font-semibold text-mho-blue uppercase tracking-wider mt-0.5">Kepala Sekolah SMPM 6 Krian</p>
+                                <p class="font-headline font-bold text-lg text-slate-900">Drs. H. Ahmad Muhajir, M.Pd
+                                </p>
+                                <p class="text-xs font-semibold text-mho-blue uppercase tracking-wider mt-0.5">Kepala
+                                    Sekolah SMPM 6 Krian</p>
                             </div>
                         </div>
                     </div>
@@ -434,19 +586,7 @@
         <!-- ============================================================ -->
         <!-- PROGRAM UNGGULAN -->
         <!-- ============================================================ -->
-        <section class="py-24 bg-slate-50 border-t border-slate-200/60 relative overflow-hidden" id="program">
-            <div class="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-20">
-                <svg class="relative block w-full h-16 sm:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0 C300,90 600,-30 900,50 C1050,90 1150,20 1200,0 L1200,0 L0,0 Z" fill="#0D5C96"></path>
-                </svg>
-            </div>
-
-            <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-15">
-                <svg class="relative block w-full h-16 sm:h-24" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,120 C400,30 800,100 1200,20 L1200,120 L0,120 Z" fill="#059669"></path>
-                </svg>
-            </div>
-
+        <section class="py-24 bg-slate-50/50 border-t border-slate-100 relative overflow-hidden" id="program">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
                 <div class="max-w-2xl mb-14" data-aos="fade-up">
@@ -455,57 +595,83 @@
                         <span class="text-xs font-bold uppercase tracking-widest text-mho-green">Program Unggulan</span>
                     </div>
                     <h2 class="font-headline font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mt-2">
-                        Empat Pilar <span class="font-serifAcc italic font-normal text-mho-blue text-4xl sm:text-5xl">Utama</span> Pengembangan Siswa
+                        Empat Pilar <span
+                            class="font-serifAcc italic font-normal text-mho-blue text-4xl sm:text-5xl">Utama</span>
+                        Pengembangan Siswa
                     </h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="0">
+                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-100 hover:border-mho-blue/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                        data-aos="fade-up" data-aos-delay="0">
                         <div class="space-y-4">
-                            <span class="font-headline font-extrabold text-2xl text-slate-300 group-hover:text-mho-blue transition-colors">01</span>
-                            <h3 class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">Tahfidz Al-Qur'an</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Bimbingan hafalan terstruktur dengan target capaian minimal 3 Juz selama 3 tahun masa studi.</p>
+                            <span
+                                class="font-headline font-extrabold text-2xl text-slate-200 group-hover:text-mho-blue transition-colors">01</span>
+                            <h3
+                                class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">
+                                Tahfidz Al-Qur'an</h3>
+                            <p class="text-slate-500 text-xs leading-relaxed">Bimbingan hafalan terstruktur dengan
+                                target capaian minimal 3 Juz selama 3 tahun masa studi.</p>
                         </div>
                         <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-[11px] font-semibold text-mho-green">Ujian Munaqosyah</span>
-                            <span class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
+                            <span
+                                class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
                         </div>
                     </div>
 
-                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-100 hover:border-mho-blue/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                        data-aos="fade-up" data-aos-delay="100">
                         <div class="space-y-4">
-                            <span class="font-headline font-extrabold text-2xl text-slate-300 group-hover:text-mho-blue transition-colors">02</span>
-                            <h3 class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">Robotik & IT</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Pengenalan logika komputasi, dasar pemrograman, dan perakitan alat otomatisasi.</p>
+                            <span
+                                class="font-headline font-extrabold text-2xl text-slate-200 group-hover:text-mho-blue transition-colors">02</span>
+                            <h3
+                                class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">
+                                Robotik & IT</h3>
+                            <p class="text-slate-500 text-xs leading-relaxed">Pengenalan logika komputasi, dasar
+                                pemrograman, dan perakitan alat otomatisasi.</p>
                         </div>
                         <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-[11px] font-semibold text-mho-green">Lab Komputer Modern</span>
-                            <span class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
+                            <span
+                                class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
                         </div>
                     </div>
 
-                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-100 hover:border-mho-blue/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                        data-aos="fade-up" data-aos-delay="200">
                         <div class="space-y-4">
-                            <span class="font-headline font-extrabold text-2xl text-slate-300 group-hover:text-mho-blue transition-colors">03</span>
-                            <h3 class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">Tapak Suci</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Seni bela diri pencak silat untuk melatih ketahanan fisik, mental, dan kedisiplinan diri.</p>
+                            <span
+                                class="font-headline font-extrabold text-2xl text-slate-200 group-hover:text-mho-blue transition-colors">03</span>
+                            <h3
+                                class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">
+                                Tapak Suci</h3>
+                            <p class="text-slate-500 text-xs leading-relaxed">Seni bela diri pencak silat untuk melatih
+                                ketahanan fisik, mental, dan kedisiplinan diri.</p>
                         </div>
                         <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-[11px] font-semibold text-mho-green">Eskul Wajib</span>
-                            <span class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
+                            <span
+                                class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
                         </div>
                     </div>
 
-                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl border border-slate-100 hover:border-mho-blue/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                        data-aos="fade-up" data-aos-delay="300">
                         <div class="space-y-4">
-                            <span class="font-headline font-extrabold text-2xl text-slate-300 group-hover:text-mho-blue transition-colors">04</span>
-                            <h3 class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">Hizbul Wathan</h3>
-                            <p class="text-slate-500 text-xs leading-relaxed">Gerakan kepanduan untuk mengasah karakter kepemimpinan dan rasa kepedulian sosial.</p>
+                            <span
+                                class="font-headline font-extrabold text-2xl text-slate-200 group-hover:text-mho-blue transition-colors">04</span>
+                            <h3
+                                class="font-headline font-bold text-lg text-slate-900 group-hover:text-mho-blue transition-colors">
+                                Hizbul Wathan</h3>
+                            <p class="text-slate-500 text-xs leading-relaxed">Gerakan kepanduan untuk mengasah karakter
+                                kepemimpinan dan rasa kepedulian sosial.</p>
                         </div>
                         <div class="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
                             <span class="text-[11px] font-semibold text-mho-green">Kegiatan Pandu</span>
-                            <span class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
+                            <span
+                                class="material-symbols-outlined text-mho-blue opacity-0 group-hover:opacity-100 transition-opacity text-sm">arrow_forward</span>
                         </div>
                     </div>
 
@@ -524,11 +690,15 @@
                     <div>
                         <div class="flex items-center gap-2">
                             <span class="w-8 h-0.5 bg-mho-green rounded-full"></span>
-                            <span class="text-xs font-bold uppercase tracking-widest text-mho-green">Informasi Terbaru</span>
+                            <span class="text-xs font-bold uppercase tracking-widest text-mho-green">Informasi
+                                Terbaru</span>
                         </div>
-                        <h2 class="font-headline font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mt-1">Warta & Kegiatan</h2>
+                        <h2
+                            class="font-headline font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight mt-1">
+                            Warta & Kegiatan</h2>
                     </div>
-                    <a href="berita.html" class="inline-flex items-center gap-1 text-xs font-bold text-mho-blue hover:underline uppercase tracking-wider mt-4 sm:mt-0">
+                    <a href="berita.html"
+                        class="inline-flex items-center gap-1 text-xs font-bold text-mho-blue hover:underline uppercase tracking-wider mt-4 sm:mt-0">
                         <span>Lihat Semua</span>
                         <span class="material-symbols-outlined text-base">chevron_right</span>
                     </a>
@@ -537,30 +707,48 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
                     <article class="group cursor-pointer" data-aos="fade-up" data-aos-delay="0">
-                        <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100 shadow-xs group-hover:shadow-md transition-shadow">
-                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOvxVGzsaotUxf7NQdqQbZHFHiUK8S0fqqH6EJi_KYAJq_gYAqVe6jeWLk4zIqPOf9swCU0aBYE8_2ZpDZjSxNfI4dNBKrBO1HMV6N5n_792ollsNzQ-bTsMRb5j34KABPGu05warSDky9tpdyeSJvRhcfdGzEbBHa9hHVSEahwdtsvnGK9pt1nW5Q9sxVy_ocOInVAHUqyKgFRge1KNz2iYq5z733YZ-UmlwWGjhZ9-JwT90K_e1vg" alt="Juara Robotik" loading="lazy" />
+                        <div
+                            class="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100 shadow-xs group-hover:shadow-md transition-shadow">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOvxVGzsaotUxf7NQdqQbZHFHiUK8S0fqqH6EJi_KYAJq_gYAqVe6jeWLk4zIqPOf9swCU0aBYE8_2ZpDZjSxNfI4dNBKrBO1HMV6N5n_792ollsNzQ-bTsMRb5j34KABPGu05warSDky9tpdyeSJvRhcfdGzEbBHa9hHVSEahwdtsvnGK9pt1nW5Q9sxVy_ocOInVAHUqyKgFRge1KNz2iYq5z733YZ-UmlwWGjhZ9-JwT90K_e1vg"
+                                alt="Juara Robotik" loading="lazy" />
                         </div>
                         <p class="text-[11px] font-semibold text-slate-400">12 Maret 2026 • Prestasi</p>
-                        <h3 class="font-headline font-bold text-base text-slate-900 group-hover:text-mho-blue transition-colors mt-1">Juara 1 Lomba Robotik Tingkat Nasional 2026</h3>
-                        <p class="text-xs text-slate-500 line-clamp-2 mt-2">Tim Robotik SMPM 6 Krian meraih penghargaan tertinggi dalam kompetisi inovasi teknologi siswa sekolah menengah.</p>
+                        <h3
+                            class="font-headline font-bold text-base text-slate-900 group-hover:text-mho-blue transition-colors mt-1">
+                            Juara 1 Lomba Robotik Tingkat Nasional 2026</h3>
+                        <p class="text-xs text-slate-500 line-clamp-2 mt-2">Tim Robotik SMPM 6 Krian meraih penghargaan
+                            tertinggi dalam kompetisi inovasi teknologi siswa sekolah menengah.</p>
                     </article>
 
                     <article class="group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
-                        <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100 shadow-xs group-hover:shadow-md transition-shadow">
-                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Gd08iwbv1BxpKbCVl9eUoaf5LPronJbfyhreBMtFqjVAjaUXSVfVt1897F9Uaa1Wl9g-j8RRErG6sF43X2CORC7BpBQd5_fEB0bqn0LDCk5cI8Z5GOWSCGpa-Illr5H2QQxIHiQfdwyuYep9QrVHMOb5wK3sJ4Spa_w-ONfTIEJkBC_hke1zeb55XPRA4-sW9Gfd2q8AeTPdTyXc8F8-QCPmDBDxJQxAu6QTdHcND2yueFqNFW73pg" alt="Baksos Ramadhan" loading="lazy" />
+                        <div
+                            class="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100 shadow-xs group-hover:shadow-md transition-shadow">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Gd08iwbv1BxpKbCVl9eUoaf5LPronJbfyhreBMtFqjVAjaUXSVfVt1897F9Uaa1Wl9g-j8RRErG6sF43X2CORC7BpBQd5_fEB0bqn0LDCk5cI8Z5GOWSCGpa-Illr5H2QQxIHiQfdwyuYep9QrVHMOb5wK3sJ4Spa_w-ONfTIEJkBC_hke1zeb55XPRA4-sW9Gfd2q8AeTPdTyXc8F8-QCPmDBDxJQxAu6QTdHcND2yueFqNFW73pg"
+                                alt="Baksos Ramadhan" loading="lazy" />
                         </div>
                         <p class="text-[11px] font-semibold text-slate-400">8 Maret 2026 • Kegiatan</p>
-                        <h3 class="font-headline font-bold text-base text-slate-900 group-hover:text-mho-blue transition-colors mt-1">Bakti Sosial & Semarak Ramadhan 1447 H</h3>
-                        <p class="text-xs text-slate-500 line-clamp-2 mt-2">Rangkaian kegiatan bakti sosial dan penyaluran bantuan paket sembako kepada masyarakat sekitar lingkungan sekolah.</p>
+                        <h3
+                            class="font-headline font-bold text-base text-slate-900 group-hover:text-mho-blue transition-colors mt-1">
+                            Bakti Sosial & Semarak Ramadhan 1447 H</h3>
+                        <p class="text-xs text-slate-500 line-clamp-2 mt-2">Rangkaian kegiatan bakti sosial dan
+                            penyaluran bantuan paket sembako kepada masyarakat sekitar lingkungan sekolah.</p>
                     </article>
 
                     <article class="group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
-                        <div class="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100 shadow-xs group-hover:shadow-md transition-shadow">
-                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDljOojaPak1pyMVfZX9_tfY3Q73hwHzU5FrLIK26CTjaoxmS4b-2ZbdFqJSBCtfBh_dhtZ5sNMRjFvFdoVZ6jyroFlF0VWpiI5heJHnJmhJY8TAbvWa7_VvSni6lbv7BYroiGAu-Pgnjh0MOftOArQzCInCINtMs1StblnjuipJh7qL8cL5QrAfk2_2EL6h0sw7LOIQjERCr1OTyhVcfaQK8nhEuYZXehFBwTXoZA2NleIvRRDZKgpbg" alt="Literasi Digital" loading="lazy" />
+                        <div
+                            class="aspect-[16/10] rounded-2xl overflow-hidden bg-slate-100 mb-4 border border-slate-100 shadow-xs group-hover:shadow-md transition-shadow">
+                            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDljOojaPak1pyMVfZX9_tfY3Q73hwHzU5FrLIK26CTjaoxmS4b-2ZbdFqJSBCtfBh_dhtZ5sNMRjFvFdoVZ6jyroFlF0VWpiI5heJHnJmhJY8TAbvWa7_VvSni6lbv7BYroiGAu-Pgnjh0MOftOArQzCInCINtMs1StblnjuipJh7qL8cL5QrAfk2_2EL6h0sw7LOIQjERCr1OTyhVcfaQK8nhEuYZXehFBwTXoZA2NleIvRRDZKgpbg"
+                                alt="Literasi Digital" loading="lazy" />
                         </div>
                         <p class="text-[11px] font-semibold text-slate-400">5 Maret 2026 • Akademik</p>
-                        <h3 class="font-headline font-bold text-base text-slate-900 group-hover:text-mho-blue transition-colors mt-1">Workshop Literasi Digital & Keamanan Siber</h3>
-                        <p class="text-xs text-slate-500 line-clamp-2 mt-2">Pelatihan etika penggunaan media sosial dan pemahaman dasar keamanan informasi digital bagi siswa kelas VII dan VIII.</p>
+                        <h3
+                            class="font-headline font-bold text-base text-slate-900 group-hover:text-mho-blue transition-colors mt-1">
+                            Workshop Literasi Digital & Keamanan Siber</h3>
+                        <p class="text-xs text-slate-500 line-clamp-2 mt-2">Pelatihan etika penggunaan media sosial dan
+                            pemahaman dasar keamanan informasi digital bagi siswa kelas VII dan VIII.</p>
                     </article>
 
                 </div>
@@ -572,14 +760,15 @@
         <!-- JEJAK ALUMNI -->
         <!-- ============================================================ -->
         <section class="py-24 bg-slate-50/80 border-t border-slate-200/60 overflow-hidden relative" id="alumni">
-            
+
             <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-20">
                 <svg class="w-full h-full" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100,100 C300,50 550,250 500,500 C450,750 100,550 100,100 Z" fill="url(#alumni-wave-grad)" />
+                    <path d="M100,100 C300,50 550,250 500,500 C450,750 100,550 100,100 Z"
+                        fill="url(#alumni-wave-grad)" />
                     <defs>
                         <linearGradient id="alumni-wave-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#059669" stop-opacity="0.4" />
-                            <stop offset="100%" stop-color="#0D5C96" stop-opacity="0.1" />
+                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.4" />
+                            <stop offset="100%" stop-color="#1E65B5" stop-opacity="0.1" />
                         </linearGradient>
                     </defs>
                 </svg>
@@ -594,31 +783,41 @@
                             <span class="text-xs font-bold uppercase tracking-widest text-mho-green">Jejak Alumni</span>
                         </div>
                         <h2 class="font-headline font-extrabold text-3xl sm:text-4xl text-slate-900 tracking-tight">
-                            Kisah <span class="font-serifAcc italic font-normal text-mho-green text-4xl sm:text-5xl">Sukses</span> Lulusan
+                            Kisah <span
+                                class="font-serifAcc italic font-normal text-mho-green text-4xl sm:text-5xl">Sukses</span>
+                            Lulusan
                         </h2>
                     </div>
 
                     <div class="flex items-center gap-3 mt-6 md:mt-0">
-                        <button onclick="scrollAlumni('left')" class="w-11 h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-blue hover:text-white hover:border-mho-blue transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95" aria-label="Sebelumnya">
+                        <button onclick="scrollAlumni('left')"
+                            class="w-11 h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-blue hover:text-white hover:border-mho-blue transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95"
+                            aria-label="Sebelumnya">
                             <span class="material-symbols-outlined text-xl">arrow_back</span>
                         </button>
-                        <button onclick="scrollAlumni('right')" class="w-11 h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-blue hover:text-white hover:border-mho-blue transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95" aria-label="Berikutnya">
+                        <button onclick="scrollAlumni('right')"
+                            class="w-11 h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-blue hover:text-white hover:border-mho-blue transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95"
+                            aria-label="Berikutnya">
                             <span class="material-symbols-outlined text-xl">arrow_forward</span>
                         </button>
                     </div>
                 </div>
 
-                <div id="alumniSlider" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4" data-aos="fade-up">
+                <div id="alumniSlider" class="flex gap-6 overflow-x-auto no-scrollbar scroll-smooth pb-4"
+                    data-aos="fade-up">
 
-                    <div class="w-[320px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div
+                        class="w-[320px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
                             <span class="material-symbols-outlined text-mho-blue/30 text-4xl">format_quote</span>
                             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed italic">
-                                "Pondasi agama dan logika pemrograman yang saya dapatkan di SMPM 6 Krian sangat membantu perjalanan studi saya hingga bekerja di industri teknologi saat ini."
+                                "Pondasi agama dan logika pemrograman yang saya dapatkan di SMPM 6 Krian sangat membantu
+                                perjalanan studi saya hingga bekerja di industri teknologi saat ini."
                             </p>
                         </div>
                         <div class="pt-6 border-t border-slate-100 flex items-center gap-4 mt-6">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Gd08iwbv1BxpKbCVl9eUoaf5LPronJbfyhreBMtFqjVAjaUXSVfVt1897F9Uaa1Wl9g-j8RRErG6sF43X2CORC7BpBQd5_fEB0bqn0LDCk5cI8Z5GOWSCGpa-Illr5H2QQxIHiQfdwyuYep9QrVHMOb5wK3sJ4Spa_w-ONfTIEJkBC_hke1zeb55XPRA4-sW9Gfd2q8AeTPdTyXc8F8-QCPmDBDxJQxAu6QTdHcND2yueFqNFW73pg" alt="Alumni 1" class="w-12 h-12 rounded-full object-cover border border-slate-200" />
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Gd08iwbv1BxpKbCVl9eUoaf5LPronJbfyhreBMtFqjVAjaUXSVfVt1897F9Uaa1Wl9g-j8RRErG6sF43X2CORC7BpBQd5_fEB0bqn0LDCk5cI8Z5GOWSCGpa-Illr5H2QQxIHiQfdwyuYep9QrVHMOb5wK3sJ4Spa_w-ONfTIEJkBC_hke1zeb55XPRA4-sW9Gfd2q8AeTPdTyXc8F8-QCPmDBDxJQxAu6QTdHcND2yueFqNFW73pg"
+                                alt="Alumni 1" class="w-12 h-12 rounded-full object-cover border border-slate-200" />
                             <div>
                                 <h4 class="font-headline font-bold text-sm text-slate-900">Muhammad Rizky, S.Kom</h4>
                                 <p class="text-[11px] text-mho-blue font-semibold">Software Engineer • Alumni 2018</p>
@@ -626,31 +825,38 @@
                         </div>
                     </div>
 
-                    <div class="w-[320px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div
+                        class="w-[320px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
                             <span class="material-symbols-outlined text-mho-blue/30 text-4xl">format_quote</span>
                             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed italic">
-                                "Kedisiplinan di Hizbul Wathan dan bimbingan Tahfidz membentuk mental kepemimpinan saya hingga dipercaya memimpin organisasi kemahasiswaan di kampus."
+                                "Kedisiplinan di Hizbul Wathan dan bimbingan Tahfidz membentuk mental kepemimpinan saya
+                                hingga dipercaya memimpin organisasi kemahasiswaan di kampus."
                             </p>
                         </div>
                         <div class="pt-6 border-t border-slate-100 flex items-center gap-4 mt-6">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOvxVGzsaotUxf7NQdqQbZHFHiUK8S0fqqH6EJi_KYAJq_gYAqVe6jeWLk4zIqPOf9swCU0aBYE8_2ZpDZjSxNfI4dNBKrBO1HMV6N5n_792ollsNzQ-bTsMRb5j34KABPGu05warSDky9tpdyeSJvRhcfdGzEbBHa9hHVSEahwdtsvnGK9pt1nW5Q9sxVy_ocOInVAHUqyKgFRge1KNz2iYq5z733YZ-UmlwWGjhZ9-JwT90K_e1vg" alt="Alumni 2" class="w-12 h-12 rounded-full object-cover border border-slate-200" />
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMOvxVGzsaotUxf7NQdqQbZHFHiUK8S0fqqH6EJi_KYAJq_gYAqVe6jeWLk4zIqPOf9swCU0aBYE8_2ZpDZjSxNfI4dNBKrBO1HMV6N5n_792ollsNzQ-bTsMRb5j34KABPGu05warSDky9tpdyeSJvRhcfdGzEbBHa9hHVSEahwdtsvnGK9pt1nW5Q9sxVy_ocOInVAHUqyKgFRge1KNz2iYq5z733YZ-UmlwWGjhZ9-JwT90K_e1vg"
+                                alt="Alumni 2" class="w-12 h-12 rounded-full object-cover border border-slate-200" />
                             <div>
                                 <h4 class="font-headline font-bold text-sm text-slate-900">Aisyah Nur Syafiqah</h4>
-                                <p class="text-[11px] text-mho-blue font-semibold">Mahasiswi Kedokteran • Alumni 2020</p>
+                                <p class="text-[11px] text-mho-blue font-semibold">Mahasiswi Kedokteran • Alumni 2020
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="w-[320px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div
+                        class="w-[320px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-8 rounded-2xl border border-slate-200/80 hover:border-mho-blue/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-4">
                             <span class="material-symbols-outlined text-mho-blue/30 text-4xl">format_quote</span>
                             <p class="text-xs sm:text-sm text-slate-600 leading-relaxed italic">
-                                "Pembiasaan ibadah harian di sekolah membuat saya memiliki benteng moral yang kuat di tengah persaingan perbankan internasional."
+                                "Pembiasaan ibadah harian di sekolah membuat saya memiliki benteng moral yang kuat di
+                                tengah persaingan perbankan internasional."
                             </p>
                         </div>
                         <div class="pt-6 border-t border-slate-100 flex items-center gap-4 mt-6">
-                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyvcisDnawXBOI2fjPbf3X4Gp4HvCoOldNRHOpxQ3WW29LtFJXzQk7qNfs6Po1FHCFU5mesaZDB_ucW8eQeN2KZj2JyMW1mVMCeNysB3ALAzIEUwasUfrZnqTVVMABo28wjWyJ3zM9o7Iw9jTmUmjuGoA2ydPDn6MXWIygk5RRNoT_0xqzUe8qCgcbuaMzL2Cd7fG9jPvDNrEPYJYeTWhRoK_Cmyi4fHyY7VLSZeAqBYMoYnDCqqzQA" alt="Alumni 3" class="w-12 h-12 rounded-full object-cover border border-slate-200" />
+                            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIyvcisDnawXBOI2fjPbf3X4Gp4HvCoOldNRHOpxQ3WW29LtFJXzQk7qNfs6Po1FHCFU5mesaZDB_ucW8eQeN2KZj2JyMW1mVMCeNysB3ALAzIEUwasUfrZnqTVVMABo28wjWyJ3zM9o7Iw9jTmUmjuGoA2ydPDn6MXWIygk5RRNoT_0xqzUe8qCgcbuaMzL2Cd7fG9jPvDNrEPYJYeTWhRoK_Cmyi4fHyY7VLSZeAqBYMoYnDCqqzQA"
+                                alt="Alumni 3" class="w-12 h-12 rounded-full object-cover border border-slate-200" />
                             <div>
                                 <h4 class="font-headline font-bold text-sm text-slate-900">Fajar Kurniawan, SE</h4>
                                 <p class="text-[11px] text-mho-blue font-semibold">Financial Analyst • Alumni 2017</p>
@@ -675,32 +881,44 @@
 
                 <div class="space-y-3" data-aos="fade-up">
                     <div class="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
-                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left font-headline font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
+                        <button onclick="toggleFaq(this)"
+                            class="w-full px-6 py-4 text-left font-headline font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                             <span>Kapan gelombang pendaftaran PPDB TA 2026/2027 dibuka?</span>
-                            <span class="material-symbols-outlined text-slate-400 transition-transform duration-200">add</span>
+                            <span
+                                class="material-symbols-outlined text-slate-400 transition-transform duration-200">add</span>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-                            Pendaftaran Gelombang I dibuka mulai Oktober 2025 hingga Maret 2026. Gelombang II akan dibuka apabila kuota peserta didik masih tersedia.
+                        <div
+                            class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
+                            Pendaftaran Gelombang I dibuka mulai Oktober 2025 hingga Maret 2026. Gelombang II akan
+                            dibuka apabila kuota peserta didik masih tersedia.
                         </div>
                     </div>
 
                     <div class="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
-                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left font-headline font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
+                        <button onclick="toggleFaq(this)"
+                            class="w-full px-6 py-4 text-left font-headline font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                             <span>Apa saja dokumen persyaratan pendaftaran?</span>
-                            <span class="material-symbols-outlined text-slate-400 transition-transform duration-200">add</span>
+                            <span
+                                class="material-symbols-outlined text-slate-400 transition-transform duration-200">add</span>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-                            Dokumen awal meliputi: Fotokopi Akta Kelahiran, Kartu Keluarga (KK), Fotokopi Ijazah/SKL SD, serta Pasfoto terbaru ukuran 3x4 sebanyak 3 lembar.
+                        <div
+                            class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
+                            Dokumen awal meliputi: Fotokopi Akta Kelahiran, Kartu Keluarga (KK), Fotokopi Ijazah/SKL SD,
+                            serta Pasfoto terbaru ukuran 3x4 sebanyak 3 lembar.
                         </div>
                     </div>
 
                     <div class="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
-                        <button onclick="toggleFaq(this)" class="w-full px-6 py-4 text-left font-headline font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
+                        <button onclick="toggleFaq(this)"
+                            class="w-full px-6 py-4 text-left font-headline font-bold text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                             <span>Apakah ada tes pemetaan kemampuan siswa?</span>
-                            <span class="material-symbols-outlined text-slate-400 transition-transform duration-200">add</span>
+                            <span
+                                class="material-symbols-outlined text-slate-400 transition-transform duration-200">add</span>
                         </button>
-                        <div class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
-                            Ya, tes pemetaan meliputi kemampuan dasar membaca Al-Qur'an (Tahsin) serta pemetaan minat dan bakat akademik siswa.
+                        <div
+                            class="faq-content hidden px-6 pb-5 text-xs sm:text-sm text-slate-500 leading-relaxed border-t border-slate-100 pt-3">
+                            Ya, tes pemetaan meliputi kemampuan dasar membaca Al-Qur'an (Tahsin) serta pemetaan minat
+                            dan bakat akademik siswa.
                         </div>
                     </div>
                 </div>
@@ -713,7 +931,8 @@
     <!-- FLOATING ACTION BUTTONS -->
     <!-- ============================================================ -->
     <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
-        <button id="backToTopBtn" onclick="scrollToTop()" class="hidden bg-mho-blue hover:bg-mho-blue-hover text-white p-3 rounded-full shadow-lg transition-all duration-200 active:scale-95">
+        <button id="backToTopBtn" onclick="scrollToTop()"
+            class="hidden bg-mho-blue hover:bg-mho-blue-hover text-white p-3 rounded-full shadow-lg transition-all duration-200 active:scale-95">
             <span class="material-symbols-outlined text-xl">arrow_upward</span>
         </button>
     </div>
@@ -721,13 +940,18 @@
     <!-- ============================================================ -->
     <!-- VIRTUAL TOUR VIDEO MODAL -->
     <!-- ============================================================ -->
-    <div id="videoModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div id="videoModal"
+        class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
         <div class="relative w-full max-w-4xl bg-black rounded-2xl overflow-hidden shadow-2xl">
-            <button onclick="toggleVideoModal()" class="absolute top-4 right-4 z-10 text-white/80 hover:text-white bg-black/50 p-2 rounded-full backdrop-blur-sm">
+            <button onclick="toggleVideoModal()"
+                class="absolute top-4 right-4 z-10 text-white/80 hover:text-white bg-black/50 p-2 rounded-full backdrop-blur-sm">
                 <span class="material-symbols-outlined text-2xl">close</span>
             </button>
             <div class="aspect-video w-full">
-                <iframe id="youtubeIframe" class="w-full h-full" src="" title="Tur Sekolah SMP Muhammadiyah 6 Krian" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="youtubeIframe" class="w-full h-full" src="" title="Tur Sekolah SMP Muhammadiyah 6 Krian"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -744,22 +968,31 @@
                     <div class="flex items-center gap-3.5">
                         <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-10 w-auto" src="assets/images/smpmeka.png" />
                         <div>
-                            <span class="font-headline font-extrabold text-lg text-white block leading-none">SMP Muhammadiyah 6 KRIAN</span>
-                            <span class="text-[9px] text-mho-green font-semibold tracking-widest uppercase mt-1 block">Islamic & Technology School</span>
+                            <span class="font-headline font-extrabold text-lg text-white block leading-none">SMP
+                                Muhammadiyah 6 KRIAN</span>
+                            <span
+                                class="text-[9px] text-mho-green font-semibold tracking-widest uppercase mt-1 block">Islamic
+                                & Technology School</span>
                         </div>
                     </div>
                     <p class="text-slate-400 text-xs leading-relaxed">
-                        Jl. Kyai Mojo No. 12, Krian, Kabupaten Sidoarjo, Jawa Timur 61262. Lembaga pendidikan menengah pertama berbasis Al-Islam dan IPTEK unggulan.
+                        Jl. Kyai Mojo No. 12, Krian, Kabupaten Sidoarjo, Jawa Timur 61262. Lembaga pendidikan menengah
+                        pertama berbasis Al-Islam dan IPTEK unggulan.
                     </p>
-                    
+
                     <div class="pt-2 space-y-2 text-xs text-slate-300">
-                        <div class="flex items-center gap-3"><span class="material-symbols-outlined text-mho-green text-base">call</span> (031) 8971234</div>
-                        <div class="flex items-center gap-3"><span class="material-symbols-outlined text-mho-green text-base">mail</span> info@smpm6krian.sch.id</div>
+                        <div class="flex items-center gap-3"><span
+                                class="material-symbols-outlined text-mho-green text-base">call</span> (031) 8971234
+                        </div>
+                        <div class="flex items-center gap-3"><span
+                                class="material-symbols-outlined text-mho-green text-base">mail</span>
+                            info@smpm6krian.sch.id</div>
                     </div>
                 </div>
 
                 <div class="lg:col-span-2 space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Tautan Utama</h4>
+                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Tautan Utama
+                    </h4>
                     <ul class="space-y-2.5 text-xs text-slate-400">
                         <li><a href="index.html" class="hover:text-white transition-colors">Beranda</a></li>
                         <li><a href="profile.html" class="hover:text-white transition-colors">Profil Sekolah</a></li>
@@ -770,7 +1003,8 @@
                 </div>
 
                 <div class="lg:col-span-3 space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Jam Operasional</h4>
+                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Jam Operasional
+                    </h4>
                     <ul class="space-y-2 text-xs text-slate-400">
                         <li class="flex justify-between border-b border-white/5 pb-2">
                             <span>Senin - Kamis:</span>
@@ -788,9 +1022,12 @@
                 </div>
 
                 <div class="lg:col-span-3 space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Peta Lokasi</h4>
+                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Peta Lokasi
+                    </h4>
                     <div class="w-full h-36 rounded-xl overflow-hidden border border-white/10 shadow-sm">
-                        <iframe title="Lokasi SMP Muhammadiyah 6 Krian" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.883713835697!2d112.58000000000001!3d-7.400000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDAuMCJTIDExMsKwMzQnODAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        <iframe title="Lokasi SMP Muhammadiyah 6 Krian"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.883713835697!2d112.58000000000001!3d-7.400000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDAuMCJTIDExMsKwMzQnODAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
 
@@ -810,7 +1047,6 @@
     <!-- AOS Script & Custom Interactive Logic -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Paksa browser kembali ke atas saat halaman dimuat/direfresh
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
