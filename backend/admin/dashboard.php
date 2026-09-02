@@ -29,6 +29,57 @@ if ($query_total_berita) {
 
 
 /* =====================================================
+   TOTAL PRESTASI
+===================================================== */
+
+$query_total_prestasi = mysqli_query(
+    $conn,
+    "SELECT COUNT(*) AS total FROM prestasi"
+);
+
+$total_prestasi = 0;
+
+if ($query_total_prestasi) {
+    $data_total = mysqli_fetch_assoc($query_total_prestasi);
+    $total_prestasi = $data_total['total'];
+}
+
+
+/* =====================================================
+   TOTAL GURU
+===================================================== */
+
+$query_total_guru = mysqli_query(
+    $conn,
+    "SELECT COUNT(*) AS total FROM guru"
+);
+
+$total_guru = 0;
+
+if ($query_total_guru) {
+    $data_total = mysqli_fetch_assoc($query_total_guru);
+    $total_guru = $data_total['total'];
+}
+
+
+/* =====================================================
+   TOTAL EKSTRAKURIKULER
+===================================================== */
+
+$query_total_ekskul = mysqli_query(
+    $conn,
+    "SELECT COUNT(*) AS total FROM ekstrakurikuler"
+);
+
+$total_ekskul = 0;
+
+if ($query_total_ekskul) {
+    $data_total = mysqli_fetch_assoc($query_total_ekskul);
+    $total_ekskul = $data_total['total'];
+}
+
+
+/* =====================================================
    BERITA TERBARU
 ===================================================== */
 
@@ -42,6 +93,7 @@ $query_berita = mysqli_query(
 
 ?>
 
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -51,8 +103,7 @@ $query_berita = mysqli_query(
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+        content="width=device-width, initial-scale=1.0">
 
     <title>Dashboard Admin | Sistem Informasi Sekolah</title>
 
@@ -67,8 +118,7 @@ $query_berita = mysqli_query(
 
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    >
+        rel="stylesheet">
 
 
     <!-- =================================================
@@ -77,8 +127,7 @@ $query_berita = mysqli_query(
 
     <link
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-    >
+        rel="stylesheet">
 
 
     <!-- =================================================
@@ -88,7 +137,6 @@ $query_berita = mysqli_query(
     <script src="https://cdn.tailwindcss.com"></script>
 
     <script>
-
         tailwind.config = {
 
             theme: {
@@ -119,17 +167,14 @@ $query_berita = mysqli_query(
             }
 
         }
-
     </script>
 
 
     <style>
-
         .material-icons {
             font-size: 20px;
             vertical-align: middle;
         }
-
     </style>
 
 </head>
@@ -154,14 +199,12 @@ $query_berita = mysqli_query(
                 <div class="flex items-center gap-3">
 
                     <div
-                        class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center font-headline font-bold text-primary text-lg"
-                    >
+                        class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center font-headline font-bold text-primary text-lg">
                         S
                     </div>
 
                     <span
-                        class="font-headline font-bold text-lg"
-                    >
+                        class="font-headline font-bold text-lg">
                         Admin Panel
                     </span>
 
@@ -173,8 +216,7 @@ $query_berita = mysqli_query(
                 <div class="flex items-center gap-4">
 
                     <span
-                        class="text-sm text-white/70 hidden sm:block"
-                    >
+                        class="text-sm text-white/70 hidden sm:block">
 
                         Welcome,
 
@@ -189,8 +231,7 @@ $query_berita = mysqli_query(
 
                     <a
                         href="logout.php"
-                        class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-sm font-semibold transition"
-                    >
+                        class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-sm font-semibold transition">
                         Logout
                     </a>
 
@@ -216,8 +257,7 @@ $query_berita = mysqli_query(
         ================================================== -->
 
         <aside
-            class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col fixed h-full pt-6"
-        >
+            class="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col fixed h-full pt-6">
 
             <div class="px-6 space-y-2">
 
@@ -226,8 +266,7 @@ $query_berita = mysqli_query(
 
                 <a
                     href="dashboard.php"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-semibold text-sm transition"
-                >
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-white font-semibold text-sm transition">
 
                     <span class="material-icons">
                         dashboard
@@ -242,8 +281,7 @@ $query_berita = mysqli_query(
 
                 <a
                     href="../berita/index.php"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition"
-                >
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition">
 
                     <span class="material-icons">
                         article
@@ -258,8 +296,7 @@ $query_berita = mysqli_query(
 
                 <a
                     href="../prestasi/index.php"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition"
-                >
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition">
 
                     <span class="material-icons">
                         emoji_events
@@ -274,8 +311,7 @@ $query_berita = mysqli_query(
 
                 <a
                     href="../guru/index.php"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition"
-                >
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition">
 
                     <span class="material-icons">
                         groups
@@ -290,8 +326,7 @@ $query_berita = mysqli_query(
 
                 <a
                     href="../fasilitas/index.php"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition"
-                >
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition">
 
                     <span class="material-icons">
                         apartment
@@ -306,8 +341,7 @@ $query_berita = mysqli_query(
 
                 <a
                     href="../ekstrakulikuler/index.php"
-                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition"
-                >
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition">
 
                     <span class="material-icons">
                         sports_kabaddi
@@ -337,8 +371,7 @@ $query_berita = mysqli_query(
             <div class="mb-8">
 
                 <h1
-                    class="font-headline font-extrabold text-3xl text-primary"
-                >
+                    class="font-headline font-extrabold text-3xl text-primary">
                     Dashboard
                 </h1>
 
@@ -351,23 +384,21 @@ $query_berita = mysqli_query(
 
 
             <!-- =================================================
-                 KARTU STATISTIK
+                 KARTU STATISTIK (BISA DIKLIK)
             ================================================== -->
 
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
-            >
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
 
 
-                <!- TOTAL BERITA ->
+                <!-- TOTAL BERITA -->
 
-                <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
-                >
+                <a
+                    href="../berita/index.php"
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition block">
 
                     <div
-                        class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4"
-                    >
+                        class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mb-4">
 
                         <span class="text-2xl">
                             📰
@@ -376,8 +407,7 @@ $query_berita = mysqli_query(
                     </div>
 
                     <p
-                        class="text-3xl font-headline font-bold text-gray-800"
-                    >
+                        class="text-3xl font-headline font-bold text-gray-800">
 
                         <?= $total_berita ?>
 
@@ -387,19 +417,17 @@ $query_berita = mysqli_query(
                         Total Berita
                     </p>
 
-                </div>
+                </a>
 
 
+                <!-- TOTAL PRESTASI -->
 
-                <!- TOTAL PRESTASI ->
-
-                <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
-                >
+                <a
+                    href="../prestasi/index.php"
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition block">
 
                     <div
-                        class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center mb-4"
-                    >
+                        class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center mb-4">
 
                         <span class="text-2xl">
                             🏆
@@ -408,28 +436,27 @@ $query_berita = mysqli_query(
                     </div>
 
                     <p
-                        class="text-3xl font-headline font-bold text-gray-800"
-                    >
-                        8
+                        class="text-3xl font-headline font-bold text-gray-800">
+
+                        <?= $total_prestasi ?>
+
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
                         Total Prestasi
                     </p>
 
-                </div>
+                </a>
 
 
+                <!-- TOTAL GURU -->
 
-                <!- TOTAL GURU ->
-
-                <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
-                >
+                <a
+                    href="../guru/index.php"
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition block">
 
                     <div
-                        class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4"
-                    >
+                        class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mb-4">
 
                         <span class="text-2xl">
                             👩‍🏫
@@ -438,28 +465,27 @@ $query_berita = mysqli_query(
                     </div>
 
                     <p
-                        class="text-3xl font-headline font-bold text-gray-800"
-                    >
-                        45
+                        class="text-3xl font-headline font-bold text-gray-800">
+
+                        <?= $total_guru ?>
+
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
                         Total Guru
                     </p>
 
-                </div>
-
+                </a>
 
 
                 <!-- TOTAL EKSTRAKURIKULER -->
 
-                <div
-                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
-                >
+                <a
+                    href="../ekstrakulikuler/index.php"
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition block">
 
                     <div
-                        class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-4"
-                    >
+                        class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mb-4">
 
                         <span class="text-2xl">
                             🏫
@@ -468,16 +494,17 @@ $query_berita = mysqli_query(
                     </div>
 
                     <p
-                        class="text-3xl font-headline font-bold text-gray-800"
-                    >
-                        24
+                        class="text-3xl font-headline font-bold text-gray-800">
+
+                        <?= $total_ekskul ?>
+
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
                         Ekstrakurikuler
                     </p>
 
-                </div>
+                </a>
 
             </div>
 
@@ -488,27 +515,23 @@ $query_berita = mysqli_query(
             ================================================== -->
 
             <div
-                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
-            >
+                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
 
                 <!-- HEADER BERITA -->
 
                 <div
-                    class="px-6 py-4 border-b border-gray-100 flex justify-between items-center"
-                >
+                    class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
 
                     <h2
-                        class="font-headline font-bold text-lg text-primary"
-                    >
+                        class="font-headline font-bold text-lg text-primary">
                         Berita Terbaru
                     </h2>
 
 
                     <a
                         href="../berita/index.php"
-                        class="text-sm text-primary hover:underline"
-                    >
+                        class="text-sm text-primary hover:underline">
                         Lihat Semua →
                     </a>
 
@@ -530,44 +553,37 @@ $query_berita = mysqli_query(
                             <tr>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     Gambar
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     ID
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     Judul
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     Kategori
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     Tanggal
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     Status
                                 </th>
 
                                 <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500"
-                                >
+                                    class="px-6 py-3 text-left font-semibold text-gray-500">
                                     Aksi
                                 </th>
 
@@ -589,13 +605,10 @@ $query_berita = mysqli_query(
 
 
                                     <tr
-                                        class="hover:bg-gray-50 transition"
-                                    >
+                                        class="hover:bg-gray-50 transition">
 
 
-                                        <!-- =================================================
-                                             GAMBAR
-                                        ================================================== -->
+                                        <!-- GAMBAR -->
 
                                         <td class="px-6 py-4">
 
@@ -605,18 +618,15 @@ $query_berita = mysqli_query(
                                                     src="../../uploads/<?= htmlspecialchars($berita['gambar']) ?>"
                                                     alt="<?= htmlspecialchars($berita['judul']) ?>"
                                                     class="w-16 h-12 object-cover rounded-lg border border-gray-200 shadow-sm"
-                                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
-                                                >
+                                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
 
                                                 <!-- FALLBACK JIKA GAMBAR GAGAL -->
 
                                                 <div
-                                                    class="hidden w-16 h-12 bg-gray-100 rounded-lg items-center justify-center border border-gray-200"
-                                                >
+                                                    class="hidden w-16 h-12 bg-gray-100 rounded-lg items-center justify-center border border-gray-200">
 
                                                     <span
-                                                        class="material-icons text-gray-400"
-                                                    >
+                                                        class="material-icons text-gray-400">
                                                         image
                                                     </span>
 
@@ -627,12 +637,10 @@ $query_berita = mysqli_query(
                                                 <!-- JIKA TIDAK ADA GAMBAR -->
 
                                                 <div
-                                                    class="w-16 h-12 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200"
-                                                >
+                                                    class="w-16 h-12 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
 
                                                     <span
-                                                        class="material-icons text-gray-400"
-                                                    >
+                                                        class="material-icons text-gray-400">
                                                         image
                                                     </span>
 
@@ -644,9 +652,7 @@ $query_berita = mysqli_query(
 
 
 
-                                        <!-- =================================================
-                                             ID
-                                        ================================================== -->
+                                        <!-- ID -->
 
                                         <td class="px-6 py-4">
 
@@ -658,18 +664,14 @@ $query_berita = mysqli_query(
 
 
 
-                                        <!-- =================================================
-                                             JUDUL
-                                        ================================================== -->
+                                        <!-- JUDUL -->
 
                                         <td
-                                            class="px-6 py-4 font-medium text-gray-800 max-w-xs"
-                                        >
+                                            class="px-6 py-4 font-medium text-gray-800 max-w-xs">
 
                                             <div
                                                 class="truncate"
-                                                title="<?= htmlspecialchars($berita['judul']) ?>"
-                                            >
+                                                title="<?= htmlspecialchars($berita['judul']) ?>">
 
                                                 <?= htmlspecialchars(
                                                     $berita['judul']
@@ -681,15 +683,12 @@ $query_berita = mysqli_query(
 
 
 
-                                        <!-- =================================================
-                                             KATEGORI
-                                        ================================================== -->
+                                        <!-- KATEGORI -->
 
                                         <td class="px-6 py-4">
 
                                             <span
-                                                class="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium"
-                                            >
+                                                class="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium">
 
                                                 <?= htmlspecialchars(
                                                     ucfirst($berita['kategori'])
@@ -701,9 +700,7 @@ $query_berita = mysqli_query(
 
 
 
-                                        <!-- =================================================
-                                             TANGGAL
-                                        ================================================== -->
+                                        <!-- TANGGAL -->
 
                                         <td class="px-6 py-4 whitespace-nowrap">
 
@@ -718,9 +715,7 @@ $query_berita = mysqli_query(
 
 
 
-                                        <!-- =================================================
-                                             STATUS
-                                        ================================================== -->
+                                        <!-- STATUS -->
 
                                         <td class="px-6 py-4">
 
@@ -728,16 +723,14 @@ $query_berita = mysqli_query(
                                             <?php if ($berita['status'] === 'publish'): ?>
 
                                                 <span
-                                                    class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold"
-                                                >
+                                                    class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
                                                     Published
                                                 </span>
 
                                             <?php else: ?>
 
                                                 <span
-                                                    class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold"
-                                                >
+                                                    class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">
                                                     Draft
                                                 </span>
 
@@ -748,26 +741,21 @@ $query_berita = mysqli_query(
 
 
 
-                                        <!-- =================================================
-                                             AKSI
-                                        ================================================== -->
+                                        <!-- AKSI -->
 
                                         <td
-                                            class="px-6 py-4 whitespace-nowrap"
-                                        >
+                                            class="px-6 py-4 whitespace-nowrap">
 
 
                                             <a
                                                 href="../berita/edit.php?id=<?= $berita['id'] ?>"
-                                                class="text-blue-600 hover:underline"
-                                            >
+                                                class="text-blue-600 hover:underline">
                                                 Edit
                                             </a>
 
 
                                             <span
-                                                class="text-gray-300 mx-2"
-                                            >
+                                                class="text-gray-300 mx-2">
                                                 |
                                             </span>
 
@@ -775,8 +763,7 @@ $query_berita = mysqli_query(
                                             <a
                                                 href="../berita/hapus.php?id=<?= $berita['id'] ?>"
                                                 class="text-red-600 hover:underline"
-                                                onclick="return confirm('Yakin ingin menghapus berita ini?')"
-                                            >
+                                                onclick="return confirm('Yakin ingin menghapus berita ini?')">
                                                 Hapus
                                             </a>
 
@@ -793,29 +780,23 @@ $query_berita = mysqli_query(
                             <?php else: ?>
 
 
-                                <!-- =================================================
-                                     BELUM ADA BERITA
-                                ================================================== -->
+                                <!-- BELUM ADA BERITA -->
 
                                 <tr>
 
                                     <td
                                         colspan="7"
-                                        class="px-6 py-10 text-center"
-                                    >
+                                        class="px-6 py-10 text-center">
 
                                         <div
-                                            class="flex flex-col items-center justify-center"
-                                        >
+                                            class="flex flex-col items-center justify-center">
 
                                             <div
-                                                class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-3"
-                                            >
+                                                class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-3">
 
                                                 <span
                                                     class="material-icons text-gray-400"
-                                                    style="font-size: 28px;"
-                                                >
+                                                    style="font-size: 28px;">
                                                     article
                                                 </span>
 
@@ -823,15 +804,13 @@ $query_berita = mysqli_query(
 
 
                                             <p
-                                                class="text-gray-500 font-medium"
-                                            >
+                                                class="text-gray-500 font-medium">
                                                 Belum ada berita
                                             </p>
 
 
                                             <p
-                                                class="text-gray-400 text-xs mt-1"
-                                            >
+                                                class="text-gray-400 text-xs mt-1">
                                                 Berita yang kamu tambahkan akan muncul di sini.
                                             </p>
 
