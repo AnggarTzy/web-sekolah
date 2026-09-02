@@ -359,7 +359,7 @@ $query_berita = mysqli_query(
             >
 
 
-                <!-- TOTAL BERITA -->
+                <!- TOTAL BERITA ->
 
                 <div
                     class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
@@ -391,7 +391,7 @@ $query_berita = mysqli_query(
 
 
 
-                <!-- TOTAL PRESTASI -->
+                <!- TOTAL PRESTASI ->
 
                 <div
                     class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
@@ -421,7 +421,7 @@ $query_berita = mysqli_query(
 
 
 
-                <!-- TOTAL GURU -->
+                <!- TOTAL GURU ->
 
                 <div
                     class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition"
