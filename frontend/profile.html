@@ -9,8 +9,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,13 +28,13 @@
                 extend: {
                     colors: {
                         mho: {
-                            blue: '#0D5C96',
-                            'blue-hover': '#0A4B7C',
-                            'blue-light': '#F0F6FA',
-                            green: '#059669',
-                            'green-hover': '#047857',
-                            'green-light': '#ECFDF5',
-                            dark: '#091E36',
+                            blue: '#1E65B5',
+                            'blue-hover': '#165196',
+                            'blue-light': '#F0F6FC',
+                            green: '#E58A2B',
+                            'green-hover': '#D07A22',
+                            'green-light': '#FEF7F0',
+                            dark: '#0B1F36',
                             bg: '#FFFFFF',
                             surface: '#F8FAFC'
                         }
@@ -56,11 +60,13 @@
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
+
         .animate-marquee {
             display: flex;
             width: 200%;
             animation: marqueeScroll 22s linear infinite;
         }
+
         .animate-marquee:hover {
             animation-play-state: paused;
         }
@@ -69,80 +75,108 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
         .animate-spin-slow {
             animation: spinSlow 30s linear infinite;
         }
 
         @keyframes floatSlow {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
         }
+
         .animate-float {
-            animation: floatSlow 4s ease-in-out infinite;
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.05); opacity: 0.6; }
+        }
+
+        .animate-glow {
+            animation: pulseGlow 6s ease-in-out infinite;
         }
 
         .text-gradient-custom {
-            background: linear-gradient(135deg, #0D5C96 0%, #059669 100%);
+            background: linear-gradient(135deg, #F97316 0%, #FACC15 100%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        .bg-gold-pattern {
+            background-image: radial-gradient(rgba(229, 138, 43, 0.12) 1.5px, transparent 1.5px), radial-gradient(rgba(250, 204, 21, 0.1) 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+        }
+
         .org-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .org-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, #1E65B5, #E58A2B);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .org-card:hover::before {
+            opacity: 1;
         }
         .org-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 0 20px 40px -12px rgba(13, 92, 150, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px -10px rgba(30, 101, 181, 0.18);
         }
 
         .vision-card {
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .vision-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 24px 48px -16px rgba(13, 92, 150, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 35px -12px rgba(30, 101, 181, 0.2);
         }
 
         .mission-item {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             cursor: default;
         }
         .mission-item:hover {
-            transform: translateX(8px) scale(1.02);
-            background: linear-gradient(135deg, #F0F6FA, #ECFDF5);
-            border-color: #0D5C96;
+            transform: translateX(4px);
+            background: linear-gradient(135deg, #F0F6FC, #FEF7F0);
+            border-color: #1E65B5;
         }
 
         .pillar-card {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
         .pillar-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #0D5C96, #059669);
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #1E65B5, #E58A2B);
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .pillar-card:hover::before {
             transform: scaleX(1);
         }
         .pillar-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px -12px rgba(13, 92, 150, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px -10px rgba(30, 101, 181, 0.15);
         }
 
         .tab-btn-active {
-            background: linear-gradient(135deg, #0D5C96, #059669);
+            background: linear-gradient(135deg, #1E65B5, #165196);
             color: white;
-            box-shadow: 0 8px 24px -8px rgba(13, 92, 150, 0.4);
+            box-shadow: 0 6px 20px -6px rgba(30, 101, 181, 0.35);
             border-color: transparent;
         }
         .tab-btn-inactive {
@@ -152,29 +186,31 @@
         }
         .tab-btn-inactive:hover {
             background: #F8FAFC;
-            border-color: #0D5C96;
-            color: #0D5C96;
+            border-color: #1E65B5;
+            color: #1E65B5;
         }
     </style>
 </head>
 
-<body class="bg-white font-sans text-slate-600 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
+<body class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
 
     <!-- ============================================================ -->
     <!-- HEADER NAVBAR -->
     <!-- ============================================================ -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/90 backdrop-blur-md" id="mainHeader">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/90 backdrop-blur-md shadow-sm/5" id="mainHeader">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
+            <div class="flex items-center justify-between h-16 sm:h-20">
 
+                <!-- Logo Identitas -->
                 <a href="index.html" class="flex items-center gap-3.5 group">
-                    <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" src="assets/images/smpmeka.png" />
+                    <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-8 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105" src="assets/images/smpmeka.png" />
                     <div class="flex flex-col">
-                        <span class="font-headline font-extrabold text-lg text-mho-blue leading-none tracking-tight">SMP MEKA</span>
-                        <span class="text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami • Unggul • Berkemajuan</span>
+                        <span class="font-headline font-extrabold text-base sm:text-lg text-mho-blue leading-none tracking-tight">SMP MEKA</span>
+                        <span class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami • Unggul • Berkemajuan</span>
                     </div>
                 </a>
 
+                <!-- Navigasi Desktop -->
                 <nav class="hidden lg:flex items-center gap-1.5">
                     <a href="index.html" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 transition-all">Beranda</a>
 
@@ -185,7 +221,7 @@
                             <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
                         </button>
                         <div class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
                                 <a href="profile.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">school</span> Profil Sekolah
                                 </a>
@@ -206,18 +242,16 @@
                             <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
                         </button>
                         <div class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
                                 <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span> Kalender Akademik
                                 </a>
                                 <a href="berita.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">campaign</span> Pengumuman
                                 </a>
-                                <!-- Ekstrakurikuler -->
                                 <a href="ekstrakurikuler.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
                                     <span class="material-symbols-outlined text-mho-green text-lg">sports_kabaddi</span> Ekstrakurikuler
                                 </a>
-                                <!-- Program Sekolah -->
                                 <a href="program-sekolah.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">menu_book</span> Program Sekolah
                                 </a>
@@ -225,14 +259,14 @@
                         </div>
                     </div>
 
-                    <!-- MENU PUBLIKASI - dengan submenu dropdown -->
+                    <!-- MENU PUBLIKASI -->
                     <div class="relative group">
                         <button class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
                             Publikasi
                             <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
                         </button>
                         <div class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
                                 <a href="berita.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">newspaper</span> Berita
                                 </a>
@@ -247,106 +281,170 @@
                     </div>
 
                     <!-- MENU RUANG ASPIRASI -->
-                    <a href="index.html#alumni" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 transition-all">Ruang Aspirasi</a>
+                    <div class="relative group">
+                        <button class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                            Ruang Aspirasi
+                            <span class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                        </button>
+                        <div class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="kritik-saran.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">forum</span> Kritik & Saran
+                                </a>
+                                <a href="survei-kepuasan.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-green-light hover:text-mho-green transition-all">
+                                    <span class="material-symbols-outlined text-mho-green text-lg">poll</span> Survei Kepuasan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
 
+                <!-- Right Action -->
                 <div class="hidden lg:flex items-center gap-4">
                     <a href="daftar.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
-                        <span>PPDB Online</span>
+                        <span>INFO PPDB</span>
                         <span class="material-symbols-outlined text-sm">open_in_new</span>
                     </a>
                 </div>
 
+                <!-- Mobile Menu Toggle -->
                 <button id="mobileMenuBtn" onclick="toggleMobileNav()" class="lg:hidden p-2 rounded-xl text-mho-blue hover:bg-slate-100 transition-all">
-                    <span class="material-symbols-outlined text-3xl">menu</span>
+                    <span class="material-symbols-outlined text-2xl sm:text-3xl">menu</span>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <div id="mobileNav" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-3">
+        <div id="mobileNav" class="hidden lg:hidden bg-white border-b border-slate-200 px-4 sm:px-6 py-6 space-y-3 max-h-[75vh] overflow-y-auto">
             <a href="index.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Beranda</a>
-            <a href="profile.html" class="block px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">Profil Sekolah</a>
-            <a href="berita.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Informasi & Berita</a>
-            <a href="ekstrakurikuler.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Ekstrakurikuler</a>
-            <a href="program-sekolah.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Program Sekolah</a>
-            <a href="prestasi.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Publikasi</a>
-            <a href="galeri.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Galeri</a>
-            <a href="index.html#alumni" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Ruang Aspirasi</a>
-            <a href="daftar.html" class="block w-full text-center py-3.5 rounded-xl bg-mho-green text-white font-headline font-extrabold text-xs uppercase tracking-wider">
-                Daftar PPDB Online
-            </a>
+            
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu(this)" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">
+                    <span>Tentang Kami</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-200 rotate-180">expand_more</span>
+                </button>
+                <div class="pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="profile.html" class="block px-3 py-2 rounded-lg text-xs font-bold text-mho-blue">Profil Sekolah</a>
+                    <a href="pendidik.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Tenaga Pendidik</a>
+                    <a href="fasilitas.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Sarana & Prasarana</a>
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu(this)" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                    <span>Informasi</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-200">expand_more</span>
+                </button>
+                <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="#" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Kalender Akademik</a>
+                    <a href="berita.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Pengumuman</a>
+                    <a href="ekstrakurikuler.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Ekstrakurikuler</a>
+                    <a href="program-sekolah.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Program Sekolah</a>
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu(this)" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                    <span>Publikasi</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-200">expand_more</span>
+                </button>
+                <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="berita.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Berita</a>
+                    <a href="galeri.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Galeri</a>
+                    <a href="prestasi.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Prestasi</a>
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu(this)" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                    <span>Ruang Aspirasi</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-200">expand_more</span>
+                </button>
+                <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="kritik-saran.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Kritik & Saran</a>
+                    <a href="survei-kepuasan.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Survei Kepuasan</a>
+                </div>
+            </div>
+            
+            <div class="pt-3">
+                <a href="daftar.html"
+                    class="block w-full text-center py-3 rounded-xl bg-mho-green text-white font-headline font-extrabold text-xs uppercase tracking-wider shadow-md">
+                    Daftar PPDB Online
+                </a>
+            </div>
         </div>
     </header>
 
-    <main class="pt-20">
+    <main class="pt-16 sm:pt-20">
 
         <!-- ============================================================ -->
-        <!-- HERO SECTION: PROFIL SEKOLAH -->
+        <!-- HERO SECTION: PROFIL SEKOLAH (DITAMBAHKAN PADDING BAWAH) -->
         <!-- ============================================================ -->
-        <section class="relative min-h-[88vh] flex items-center bg-gradient-to-b from-slate-50 via-white to-slate-50/50 border-b border-slate-200/80 overflow-hidden z-10 pb-16 lg:pb-0">
+        <section class="relative min-h-[85vh] sm:min-h-[90vh] flex items-center bg-gradient-to-b from-slate-50/70 via-white to-slate-50/50 bg-gold-pattern border-b border-slate-100 overflow-visible z-25 pt-16 sm:pt-20 pb-28 sm:pb-36">
             
-            <div class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-30">
-                <svg class="relative block w-full h-32 sm:h-48 lg:h-64" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z" fill="#0D5C96" fill-opacity="0.15"></path>
-                    <path d="M0,30 C200,100 450,10 700,70 C950,130 1100,20 1200,50 L1200,120 L0,120 Z" fill="#059669" fill-opacity="0.2"></path>
-                </svg>
-            </div>
+            <div class="absolute -top-20 -right-20 w-80 sm:w-[500px] h-80 sm:h-[500px] bg-gradient-to-br from-amber-400/25 via-orange-500/20 to-yellow-300/10 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+            <div class="absolute top-1/4 -left-24 w-72 sm:w-96 h-72 sm:h-96 bg-gradient-to-tr from-blue-600/10 via-amber-500/15 to-orange-400/10 rounded-3xl rotate-45 blur-2xl pointer-events-none"></div>
+            
+            <div class="absolute top-20 right-10 lg:right-24 w-16 sm:w-20 h-16 sm:h-20 bg-gradient-to-br from-amber-400 to-orange-500 rounded-3xl rotate-12 opacity-25 shadow-xl pointer-events-none hidden sm:block animate-float"></div>
+            <div class="absolute bottom-16 left-12 w-12 sm:w-16 h-12 sm:h-16 border-4 border-amber-500/30 rounded-full animate-float pointer-events-none hidden sm:block" style="animation-delay: 1.5s;"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-dashed border-mho-blue/10 rounded-full pointer-events-none hidden lg:block animate-spin-slow"></div>
 
-            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-mho-blue/10 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-mho-green/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-25 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 relative z-10 w-full">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
-                    <div class="lg:col-span-7 space-y-7" data-aos="fade-right" data-aos-duration="700">
-                        <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-mho-blue-light border border-mho-blue/20 shadow-xs">
-                            <span class="w-2 h-2 rounded-full bg-mho-blue animate-pulse"></span>
-                            <span class="text-xs font-bold text-mho-blue uppercase tracking-wider">Profil Sekolah</span>
+                    <div class="lg:col-span-7 space-y-6 sm:space-y-7 text-center lg:text-left" data-aos="fade-right" data-aos-duration="600">
+                        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-mho-blue-light border border-mho-blue/20 shadow-xs mx-auto lg:mx-0">
+                            <span class="w-2.5 h-2.5 rounded-full bg-mho-blue animate-pulse"></span>
+                            <span class="text-[11px] sm:text-xs font-bold text-mho-blue uppercase tracking-wider">Profil Sekolah</span>
                         </div>
 
-                        <h1 class="font-headline font-extrabold text-slate-900 text-4xl sm:text-5xl lg:text-6xl leading-[1.15] tracking-tight">
-                            <span class="text-gradient-custom">SMP Muhammadiyah 6</span><br />
+                        <h1 class="font-headline font-extrabold text-slate-900 text-3xl sm:text-5xl lg:text-6xl leading-[1.15] tracking-tight">
+                            <span class="text-gradient-custom">SMP Muhammadiyah 6</span><br class="hidden sm:inline" />
                             <span class="text-slate-900">Krian</span><br />
-                            <span class="font-serifAcc italic font-bold text-mho-blue text-3xl sm:text-4xl lg:text-5xl">Islamic & Technology School</span>
+                            <span class="font-serifAcc italic font-bold text-mho-blue text-2xl sm:text-4xl lg:text-5xl">Islamic & Technology School</span>
                         </h1>
 
-                        <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl font-normal">
-                            SMP Muhammadiyah 6 Krian adalah lembaga pendidikan menengah pertama unggulan yang berlokasi di Krian, Kabupaten Sidoarjo, Jawa Timur. Sekolah ini berkomitmen untuk memberikan pendidikan berkualitas dengan mengintegrasikan nilai-nilai Al-Islam dan Kemuhammadiyahan serta penguasaan sains dan teknologi modern. Dengan tenaga pengajar profesional dan fasilitas bertaraf internasional, SMP Muhammadiyah 6 Krian terus berupaya mencetak generasi yang <span class="font-semibold text-slate-900">berakhlak, peduli, dan berprestasi</span> di era teknologi.
+                        <p class="text-slate-600 text-xs sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
+                            SMP Muhammadiyah 6 Krian adalah lembaga pendidikan menengah pertama unggulan yang berlokasi di Krian, Kabupaten Sidoarjo, Jawa Timur. Sekolah ini berkomitmen untuk memberikan pendidikan berkualitas dengan mengintegrasikan nilai-nilai Al-Islam dan Kemuhammadiyahan serta penguasaan sains dan teknologi modern. Dengan tenaga pengajar profesional, SMP Muhammadiyah 6 Krian terus berupaya mencetak generasi yang <span class="font-semibold text-slate-900">berakhlak, peduli, dan berprestasi</span> di era teknologi.
                         </p>
 
-                        <div class="flex flex-wrap gap-4 pt-2">
-                            <a href="#sejarah" class="inline-flex items-center gap-3 px-7 py-3.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 pt-2">
+                            <a href="#sejarah" class="inline-flex items-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm">
                                 <span>Jelajahi</span>
-                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                                <span class="material-symbols-outlined text-base sm:text-lg">arrow_forward</span>
                             </a>
-                            <a href="#visi-misi" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-white hover:bg-mho-green-light text-mho-green font-headline font-semibold text-xs uppercase tracking-wider border border-mho-green/30 transition-all shadow-xs hover:shadow-sm">
-                                <span class="material-symbols-outlined text-lg">visibility</span>
+                            <a href="#visi-misi" class="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-white hover:bg-mho-green-light text-mho-green font-headline font-semibold text-xs uppercase tracking-wider border border-mho-green/30 transition-all">
+                                <span class="material-symbols-outlined text-base sm:text-lg">visibility</span>
                                 <span>Visi & Misi</span>
                             </a>
                         </div>
                     </div>
 
-                    <div class="lg:col-span-5 relative mt-8 lg:mt-0" data-aos="zoom-in" data-aos-duration="800">
-                        <div class="relative w-full max-w-lg mx-auto flex justify-center items-end min-h-[440px] sm:min-h-[500px]">
-                            <div class="absolute bottom-6 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-white border border-mho-blue/20 shadow-sm flex items-center justify-center overflow-hidden">
-                                <div class="w-[92%] h-[92%] rounded-full border border-dashed border-mho-blue/30 animate-spin-slow opacity-60"></div>
-                            </div>
-                            <img src="assets/images/woman.png" alt="Siswi SMP Muhammadiyah 6 Krian" class="relative z-10 w-auto h-[460px] sm:h-[520px] max-w-none object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.08)] -mb-12 sm:-mb-16" />
+                    <div class="lg:col-span-5 relative mt-6 lg:mt-0 overflow-visible" data-aos="zoom-in" data-aos-duration="600">
+                        <div class="relative w-full max-w-sm sm:max-w-lg mx-auto flex justify-center items-end min-h-[380px] sm:min-h-[520px] overflow-visible">
+                            
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 sm:w-96 h-72 sm:h-96 rounded-3xl bg-gradient-to-tr from-amber-500/15 via-orange-400/20 to-yellow-300/10 rotate-45 blur-xl pointer-events-none"></div>
 
-                            <div class="absolute top-8 left-0 sm:-left-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-4 shadow-xl border border-slate-200/80 flex items-center gap-3.5 animate-float">
-                                <div class="w-10 h-10 rounded-xl bg-mho-green-light text-mho-green flex items-center justify-center font-bold">
-                                    <span class="material-symbols-outlined text-2xl">verified</span>
+                            <div class="absolute bottom-4 sm:bottom-6 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-white border border-slate-100 shadow-xl shadow-slate-200/50 flex items-center justify-center overflow-hidden">
+                                <div class="w-[92%] h-[92%] rounded-full border border-dashed border-mho-blue/20 animate-spin-slow opacity-60"></div>
+                            </div>
+                            
+                            <!-- Gambar Siswi (Margin Negatif Lebih Tinggi Agar Tidak Terpotong) -->
+                            <img src="assets/images/woman.png" alt="Siswi SMP Muhammadiyah 6 Krian" class="relative z-30 w-auto h-[380px] sm:h-[520px] max-w-none object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.08)] -mb-24 sm:-mb-36" />
+
+                            <div class="absolute top-4 left-0 sm:-left-4 z-40 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3.5 sm:p-4 shadow-xl border border-slate-100 flex items-center gap-3 animate-float">
+                                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-mho-green-light text-mho-green flex items-center justify-center font-bold">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">verified</span>
                                 </div>
                                 <div>
                                     <p class="font-headline font-bold text-xs text-slate-900">Akreditasi A+</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Unggul & Terpercaya</p>
+                                    <p class="text-[10px] text-slate-600 font-medium">Unggul & Terpercaya</p>
                                 </div>
                             </div>
 
-                            <div class="absolute bottom-16 right-0 sm:-right-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-4 shadow-xl border border-slate-200/80 flex items-center gap-3.5 animate-float" style="animation-delay: 2s;">
-                                <div class="w-10 h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center font-bold">
-                                    <span class="material-symbols-outlined text-2xl">menu_book</span>
+                            <div class="absolute bottom-8 right-0 sm:-right-4 z-40 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3.5 sm:p-4 shadow-xl border border-slate-100 flex items-center gap-3 animate-float" style="animation-delay: 2s;">
+                                <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center font-bold">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">menu_book</span>
                                 </div>
                                 <div>
                                     <p class="font-headline font-bold text-xs text-slate-900">Program Tahfidz</p>
@@ -363,23 +461,23 @@
         <!-- ============================================================ -->
         <!-- MARQUEE BANNER -->
         <!-- ============================================================ -->
-        <div class="relative z-30 -mt-6 overflow-hidden py-4 select-none">
-            <div class="bg-mho-blue shadow-xl py-3" style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
+        <div class="relative z-10 -mt-8 sm:-mt-12 overflow-hidden py-3 sm:py-4 select-none">
+            <div class="bg-mho-blue shadow-lg py-3 sm:py-3.5" style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
                 <div class="flex overflow-hidden whitespace-nowrap">
-                    <div class="animate-marquee flex items-center gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white">
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">verified</span> Akreditasi A+ (Unggul)</span>
+                    <div class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm sm:text-base">verified</span> Akreditasi A+ (Unggul)</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">school</span> Berbasis Al-Islam & Teknologi</span>
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm sm:text-base">school</span> Berbasis Al-Islam & Teknologi</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">star</span> Sidoarjo, Jawa Timur</span>
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm sm:text-base">star</span> Sidoarjo, Jawa Timur</span>
                         <span class="text-white/40">•</span>
                     </div>
-                    <div class="animate-marquee flex items-center gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white" aria-hidden="true">
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">verified</span> Akreditasi A+ (Unggul)</span>
+                    <div class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white" aria-hidden="true">
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm sm:text-base">verified</span> Akreditasi A+ (Unggul)</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">school</span> Berbasis Al-Islam & Teknologi</span>
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm sm:text-base">school</span> Berbasis Al-Islam & Teknologi</span>
                         <span class="text-white/40">•</span>
-                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-base">star</span> Sidoarjo, Jawa Timur</span>
+                        <span class="flex items-center gap-2"><span class="material-symbols-outlined text-sm sm:text-base">star</span> Sidoarjo, Jawa Timur</span>
                         <span class="text-white/40">•</span>
                     </div>
                 </div>
@@ -387,53 +485,38 @@
         </div>
 
         <!-- ============================================================ -->
-        <!-- AKREDITASI - PREMIUM SECTION -->
+        <!-- AKREDITASI - CLEAN PROFESSIONAL CORPORATE CARD -->
         <!-- ============================================================ -->
-        <section class="py-20 bg-white relative overflow-hidden" id="sejarah">
-            <div class="absolute top-0 right-0 w-1/2 h-full pointer-events-none opacity-[0.04]">
-                <svg class="w-full h-full" viewBox="0 0 600 600" fill="none">
-                    <path d="M100,100 C300,50 550,250 500,500 C450,750 100,550 100,100 Z" fill="#0D5C96"/>
-                </svg>
-            </div>
-
+        <section class="py-12 sm:py-16 bg-white relative overflow-hidden" id="sejarah">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
-                <!-- Akreditasi -->
-                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-mho-blue to-mho-blue-hover p-10 sm:p-14" data-aos="fade-up">
-                    <div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
-                    <div class="absolute bottom-0 left-0 w-96 h-96 bg-mho-green/20 rounded-full blur-3xl"></div>
-                    
-                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                        <div class="lg:col-span-8 space-y-5 text-white">
-                            <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/20 border border-white/10">
-                                <span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
-                                <span class="text-[10px] font-extrabold uppercase tracking-widest">Akreditasi Paripurna</span>
+                <div class="bg-mho-blue text-white rounded-2xl sm:rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden transition-all duration-200 hover:shadow-md" data-aos="fade-up">
+                    <div class="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-white/10 to-transparent pointer-events-none"></div>
+
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                        <div class="lg:col-span-8 space-y-4">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/10 text-white text-[11px] font-semibold tracking-wider uppercase">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                               <span>Akreditasi Resmi BAN-S/M</span>
                             </div>
-                            <h3 class="font-headline font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight">
-                                Terakreditasi A+ <br />
-                                <span class="text-white/80 font-serifAcc italic font-normal text-2xl sm:text-3xl">Unggul & Berstandar Nasional</span>
+                            <h3 class="font-headline font-bold text-2xl sm:text-3xl lg:text-4xl leading-snug">
+                                Terakreditasi A+ (Unggul)
                             </h3>
-                            <p class="text-white/80 text-sm sm:text-base leading-relaxed max-w-xl">
-                                SMP Muhammadiyah 6 Krian telah meraih akreditasi A+ (Unggul) dari Badan Akreditasi Nasional Sekolah/Madrasah (BAN-S/M), yang menunjukkan komitmen sekolah dalam memberikan pendidikan berkualitas tinggi dengan standar nasional dan internasional.
+                            <p class="text-slate-100 text-xs sm:text-sm leading-relaxed max-w-2xl font-normal opacity-90">
+                                Berdasarkan penilaian standar nasional pendidikan, SMP Muhammadiyah 6 Krian secara resmi menyandang status Akreditasi A+ (Unggul). Hal ini mencerminkan konsistensi mutu pembelajaran, tata kelola institusi yang transparan, serta fasilitas penunjang modern.
                             </p>
-                            <div class="flex flex-wrap gap-4 pt-2">
-                                <a href="#struktur" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white text-mho-blue font-headline font-bold text-xs uppercase tracking-wider transition-all hover:shadow-lg hover:-translate-y-0.5">
-                                    <span>Lihat Struktur Organisasi</span>
+                            <div class="pt-2">
+                                <a href="#struktur" class="inline-flex items-center gap-2 text-xs font-bold text-white bg-white/15 hover:bg-white/25 px-5 py-2.5 rounded-xl transition-all">
+                                    <span>Struktur Organisasi Sekolah</span>
                                     <span class="material-symbols-outlined text-sm">arrow_forward</span>
                                 </a>
                             </div>
                         </div>
-                        <div class="lg:col-span-4 flex justify-center">
-                            <div class="relative">
-                                <div class="w-40 h-40 sm:w-48 sm:h-48 rounded-full bg-white/10 border-4 border-white/30 flex items-center justify-center backdrop-blur-sm">
-                                    <div class="text-center text-white">
-                                        <span class="block font-headline font-extrabold text-5xl sm:text-6xl">A+</span>
-                                        <span class="text-[10px] font-bold uppercase tracking-widest text-white/80">Akreditasi</span>
-                                    </div>
-                                </div>
-                                <div class="absolute -top-2 -right-2 w-12 h-12 bg-mho-green rounded-full flex items-center justify-center shadow-lg animate-float">
-                                    <span class="material-symbols-outlined text-white text-2xl">verified</span>
-                                </div>
+
+                        <div class="lg:col-span-4 flex justify-center lg:justify-end">
+                            <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 text-center w-full max-w-[220px]">
+                                <span class="block font-headline font-extrabold text-5xl sm:text-6xl text-amber-300 tracking-tight">A+</span>
+                                <span class="block text-[11px] font-semibold tracking-wider uppercase text-white/80 mt-1">Peringkat Tertinggi</span>
                             </div>
                         </div>
                     </div>
@@ -443,43 +526,46 @@
         </section>
 
         <!-- ============================================================ -->
-        <!-- VISI, MISI, DAN TUJUAN - PREMIUM INTERNATIONAL CONCEPT -->
+        <!-- VISI, MISI, DAN TUJUAN -->
         <!-- ============================================================ -->
-        <section class="py-24 bg-slate-50/80 border-t border-slate-200/60 relative overflow-hidden" id="visi-misi">
+        <section class="py-16 sm:py-24 bg-slate-50/50 bg-gold-pattern border-t border-slate-100 relative overflow-hidden" id="visi-misi">
             
-            <div class="absolute -top-40 -right-40 w-96 h-96 bg-mho-blue/5 rounded-full blur-3xl"></div>
-            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-mho-green/5 rounded-full blur-3xl"></div>
+            <div class="absolute top-12 left-10 w-72 sm:w-96 h-72 sm:h-96 bg-gradient-to-r from-amber-500/10 to-orange-400/15 rounded-full blur-3xl pointer-events-none animate-glow"></div>
+            <div class="absolute bottom-10 right-10 w-80 sm:w-[400px] h-80 sm:h-[400px] bg-gradient-to-tr from-yellow-500/10 via-orange-400/10 to-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
             
+            <div class="absolute top-1/4 right-8 w-16 h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-2xl rotate-45 opacity-20 pointer-events-none hidden lg:block animate-float"></div>
+            <div class="absolute bottom-20 left-12 w-14 h-14 border-2 border-amber-500/30 rounded-full pointer-events-none hidden lg:block animate-float" style="animation-delay: 2s;"></div>
+
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
-                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-mho-blue/10 shadow-sm mb-4">
+                <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16" data-aos="fade-up">
+                    <div class="inline-flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white border border-mho-blue/10 shadow-xs mb-3 sm:mb-4">
                         <span class="w-2 h-2 rounded-full bg-mho-blue animate-pulse"></span>
-                        <span class="text-[10px] font-bold uppercase tracking-[0.15em] text-mho-blue">Vision & Mission Framework</span>
+                        <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.15em] text-mho-blue">Arah Strategis Sekolah</span>
                         <span class="w-2 h-2 rounded-full bg-mho-green animate-pulse"></span>
                     </div>
-                    <h2 class="font-headline font-extrabold text-4xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-[1.1]">
-                        Our Strategic
-                        <span class="text-gradient-custom block sm:inline">Direction</span>
+                    <h2 class="font-headline font-extrabold text-2xl sm:text-5xl lg:text-6xl text-slate-900 tracking-tight leading-[1.1]">
+                        Landasan & Tujuan
+                        <span class="text-gradient-custom block sm:inline">Pendidikan</span>
                     </h2>
-                    <p class="text-slate-500 text-sm sm:text-base mt-4 max-w-2xl mx-auto leading-relaxed">
-                        Sebagai institusi pendidikan berstandar global, kami memiliki landasan kuat yang menjadi pedoman dalam mewujudkan kualitas pembelajaran terbaik bagi seluruh warga sekolah.
+                    <p class="text-slate-600 text-xs sm:text-base mt-3 sm:mt-4 max-w-2xl mx-auto leading-relaxed">
+                        Sebagai institusi pendidikan berstandar global, kami memiliki landasan kuat yang menjadi pedoman dalam mewujudkan kualitas pendidikan terbaik bagi seluruh warga sekolah.
                     </p>
                 </div>
 
                 <!-- Tab Navigation -->
-                <div class="flex justify-center gap-3 mb-12 flex-wrap" data-aos="fade-up" data-aos-delay="100">
-                    <button onclick="switchTab('visi')" id="btnVisi" class="tab-btn-active px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-2">
-                        <span class="material-symbols-outlined text-lg">visibility</span>
-                        Vision
+                <div class="flex justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 flex-wrap" data-aos="fade-up" data-aos-delay="100">
+                    <button onclick="switchTab('visi')" id="btnVisi" class="tab-btn-active px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-1.5 sm:gap-2">
+                        <span class="material-symbols-outlined text-base sm:text-lg">visibility</span>
+                        Visi
                     </button>
-                    <button onclick="switchTab('misi')" id="btnMisi" class="tab-btn-inactive px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-lg">rocket_launch</span>
-                        Mission
+                    <button onclick="switchTab('misi')" id="btnMisi" class="tab-btn-inactive px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 flex items-center gap-1.5 sm:gap-2">
+                        <span class="material-symbols-outlined text-base sm:text-lg">rocket_launch</span>
+                        Misi
                     </button>
-                    <button onclick="switchTab('tujuan')" id="btnTujuan" class="tab-btn-inactive px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-lg">flag</span>
-                        Goals
+                    <button onclick="switchTab('tujuan')" id="btnTujuan" class="tab-btn-inactive px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 flex items-center gap-1.5 sm:gap-2">
+                        <span class="material-symbols-outlined text-base sm:text-lg">flag</span>
+                        Tujuan
                     </button>
                 </div>
 
@@ -488,32 +574,32 @@
                     
                     <!-- VISI -->
                     <div id="contentVisi" class="tab-pane">
-                        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center">
+                        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 sm:gap-8 items-center">
                             <div class="lg:col-span-3">
-                                <div class="bg-white rounded-3xl p-10 sm:p-14 border border-slate-200 shadow-sm vision-card relative overflow-hidden">
-                                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-mho-blue/5 to-mho-green/5 rounded-full blur-2xl"></div>
-                                    <div class="absolute bottom-0 left-0 w-48 h-48 bg-mho-blue/5 rounded-full blur-2xl"></div>
+                                <div class="bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-14 border border-slate-100 shadow-sm vision-card relative overflow-hidden">
+                                    <div class="absolute -top-12 -right-12 w-48 h-48 bg-gradient-to-br from-amber-500/15 to-orange-400/15 rounded-full blur-2xl"></div>
+                                    <div class="absolute -bottom-12 -left-12 w-48 h-48 bg-yellow-400/15 rounded-full blur-2xl"></div>
                                     
                                     <div class="relative z-10">
-                                        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-mho-blue-light border border-mho-blue/10 mb-6">
-                                            <span class="material-symbols-outlined text-mho-blue text-lg">stars</span>
-                                            <span class="text-[10px] font-bold uppercase tracking-widest text-mho-blue">Our Vision</span>
+                                        <div class="inline-flex items-center gap-2 sm:gap-3 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-50 border border-amber-200/50 mb-4 sm:mb-6 shadow-xs">
+                                            <span class="material-symbols-outlined text-amber-600 text-base sm:text-lg">stars</span>
+                                            <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-700">Visi Sekolah</span>
                                         </div>
                                         
-                                        <blockquote class="font-serifAcc italic text-3xl sm:text-4xl lg:text-5xl text-slate-800 leading-[1.2] tracking-tight">
+                                        <blockquote class="font-serifAcc italic text-xl sm:text-4xl lg:text-5xl text-slate-800 leading-[1.2] tracking-tight">
                                             "Menjadi lembaga pendidikan Islam unggulan yang melahirkan generasi
                                             <span class="text-gradient-custom font-bold not-italic">berakhlak mulia</span>,
                                             <span class="text-gradient-custom font-bold not-italic">cerdas berbasis teknologi</span>,
                                             serta <span class="text-gradient-custom font-bold not-italic">berwawasan global</span>."
                                         </blockquote>
                                         
-                                        <div class="mt-8 flex flex-wrap gap-4">
-                                            <div class="flex items-center gap-2 text-xs text-slate-500">
-                                                <span class="w-8 h-px bg-gradient-to-r from-mho-blue to-mho-green"></span>
-                                                <span>Framework 2030</span>
+                                        <div class="mt-6 sm:mt-8 flex flex-wrap gap-3 sm:gap-4 text-xs text-slate-600">
+                                            <div class="flex items-center gap-2">
+                                                <span class="w-6 sm:w-8 h-px bg-gradient-to-r from-amber-500 to-orange-500"></span>
+                                                <span>Kerangka Visi 2030</span>
                                             </div>
-                                            <div class="flex items-center gap-2 text-xs text-slate-500">
-                                                <span class="material-symbols-outlined text-mho-blue text-sm">verified</span>
+                                            <div class="flex items-center gap-1.5">
+                                                <span class="material-symbols-outlined text-amber-500 text-sm">verified</span>
                                                 <span>Berstandar Internasional</span>
                                             </div>
                                         </div>
@@ -521,28 +607,28 @@
                                 </div>
                             </div>
                             <div class="lg:col-span-2">
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm pillar-card">
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-3">
-                                            <span class="material-symbols-outlined text-2xl">psychology</span>
+                                <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                                    <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm pillar-card">
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-amber-50 text-amber-600 mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">psychology</span>
                                         </div>
                                         <p class="text-[10px] font-bold uppercase tracking-wider text-slate-700">Akhlak Mulia</p>
                                     </div>
-                                    <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm pillar-card">
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-green-light text-mho-green mx-auto flex items-center justify-center mb-3">
-                                            <span class="material-symbols-outlined text-2xl">memory</span>
+                                    <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm pillar-card">
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-orange-50 text-orange-600 mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">memory</span>
                                         </div>
                                         <p class="text-[10px] font-bold uppercase tracking-wider text-slate-700">Teknologi</p>
                                     </div>
-                                    <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm pillar-card">
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-3">
-                                            <span class="material-symbols-outlined text-2xl">language</span>
+                                    <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm pillar-card">
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-amber-50 text-amber-600 mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">language</span>
                                         </div>
                                         <p class="text-[10px] font-bold uppercase tracking-wider text-slate-700">Global</p>
                                     </div>
-                                    <div class="bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm pillar-card">
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-green-light text-mho-green mx-auto flex items-center justify-center mb-3">
-                                            <span class="material-symbols-outlined text-2xl">mosque</span>
+                                    <div class="bg-white/95 backdrop-blur-md rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm pillar-card">
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-orange-50 text-orange-600 mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">mosque</span>
                                         </div>
                                         <p class="text-[10px] font-bold uppercase tracking-wider text-slate-700">Islami</p>
                                     </div>
@@ -553,59 +639,59 @@
 
                     <!-- MISI -->
                     <div id="contentMisi" class="tab-pane hidden">
-                        <div class="bg-white rounded-3xl p-10 sm:p-14 border border-slate-200 shadow-sm relative overflow-hidden">
-                            <div class="absolute -top-20 -right-20 w-80 h-80 bg-mho-green/5 rounded-full blur-3xl"></div>
+                        <div class="bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-14 border border-slate-100 shadow-sm relative overflow-hidden">
+                            <div class="absolute -top-20 -right-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl"></div>
                             
                             <div class="relative z-10">
-                                <div class="flex items-center gap-4 mb-8">
-                                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-mho-green-light border border-mho-green/10">
-                                        <span class="material-symbols-outlined text-mho-green text-lg">rocket_launch</span>
-                                        <span class="text-[10px] font-bold uppercase tracking-widest text-mho-green">Strategic Missions</span>
+                                <div class="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                                    <div class="inline-flex items-center gap-2 sm:gap-3 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-50 border border-amber-200/50 shadow-xs">
+                                        <span class="material-symbols-outlined text-amber-600 text-base sm:text-lg">rocket_launch</span>
+                                        <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-700">Misi Strategis</span>
                                     </div>
-                                    <span class="text-xs text-slate-400 font-medium">4 Core Pillars</span>
+                                    <span class="text-xs text-slate-500 font-medium">4 Pilar Utama</span>
                                 </div>
                                 
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                    <div class="mission-item p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-mho-blue/30 transition-all group">
-                                        <div class="flex items-start gap-4">
-                                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mho-blue to-mho-blue-hover text-white flex items-center justify-center font-headline font-extrabold text-sm flex-shrink-0 shadow-md">01</div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                                    <div class="mission-item p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-amber-500/30 transition-all group">
+                                        <div class="flex items-start gap-3.5 sm:gap-4">
+                                            <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm flex-shrink-0 shadow-md">01</div>
                                             <div>
-                                                <h4 class="font-headline font-bold text-sm text-slate-900 mb-1">Aqidah & Ibadah</h4>
-                                                <p class="text-xs text-slate-500 leading-relaxed">Menanamkan aqidah Islamiyah dan pembiasaan ibadah harian secara konsisten dan disiplin.</p>
-                                                <span class="inline-block mt-2 text-[9px] font-bold uppercase tracking-wider text-mho-blue">Faith Foundation</span>
+                                                <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1">Aqidah & Ibadah</h4>
+                                                <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Menanamkan aqidah Islamiyah dan pembiasaan ibadah harian secara konsisten dan disiplin.</p>
+                                                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-md bg-amber-100/60 text-amber-700 text-[9px] font-bold uppercase tracking-wider">Fondasi Iman</span>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="mission-item p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-mho-green/30 transition-all group">
-                                        <div class="flex items-start gap-4">
-                                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mho-green to-mho-green-hover text-white flex items-center justify-center font-headline font-extrabold text-sm flex-shrink-0 shadow-md">02</div>
+                                    <div class="mission-item p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-amber-500/30 transition-all group">
+                                        <div class="flex items-start gap-3.5 sm:gap-4">
+                                            <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm flex-shrink-0 shadow-md">02</div>
                                             <div>
-                                                <h4 class="font-headline font-bold text-sm text-slate-900 mb-1">Sains & Teknologi</h4>
-                                                <p class="text-xs text-slate-500 leading-relaxed">Menyelenggarakan proses pembelajaran berbasis sains dan teknologi modern yang interaktif.</p>
-                                                <span class="inline-block mt-2 text-[9px] font-bold uppercase tracking-wider text-mho-green">Innovation Hub</span>
+                                                <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1">Sains & Teknologi</h4>
+                                                <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Menyelenggarakan proses pembelajaran berbasis sains dan teknologi modern yang interaktif.</p>
+                                                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-md bg-orange-100/60 text-orange-700 text-[9px] font-bold uppercase tracking-wider">Pusat Inovasi</span>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="mission-item p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-mho-blue/30 transition-all group">
-                                        <div class="flex items-start gap-4">
-                                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mho-blue to-mho-blue-hover text-white flex items-center justify-center font-headline font-extrabold text-sm flex-shrink-0 shadow-md">03</div>
+                                    <div class="mission-item p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-amber-500/30 transition-all group">
+                                        <div class="flex items-start gap-3.5 sm:gap-4">
+                                            <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm flex-shrink-0 shadow-md">03</div>
                                             <div>
-                                                <h4 class="font-headline font-bold text-sm text-slate-900 mb-1">Pengembangan Talenta</h4>
-                                                <p class="text-xs text-slate-500 leading-relaxed">Mengembangkan potensi akademik dan non-akademik melalui program ekstrakurikuler unggulan.</p>
-                                                <span class="inline-block mt-2 text-[9px] font-bold uppercase tracking-wider text-mho-blue">Talent Acceleration</span>
+                                                <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1">Pengembangan Talenta</h4>
+                                                <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Mengembangkan potensi akademik dan non-akademik melalui program ekstrakurikuler unggulan.</p>
+                                                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-md bg-amber-100/60 text-amber-700 text-[9px] font-bold uppercase tracking-wider">Akselerasi Bakat</span>
                                             </div>
                                         </div>
                                     </div>
                                     
-                                    <div class="mission-item p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-mho-green/30 transition-all group">
-                                        <div class="flex items-start gap-4">
-                                            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-mho-green to-mho-green-hover text-white flex items-center justify-center font-headline font-extrabold text-sm flex-shrink-0 shadow-md">04</div>
+                                    <div class="mission-item p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:border-amber-500/30 transition-all group">
+                                        <div class="flex items-start gap-3.5 sm:gap-4">
+                                            <div class="w-9 h-9 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm flex-shrink-0 shadow-md">04</div>
                                             <div>
-                                                <h4 class="font-headline font-bold text-sm text-slate-900 mb-1">Kolaborasi Strategis</h4>
-                                                <p class="text-xs text-slate-500 leading-relaxed">Membangun jejaring kolaborasi aktif dengan orang tua wali murid dan instansi strategis.</p>
-                                                <span class="inline-block mt-2 text-[9px] font-bold uppercase tracking-wider text-mho-green">Strategic Partnership</span>
+                                                <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1">Kolaborasi Strategis</h4>
+                                                <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Membangun jejaring kolaborasi aktif dengan orang tua wali murid dan instansi strategis.</p>
+                                                <span class="inline-block mt-2 px-2.5 py-0.5 rounded-md bg-orange-100/60 text-orange-700 text-[9px] font-bold uppercase tracking-wider">Kemitraan</span>
                                             </div>
                                         </div>
                                     </div>
@@ -616,53 +702,53 @@
 
                     <!-- TUJUAN -->
                     <div id="contentTujuan" class="tab-pane hidden">
-                        <div class="bg-white rounded-3xl p-10 sm:p-14 border border-slate-200 shadow-sm relative overflow-hidden">
-                            <div class="absolute -top-20 -left-20 w-80 h-80 bg-mho-blue/5 rounded-full blur-3xl"></div>
+                        <div class="bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-14 border border-slate-100 shadow-sm relative overflow-hidden">
+                            <div class="absolute -top-20 -left-20 w-80 h-80 bg-yellow-500/10 rounded-full blur-3xl"></div>
                             
                             <div class="relative z-10">
-                                <div class="flex items-center gap-4 mb-8">
-                                    <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-mho-blue-light border border-mho-blue/10">
-                                        <span class="material-symbols-outlined text-mho-blue text-lg">flag</span>
-                                        <span class="text-[10px] font-bold uppercase tracking-widest text-mho-blue">Long-Term Goals</span>
+                                <div class="flex items-center gap-3 sm:gap-4 mb-6 sm:mb-8">
+                                    <div class="inline-flex items-center gap-2 sm:gap-3 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-amber-50 border border-amber-200/50 shadow-xs">
+                                        <span class="material-symbols-outlined text-amber-600 text-base sm:text-lg">flag</span>
+                                        <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-widest text-amber-700">Tujuan Jangka Panjang</span>
                                     </div>
-                                    <span class="text-xs text-slate-400 font-medium">2030 Milestones</span>
+                                    <span class="text-xs text-slate-500 font-medium">Sasaran Mutu 2030</span>
                                 </div>
                                 
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                                    <div class="group relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200 hover:border-mho-blue/30 transition-all duration-500 hover:shadow-xl">
-                                        <div class="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-gradient-to-br from-mho-blue to-mho-green text-white flex items-center justify-center font-headline font-extrabold text-sm shadow-lg">1</div>
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-blue-light text-mho-blue flex items-center justify-center mb-4">
-                                            <span class="material-symbols-outlined text-2xl">menu_book</span>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                                    <div class="group relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-5 sm:p-8 border border-slate-100 hover:border-amber-500/30 transition-all duration-500 hover:shadow-xl">
+                                        <div class="absolute -top-3 -right-3 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm shadow-lg">1</div>
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3 sm:mb-4 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">menu_book</span>
                                         </div>
-                                        <h4 class="font-headline font-bold text-sm text-slate-900 mb-2">Tahfidz Al-Qur'an</h4>
-                                        <p class="text-xs text-slate-500 leading-relaxed">Seluruh lulusan hafal Al-Qur'an minimal 3 Juz dan menguasai dasar literasi digital tingkat lanjut.</p>
-                                        <div class="mt-4 flex items-center gap-2 text-[10px] font-bold text-mho-blue">
+                                        <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1.5 sm:mb-2">Tahfidz Al-Qur'an</h4>
+                                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Seluruh lulusan hafal Al-Qur'an minimal 3 Juz dan menguasai dasar literasi digital tingkat lanjut.</p>
+                                        <div class="mt-3 sm:mt-4 flex items-center gap-1.5 sm:gap-2 text-[10px] font-bold text-amber-600">
                                             <span class="material-symbols-outlined text-sm">trending_up</span>
                                             <span>Target 2030</span>
                                         </div>
                                     </div>
                                     
-                                    <div class="group relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200 hover:border-mho-green/30 transition-all duration-500 hover:shadow-xl">
-                                        <div class="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-gradient-to-br from-mho-green to-mho-blue text-white flex items-center justify-center font-headline font-extrabold text-sm shadow-lg">2</div>
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-green-light text-mho-green flex items-center justify-center mb-4">
-                                            <span class="material-symbols-outlined text-2xl">emoji_events</span>
+                                    <div class="group relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-5 sm:p-8 border border-slate-100 hover:border-amber-500/30 transition-all duration-500 hover:shadow-xl">
+                                        <div class="absolute -top-3 -right-3 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm shadow-lg">2</div>
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-orange-50 text-orange-600 flex items-center justify-center mb-3 sm:mb-4 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">emoji_events</span>
                                         </div>
-                                        <h4 class="font-headline font-bold text-sm text-slate-900 mb-2">Prestasi Nasional</h4>
-                                        <p class="text-xs text-slate-500 leading-relaxed">Meraih peringkat teratas dalam kompetisi akademik maupun robotik tingkat regional dan nasional.</p>
-                                        <div class="mt-4 flex items-center gap-2 text-[10px] font-bold text-mho-green">
+                                        <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1.5 sm:mb-2">Prestasi Nasional</h4>
+                                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Meraih peringkat teratas dalam kompetisi akademik maupun robotik tingkat regional dan nasional.</p>
+                                        <div class="mt-3 sm:mt-4 flex items-center gap-1.5 sm:gap-2 text-[10px] font-bold text-orange-600">
                                             <span class="material-symbols-outlined text-sm">trending_up</span>
                                             <span>Target 2030</span>
                                         </div>
                                     </div>
                                     
-                                    <div class="group relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-8 border border-slate-200 hover:border-mho-blue/30 transition-all duration-500 hover:shadow-xl">
-                                        <div class="absolute -top-3 -right-3 w-12 h-12 rounded-full bg-gradient-to-br from-mho-blue to-mho-green text-white flex items-center justify-center font-headline font-extrabold text-sm shadow-lg">3</div>
-                                        <div class="w-14 h-14 rounded-2xl bg-mho-blue-light text-mho-blue flex items-center justify-center mb-4">
-                                            <span class="material-symbols-outlined text-2xl">public</span>
+                                    <div class="group relative bg-gradient-to-br from-slate-50 to-white rounded-2xl p-5 sm:p-8 border border-slate-100 hover:border-amber-500/30 transition-all duration-500 hover:shadow-xl">
+                                        <div class="absolute -top-3 -right-3 w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-amber-500 to-yellow-500 text-white flex items-center justify-center font-headline font-extrabold text-xs sm:text-sm shadow-lg">3</div>
+                                        <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-3 sm:mb-4 shadow-xs">
+                                            <span class="material-symbols-outlined text-xl sm:text-2xl">public</span>
                                         </div>
-                                        <h4 class="font-headline font-bold text-sm text-slate-900 mb-2">Rujukan Global</h4>
-                                        <p class="text-xs text-slate-500 leading-relaxed">Menjadi rujukan sekolah menengah berbasis teknologi ramah lingkungan di Kabupaten Sidoarjo.</p>
-                                        <div class="mt-4 flex items-center gap-2 text-[10px] font-bold text-mho-blue">
+                                        <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900 mb-1.5 sm:mb-2">Rujukan Global</h4>
+                                        <p class="text-[11px] sm:text-xs text-slate-600 leading-relaxed">Menjadi rujukan sekolah menengah berbasis teknologi ramah lingkungan di Kabupaten Sidoarjo.</p>
+                                        <div class="mt-3 sm:mt-4 flex items-center gap-1.5 sm:gap-2 text-[10px] font-bold text-amber-600">
                                             <span class="material-symbols-outlined text-sm">trending_up</span>
                                             <span>Target 2030</span>
                                         </div>
@@ -680,127 +766,123 @@
         <!-- ============================================================ -->
         <!-- STRUKTUR ORGANISASI -->
         <!-- ============================================================ -->
-        <section class="py-24 bg-white border-t border-slate-100 relative overflow-hidden" id="struktur">
-            <div class="absolute bottom-0 left-0 w-1/2 h-full pointer-events-none opacity-[0.03]">
-                <svg class="w-full h-full" viewBox="0 0 600 600" fill="none">
-                    <path d="M500,500 C300,550 50,350 100,100 C150,-150 500,50 500,500 Z" fill="#059669"/>
-                </svg>
-            </div>
+        <section class="py-16 sm:py-24 bg-white border-t border-slate-100 relative overflow-hidden" id="struktur">
+            
+            <div class="absolute top-10 right-10 w-72 h-72 bg-gradient-to-bl from-amber-500/10 to-orange-400/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-10 left-10 w-72 h-72 bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 
-                <div class="text-center max-w-2xl mx-auto mb-14" data-aos="fade-up">
-                    <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green mb-3">
+                <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14" data-aos="fade-up">
+                    <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green mb-2 sm:mb-3">
                         <span class="w-2 h-2 rounded-full bg-mho-green"></span>
-                        <span>Organizational Structure</span>
+                        <span>Struktur Organisasi</span>
                     </div>
-                    <h2 class="font-headline font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight">
+                    <h2 class="font-headline font-extrabold text-2xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight">
                         Struktur Organisasi <br />
-                        <span class="text-gradient-custom font-serifAcc italic font-normal text-4xl sm:text-6xl">SMP Muhammadiyah 6 Krian</span>
+                        <span class="text-gradient-custom font-serifAcc italic font-normal text-3xl sm:text-6xl">SMP Muhammadiyah 6 Krian</span>
                     </h2>
-                    <p class="text-slate-500 text-sm sm:text-base mt-4 leading-relaxed">
+                    <p class="text-slate-600 text-xs sm:text-base mt-3 sm:mt-4 leading-relaxed">
                         Susunan kepengurusan dan tata kelola institusi yang profesional, transparan, dan akuntabel untuk mewujudkan visi pendidikan unggulan.
                     </p>
                 </div>
 
-                <div class="relative" data-aos="fade-up">
+                <div class="relative max-w-5xl mx-auto" data-aos="fade-up">
                     
-                    <!-- Kepala Sekolah -->
-                    <div class="flex justify-center mb-8">
-                        <div class="org-card bg-gradient-to-br from-mho-blue to-mho-blue-hover text-white rounded-2xl p-6 sm:p-8 w-full max-w-md text-center shadow-xl border border-white/10">
-                            <div class="w-20 h-20 rounded-full bg-white/20 mx-auto flex items-center justify-center mb-4">
-                                <span class="material-symbols-outlined text-4xl text-white">person</span>
+                    <div class="flex justify-center mb-6 sm:mb-8 relative">
+                        <div class="absolute -top-3 z-10 px-4 py-1 rounded-full bg-amber-500 text-white font-headline font-bold text-[10px] sm:text-xs uppercase tracking-widest shadow-md">
+                            Pimpinan Tertinggi
+                        </div>
+                        <div class="org-card bg-gradient-to-br from-mho-blue to-mho-blue-hover text-white rounded-2xl p-5 sm:p-8 w-full max-w-md text-center shadow-xl border border-white/10">
+                            <div class="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/20 mx-auto flex items-center justify-center mb-3 sm:mb-4 shadow-inner">
+                                <span class="material-symbols-outlined text-2xl sm:text-4xl text-white">person</span>
                             </div>
-                            <h3 class="font-headline font-extrabold text-lg sm:text-xl">Drs. H. Ahmad Muhajir, M.Pd</h3>
-                            <p class="text-white/80 text-xs font-semibold uppercase tracking-wider mt-1">Kepala Sekolah</p>
-                            <div class="mt-3 flex justify-center gap-4 text-xs text-white/70">
+                            <h3 class="font-headline font-extrabold text-sm sm:text-xl">Drs. H. Ahmad Muhajir, M.Pd</h3>
+                            <p class="text-white/80 text-[11px] sm:text-xs font-semibold uppercase tracking-wider mt-1">Kepala Sekolah</p>
+                            <div class="mt-2.5 sm:mt-3 flex justify-center gap-3 sm:gap-4 text-[11px] sm:text-xs text-white/70">
                                 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">verified</span> Akreditasi A+</span>
+                                <span>•</span>
                                 <span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">school</span> 24+ Tahun</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="relative flex justify-center mb-6">
-                        <div class="w-px h-8 bg-gradient-to-b from-mho-blue to-mho-blue/30"></div>
+                    <div class="relative flex justify-center mb-5 sm:mb-6">
+                        <div class="w-px h-8 bg-gradient-to-b from-mho-blue to-mho-blue/30 relative">
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-amber-500 ring-4 ring-amber-100"></div>
+                        </div>
                     </div>
 
-                    <!-- Grid: Wakil Kepala & Koordinator -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                        
-                        <div class="org-card bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm hover:border-mho-blue/40">
-                            <div class="w-14 h-14 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-3">
-                                <span class="material-symbols-outlined text-2xl">school</span>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                        <div class="org-card bg-white rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm hover:border-mho-blue/40">
+                            <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                <span class="material-symbols-outlined text-lg sm:text-2xl">school</span>
                             </div>
-                            <h4 class="font-headline font-bold text-sm text-slate-900">Waka Kurikulum</h4>
-                            <p class="text-xs text-slate-500 mt-1 font-medium">Nurul Huda, S.Pd., M.Pd</p>
+                            <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900">Waka Kurikulum</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-600 mt-1 font-medium">Nurul Huda, S.Pd., M.Pd</p>
                             <span class="inline-block mt-2 px-3 py-1 rounded-full bg-mho-blue-light text-mho-blue text-[10px] font-bold uppercase tracking-wider">Akademik</span>
                         </div>
 
-                        <div class="org-card bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm hover:border-mho-blue/40">
-                            <div class="w-14 h-14 rounded-full bg-mho-green-light text-mho-green mx-auto flex items-center justify-center mb-3">
-                                <span class="material-symbols-outlined text-2xl">groups</span>
+                        <div class="org-card bg-white rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm hover:border-mho-blue/40">
+                            <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-amber-50 text-amber-600 mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                <span class="material-symbols-outlined text-lg sm:text-2xl">groups</span>
                             </div>
-                            <h4 class="font-headline font-bold text-sm text-slate-900">Waka Kesiswaan</h4>
-                            <p class="text-xs text-slate-500 mt-1 font-medium">M. Farhan, S.Pd., M.M</p>
-                            <span class="inline-block mt-2 px-3 py-1 rounded-full bg-mho-green-light text-mho-green text-[10px] font-bold uppercase tracking-wider">Kesiswaan</span>
+                            <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900">Waka Kesiswaan</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-600 mt-1 font-medium">M. Farhan, S.Pd., M.M</p>
+                            <span class="inline-block mt-2 px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-[10px] font-bold uppercase tracking-wider">Kesiswaan</span>
                         </div>
 
-                        <div class="org-card bg-white rounded-2xl p-6 text-center border border-slate-200 shadow-sm hover:border-mho-blue/40">
-                            <div class="w-14 h-14 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-3">
-                                <span class="material-symbols-outlined text-2xl">apartment</span>
+                        <div class="org-card bg-white rounded-2xl p-4 sm:p-6 text-center border border-slate-100 shadow-sm hover:border-mho-blue/40">
+                            <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-2 sm:mb-3 shadow-xs">
+                                <span class="material-symbols-outlined text-lg sm:text-2xl">apartment</span>
                             </div>
-                            <h4 class="font-headline font-bold text-sm text-slate-900">Waka Sarpras</h4>
-                            <p class="text-xs text-slate-500 mt-1 font-medium">Ahmad Syaifuddin, S.T</p>
+                            <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900">Waka Sarpras</h4>
+                            <p class="text-[11px] sm:text-xs text-slate-600 mt-1 font-medium">Ahmad Syaifuddin, S.T</p>
                             <span class="inline-block mt-2 px-3 py-1 rounded-full bg-mho-blue-light text-mho-blue text-[10px] font-bold uppercase tracking-wider">Infrastruktur</span>
                         </div>
-
                     </div>
 
-                    <div class="relative flex justify-center my-8">
-                        <div class="w-px h-8 bg-gradient-to-b from-mho-blue/30 to-mho-green/30"></div>
+                    <div class="relative flex justify-center mb-6 sm:mb-8">
+                        <div class="w-px h-8 bg-gradient-to-b from-mho-blue/30 to-amber-500/30 relative">
+                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-mho-blue"></div>
+                        </div>
                     </div>
 
-                    <!-- Row 2: Koordinator & Staf -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-5xl mx-auto">
-                        
-                        <div class="bg-slate-50/80 rounded-xl p-4 text-center border border-slate-100 hover:bg-white hover:border-mho-blue/20 transition-all">
-                            <div class="w-10 h-10 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-2">
-                                <span class="material-symbols-outlined text-lg">menu_book</span>
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+                        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100 hover:bg-white hover:border-mho-blue/20 transition-all shadow-xs">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-1.5 sm:mb-2">
+                                <span class="material-symbols-outlined text-base sm:text-lg">menu_book</span>
                             </div>
-                            <h5 class="font-headline font-bold text-xs text-slate-900">Koord. Tahfidz</h5>
-                            <p class="text-[10px] text-slate-500">Ustadzah Laila, S.Ag</p>
+                            <h5 class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">Koord. Tahfidz</h5>
+                            <p class="text-[10px] text-slate-600 mt-0.5">Ustadzah Laila, S.Ag</p>
                         </div>
-
-                        <div class="bg-slate-50/80 rounded-xl p-4 text-center border border-slate-100 hover:bg-white hover:border-mho-green/20 transition-all">
-                            <div class="w-10 h-10 rounded-full bg-mho-green-light text-mho-green mx-auto flex items-center justify-center mb-2">
-                                <span class="material-symbols-outlined text-lg">computer</span>
+                        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100 hover:bg-white hover:border-amber-500/20 transition-all shadow-xs">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-50 text-amber-600 mx-auto flex items-center justify-center mb-1.5 sm:mb-2">
+                                <span class="material-symbols-outlined text-base sm:text-lg">computer</span>
                             </div>
-                            <h5 class="font-headline font-bold text-xs text-slate-900">Koord. Robotik</h5>
-                            <p class="text-[10px] text-slate-500">Ahmad Rifai, S.Kom</p>
+                            <h5 class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">Koord. Robotik</h5>
+                            <p class="text-[10px] text-slate-600 mt-0.5">Ahmad Rifai, S.Kom</p>
                         </div>
-
-                        <div class="bg-slate-50/80 rounded-xl p-4 text-center border border-slate-100 hover:bg-white hover:border-mho-blue/20 transition-all">
-                            <div class="w-10 h-10 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-2">
-                                <span class="material-symbols-outlined text-lg">sports_martial_arts</span>
+                        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100 hover:bg-white hover:border-mho-blue/20 transition-all shadow-xs">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-mho-blue-light text-mho-blue mx-auto flex items-center justify-center mb-1.5 sm:mb-2">
+                                <span class="material-symbols-outlined text-base sm:text-lg">sports_martial_arts</span>
                             </div>
-                            <h5 class="font-headline font-bold text-xs text-slate-900">Pelatih Tapak Suci</h5>
-                            <p class="text-[10px] text-slate-500">M. Ihsan, S.Pd</p>
+                            <h5 class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">Pelatih Tapak Suci</h5>
+                            <p class="text-[10px] text-slate-600 mt-0.5">M. Ihsan, S.Pd</p>
                         </div>
-
-                        <div class="bg-slate-50/80 rounded-xl p-4 text-center border border-slate-100 hover:bg-white hover:border-mho-green/20 transition-all">
-                            <div class="w-10 h-10 rounded-full bg-mho-green-light text-mho-green mx-auto flex items-center justify-center mb-2">
-                                <span class="material-symbols-outlined text-lg">camping</span>
+                        <div class="bg-slate-50/80 rounded-xl p-3 sm:p-4 text-center border border-slate-100 hover:bg-white hover:border-amber-500/20 transition-all shadow-xs">
+                            <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-amber-50 text-amber-600 mx-auto flex items-center justify-center mb-1.5 sm:mb-2">
+                                <span class="material-symbols-outlined text-base sm:text-lg">camping</span>
                             </div>
-                            <h5 class="font-headline font-bold text-xs text-slate-900">Pembina HW</h5>
-                            <p class="text-[10px] text-slate-500">Agus Salim, S.Pd</p>
+                            <h5 class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">Pembina HW</h5>
+                            <p class="text-[10px] text-slate-600 mt-0.5">Agus Salim, S.Pd</p>
                         </div>
-
                     </div>
 
-                    <div class="text-center mt-10">
-                        <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-100 text-slate-500 text-xs font-medium">
-                            <span class="material-symbols-outlined text-base text-mho-blue">info</span>
-                            Struktur organisasi didasarkan pada SK Kepala Sekolah Nomor 001/SK-SMPM6/V/2026
+                    <div class="text-center mt-8 sm:mt-10">
+                        <div class="inline-flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2.5 sm:py-3 rounded-full bg-slate-100 text-slate-600 text-[10px] sm:text-xs font-medium max-w-full text-center shadow-xs">
+                            <span class="material-symbols-outlined text-sm sm:text-base text-amber-500 flex-shrink-0">info</span>
+                            <span class="truncate">Struktur organisasi didasarkan pada SK Kepala Sekolah Nomor 001/SK-SMPM6/V/2026</span>
                         </div>
                     </div>
 
@@ -812,43 +894,63 @@
     </main>
 
     <!-- ============================================================ -->
-    <!-- FLOATING ACTION BUTTONS -->
+    <!-- FLOATING ACTION BUTTONS & MOBILE BOTTOM BAR -->
     <!-- ============================================================ -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+    <div class="fixed bottom-6 right-6 z-50 hidden sm:flex flex-col gap-3 items-end">
         <button id="backToTopBtn" onclick="scrollToTop()" class="hidden bg-mho-blue hover:bg-mho-blue-hover text-white p-3 rounded-full shadow-lg transition-all duration-200 active:scale-95">
             <span class="material-symbols-outlined text-xl">arrow_upward</span>
         </button>
     </div>
 
+    <!-- Mobile Floating Bottom Bar -->
+    <div class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 flex items-center justify-between sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        <a href="index.html" class="flex flex-col items-center text-slate-600 hover:text-mho-blue">
+            <span class="material-symbols-outlined text-xl">home</span>
+            <span class="text-[10px] font-semibold mt-0.5">Beranda</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center text-mho-blue">
+            <span class="material-symbols-outlined text-xl">school</span>
+            <span class="text-[10px] font-bold mt-0.5">Profil</span>
+        </a>
+        <a href="berita.html" class="flex flex-col items-center text-slate-600 hover:text-mho-blue">
+            <span class="material-symbols-outlined text-xl">newspaper</span>
+            <span class="text-[10px] font-semibold mt-0.5">Berita</span>
+        </a>
+        <a href="daftar.html" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-mho-green text-white font-headline font-extrabold text-[11px] shadow-sm">
+            <span>PPDB</span>
+            <span class="material-symbols-outlined text-xs">open_in_new</span>
+        </a>
+    </div>
+
     <!-- ============================================================ -->
     <!-- FOOTER -->
     <!-- ============================================================ -->
-    <footer class="bg-mho-dark text-white pt-16 pb-12 relative overflow-hidden">
+    <footer class="bg-mho-dark text-white pt-12 sm:pt-16 pb-20 sm:pb-12 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 sm:pb-16 border-b border-white/10 text-center sm:text-left">
 
-                <div class="lg:col-span-4 space-y-5">
-                    <div class="flex items-center gap-3.5">
-                        <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-10 w-auto" src="assets/images/smpmeka.png" />
+                <div class="lg:col-span-4 space-y-4 sm:space-y-5">
+                    <div class="flex items-center justify-center sm:justify-start gap-3.5">
+                        <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-8 sm:h-10 w-auto" src="assets/images/smpmeka.png" />
                         <div>
-                            <span class="font-headline font-extrabold text-lg text-white block leading-none">SMP Muhammadiyah 6 KRIAN</span>
+                            <span class="font-headline font-extrabold text-base sm:text-lg text-white block leading-none">SMP Muhammadiyah 6 KRIAN</span>
                             <span class="text-[9px] text-mho-green font-semibold tracking-widest uppercase mt-1 block">Islamic & Technology School</span>
                         </div>
                     </div>
-                    <p class="text-slate-400 text-xs leading-relaxed">
+                    <p class="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto sm:mx-0">
                         Jl. Kyai Mojo No. 12, Krian, Kabupaten Sidoarjo, Jawa Timur 61262. Lembaga pendidikan menengah pertama berbasis Al-Islam dan IPTEK unggulan.
                     </p>
                     
                     <div class="pt-2 space-y-2 text-xs text-slate-300">
-                        <div class="flex items-center gap-3"><span class="material-symbols-outlined text-mho-green text-base">call</span> (031) 8971234</div>
-                        <div class="flex items-center gap-3"><span class="material-symbols-outlined text-mho-green text-base">mail</span> info@smpm6krian.sch.id</div>
+                        <div class="flex items-center justify-center sm:justify-start gap-3"><span class="material-symbols-outlined text-amber-500 text-base">call</span> (031) 8971234</div>
+                        <div class="flex items-center justify-center sm:justify-start gap-3"><span class="material-symbols-outlined text-amber-500 text-base">mail</span> info@smpm6krian.sch.id</div>
                     </div>
                 </div>
 
-                <div class="lg:col-span-2 space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Tautan Utama</h4>
-                    <ul class="space-y-2.5 text-xs text-slate-400">
+                <div class="lg:col-span-2 space-y-3 sm:space-y-4">
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Tautan Utama</h4>
+                    <ul class="space-y-2 sm:space-y-2.5 text-xs text-slate-400">
                         <li><a href="index.html" class="hover:text-white transition-colors">Beranda</a></li>
                         <li><a href="profile.html" class="hover:text-white transition-colors">Profil Sekolah</a></li>
                         <li><a href="index.html#program" class="hover:text-white transition-colors">Program Unggulan</a></li>
@@ -857,36 +959,36 @@
                     </ul>
                 </div>
 
-                <div class="lg:col-span-3 space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Jam Operasional</h4>
-                    <ul class="space-y-2 text-xs text-slate-400">
-                        <li class="flex justify-between border-b border-white/5 pb-2">
+                <div class="lg:col-span-3 space-y-3 sm:space-y-4">
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Jam Operasional</h4>
+                    <ul class="space-y-2 text-xs text-slate-400 max-w-xs mx-auto sm:mx-0">
+                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
                             <span>Senin - Kamis:</span>
                             <span class="text-slate-200 font-medium">07:00 - 15:30 WIB</span>
                         </li>
-                        <li class="flex justify-between border-b border-white/5 pb-2">
+                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
                             <span>Jum'at:</span>
                             <span class="text-slate-200 font-medium">07:00 - 11:30 WIB</span>
                         </li>
-                        <li class="flex justify-between border-b border-white/5 pb-2">
+                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
                             <span>Sabtu (Ekstrakurikuler):</span>
                             <span class="text-slate-200 font-medium">08:00 - 12:00 WIB</span>
                         </li>
                     </ul>
                 </div>
 
-                <div class="lg:col-span-3 space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-mho-green uppercase tracking-widest">Peta Lokasi</h4>
-                    <div class="w-full h-36 rounded-xl overflow-hidden border border-white/10 shadow-sm">
+                <div class="lg:col-span-3 space-y-3 sm:space-y-4">
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Peta Lokasi</h4>
+                    <div class="w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-white/10 shadow-sm">
                         <iframe title="Lokasi SMP Muhammadiyah 6 Krian" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.883713835697!2d112.58000000000001!3d-7.400000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDAuMCJTIDExMsKwMzQnODAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
 
             </div>
 
-            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400">
+            <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-slate-400 text-center sm:text-left">
                 <p>© 2026 SMP Muhammadiyah 6 Krian. All rights reserved.</p>
-                <div class="flex gap-6">
+                <div class="flex gap-4 sm:gap-6">
                     <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
                     <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
                 </div>
@@ -915,9 +1017,9 @@
         const backToTopBtn = document.getElementById('backToTopBtn');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
-                backToTopBtn.classList.remove('hidden');
+                if (backToTopBtn) backToTopBtn.classList.remove('hidden');
             } else {
-                backToTopBtn.classList.add('hidden');
+                if (backToTopBtn) backToTopBtn.classList.add('hidden');
             }
         });
 
@@ -930,6 +1032,13 @@
             menu.classList.toggle('hidden');
         }
 
+        function toggleMobileSubmenu(btn) {
+            const subMenu = btn.nextElementSibling;
+            const icon = btn.querySelector('.material-symbols-outlined');
+            subMenu.classList.toggle('hidden');
+            icon.style.transform = subMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+
         function switchTab(tabId) {
             const panes = document.querySelectorAll('.tab-pane');
             panes.forEach(pane => pane.classList.add('hidden'));
@@ -939,18 +1048,18 @@
             const btnTujuan = document.getElementById('btnTujuan');
 
             [btnVisi, btnMisi, btnTujuan].forEach(btn => {
-                btn.className = "tab-btn-inactive px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 flex items-center gap-2";
+                btn.className = "tab-btn-inactive px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 flex items-center gap-1.5 sm:gap-2";
             });
 
             if (tabId === 'visi') {
                 document.getElementById('contentVisi').classList.remove('hidden');
-                btnVisi.className = "tab-btn-active px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-2";
+                btnVisi.className = "tab-btn-active px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-1.5 sm:gap-2";
             } else if (tabId === 'misi') {
                 document.getElementById('contentMisi').classList.remove('hidden');
-                btnMisi.className = "tab-btn-active px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-2";
+                btnMisi.className = "tab-btn-active px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-1.5 sm:gap-2";
             } else if (tabId === 'tujuan') {
                 document.getElementById('contentTujuan').classList.remove('hidden');
-                btnTujuan.className = "tab-btn-active px-8 py-3.5 rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-2";
+                btnTujuan.className = "tab-btn-active px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl font-headline font-bold text-xs uppercase tracking-wider transition-all duration-300 border-2 shadow-lg flex items-center gap-1.5 sm:gap-2";
             }
         }
     </script>
