@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalender Akademik | SMP Muhammadiyah 6 Krian - Islamic & Technology Based School</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@1,600;1,700&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mho: {
+                            blue: '#1E65B5',
+                            'blue-hover': '#165196',
+                            'blue-light': '#F0F6FC',
+                            green: '#E58A2B',
+                            'green-hover': '#D07A22',
+                            'green-light': '#FEF7F0',
+                            dark: '#0B1F36',
+                            bg: '#FFFFFF',
+                            surface: '#F8FAFC'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        headline: ["Plus Jakarta Sans", "sans-serif"],
+                        serifAcc: ["Playfair Display", "serif"],
+                    }
+                },
+            },
+        };
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-marquee {
+            display: flex;
+            width: 200%;
+            animation: marqueeScroll 22s linear infinite;
+        }
+
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spinSlow 30s linear infinite;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(1deg); }
+        }
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        @keyframes floatSlow2 {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(-2deg); }
+        }
+        .animate-float2 {
+            animation: floatSlow2 6s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8) rotate(0deg); }
+            50% { opacity: 0.6; transform: scale(1.2) rotate(180deg); }
+        }
+        .animate-twinkle {
+            animation: twinkle 4s ease-in-out infinite;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .text-gradient-custom {
+            background: linear-gradient(135deg, #F97316 0%, #FACC15 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bg-gold-pattern {
+            background-image: radial-gradient(rgba(229, 138, 43, 0.12) 1.5px, transparent 1.5px),
+                radial-gradient(rgba(250, 204, 21, 0.1) 1.5px, transparent 1.5px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+        }
+
+        /* Shape decorations */
+        .shape-diamond { clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+        .shape-star { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }
+        .shape-hexagon { clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%); }
+
+        /* Calendar Specific Styles */
+        .btn-view-active {
+            background-color: #1E65B5;
+            color: white;
+            border-color: #1E65B5;
+        }
+        .btn-view-inactive {
+            background-color: white;
+            color: #64748B;
+            border-color: #E2E8F0;
+        }
+        .btn-view-inactive:hover {
+            background-color: #F8FAFC;
+            color: #1E65B5;
+        }
+        
+        .timeline-dot::before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: inherit;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px currentColor;
+        }
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 24px;
+            bottom: -24px;
+            width: 2px;
+            background-color: #E2E8F0;
+            z-index: -1;
+        }
+        .timeline-item:last-child .timeline-line::after {
+            display: none;
+        }
+
+        .cal-grid-cell {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #F1F5F9;
+            padding: 4px;
+            transition: all 0.2s;
+        }
+        .cal-grid-cell:hover {
+            background-color: #F8FAFC;
+        }
+        .cal-grid-header {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748B;
+            padding: 8px 0;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
+
+    <!-- ============================================================ -->
+    <!-- HEADER NAVBAR -->
+    <!-- ============================================================ -->
+    <header
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/95 backdrop-blur-md shadow-sm/5"
+        id="mainHeader">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+
+                <a href="index.html" class="flex items-center gap-3 group">
+                    <img alt="Logo SMP Muhammadiyah 6 Krian"
+                        class="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105"
+                        src="assets/images/smpmeka.png" />
+                    <div class="flex flex-col">
+                        <span
+                            class="font-headline font-extrabold text-sm sm:text-lg text-mho-blue leading-none tracking-tight">SMP
+                            MEKA</span>
+                        <span
+                            class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami
+                            • Unggul • Berkemajuan</span>
+                    </div>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-1.5">
+                    <a href="index.html"
+                        class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 transition-all">Beranda</a>
+
+                    <div class="relative group">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                            Tentang Kami
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                        </button>
+                        <div
+                            class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="profile.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">school</span> Profil Sekolah
+                                </a>
+                                <a href="pendidik.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">groups</span> Tenaga Pendidik
+                                </a>
+                                <a href="fasilitas.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">apartment</span> Sarana & Prasarana
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light border border-mho-blue/20 flex items-center gap-1 transition-all">
+                            Informasi
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                        </button>
+                        <div
+                            class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="kalender-akademik.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span> Kalender Akademik
+                                </a>
+                                <a href="ekstrakurikuler.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">sports_kabaddi</span> Ekstrakurikuler
+                                </a>
+                                <a href="program-sekolah.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">menu_book</span> Program Sekolah
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                            Publikasi
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                        </button>
+                        <div
+                            class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="berita.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">newspaper</span> Berita
+                                </a>
+                                <a href="galeri.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">photo_library</span> Galeri
+                                </a>
+                                <a href="prestasi.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">emoji_events</span> Prestasi
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative group">
+                        <button
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                            Ruang Aspirasi
+                            <span
+                                class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
+                        </button>
+                        <div
+                            class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
+                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                                <a href="kritik-saran.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">forum</span> Kritik & Saran
+                                </a>
+                                <a href="survei-kepuasan.html"
+                                    class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
+                                    <span class="material-symbols-outlined text-mho-blue text-lg">poll</span> Survei Kepuasan
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="hidden lg:flex items-center gap-4">
+                    <a href="daftar.html"
+                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                        <span>INFO PPDB</span>
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </a>
+                </div>
+
+                <button id="mobileMenuBtn" onclick="toggleMobileNav()"
+                    class="lg:hidden p-2 rounded-xl text-mho-blue hover:bg-slate-100 transition-all focus:outline-none">
+                    <span class="material-symbols-outlined text-3xl">menu</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileNav"
+            class="hidden lg:hidden bg-white border-b border-slate-200 px-4 sm:px-6 py-6 space-y-3 max-h-[80vh] overflow-y-auto shadow-2xl">
+            <a href="index.html" class="block px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">Beranda</a>
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu(this)" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                    <span>Tentang Kami</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-200">expand_more</span>
+                </button>
+                <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="profile.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Profil Sekolah</a>
+                    <a href="pendidik.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Tenaga Pendidik</a>
+                    <a href="fasilitas.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Sarana & Prasarana</a>
+                </div>
+            </div>
+            <div class="space-y-1">
+                <button onclick="toggleMobileSubmenu(this)" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">
+                    <span>Informasi</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-200 rotate-180">expand_more</span>
+                </button>
+                <div class="pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="kalender-akademik.html" class="block px-3 py-2 rounded-lg text-xs font-bold text-mho-blue">Kalender Akademik</a>
+                    <a href="ekstrakurikuler.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Ekstrakurikuler</a>
+                    <a href="program-sekolah.html" class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Program Sekolah</a>
+                </div>
+            </div>
+            <div class="pt-3">
+                <a href="daftar.html" class="block w-full text-center py-3.5 rounded-xl bg-mho-green text-white font-headline font-extrabold text-xs uppercase tracking-wider shadow-md">
+                    Daftar PPDB Online
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-20">
+
+        <!-- ============================================================ -->
+        <!-- HERO SECTION WITH WOMAN ILLUSTRATION -->
+        <!-- ============================================================ -->
+        <section
+            class="relative min-h-[85vh] sm:min-h-[88vh] flex items-center bg-gradient-to-b from-slate-50/60 via-white to-slate-50/40 bg-gold-pattern border-b border-slate-100 overflow-hidden z-10 py-12 lg:py-0">
+
+            <div
+                class="absolute -top-20 -right-20 w-[450px] h-[450px] pointer-events-none opacity-30 rotate-45 hidden sm:block">
+                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#hero-leaf-grad)" />
+                    <defs>
+                        <linearGradient id="hero-leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.5" />
+                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="absolute bottom-5 -left-32 w-96 h-96 pointer-events-none opacity-25 -rotate-12 hidden sm:block">
+                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#hero-leaf-grad2)" />
+                    <defs>
+                        <linearGradient id="hero-leaf-grad2" x1="0%" y1="100%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.4" />
+                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.15" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="absolute top-20 right-10 w-16 h-16 bg-amber-400/20 rounded-full animate-float hidden sm:block"></div>
+            <div class="absolute top-40 left-8 w-8 h-8 shape-star bg-amber-500/15 animate-twinkle hidden sm:block"></div>
+            <div class="absolute bottom-32 right-20 w-12 h-12 shape-diamond bg-amber-400/10 animate-float2 hidden sm:block"></div>
+
+            <div
+                class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-20">
+                <svg class="relative block w-full h-24 sm:h-48 lg:h-64" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z" fill="#1E65B5"
+                        fill-opacity="0.12"></path>
+                    <path d="M0,30 C200,100 450,10 700,70 C950,130 1100,20 1200,50 L1200,120 L0,120 Z" fill="#E58A2B"
+                        fill-opacity="0.3"></path>
+                </svg>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-16 relative z-10 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+
+                    <div class="lg:col-span-7 space-y-5 sm:space-y-7" data-aos="fade-right" data-aos-duration="700">
+                        <div
+                            class="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-mho-blue-light border border-mho-blue/20 shadow-xs">
+                            <span class="w-2 h-2 rounded-full bg-mho-blue animate-pulse"></span>
+                            <span class="text-[11px] sm:text-xs font-bold text-mho-blue uppercase tracking-wider">Tahun Ajaran 2026/2027</span>
+                        </div>
+
+                        <h1
+                            class="font-headline font-extrabold text-slate-900 text-3xl sm:text-5xl lg:text-6xl leading-[1.15] tracking-tight">
+                            <span class="text-gradient-custom">Kalender Akademik</span><br />
+                            <span class="text-slate-900">Terpadu & Sistematis</span><br />
+                            <span
+                                class="font-serifAcc italic font-bold text-mho-blue text-2xl sm:text-4xl lg:text-5xl">Agenda Resmi Sekolah</span>
+                        </h1>
+
+                        <p class="text-slate-600 text-xs sm:text-base leading-relaxed max-w-xl font-normal">
+                            Jadwal operasional, agenda pembelajaran, evaluasi akademik, dan kegiatan strategis SMP Muhammadiyah 6 Krian selama satu tahun ajaran penuh.
+                        </p>
+
+                        <div class="flex flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2">
+                            <a href="#katalog-kalender"
+                                class="inline-flex items-center gap-2.5 sm:gap-3 px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-mho-blue/20 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+                                <span>Lihat Jadwal</span>
+                                <span class="material-symbols-outlined text-base sm:text-lg">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 relative mt-6 lg:mt-0" data-aos="zoom-in" data-aos-duration="800">
+                        <div
+                            class="relative w-full max-w-sm sm:max-w-lg mx-auto flex justify-center items-end min-h-[360px] sm:min-h-[500px]">
+                            <div
+                                class="absolute bottom-4 sm:bottom-6 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-white border border-slate-100 shadow-xl shadow-slate-100 flex items-center justify-center overflow-hidden">
+                                <div
+                                    class="w-[92%] h-[92%] rounded-full border border-dashed border-mho-blue/20 animate-spin-slow opacity-60">
+                                </div>
+                            </div>
+                            <img src="assets/images/woman.png" alt="Kalender Akademik SMP Muhammadiyah 6 Krian"
+                                class="relative z-10 w-auto h-[380px] sm:h-[520px] max-w-none object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.06)] -mb-8 sm:-mb-16" />
+
+                            <div
+                                class="absolute top-4 left-1 sm:top-8 sm:-left-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3 animate-float scale-90 sm:scale-100 origin-left">
+                                <div
+                                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center font-bold">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">calendar_month</span>
+                                </div>
+                                <div>
+                                    <p class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">Jadwal Resmi</p>
+                                    <p class="text-[9px] sm:text-[10px] text-slate-600 font-medium">Tahun Ajaran Aktif</p>
+                                </div>
+                            </div>
+
+                            <div class="absolute bottom-8 right-1 sm:bottom-16 sm:-right-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3 animate-float scale-90 sm:scale-100 origin-right"
+                                style="animation-delay: 2s;">
+                                <div
+                                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-mho-green-light text-mho-green flex items-center justify-center font-bold">
+                                    <span class="material-symbols-outlined text-xl sm:text-2xl">verified</span>
+                                </div>
+                                <div>
+                                    <p class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">Terstruktur</p>
+                                    <p class="text-[9px] sm:text-[10px] text-mho-green font-semibold">Ganjil & Genap</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================ -->
+        <!-- MARQUEE -->
+        <!-- ============================================================ -->
+        <div class="relative z-30 -mt-5 sm:-mt-6 overflow-hidden py-3 sm:py-4 select-none">
+            <div class="bg-mho-blue shadow-lg py-3 sm:py-3.5"
+                style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
+                <div class="flex overflow-hidden whitespace-nowrap">
+                    <div
+                        class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white">
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-sm sm:text-base">calendar_month</span> Kalender Akademik Resmi</span>
+                        <span class="text-white/40">•</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-sm sm:text-base">school</span> Penilaian Tengah & Akhir Semester</span>
+                        <span class="text-white/40">•</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-sm sm:text-base">event_available</span> Agenda & Kegiatan Sekolah</span>
+                        <span class="text-white/40">•</span>
+                    </div>
+                    <div class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white"
+                        aria-hidden="true">
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-sm sm:text-base">calendar_month</span> Kalender Akademik Resmi</span>
+                        <span class="text-white/40">•</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-sm sm:text-base">school</span> Penilaian Tengah & Akhir Semester</span>
+                        <span class="text-white/40">•</span>
+                        <span class="flex items-center gap-2"><span
+                                class="material-symbols-outlined text-sm sm:text-base">event_available</span> Agenda & Kegiatan Sekolah</span>
+                        <span class="text-white/40">•</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- ACADEMIC CALENDAR CONTENT -->
+        <!-- ============================================================ -->
+        <section class="py-16 sm:py-24 bg-white relative" id="katalog-kalender">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Toolkit Bar: Filter & Toggle & Download -->
+                <div class="flex flex-col lg:flex-row justify-between items-center gap-4 mb-10 bg-slate-50 p-4 rounded-2xl border border-slate-100 shadow-sm" data-aos="fade-up">
+                    
+                    <!-- Filters -->
+                    <div class="flex flex-wrap items-center gap-2 sm:gap-3 w-full lg:w-auto">
+                        <select id="filterCategory" onchange="filterEvents()" class="bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl px-4 py-2.5 focus:outline-none focus:border-mho-blue focus:ring-1 focus:ring-mho-blue w-full sm:w-auto cursor-pointer">
+                            <option value="all">Semua Kategori</option>
+                            <option value="exam">Evaluasi & Ujian</option>
+                            <option value="event">Agenda Sekolah</option>
+                            <option value="holiday">Hari Libur</option>
+                        </select>
+                        <select id="filterSemester" onchange="filterEvents()" class="bg-white border border-slate-200 text-slate-700 text-xs font-semibold rounded-xl px-4 py-2.5 focus:outline-none focus:border-mho-blue focus:ring-1 focus:ring-mho-blue w-full sm:w-auto cursor-pointer">
+                            <option value="all">Satu Tahun Ajaran</option>
+                            <option value="ganjil">Semester Ganjil</option>
+                            <option value="genap">Semester Genap</option>
+                        </select>
+                    </div>
+
+                    <!-- View Toggle & Actions -->
+                    <div class="flex items-center gap-3 w-full lg:w-auto justify-end">
+                        <div class="flex p-1 bg-slate-200/50 rounded-xl">
+                            <button onclick="switchView('list')" id="btnViewList" class="btn-view-active flex items-center justify-center w-10 h-10 rounded-lg transition-all" title="Mode Daftar">
+                                <span class="material-symbols-outlined text-[20px]">view_agenda</span>
+                            </button>
+                            <button onclick="switchView('grid')" id="btnViewGrid" class="btn-view-inactive flex items-center justify-center w-10 h-10 rounded-lg transition-all" title="Mode Kalender">
+                                <span class="material-symbols-outlined text-[20px]">calendar_month</span>
+                            </button>
+                        </div>
+                        <button class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-mho-dark hover:bg-slate-800 text-white font-headline font-bold text-xs uppercase tracking-wider transition-all shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">download</span>
+                            <span class="hidden sm:inline">Unduh PDF</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-10" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center gap-2 text-xs font-medium text-slate-600"><span class="w-3 h-3 rounded-full bg-blue-500"></span> Agenda Sekolah</div>
+                    <div class="flex items-center gap-2 text-xs font-medium text-slate-600"><span class="w-3 h-3 rounded-full bg-orange-500"></span> Evaluasi & Ujian</div>
+                    <div class="flex items-center gap-2 text-xs font-medium text-slate-600"><span class="w-3 h-3 rounded-full bg-red-500"></span> Libur Nasional/Sekolah</div>
+                    <div class="flex items-center gap-2 text-xs font-medium text-slate-600"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Kegiatan Keislaman</div>
+                </div>
+
+                <!-- ================= LIST VIEW ================= -->
+                <div id="viewList" class="block space-y-12 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                    
+                    <!-- Month Block: Juli 2026 -->
+                    <div class="event-block" data-semester="ganjil">
+                        <div class="flex items-center gap-4 mb-6">
+                            <h3 class="font-headline font-extrabold text-xl text-slate-900">Juli 2026</h3>
+                            <div class="h-px bg-slate-200 flex-grow"></div>
+                        </div>
+                        <div class="pl-2 sm:pl-4">
+                            <!-- Event Item -->
+                            <div class="timeline-item relative pl-8 pb-8 event-item" data-category="event">
+                                <div class="timeline-line text-blue-500 timeline-dot text-blue-500"></div>
+                                <div class="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-wider border border-blue-100 w-fit">Agenda Sekolah</span>
+                                        <span class="text-sm font-bold text-slate-900">13 - 15 Juli 2026</span>
+                                    </div>
+                                    <h4 class="font-headline font-bold text-base text-mho-blue mb-1">Masa Pengenalan Lingkungan Sekolah (MPLS)</h4>
+                                    <p class="text-xs text-slate-500">Kegiatan orientasi siswa baru kelas VII tahun ajaran 2026/2027.</p>
+                                </div>
+                            </div>
+                            <!-- Event Item -->
+                            <div class="timeline-item relative pl-8 pb-8 event-item" data-category="event">
+                                <div class="timeline-line text-blue-500 timeline-dot text-blue-500"></div>
+                                <div class="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 text-[10px] font-bold uppercase tracking-wider border border-blue-100 w-fit">Agenda Sekolah</span>
+                                        <span class="text-sm font-bold text-slate-900">16 Juli 2026</span>
+                                    </div>
+                                    <h4 class="font-headline font-bold text-base text-mho-blue mb-1">Hari Pertama Efektif Belajar</h4>
+                                    <p class="text-xs text-slate-500">Dimulainya Kegiatan Belajar Mengajar (KBM) untuk seluruh kelas.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Month Block: September 2026 -->
+                    <div class="event-block" data-semester="ganjil">
+                        <div class="flex items-center gap-4 mb-6">
+                            <h3 class="font-headline font-extrabold text-xl text-slate-900">September 2026</h3>
+                            <div class="h-px bg-slate-200 flex-grow"></div>
+                        </div>
+                        <div class="pl-2 sm:pl-4">
+                            <!-- Event Item -->
+                            <div class="timeline-item relative pl-8 pb-8 event-item" data-category="exam">
+                                <div class="timeline-line text-orange-500 timeline-dot text-orange-500"></div>
+                                <div class="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-l-orange-500">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-orange-50 text-orange-700 text-[10px] font-bold uppercase tracking-wider border border-orange-100 w-fit">Evaluasi & Ujian</span>
+                                        <span class="text-sm font-bold text-slate-900">21 - 26 September 2026</span>
+                                    </div>
+                                    <h4 class="font-headline font-bold text-base text-mho-blue mb-1">Penilaian Tengah Semester (PTS) Ganjil</h4>
+                                    <p class="text-xs text-slate-500">Pelaksanaan ujian tengah semester untuk kelas VII, VIII, dan IX berbasis CBT.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Month Block: Desember 2026 -->
+                    <div class="event-block" data-semester="ganjil">
+                        <div class="flex items-center gap-4 mb-6">
+                            <h3 class="font-headline font-extrabold text-xl text-slate-900">Desember 2026</h3>
+                            <div class="h-px bg-slate-200 flex-grow"></div>
+                        </div>
+                        <div class="pl-2 sm:pl-4">
+                            <!-- Event Item -->
+                            <div class="timeline-item relative pl-8 pb-8 event-item" data-category="exam">
+                                <div class="timeline-line text-orange-500 timeline-dot text-orange-500"></div>
+                                <div class="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-l-orange-500">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-orange-50 text-orange-700 text-[10px] font-bold uppercase tracking-wider border border-orange-100 w-fit">Evaluasi & Ujian</span>
+                                        <span class="text-sm font-bold text-slate-900">07 - 12 Desember 2026</span>
+                                    </div>
+                                    <h4 class="font-headline font-bold text-base text-mho-blue mb-1">Penilaian Akhir Semester (PAS) Ganjil</h4>
+                                    <p class="text-xs text-slate-500">Ujian penentu nilai rapor semester ganjil seluruh tingkat.</p>
+                                </div>
+                            </div>
+                            <!-- Event Item -->
+                            <div class="timeline-item relative pl-8 pb-8 event-item" data-category="holiday">
+                                <div class="timeline-line text-red-500 timeline-dot text-red-500"></div>
+                                <div class="bg-white border border-slate-100 rounded-2xl p-4 sm:p-5 shadow-sm hover:shadow-md transition-shadow border-l-4 border-l-red-500">
+                                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-red-50 text-red-700 text-[10px] font-bold uppercase tracking-wider border border-red-100 w-fit">Hari Libur</span>
+                                        <span class="text-sm font-bold text-slate-900">21 - 31 Desember 2026</span>
+                                    </div>
+                                    <h4 class="font-headline font-bold text-base text-red-600 mb-1">Libur Semester Ganjil</h4>
+                                    <p class="text-xs text-slate-500">Masa jeda semester dan libur Natal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Empty State for Filters -->
+                    <div id="emptyState" class="hidden text-center py-12">
+                        <span class="material-symbols-outlined text-4xl text-slate-300 mb-2">event_busy</span>
+                        <h4 class="font-bold text-slate-700">Tidak ada agenda</h4>
+                        <p class="text-xs text-slate-500 mt-1">Coba sesuaikan filter kategori atau semester.</p>
+                    </div>
+
+                </div>
+
+                <!-- ================= GRID VIEW ================= -->
+                <div id="viewGrid" class="hidden max-w-6xl mx-auto" data-aos="fade-up">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- Month Card: September -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+                            <h3 class="font-headline font-extrabold text-lg text-slate-900 mb-4 text-center">September 2026</h3>
+                            <div class="grid grid-cols-7 gap-1 mb-2 border-b border-slate-100 pb-2">
+                                <div class="cal-grid-header">Sen</div>
+                                <div class="cal-grid-header">Sel</div>
+                                <div class="cal-grid-header">Rab</div>
+                                <div class="cal-grid-header">Kam</div>
+                                <div class="cal-grid-header">Jum</div>
+                                <div class="cal-grid-header">Sab</div>
+                                <div class="cal-grid-header text-red-500">Min</div>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1 text-sm">
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">1</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">2</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">3</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">4</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">5</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">6</span></div>
+                                
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">7</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">8</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">9</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">10</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">11</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">12</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">13</span></div>
+
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">14</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">15</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">16</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">17</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">18</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">19</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">20</span></div>
+
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PTS Ganjil"><span class="block text-right w-full">21</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PTS Ganjil"><span class="block text-right w-full">22</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PTS Ganjil"><span class="block text-right w-full">23</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PTS Ganjil"><span class="block text-right w-full">24</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PTS Ganjil"><span class="block text-right w-full">25</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PTS Ganjil"><span class="block text-right w-full">26</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">27</span></div>
+
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">28</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">29</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">30</span></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                            </div>
+                        </div>
+
+                        <!-- Month Card: Desember -->
+                        <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-sm">
+                            <h3 class="font-headline font-extrabold text-lg text-slate-900 mb-4 text-center">Desember 2026</h3>
+                            <div class="grid grid-cols-7 gap-1 mb-2 border-b border-slate-100 pb-2">
+                                <div class="cal-grid-header">Sen</div>
+                                <div class="cal-grid-header">Sel</div>
+                                <div class="cal-grid-header">Rab</div>
+                                <div class="cal-grid-header">Kam</div>
+                                <div class="cal-grid-header">Jum</div>
+                                <div class="cal-grid-header">Sab</div>
+                                <div class="cal-grid-header text-red-500">Min</div>
+                            </div>
+                            <div class="grid grid-cols-7 gap-1 text-sm">
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">1</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">2</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">3</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">4</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">5</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">6</span></div>
+                                
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PAS Ganjil"><span class="block text-right w-full">7</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PAS Ganjil"><span class="block text-right w-full">8</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PAS Ganjil"><span class="block text-right w-full">9</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PAS Ganjil"><span class="block text-right w-full">10</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PAS Ganjil"><span class="block text-right w-full">11</span></div>
+                                <div class="cal-grid-cell font-bold text-orange-700 bg-orange-50 border-orange-200" title="PAS Ganjil"><span class="block text-right w-full">12</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">13</span></div>
+
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">14</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">15</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">16</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">17</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">18</span></div>
+                                <div class="cal-grid-cell font-medium text-slate-700"><span class="block text-right w-full">19</span></div>
+                                <div class="cal-grid-cell font-medium text-red-500"><span class="block text-right w-full">20</span></div>
+
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">21</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">22</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">23</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">24</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">25</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">26</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">27</span></div>
+
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">28</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">29</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">30</span></div>
+                                <div class="cal-grid-cell font-bold text-red-700 bg-red-50 border-red-200" title="Libur Semester"><span class="block text-right w-full">31</span></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                                <div class="cal-grid-cell opacity-0 pointer-events-none"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- FLOATING ACTION BUTTONS & MOBILE BOTTOM BAR -->
+    <!-- ============================================================ -->
+    <div class="fixed bottom-6 right-6 z-50 hidden sm:flex flex-col gap-3 items-end">
+        <button id="backToTopBtn" onclick="scrollToTop()"
+            class="hidden bg-mho-blue hover:bg-mho-blue-hover text-white p-3 rounded-full shadow-lg transition-all duration-200 active:scale-95">
+            <span class="material-symbols-outlined text-xl">arrow_upward</span>
+        </button>
+    </div>
+
+    <div
+        class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 flex items-center justify-between sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        <a href="index.html" class="flex flex-col items-center text-slate-600 hover:text-mho-blue">
+            <span class="material-symbols-outlined text-xl">home</span>
+            <span class="text-[10px] font-semibold mt-0.5">Beranda</span>
+        </a>
+        <a href="profile.html" class="flex flex-col items-center text-slate-600 hover:text-mho-blue">
+            <span class="material-symbols-outlined text-xl">school</span>
+            <span class="text-[10px] font-semibold mt-0.5">Profil</span>
+        </a>
+        <a href="kalender-akademik.html" class="flex flex-col items-center text-mho-blue">
+            <span class="material-symbols-outlined text-xl">calendar_month</span>
+            <span class="text-[10px] font-bold mt-0.5">Kalender</span>
+        </a>
+        <a href="daftar.html"
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-mho-green text-white font-headline font-extrabold text-[11px] shadow-sm">
+            <span>PPDB</span>
+            <span class="material-symbols-outlined text-xs">open_in_new</span>
+        </a>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================================ -->
+    <footer class="bg-mho-dark text-white pt-12 sm:pt-16 pb-20 sm:pb-12 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-12 sm:pb-16 border-b border-white/10 text-center sm:text-left">
+
+                <div class="lg:col-span-4 space-y-4 sm:space-y-5">
+                    <div class="flex items-center justify-center sm:justify-start gap-3.5">
+                        <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-8 sm:h-10 w-auto"
+                            src="assets/images/smpmeka.png" />
+                        <div>
+                            <span
+                                class="font-headline font-extrabold text-base sm:text-lg text-white block leading-none">SMP
+                                Muhammadiyah 6 KRIAN</span>
+                            <span
+                                class="text-[9px] text-amber-400 font-semibold tracking-widest uppercase mt-1 block">Islamic
+                                & Technology School</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto sm:mx-0">
+                        Jl. Kyai Mojo No. 12, Krian, Kabupaten Sidoarjo, Jawa Timur 61262. Lembaga pendidikan menengah
+                        pertama berbasis Al-Islam dan IPTEK unggulan.
+                    </p>
+
+                    <div class="pt-2 space-y-2 text-xs text-slate-300">
+                        <div class="flex items-center justify-center sm:justify-start gap-3"><span
+                                class="material-symbols-outlined text-amber-500 text-base">call</span> (031) 8971234
+                        </div>
+                        <div class="flex items-center justify-center sm:justify-start gap-3"><span
+                                class="material-symbols-outlined text-amber-500 text-base">mail</span>
+                            info@smpm6krian.sch.id</div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 space-y-3 sm:space-y-4">
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Tautan Utama
+                    </h4>
+                    <ul class="space-y-2 sm:space-y-2.5 text-xs text-slate-400">
+                        <li><a href="index.html" class="hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="profile.html" class="hover:text-white transition-colors">Profil Sekolah</a></li>
+                        <li><a href="index.html#program" class="hover:text-white transition-colors">Program Unggulan</a>
+                        </li>
+                        <li><a href="berita.html" class="hover:text-white transition-colors">Warta & Pengumuman</a></li>
+                        <li><a href="index.html#alumni" class="hover:text-white transition-colors">Jejak Alumni</a></li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3 sm:space-y-4">
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Jam Operasional
+                    </h4>
+                    <ul class="space-y-2 text-xs text-slate-400 max-w-xs mx-auto sm:mx-0">
+                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
+                            <span>Senin - Kamis:</span>
+                            <span class="text-slate-200 font-medium">07:00 - 15:30 WIB</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
+                            <span>Jum'at:</span>
+                            <span class="text-slate-200 font-medium">07:00 - 11:30 WIB</span>
+                        </li>
+                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
+                            <span>Sabtu (Ekstrakurikuler):</span>
+                            <span class="text-slate-200 font-medium">08:00 - 12:00 WIB</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="lg:col-span-3 space-y-3 sm:space-y-4">
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Peta Lokasi</h4>
+                    <div class="w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-white/10 shadow-sm">
+                        <iframe title="Lokasi SMP Muhammadiyah 6 Krian"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.883713835697!2d112.58000000000001!3d-7.400000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDAuMCJTIDExMsKwMzQnODAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+            </div>
+
+            <div
+                class="pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-slate-400 text-center sm:text-left">
+                <p>© 2026 SMP Muhammadiyah 6 Krian. All rights reserved.</p>
+                <div class="flex gap-4 sm:gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
+
+        AOS.init({
+            duration: 600,
+            once: true,
+            offset: 40,
+            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
+        });
+
+        function switchView(view) {
+            const btnList = document.getElementById('btnViewList');
+            const btnGrid = document.getElementById('btnViewGrid');
+            const viewList = document.getElementById('viewList');
+            const viewGrid = document.getElementById('viewGrid');
+
+            if (view === 'list') {
+                btnList.className = 'btn-view-active flex items-center justify-center w-10 h-10 rounded-lg transition-all';
+                btnGrid.className = 'btn-view-inactive flex items-center justify-center w-10 h-10 rounded-lg transition-all';
+                viewList.classList.remove('hidden');
+                viewGrid.classList.add('hidden');
+            } else {
+                btnGrid.className = 'btn-view-active flex items-center justify-center w-10 h-10 rounded-lg transition-all';
+                btnList.className = 'btn-view-inactive flex items-center justify-center w-10 h-10 rounded-lg transition-all';
+                viewGrid.classList.remove('hidden');
+                viewList.classList.add('hidden');
+            }
+        }
+
+        function filterEvents() {
+            const categoryFilter = document.getElementById('filterCategory').value;
+            const semesterFilter = document.getElementById('filterSemester').value;
+            
+            const eventBlocks = document.querySelectorAll('.event-block');
+            let hasVisibleEvent = false;
+
+            eventBlocks.forEach(block => {
+                const blockSemester = block.getAttribute('data-semester');
+                let blockHasVisibleItem = false;
+                const items = block.querySelectorAll('.event-item');
+
+                items.forEach(item => {
+                    const itemCategory = item.getAttribute('data-category');
+                    
+                    const matchCategory = (categoryFilter === 'all' || itemCategory === categoryFilter);
+                    const matchSemester = (semesterFilter === 'all' || blockSemester === semesterFilter);
+
+                    if (matchCategory && matchSemester) {
+                        item.style.display = 'block';
+                        blockHasVisibleItem = true;
+                        hasVisibleEvent = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                block.style.display = blockHasVisibleItem ? 'block' : 'none';
+            });
+
+            const emptyState = document.getElementById('emptyState');
+            if(hasVisibleEvent) {
+                emptyState.classList.add('hidden');
+            } else {
+                emptyState.classList.remove('hidden');
+            }
+        }
+
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                if (backToTopBtn) backToTopBtn.classList.remove('hidden');
+            } else {
+                if (backToTopBtn) backToTopBtn.classList.add('hidden');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNav');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleMobileSubmenu(btn) {
+            const subMenu = btn.nextElementSibling;
+            const icon = btn.querySelector('.material-symbols-outlined');
+            subMenu.classList.toggle('hidden');
+            icon.style.transform = subMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+    </script>
+</body>
+</html>
