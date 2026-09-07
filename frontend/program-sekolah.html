@@ -60,6 +60,7 @@
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
@@ -79,62 +80,80 @@
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
         }
+
         .animate-spin-slow {
             animation: spinSlow 30s linear infinite;
         }
 
         @keyframes floatSlow {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-8px) rotate(1deg);
             }
         }
+
         .animate-float {
             animation: floatSlow 5s ease-in-out infinite;
         }
 
         @keyframes floatSlow2 {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0px) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-12px) rotate(-2deg);
             }
         }
+
         .animate-float2 {
             animation: floatSlow2 6s ease-in-out infinite;
         }
 
         @keyframes pulseGlow {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: scale(1);
                 opacity: 0.3;
             }
+
             50% {
                 transform: scale(1.05);
                 opacity: 0.6;
             }
         }
+
         .animate-glow {
             animation: pulseGlow 6s ease-in-out infinite;
         }
 
         @keyframes twinkle {
-            0%, 100% {
+
+            0%,
+            100% {
                 opacity: 0.2;
                 transform: scale(0.8) rotate(0deg);
             }
+
             50% {
                 opacity: 0.6;
                 transform: scale(1.2) rotate(180deg);
             }
         }
+
         .animate-twinkle {
             animation: twinkle 4s ease-in-out infinite;
         }
@@ -156,6 +175,7 @@
         .program-card {
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .program-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 20px 35px -12px rgba(30, 101, 181, 0.15);
@@ -165,16 +185,19 @@
         .shape-diamond {
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
+
         .shape-star {
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
+
         .shape-hexagon {
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
         }
     </style>
 </head>
 
-<body class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
+<body
+    class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
 
     <!-- ============================================================ -->
     <!-- HEADER NAVBAR -->
@@ -242,7 +265,7 @@
                         <div
                             class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
                             <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
-                                <a href="kalender-akademik.html"
+                                <a href="kalender.html"
                                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span>
                                     Kalender Akademik
@@ -356,7 +379,7 @@
                         class="material-symbols-outlined text-base transition-transform duration-200 rotate-180">expand_more</span>
                 </button>
                 <div class="pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
-                    <a href="kalender-akademik.html"
+                    <a href="kalender.html"
                         class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Kalender
                         Akademik</a>
                     <a href="ekstrakurikuler.html"
@@ -428,7 +451,8 @@
             </div>
             <div class="absolute top-40 left-8 w-8 h-8 shape-star bg-amber-500/15 animate-twinkle hidden sm:block">
             </div>
-            <div class="absolute bottom-32 right-20 w-12 h-12 shape-diamond bg-amber-400/10 animate-float2 hidden sm:block">
+            <div
+                class="absolute bottom-32 right-20 w-12 h-12 shape-diamond bg-amber-400/10 animate-float2 hidden sm:block">
             </div>
             <div class="absolute top-1/3 left-1/4 w-6 h-6 shape-hexagon bg-orange-400/20 animate-pulse hidden lg:block">
             </div>
@@ -572,10 +596,10 @@
         <section class="py-16 sm:py-24 bg-white relative overflow-hidden" id="daftar-program">
 
             <!-- Blur Orange Decorations -->
-            <div
-                class="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none">
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none">
             </div>
-            <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-orange-300/10 rounded-full blur-3xl pointer-events-none">
+            <div
+                class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-orange-300/10 rounded-full blur-3xl pointer-events-none">
             </div>
 
             <div class="absolute top-20 left-10 w-12 h-12 shape-hexagon bg-amber-400/15 animate-float2 hidden sm:block">

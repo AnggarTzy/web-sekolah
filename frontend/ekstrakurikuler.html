@@ -60,6 +60,7 @@
             0% {
                 transform: translateX(0);
             }
+
             100% {
                 transform: translateX(-50%);
             }
@@ -79,66 +80,80 @@
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
         }
+
         .animate-spin-slow {
             animation: spinSlow 30s linear infinite;
         }
 
         @keyframes floatSlow {
+
             0%,
             100% {
                 transform: translateY(0px) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-8px) rotate(1deg);
             }
         }
+
         .animate-float {
             animation: floatSlow 5s ease-in-out infinite;
         }
 
         @keyframes floatSlow2 {
+
             0%,
             100% {
                 transform: translateY(0px) rotate(0deg);
             }
+
             50% {
                 transform: translateY(-12px) rotate(-2deg);
             }
         }
+
         .animate-float2 {
             animation: floatSlow2 6s ease-in-out infinite;
         }
 
         @keyframes pulseGlow {
+
             0%,
             100% {
                 transform: scale(1);
                 opacity: 0.3;
             }
+
             50% {
                 transform: scale(1.05);
                 opacity: 0.6;
             }
         }
+
         .animate-glow {
             animation: pulseGlow 6s ease-in-out infinite;
         }
 
         @keyframes twinkle {
+
             0%,
             100% {
                 opacity: 0.2;
                 transform: scale(0.8) rotate(0deg);
             }
+
             50% {
                 opacity: 0.6;
                 transform: scale(1.2) rotate(180deg);
             }
         }
+
         .animate-twinkle {
             animation: twinkle 4s ease-in-out infinite;
         }
@@ -146,6 +161,7 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+
         .no-scrollbar {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -562,19 +578,23 @@
         .shape-diamond {
             clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
         }
+
         .shape-star {
             clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
         }
+
         .shape-hexagon {
             clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
         }
+
         .shape-cross {
             clip-path: polygon(20% 0%, 40% 0%, 40% 20%, 60% 20%, 60% 0%, 80% 0%, 80% 20%, 100% 20%, 100% 40%, 80% 40%, 80% 60%, 100% 60%, 100% 80%, 80% 80%, 80% 100%, 60% 100%, 60% 80%, 40% 80%, 40% 100%, 20% 100%, 20% 80%, 0% 80%, 0% 60%, 20% 60%, 20% 40%, 0% 40%, 0% 20%, 20% 20%);
         }
     </style>
 </head>
 
-<body class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
+<body
+    class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
 
     <!-- ============================================================ -->
     <!-- HEADER NAVBAR -->
@@ -603,9 +623,10 @@
                     <a href="index.html"
                         class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 transition-all">Beranda</a>
 
+                    <!-- TENTANG KAMI - TIDAK AKTIF -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light border border-mho-blue/20 flex items-center gap-1 transition-all">
+                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
                             Tentang Kami
                             <span
                                 class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
@@ -632,9 +653,10 @@
                         </div>
                     </div>
 
+                    <!-- INFORMASI - AKTIF (menyala biru) -->
                     <div class="relative group">
                         <button
-                            class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
+                            class="px-4 py-2 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light border border-mho-blue/20 flex items-center gap-1 transition-all">
                             Informasi
                             <span
                                 class="material-symbols-outlined text-base transition-transform duration-200 group-hover:rotate-180">expand_more</span>
@@ -642,7 +664,7 @@
                         <div
                             class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
                             <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
-                                <a href="#"
+                                <a href="kalender.html"
                                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span>
                                     Kalender Akademik
@@ -661,7 +683,7 @@
                         </div>
                     </div>
 
-                    <!-- MENU PUBLIKASI - HANYA BERITA & GALERI -->
+                    <!-- PUBLIKASI - TIDAK AKTIF -->
                     <div class="relative group">
                         <button
                             class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
@@ -686,6 +708,7 @@
                         </div>
                     </div>
 
+                    <!-- RUANG ASPIRASI - TIDAK AKTIF -->
                     <div class="relative group">
                         <button
                             class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
@@ -726,6 +749,7 @@
             </div>
         </div>
 
+        <!-- MOBILE NAVIGATION -->
         <div id="mobileNav"
             class="hidden lg:hidden bg-white border-b border-slate-200 px-4 sm:px-6 py-6 space-y-3 max-h-[80vh] overflow-y-auto shadow-2xl">
             <a href="index.html"
@@ -733,12 +757,12 @@
 
             <div class="space-y-1">
                 <button onclick="toggleMobileSubmenu(this)"
-                    class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">
+                    class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
                     <span>Tentang Kami</span>
                     <span
-                        class="material-symbols-outlined text-base transition-transform duration-200 rotate-180">expand_more</span>
+                        class="material-symbols-outlined text-base transition-transform duration-200">expand_more</span>
                 </button>
-                <div class="pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
                     <a href="profile.html"
                         class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Profil
                         Sekolah</a>
@@ -751,15 +775,16 @@
                 </div>
             </div>
 
+            <!-- INFORMASI MOBILE - AKTIF -->
             <div class="space-y-1">
                 <button onclick="toggleMobileSubmenu(this)"
-                    class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
+                    class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">
                     <span>Informasi</span>
                     <span
-                        class="material-symbols-outlined text-base transition-transform duration-200">expand_more</span>
+                        class="material-symbols-outlined text-base transition-transform duration-200 rotate-180">expand_more</span>
                 </button>
-                <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
-                    <a href="#"
+                <div class="pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
+                    <a href="kalender.html"
                         class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Kalender
                         Akademik</a>
                     <a href="ekstrakurikuler.html"
@@ -770,7 +795,7 @@
                 </div>
             </div>
 
-            <!-- PUBLIKASI MOBILE - HANYA BERITA & GALERI -->
+            <!-- PUBLIKASI MOBILE - TIDAK AKTIF -->
             <div class="space-y-1">
                 <button onclick="toggleMobileSubmenu(this)"
                     class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
@@ -788,6 +813,7 @@
                 </div>
             </div>
 
+            <!-- RUANG ASPIRASI MOBILE - TIDAK AKTIF -->
             <div class="space-y-1">
                 <button onclick="toggleMobileSubmenu(this)"
                     class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
@@ -797,7 +823,8 @@
                 </button>
                 <div class="hidden pl-4 space-y-1 border-l-2 border-mho-blue/20 ml-4 my-1">
                     <a href="kritik-saran.html"
-                        class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Kritik & Saran</a>
+                        class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Kritik
+                        & Saran</a>
                     <a href="survei-kepuasan.html"
                         class="block px-3 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-mho-blue">Survei
                         Kepuasan</a>
@@ -846,10 +873,16 @@
                 </svg>
             </div>
 
-            <div class="absolute top-20 right-10 w-16 h-16 bg-amber-400/20 rounded-full animate-float hidden sm:block"></div>
-            <div class="absolute top-40 left-8 w-8 h-8 shape-star bg-amber-500/15 animate-twinkle hidden sm:block"></div>
-            <div class="absolute bottom-32 right-20 w-12 h-12 shape-diamond bg-amber-400/10 animate-float2 hidden sm:block"></div>
-            <div class="absolute top-1/3 right-1/4 w-6 h-6 shape-hexagon bg-orange-400/20 animate-pulse hidden lg:block"></div>
+            <div class="absolute top-20 right-10 w-16 h-16 bg-amber-400/20 rounded-full animate-float hidden sm:block">
+            </div>
+            <div class="absolute top-40 left-8 w-8 h-8 shape-star bg-amber-500/15 animate-twinkle hidden sm:block">
+            </div>
+            <div
+                class="absolute bottom-32 right-20 w-12 h-12 shape-diamond bg-amber-400/10 animate-float2 hidden sm:block">
+            </div>
+            <div
+                class="absolute top-1/3 right-1/4 w-6 h-6 shape-hexagon bg-orange-400/20 animate-pulse hidden lg:block">
+            </div>
 
             <div
                 class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-20">
@@ -869,7 +902,8 @@
                         <div
                             class="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-mho-green-light border border-mho-green/20 shadow-xs">
                             <span class="w-2 h-2 rounded-full bg-mho-green animate-pulse"></span>
-                            <span class="text-[11px] sm:text-xs font-bold text-mho-green uppercase tracking-wider">Talent
+                            <span
+                                class="text-[11px] sm:text-xs font-bold text-mho-green uppercase tracking-wider">Talent
                                 Incubation & Development Hub</span>
                         </div>
 
@@ -917,7 +951,8 @@
                                 <div>
                                     <p class="font-headline font-bold text-[11px] sm:text-xs text-slate-900">20+ Ekskul
                                         Unggulan</p>
-                                    <p class="text-[9px] sm:text-[10px] text-slate-600 font-medium">Berstandar Global</p>
+                                    <p class="text-[9px] sm:text-[10px] text-slate-600 font-medium">Berstandar Global
+                                    </p>
                                 </div>
                             </div>
 
@@ -951,7 +986,8 @@
                     <div
                         class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white">
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">verified</span> 20+ Ekstrakurikuler
+                                class="material-symbols-outlined text-sm sm:text-base">verified</span> 20+
+                            Ekstrakurikuler
                             Unggulan</span>
                         <span class="text-white/40">•</span>
                         <span class="flex items-center gap-2"><span
@@ -970,7 +1006,8 @@
                     <div class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white"
                         aria-hidden="true">
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">verified</span> 20+ Ekstrakurikuler
+                                class="material-symbols-outlined text-sm sm:text-base">verified</span> 20+
+                            Ekstrakurikuler
                             Unggulan</span>
                         <span class="text-white/40">•</span>
                         <span class="flex items-center gap-2"><span
@@ -993,20 +1030,28 @@
         <!-- ============================================================ -->
         <!-- BENTO GRID - KATEGORI UTAMA -->
         <!-- ============================================================ -->
-        <section class="py-16 sm:py-24 bg-slate-50/50 bg-gold-pattern border-t border-slate-100 relative overflow-hidden"
+        <section
+            class="py-16 sm:py-24 bg-slate-50/50 bg-gold-pattern border-t border-slate-100 relative overflow-hidden"
             id="katalog-ekskul">
 
-            <div class="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-orange-300/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div
+                class="absolute bottom-0 left-0 w-1/2 h-1/2 bg-orange-300/10 rounded-full blur-3xl pointer-events-none">
+            </div>
 
-            <div class="absolute top-20 left-10 w-12 h-12 shape-hexagon bg-amber-400/15 animate-float2 hidden sm:block"></div>
-            <div class="absolute bottom-20 right-10 w-8 h-8 shape-star bg-amber-500/10 animate-twinkle hidden sm:block"></div>
-            <div class="absolute top-1/3 right-20 w-6 h-6 shape-diamond bg-amber-400/20 animate-float hidden sm:block"></div>
+            <div class="absolute top-20 left-10 w-12 h-12 shape-hexagon bg-amber-400/15 animate-float2 hidden sm:block">
+            </div>
+            <div class="absolute bottom-20 right-10 w-8 h-8 shape-star bg-amber-500/10 animate-twinkle hidden sm:block">
+            </div>
+            <div class="absolute top-1/3 right-20 w-6 h-6 shape-diamond bg-amber-400/20 animate-float hidden sm:block">
+            </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
                 <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
-                    <div class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green mb-2">
+                    <div
+                        class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green mb-2">
                         <span class="w-2 h-2 rounded-full bg-mho-green"></span>
                         <span>Pusat Klaster Talenta</span>
                         <span class="w-2 h-2 rounded-full bg-mho-green"></span>
@@ -1102,12 +1147,18 @@
         <!-- ============================================================ -->
         <section class="py-16 sm:py-24 bg-white relative overflow-hidden" id="direktori-ekskul">
 
-            <div class="absolute top-0 right-0 w-64 h-64 bg-amber-400/8 rounded-full blur-3xl pointer-events-none"></div>
-            <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-300/8 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-amber-400/8 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-300/8 rounded-full blur-3xl pointer-events-none">
+            </div>
 
-            <div class="absolute bottom-10 left-10 w-12 h-12 shape-star bg-amber-500/10 animate-twinkle hidden sm:block"></div>
-            <div class="absolute top-1/4 right-12 w-8 h-8 shape-diamond bg-amber-400/15 animate-float hidden sm:block"></div>
-            <div class="absolute top-20 left-1/3 w-6 h-6 shape-hexagon bg-amber-400/20 animate-float2 hidden sm:block"></div>
+            <div
+                class="absolute bottom-10 left-10 w-12 h-12 shape-star bg-amber-500/10 animate-twinkle hidden sm:block">
+            </div>
+            <div class="absolute top-1/4 right-12 w-8 h-8 shape-diamond bg-amber-400/15 animate-float hidden sm:block">
+            </div>
+            <div class="absolute top-20 left-1/3 w-6 h-6 shape-hexagon bg-amber-400/20 animate-float2 hidden sm:block">
+            </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
@@ -1115,7 +1166,8 @@
                     <div class="text-center sm:text-left space-y-1">
                         <div class="flex items-center justify-center sm:justify-start gap-2">
                             <span class="w-8 h-0.5 bg-mho-green rounded-full"></span>
-                            <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-mho-green">Katalog
+                            <span
+                                class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-mho-green">Katalog
                                 Ekstrakurikuler</span>
                         </div>
                         <h2 class="font-headline font-extrabold text-2xl sm:text-4xl text-slate-900 tracking-tight">
@@ -1398,7 +1450,8 @@
                 </div>
 
                 <div class="lg:col-span-3 space-y-3 sm:space-y-4">
-                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Peta Lokasi</h4>
+                    <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Peta Lokasi
+                    </h4>
                     <div class="w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-white/10 shadow-sm">
                         <iframe title="Lokasi SMP Muhammadiyah 6 Krian"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.883713835697!2d112.58000000000001!3d-7.400000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDAuMCJTIDExMsKwMzQnODAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
@@ -1492,7 +1545,7 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const defaultBtn = document.querySelector('.filter-btn[onclick*="all"]');
             if (defaultBtn) {
                 filterCategory('all', defaultBtn);
