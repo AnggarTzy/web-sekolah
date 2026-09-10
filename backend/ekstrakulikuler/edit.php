@@ -9,22 +9,22 @@ if (!isset($_SESSION['login'])) {
 include '../config/koneksi.php';
 
 $id = $_GET['id'] ?? 0;
-$result = mysqli_query($conn, "SELECT * FROM prestasi WHERE id = '$id'");
-$prestasi = mysqli_fetch_assoc($result);
+$result = mysqli_query($conn, "SELECT * FROM ekstrakurikuler WHERE id = '$id'");
+$ekskul = mysqli_fetch_assoc($result);
 
-if (!$prestasi) {
+if (!$ekskul) {
     header("Location: index.php");
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
+    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $tingkat = mysqli_real_escape_string($conn, $_POST['tingkat']);
-    $tahun = mysqli_real_escape_string($conn, $_POST['tahun']);
+    $pembina = mysqli_real_escape_string($conn, $_POST['pembina']);
+    $jadwal = mysqli_real_escape_string($conn, $_POST['jadwal']);
     $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
 
-    $gambar_lama = $prestasi['gambar'];
+    $gambar_lama = $ekskul['gambar'];
     $gambar = $gambar_lama;
 
     if (!empty($_FILES['gambar']['name'])) {
@@ -37,9 +37,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $query = mysqli_query($conn, "UPDATE prestasi SET 
-                                  judul = '$judul', kategori = '$kategori', tingkat = '$tingkat', 
-                                  tahun = '$tahun', deskripsi = '$deskripsi', gambar = '$gambar' 
+    $query = mysqli_query($conn, "UPDATE ekstrakurikuler SET 
+                                  nama = '$nama', kategori = '$kategori', pembina = '$pembina', 
+                                  jadwal = '$jadwal', deskripsi = '$deskripsi', gambar = '$gambar' 
                                   WHERE id = '$id'");
 
     if ($query) {
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Prestasi | Admin SMP Muhammadiyah 6 Krian</title>
+    <title>Edit Ekstrakurikuler | Admin SMP Muhammadiyah 6 Krian</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,12 +112,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="px-6 py-5 border-b border-slate-100">
                 <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 bg-yellow-100 text-primary rounded-xl flex items-center justify-center">
+                    <div class="w-11 h-11 bg-orange-100 text-primary rounded-xl flex items-center justify-center">
                         <span class="material-icons">edit</span>
                     </div>
                     <div>
-                        <h1 class="font-headline font-extrabold text-2xl text-primary">Edit Prestasi</h1>
-                        <p class="text-sm text-slate-500">Perbarui informasi prestasi.</p>
+                        <h1 class="font-headline font-extrabold text-2xl text-primary">Edit Ekstrakurikuler</h1>
+                        <p class="text-sm text-slate-500">Perbarui informasi ekstrakurikuler.</p>
                     </div>
                 </div>
             </div>
@@ -135,51 +135,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <form method="POST" enctype="multipart/form-data" class="space-y-6">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Prestasi</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Ekstrakurikuler</label>
                         <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">title</span>
-                            <input type="text" name="judul" value="<?= htmlspecialchars($prestasi['judul']) ?>" required class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori</label>
-                            <select name="kategori" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                                <option value="akademik" <?= $prestasi['kategori'] == 'akademik' ? 'selected' : '' ?>>Akademik</option>
-                                <option value="olahraga" <?= $prestasi['kategori'] == 'olahraga' ? 'selected' : '' ?>>Olahraga</option>
-                                <option value="seni" <?= $prestasi['kategori'] == 'seni' ? 'selected' : '' ?>>Seni</option>
-                                <option value="teknologi" <?= $prestasi['kategori'] == 'teknologi' ? 'selected' : '' ?>>Teknologi</option>
-                                <option value="umum" <?= $prestasi['kategori'] == 'umum' ? 'selected' : '' ?>>Umum</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Tingkat</label>
-                            <select name="tingkat" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                                <option value="sekolah" <?= $prestasi['tingkat'] == 'sekolah' ? 'selected' : '' ?>>Sekolah</option>
-                                <option value="kecamatan" <?= $prestasi['tingkat'] == 'kecamatan' ? 'selected' : '' ?>>Kecamatan</option>
-                                <option value="kabupaten" <?= $prestasi['tingkat'] == 'kabupaten' ? 'selected' : '' ?>>Kabupaten</option>
-                                <option value="provinsi" <?= $prestasi['tingkat'] == 'provinsi' ? 'selected' : '' ?>>Provinsi</option>
-                                <option value="nasional" <?= $prestasi['tingkat'] == 'nasional' ? 'selected' : '' ?>>Nasional</option>
-                                <option value="internasional" <?= $prestasi['tingkat'] == 'internasional' ? 'selected' : '' ?>>Internasional</option>
-                            </select>
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">sports_kabaddi</span>
+                            <input type="text" name="nama" value="<?= htmlspecialchars($ekskul['nama']) ?>" required class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Tahun</label>
-                        <input type="number" name="tahun" min="2000" max="2100" value="<?= $prestasi['tahun'] ?>" required class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori</label>
+                        <select name="kategori" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                            <option value="teknologi" <?= $ekskul['kategori'] == 'teknologi' ? 'selected' : '' ?>>Teknologi</option>
+                            <option value="olahraga" <?= $ekskul['kategori'] == 'olahraga' ? 'selected' : '' ?>>Olahraga</option>
+                            <option value="seni" <?= $ekskul['kategori'] == 'seni' ? 'selected' : '' ?>>Seni</option>
+                            <option value="religi" <?= $ekskul['kategori'] == 'religi' ? 'selected' : '' ?>>Religi</option>
+                            <option value="umum" <?= $ekskul['kategori'] == 'umum' ? 'selected' : '' ?>>Umum</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Pembina</label>
+                        <div class="relative">
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
+                            <input type="text" name="pembina" value="<?= htmlspecialchars($ekskul['pembina']) ?>" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Jadwal</label>
+                        <div class="relative">
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">schedule</span>
+                            <input type="text" name="jadwal" value="<?= htmlspecialchars($ekskul['jadwal']) ?>" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                        </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
-                        <textarea name="deskripsi" rows="5" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y"><?= htmlspecialchars($prestasi['deskripsi']) ?></textarea>
+                        <textarea name="deskripsi" rows="5" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y"><?= htmlspecialchars($ekskul['deskripsi']) ?></textarea>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Gambar Saat Ini</label>
-                        <?php if ($prestasi['gambar']) : ?>
-                            <div class="mb-3"><img src="../../uploads/<?= $prestasi['gambar'] ?>" class="w-48 h-32 object-cover rounded-xl border border-slate-200"></div>
+                        <?php if ($ekskul['gambar']) : ?>
+                            <div class="mb-3"><img src="../../uploads/<?= $ekskul['gambar'] ?>" class="w-48 h-32 object-cover rounded-xl border border-slate-200"></div>
                         <?php else : ?>
                             <p class="text-sm text-slate-400">Tidak ada gambar</p>
                         <?php endif; ?>

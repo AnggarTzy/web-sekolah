@@ -8,45 +8,31 @@ if (!isset($_SESSION['login'])) {
 
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$result = mysqli_query($conn, "SELECT * FROM prestasi WHERE id = '$id'");
-$prestasi = mysqli_fetch_assoc($result);
-
-if (!$prestasi) {
-    header("Location: index.php");
-    exit;
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
+    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $tingkat = mysqli_real_escape_string($conn, $_POST['tingkat']);
-    $tahun = mysqli_real_escape_string($conn, $_POST['tahun']);
+    $pembina = mysqli_real_escape_string($conn, $_POST['pembina']);
+    $jadwal = mysqli_real_escape_string($conn, $_POST['jadwal']);
     $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
 
-    $gambar_lama = $prestasi['gambar'];
-    $gambar = $gambar_lama;
-
+    $gambar = null;
     if (!empty($_FILES['gambar']['name'])) {
         $target_dir = "../../uploads/";
         if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
         $file_name = time() . "_" . basename($_FILES['gambar']['name']);
         if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            if ($gambar_lama && file_exists($target_dir . $gambar_lama)) unlink($target_dir . $gambar_lama);
             $gambar = $file_name;
         }
     }
 
-    $query = mysqli_query($conn, "UPDATE prestasi SET 
-                                  judul = '$judul', kategori = '$kategori', tingkat = '$tingkat', 
-                                  tahun = '$tahun', deskripsi = '$deskripsi', gambar = '$gambar' 
-                                  WHERE id = '$id'");
+    $query = mysqli_query($conn, "INSERT INTO ekstrakurikuler (nama, kategori, pembina, jadwal, deskripsi, gambar) 
+                                  VALUES ('$nama', '$kategori', '$pembina', '$jadwal', '$deskripsi', '$gambar')");
 
     if ($query) {
         header("Location: index.php");
         exit;
     } else {
-        $error = "Gagal mengupdate: " . mysqli_error($conn);
+        $error = "Gagal menyimpan: " . mysqli_error($conn);
     }
 }
 ?>
@@ -56,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Prestasi | Admin SMP Muhammadiyah 6 Krian</title>
+    <title>Tambah Ekstrakurikuler | Admin SMP Muhammadiyah 6 Krian</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,6 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
+    <!-- NAVBAR -->
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -108,16 +95,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </nav>
 
+    <!-- KONTEN -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="px-6 py-5 border-b border-slate-100">
                 <div class="flex items-center gap-3">
-                    <div class="w-11 h-11 bg-yellow-100 text-primary rounded-xl flex items-center justify-center">
-                        <span class="material-icons">edit</span>
+                    <div class="w-11 h-11 bg-orange-100 text-primary rounded-xl flex items-center justify-center">
+                        <span class="material-icons">add_circle</span>
                     </div>
                     <div>
-                        <h1 class="font-headline font-extrabold text-2xl text-primary">Edit Prestasi</h1>
-                        <p class="text-sm text-slate-500">Perbarui informasi prestasi.</p>
+                        <h1 class="font-headline font-extrabold text-2xl text-primary">Tambah Ekstrakurikuler</h1>
+                        <p class="text-sm text-slate-500">Lengkapi informasi ekstrakurikuler di bawah ini.</p>
                     </div>
                 </div>
             </div>
@@ -135,55 +123,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <form method="POST" enctype="multipart/form-data" class="space-y-6">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Judul Prestasi</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Nama Ekstrakurikuler</label>
                         <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">title</span>
-                            <input type="text" name="judul" value="<?= htmlspecialchars($prestasi['judul']) ?>" required class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori</label>
-                            <select name="kategori" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                                <option value="akademik" <?= $prestasi['kategori'] == 'akademik' ? 'selected' : '' ?>>Akademik</option>
-                                <option value="olahraga" <?= $prestasi['kategori'] == 'olahraga' ? 'selected' : '' ?>>Olahraga</option>
-                                <option value="seni" <?= $prestasi['kategori'] == 'seni' ? 'selected' : '' ?>>Seni</option>
-                                <option value="teknologi" <?= $prestasi['kategori'] == 'teknologi' ? 'selected' : '' ?>>Teknologi</option>
-                                <option value="umum" <?= $prestasi['kategori'] == 'umum' ? 'selected' : '' ?>>Umum</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Tingkat</label>
-                            <select name="tingkat" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                                <option value="sekolah" <?= $prestasi['tingkat'] == 'sekolah' ? 'selected' : '' ?>>Sekolah</option>
-                                <option value="kecamatan" <?= $prestasi['tingkat'] == 'kecamatan' ? 'selected' : '' ?>>Kecamatan</option>
-                                <option value="kabupaten" <?= $prestasi['tingkat'] == 'kabupaten' ? 'selected' : '' ?>>Kabupaten</option>
-                                <option value="provinsi" <?= $prestasi['tingkat'] == 'provinsi' ? 'selected' : '' ?>>Provinsi</option>
-                                <option value="nasional" <?= $prestasi['tingkat'] == 'nasional' ? 'selected' : '' ?>>Nasional</option>
-                                <option value="internasional" <?= $prestasi['tingkat'] == 'internasional' ? 'selected' : '' ?>>Internasional</option>
-                            </select>
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">sports_kabaddi</span>
+                            <input type="text" name="nama" required class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Contoh: Robotik & Coding">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Tahun</label>
-                        <input type="number" name="tahun" min="2000" max="2100" value="<?= $prestasi['tahun'] ?>" required class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Kategori</label>
+                        <select name="kategori" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                            <option value="teknologi">Teknologi</option>
+                            <option value="olahraga">Olahraga</option>
+                            <option value="seni">Seni</option>
+                            <option value="religi">Religi</option>
+                            <option value="umum">Umum</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Pembina</label>
+                        <div class="relative">
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">person</span>
+                            <input type="text" name="pembina" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Contoh: Ahmad Rifai, S.Kom">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Jadwal</label>
+                        <div class="relative">
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">schedule</span>
+                            <input type="text" name="jadwal" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Contoh: Rabu, 15:00 - 17:00">
+                        </div>
                     </div>
 
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
-                        <textarea name="deskripsi" rows="5" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y"><?= htmlspecialchars($prestasi['deskripsi']) ?></textarea>
+                        <textarea name="deskripsi" rows="5" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y" placeholder="Tulis deskripsi ekstrakurikuler..."></textarea>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Gambar Saat Ini</label>
-                        <?php if ($prestasi['gambar']) : ?>
-                            <div class="mb-3"><img src="../../uploads/<?= $prestasi['gambar'] ?>" class="w-48 h-32 object-cover rounded-xl border border-slate-200"></div>
-                        <?php else : ?>
-                            <p class="text-sm text-slate-400">Tidak ada gambar</p>
-                        <?php endif; ?>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2 mt-4">Ganti Gambar (jika ada)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Gambar</label>
                         <label for="gambar" class="block border-2 border-dashed border-slate-300 hover:border-primary rounded-2xl p-7 text-center cursor-pointer transition bg-slate-50 hover:bg-blue-50/40">
                             <span class="material-icons text-4xl text-primary">cloud_upload</span>
                             <p class="font-semibold text-slate-700 mt-2">Klik untuk memilih gambar</p>
@@ -196,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="flex items-center gap-4 pt-4">
                         <button type="submit" class="flex items-center justify-center gap-2 px-7 py-3.5 bg-primary hover:bg-blue-900 text-white rounded-xl font-semibold text-sm transition shadow-lg shadow-blue-900/20">
                             <span class="material-icons text-lg">save</span>
-                            Simpan Perubahan
+                            Simpan Ekstrakurikuler
                         </button>
                         <a href="index.php" class="flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition">
                             <span class="material-icons text-lg">close</span>
