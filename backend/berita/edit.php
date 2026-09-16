@@ -78,15 +78,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                         $gambar = $file_name;
                     }
-
                 } else {
                     $error = "Ukuran gambar terlalu besar. Maksimal 5MB.";
                 }
-
             } else {
                 $error = "Format gambar tidak diperbolehkan. Gunakan JPG, JPEG, PNG, atau WEBP.";
             }
-
         } else {
             $error = "Terjadi kesalahan saat mengupload gambar.";
         }
@@ -107,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ");
 
         if ($query) {
+            catat_aktivitas($conn, 'Berita', 'Mengedit', $judul);
             header("Location: index.php?status=updated");
             exit;
         } else {
@@ -154,448 +152,447 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body class="bg-slate-50 font-sans text-slate-700">
 
-<!-- NAVBAR -->
-<nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
+    <!-- NAVBAR -->
+    <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-16">
 
-            <!-- Logo -->
-            <div class="flex items-center gap-3">
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
 
-                <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center font-headline font-extrabold text-primary text-lg shadow">
-                    S
+                    <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center font-headline font-extrabold text-primary text-lg shadow">
+                        S
+                    </div>
+
+                    <div>
+                        <p class="font-headline font-bold text-lg leading-tight">
+                            Admin Panel
+                        </p>
+
+                        <p class="text-xs text-white/60">
+                            SMP Muhammadiyah 6 Krian
+                        </p>
+                    </div>
+
                 </div>
 
-                <div>
-                    <p class="font-headline font-bold text-lg leading-tight">
-                        Admin Panel
-                    </p>
+                <!-- Menu -->
+                <div class="flex items-center gap-2 sm:gap-3">
 
-                    <p class="text-xs text-white/60">
-                        SMP Muhammadiyah 6 Krian
-                    </p>
+                    <a href="index.php"
+                        class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-semibold transition">
+
+                        <span class="material-icons text-base">
+                            arrow_back
+                        </span>
+
+                        <span class="hidden sm:inline">
+                            Kembali
+                        </span>
+
+                    </a>
+
+                    <a href="../admin/logout.php"
+                        class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl text-sm font-semibold transition">
+
+                        <span class="material-icons text-base">
+                            logout
+                        </span>
+
+                        <span class="hidden sm:inline">
+                            Logout
+                        </span>
+
+                    </a>
+
                 </div>
-
-            </div>
-
-            <!-- Menu -->
-            <div class="flex items-center gap-2 sm:gap-3">
-
-                <a href="index.php"
-                   class="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-semibold transition">
-
-                    <span class="material-icons text-base">
-                        arrow_back
-                    </span>
-
-                    <span class="hidden sm:inline">
-                        Kembali
-                    </span>
-
-                </a>
-
-                <a href="../admin/logout.php"
-                   class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 rounded-xl text-sm font-semibold transition">
-
-                    <span class="material-icons text-base">
-                        logout
-                    </span>
-
-                    <span class="hidden sm:inline">
-                        Logout
-                    </span>
-
-                </a>
 
             </div>
 
         </div>
 
-    </div>
-
-</nav>
+    </nav>
 
 
-<!-- CONTENT -->
-<main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
+    <!-- CONTENT -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
 
-    <!-- Header -->
-    <div class="mb-7">
+        <!-- Header -->
+        <div class="mb-7">
 
-        <div class="flex items-center gap-3 mb-2">
+            <div class="flex items-center gap-3 mb-2">
 
-            <div class="w-11 h-11 bg-blue-100 text-primary rounded-xl flex items-center justify-center">
+                <div class="w-11 h-11 bg-blue-100 text-primary rounded-xl flex items-center justify-center">
+
+                    <span class="material-icons">
+                        edit
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h1 class="font-headline font-extrabold text-2xl sm:text-3xl text-primary">
+                        Edit Berita
+                    </h1>
+
+                    <p class="text-sm text-slate-500">
+                        Perbarui informasi berita yang sudah ada.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Error -->
+        <?php if (isset($error)) : ?>
+
+            <div class="mb-6 flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 px-5 py-4 rounded-2xl">
 
                 <span class="material-icons">
-                    edit
+                    error_outline
                 </span>
 
-            </div>
-
-            <div>
-
-                <h1 class="font-headline font-extrabold text-2xl sm:text-3xl text-primary">
-                    Edit Berita
-                </h1>
-
-                <p class="text-sm text-slate-500">
-                    Perbarui informasi berita yang sudah ada.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Error -->
-    <?php if (isset($error)) : ?>
-
-        <div class="mb-6 flex items-start gap-3 bg-red-50 border border-red-200 text-red-700 px-5 py-4 rounded-2xl">
-
-            <span class="material-icons">
-                error_outline
-            </span>
-
-            <div>
-                <p class="font-semibold">
-                    Terjadi Kesalahan
-                </p>
-
-                <p class="text-sm mt-1">
-                    <?= htmlspecialchars($error) ?>
-                </p>
-            </div>
-
-        </div>
-
-    <?php endif; ?>
-
-
-    <form method="POST"
-          enctype="multipart/form-data"
-          class="space-y-6">
-
-
-        <!-- INFORMASI UTAMA -->
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-
-            <div class="px-6 py-5 border-b border-slate-100">
-
-                <h2 class="font-headline font-bold text-lg text-slate-800">
-                    Informasi Berita
-                </h2>
-
-                <p class="text-sm text-slate-500 mt-1">
-                    Masukkan informasi utama dari berita.
-                </p>
-
-            </div>
-
-
-            <div class="p-6 space-y-6">
-
-                <!-- Judul -->
                 <div>
+                    <p class="font-semibold">
+                        Terjadi Kesalahan
+                    </p>
 
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">
-                        Judul Berita
-                    </label>
+                    <p class="text-sm mt-1">
+                        <?= htmlspecialchars($error) ?>
+                    </p>
+                </div>
 
-                    <input
-                        type="text"
-                        name="judul"
-                        value="<?= htmlspecialchars($berita['judul']) ?>"
-                        required
-                        class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
-                        placeholder="Masukkan judul berita">
+            </div>
+
+        <?php endif; ?>
+
+
+        <form method="POST"
+            enctype="multipart/form-data"
+            class="space-y-6">
+
+
+            <!-- INFORMASI UTAMA -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100">
+
+                    <h2 class="font-headline font-bold text-lg text-slate-800">
+                        Informasi Berita
+                    </h2>
+
+                    <p class="text-sm text-slate-500 mt-1">
+                        Masukkan informasi utama dari berita.
+                    </p>
 
                 </div>
 
 
-                <!-- Kategori + Status -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div class="p-6 space-y-6">
 
-                    <!-- Kategori -->
+                    <!-- Judul -->
                     <div>
 
                         <label class="block text-sm font-semibold text-slate-700 mb-2">
-                            Kategori
+                            Judul Berita
                         </label>
-
-                        <select
-                            name="kategori"
-                            class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-
-                            <option value="umum" <?= $berita['kategori'] == 'umum' ? 'selected' : '' ?>>
-                                Umum
-                            </option>
-
-                            <option value="akademik" <?= $berita['kategori'] == 'akademik' ? 'selected' : '' ?>>
-                                Akademik
-                            </option>
-
-                            <option value="kegiatan" <?= $berita['kategori'] == 'kegiatan' ? 'selected' : '' ?>>
-                                Kegiatan
-                            </option>
-
-                            <option value="prestasi" <?= $berita['kategori'] == 'prestasi' ? 'selected' : '' ?>>
-                                Prestasi
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- Status -->
-                    <div>
-
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">
-                            Status Berita
-                        </label>
-
-                        <select
-                            name="status"
-                            class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-
-                            <option value="publish" <?= $berita['status'] == 'publish' ? 'selected' : '' ?>>
-                                Publish
-                            </option>
-
-                            <option value="draft" <?= $berita['status'] == 'draft' ? 'selected' : '' ?>>
-                                Draft
-                            </option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <!-- Penulis -->
-                <div>
-
-                    <label class="block text-sm font-semibold text-slate-700 mb-2">
-                        Penulis
-                    </label>
-
-                    <div class="relative">
-
-                        <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
-                            person
-                        </span>
 
                         <input
                             type="text"
-                            name="penulis"
-                            value="<?= htmlspecialchars($berita['penulis']) ?>"
+                            name="judul"
+                            value="<?= htmlspecialchars($berita['judul']) ?>"
                             required
-                            class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+                            class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition"
+                            placeholder="Masukkan judul berita">
 
                     </div>
 
-                </div>
+
+                    <!-- Kategori + Status -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                        <!-- Kategori -->
+                        <div>
+
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                Kategori
+                            </label>
+
+                            <select
+                                name="kategori"
+                                class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+
+                                <option value="umum" <?= $berita['kategori'] == 'umum' ? 'selected' : '' ?>>
+                                    Umum
+                                </option>
+
+                                <option value="akademik" <?= $berita['kategori'] == 'akademik' ? 'selected' : '' ?>>
+                                    Akademik
+                                </option>
+
+                                <option value="kegiatan" <?= $berita['kategori'] == 'kegiatan' ? 'selected' : '' ?>>
+                                    Kegiatan
+                                </option>
+
+                                <option value="prestasi" <?= $berita['kategori'] == 'prestasi' ? 'selected' : '' ?>>
+                                    Prestasi
+                                </option>
+
+                            </select>
+
+                        </div>
 
 
-                <!-- Konten -->
-                <div>
+                        <!-- Status -->
+                        <div>
 
-                    <div class="flex items-center justify-between mb-2">
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">
+                                Status Berita
+                            </label>
 
-                        <label class="block text-sm font-semibold text-slate-700">
-                            Konten Berita
-                        </label>
+                            <select
+                                name="status"
+                                class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
 
-                        <span class="text-xs text-slate-400">
-                            Isi berita secara lengkap
-                        </span>
+                                <option value="publish" <?= $berita['status'] == 'publish' ? 'selected' : '' ?>>
+                                    Publish
+                                </option>
 
-                    </div>
+                                <option value="draft" <?= $berita['status'] == 'draft' ? 'selected' : '' ?>>
+                                    Draft
+                                </option>
 
-                    <textarea
-                        name="konten"
-                        rows="10"
-                        required
-                        class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y"
-                        placeholder="Tulis isi berita di sini..."><?= htmlspecialchars($berita['konten']) ?></textarea>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- GAMBAR -->
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-
-            <div class="px-6 py-5 border-b border-slate-100">
-
-                <h2 class="font-headline font-bold text-lg text-slate-800">
-                    Gambar Berita
-                </h2>
-
-                <p class="text-sm text-slate-500 mt-1">
-                    Gunakan gambar yang relevan dengan isi berita.
-                </p>
-
-            </div>
-
-
-            <div class="p-6">
-
-                <!-- Gambar lama -->
-                <?php if (!empty($berita['gambar'])) : ?>
-
-                    <div class="mb-6">
-
-                        <p class="text-sm font-semibold text-slate-700 mb-3">
-                            Gambar Saat Ini
-                        </p>
-
-                        <div class="relative group max-w-md">
-
-                            <img
-                                src="../../uploads/<?= htmlspecialchars($berita['gambar']) ?>"
-                                alt="Gambar berita"
-                                class="w-full h-56 object-cover rounded-2xl border border-slate-200 shadow-sm">
-
-                            <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent rounded-b-2xl p-4">
-
-                                <p class="text-white text-xs truncate">
-                                    <?= htmlspecialchars($berita['gambar']) ?>
-                                </p>
-
-                            </div>
+                            </select>
 
                         </div>
 
                     </div>
 
-                <?php else : ?>
 
-                    <div class="mb-6 p-6 bg-slate-50 rounded-2xl border border-dashed border-slate-300 text-center">
+                    <!-- Penulis -->
+                    <div>
 
-                        <span class="material-icons text-4xl text-slate-300">
-                            image
-                        </span>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">
+                            Penulis
+                        </label>
 
-                        <p class="text-sm text-slate-500 mt-2">
-                            Berita ini belum memiliki gambar.
-                        </p>
+                        <div class="relative">
+
+                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                                person
+                            </span>
+
+                            <input
+                                type="text"
+                                name="penulis"
+                                value="<?= htmlspecialchars($berita['penulis']) ?>"
+                                required
+                                class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
+
+                        </div>
 
                     </div>
 
-                <?php endif; ?>
 
+                    <!-- Konten -->
+                    <div>
 
-                <!-- Upload baru -->
-                <div>
+                        <div class="flex items-center justify-between mb-2">
 
-                    <p class="text-sm font-semibold text-slate-700 mb-3">
-                        Ganti Gambar
-                    </p>
+                            <label class="block text-sm font-semibold text-slate-700">
+                                Konten Berita
+                            </label>
 
-                    <label
-                        for="gambar"
-                        class="block border-2 border-dashed border-slate-300 hover:border-primary rounded-2xl p-7 text-center cursor-pointer transition bg-slate-50 hover:bg-blue-50/40">
+                            <span class="text-xs text-slate-400">
+                                Isi berita secara lengkap
+                            </span>
 
-                        <span class="material-icons text-4xl text-primary">
-                            cloud_upload
-                        </span>
+                        </div>
 
-                        <p class="font-semibold text-slate-700 mt-2">
-                            Klik untuk memilih gambar
-                        </p>
+                        <textarea
+                            name="konten"
+                            rows="10"
+                            required
+                            class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y"
+                            placeholder="Tulis isi berita di sini..."><?= htmlspecialchars($berita['konten']) ?></textarea>
 
-                        <p class="text-xs text-slate-400 mt-1">
-                            JPG, JPEG, PNG atau WEBP • Maksimal 5MB
-                        </p>
-
-                        <p id="file-name" class="text-sm text-primary font-semibold mt-3 hidden"></p>
-
-                        <input
-                            id="gambar"
-                            type="file"
-                            name="gambar"
-                            accept="image/jpeg,image/png,image/jpg,image/webp"
-                            class="hidden">
-
-                    </label>
+                    </div>
 
                 </div>
 
             </div>
 
-        </div>
+
+            <!-- GAMBAR -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100">
+
+                    <h2 class="font-headline font-bold text-lg text-slate-800">
+                        Gambar Berita
+                    </h2>
+
+                    <p class="text-sm text-slate-500 mt-1">
+                        Gunakan gambar yang relevan dengan isi berita.
+                    </p>
+
+                </div>
 
 
-        <!-- BUTTON -->
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+                <div class="p-6">
 
-            <div class="flex flex-col-reverse sm:flex-row sm:justify-between gap-3">
+                    <!-- Gambar lama -->
+                    <?php if (!empty($berita['gambar'])) : ?>
 
-                <a
-                    href="index.php"
-                    class="flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition">
+                        <div class="mb-6">
 
-                    <span class="material-icons text-lg">
-                        close
-                    </span>
+                            <p class="text-sm font-semibold text-slate-700 mb-3">
+                                Gambar Saat Ini
+                            </p>
 
-                    Batal
+                            <div class="relative group max-w-md">
 
-                </a>
+                                <img
+                                    src="../../uploads/<?= htmlspecialchars($berita['gambar']) ?>"
+                                    alt="Gambar berita"
+                                    class="w-full h-56 object-cover rounded-2xl border border-slate-200 shadow-sm">
+
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent rounded-b-2xl p-4">
+
+                                    <p class="text-white text-xs truncate">
+                                        <?= htmlspecialchars($berita['gambar']) ?>
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <?php else : ?>
+
+                        <div class="mb-6 p-6 bg-slate-50 rounded-2xl border border-dashed border-slate-300 text-center">
+
+                            <span class="material-icons text-4xl text-slate-300">
+                                image
+                            </span>
+
+                            <p class="text-sm text-slate-500 mt-2">
+                                Berita ini belum memiliki gambar.
+                            </p>
+
+                        </div>
+
+                    <?php endif; ?>
 
 
-                <button
-                    type="submit"
-                    class="flex items-center justify-center gap-2 px-7 py-3.5 bg-primary hover:bg-blue-900 text-white rounded-xl font-semibold text-sm transition shadow-lg shadow-blue-900/20">
+                    <!-- Upload baru -->
+                    <div>
 
-                    <span class="material-icons text-lg">
-                        save
-                    </span>
+                        <p class="text-sm font-semibold text-slate-700 mb-3">
+                            Ganti Gambar
+                        </p>
 
-                    Simpan Perubahan
+                        <label
+                            for="gambar"
+                            class="block border-2 border-dashed border-slate-300 hover:border-primary rounded-2xl p-7 text-center cursor-pointer transition bg-slate-50 hover:bg-blue-50/40">
 
-                </button>
+                            <span class="material-icons text-4xl text-primary">
+                                cloud_upload
+                            </span>
+
+                            <p class="font-semibold text-slate-700 mt-2">
+                                Klik untuk memilih gambar
+                            </p>
+
+                            <p class="text-xs text-slate-400 mt-1">
+                                JPG, JPEG, PNG atau WEBP • Maksimal 5MB
+                            </p>
+
+                            <p id="file-name" class="text-sm text-primary font-semibold mt-3 hidden"></p>
+
+                            <input
+                                id="gambar"
+                                type="file"
+                                name="gambar"
+                                accept="image/jpeg,image/png,image/jpg,image/webp"
+                                class="hidden">
+
+                        </label>
+
+                    </div>
+
+                </div>
 
             </div>
 
-        </div>
 
-    </form>
+            <!-- BUTTON -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
 
-</main>
+                <div class="flex flex-col-reverse sm:flex-row sm:justify-between gap-3">
+
+                    <a
+                        href="index.php"
+                        class="flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl font-semibold text-sm transition">
+
+                        <span class="material-icons text-lg">
+                            close
+                        </span>
+
+                        Batal
+
+                    </a>
 
 
-<script>
+                    <button
+                        type="submit"
+                        class="flex items-center justify-center gap-2 px-7 py-3.5 bg-primary hover:bg-blue-900 text-white rounded-xl font-semibold text-sm transition shadow-lg shadow-blue-900/20">
 
-    // Menampilkan nama file ketika memilih gambar
-    const gambarInput = document.getElementById('gambar');
-    const fileName = document.getElementById('file-name');
+                        <span class="material-icons text-lg">
+                            save
+                        </span>
 
-    gambarInput.addEventListener('change', function () {
+                        Simpan Perubahan
 
-        if (this.files.length > 0) {
+                    </button>
 
-            fileName.textContent = "File dipilih: " + this.files[0].name;
-            fileName.classList.remove('hidden');
+                </div>
 
-        } else {
+            </div>
 
-            fileName.classList.add('hidden');
+        </form>
 
-        }
+    </main>
 
-    });
 
-</script>
+    <script>
+        // Menampilkan nama file ketika memilih gambar
+        const gambarInput = document.getElementById('gambar');
+        const fileName = document.getElementById('file-name');
+
+        gambarInput.addEventListener('change', function() {
+
+            if (this.files.length > 0) {
+
+                fileName.textContent = "File dipilih: " + this.files[0].name;
+                fileName.classList.remove('hidden');
+
+            } else {
+
+                fileName.classList.add('hidden');
+
+            }
+
+        });
+    </script>
 
 </body>
+
 </html>

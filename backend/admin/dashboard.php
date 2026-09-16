@@ -91,6 +91,19 @@ $query_berita = mysqli_query(
      LIMIT 2"
 );
 
+
+/* =====================================================
+   RIWAYAT TERBARU
+===================================================== */
+
+$query_aktivitas = mysqli_query(
+    $conn,
+    "SELECT id, modul, aksi, judul, waktu
+     FROM aktivitas
+     ORDER BY waktu DESC
+     LIMIT 8"
+);
+
 ?>
 
 
@@ -515,7 +528,7 @@ $query_berita = mysqli_query(
             ================================================== -->
 
             <div
-                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
 
 
                 <!-- HEADER BERITA -->
@@ -827,6 +840,161 @@ $query_berita = mysqli_query(
                         </tbody>
 
                     </table>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RIWAYAT TERBARU
+            ================================================== -->
+
+            <div
+                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+
+
+                <!-- HEADER -->
+
+                <div
+                    class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+
+                    <h2
+                        class="font-headline font-bold text-lg text-primary">
+                        Riwayat Terbaru
+                    </h2>
+
+                    <span class="text-xs text-gray-400">
+                        Aktivitas terakhir di sistem
+                    </span>
+
+                </div>
+
+
+
+                <!-- DAFTAR AKTIVITAS -->
+
+                <div class="divide-y divide-gray-100">
+
+                    <?php if ($query_aktivitas && mysqli_num_rows($query_aktivitas) > 0): ?>
+
+
+                        <?php while ($aktivitas = mysqli_fetch_assoc($query_aktivitas)): ?>
+
+
+                            <div class="flex items-center gap-4 px-6 py-4 hover:bg-gray-50 transition">
+
+
+                                <!-- ICON MODUL -->
+
+                                <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
+
+                                    <?php if ($aktivitas['modul'] === 'Berita'): ?>
+
+                                        <span class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+                                            <span class="material-icons">article</span>
+                                        </span>
+
+                                    <?php elseif ($aktivitas['modul'] === 'Prestasi'): ?>
+
+                                        <span class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
+                                            <span class="material-icons">emoji_events</span>
+                                        </span>
+
+                                    <?php elseif ($aktivitas['modul'] === 'Guru'): ?>
+
+                                        <span class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+                                            <span class="material-icons">groups</span>
+                                        </span>
+
+                                    <?php elseif ($aktivitas['modul'] === 'Fasilitas'): ?>
+
+                                        <span class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
+                                            <span class="material-icons">apartment</span>
+                                        </span>
+
+                                    <?php elseif ($aktivitas['modul'] === 'Ekstrakurikuler'): ?>
+
+                                        <span class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
+                                            <span class="material-icons">sports_kabaddi</span>
+                                        </span>
+
+                                    <?php else: ?>
+
+                                        <span class="w-10 h-10 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center">
+                                            <span class="material-icons">info</span>
+                                        </span>
+
+                                    <?php endif; ?>
+
+                                </div>
+
+
+
+                                <!-- INFO -->
+
+                                <div class="flex-1 min-w-0">
+
+                                    <p class="text-sm font-semibold text-slate-800 truncate">
+                                        <?= htmlspecialchars($aktivitas['judul']) ?>
+                                    </p>
+
+                                    <p class="text-xs text-slate-500 mt-0.5">
+
+                                        <span class="font-medium text-primary">
+                                            <?= htmlspecialchars($aktivitas['modul']) ?>
+                                        </span>
+
+                                        •
+
+                                        <?= htmlspecialchars($aktivitas['aksi']) ?>
+
+                                        •
+
+                                        <?= date('d M Y H:i', strtotime($aktivitas['waktu'])) ?>
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                        <?php endwhile; ?>
+
+
+                    <?php else: ?>
+
+
+                        <!-- BELUM ADA RIWAYAT -->
+
+                        <div class="px-6 py-10 text-center">
+
+                            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-3 mx-auto">
+
+                                <span
+                                    class="material-icons text-gray-400"
+                                    style="font-size: 28px;">
+                                    history
+                                </span>
+
+                            </div>
+
+
+                            <p class="text-gray-500 font-medium">
+                                Belum ada riwayat aktivitas
+                            </p>
+
+
+                            <p class="text-gray-400 text-xs mt-1">
+                                Tambahkan data baru, maka riwayat akan muncul di sini.
+                            </p>
+
+                        </div>
+
+
+                    <?php endif; ?>
 
                 </div>
 

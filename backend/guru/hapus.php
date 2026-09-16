@@ -20,10 +20,10 @@ if ($guru && $guru['foto'] && file_exists("../../uploads/" . $guru['foto'])) {
 $query = mysqli_query($conn, "DELETE FROM guru WHERE id = '$id'");
 
 if ($query) {
+    catat_aktivitas($conn, 'Guru', 'Menghapus', $guru['nama']);
     header("Location: index.php?status=success");
     exit;
 } else {
     header("Location: index.php?status=error");
     exit;
 }
-?>

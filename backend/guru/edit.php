@@ -42,6 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                   WHERE id = '$id'");
 
     if ($query) {
+        catat_aktivitas($conn, 'Guru', 'Mengedit', $nama);
         header("Location: index.php");
         exit;
     } else {
@@ -52,6 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,6 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </head>
+
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
@@ -200,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         const fotoInput = document.getElementById('foto');
         const fileName = document.getElementById('file-name');
-        fotoInput.addEventListener('change', function () {
+        fotoInput.addEventListener('change', function() {
             if (this.files.length > 0) {
                 fileName.textContent = "File dipilih: " + this.files[0].name;
                 fileName.classList.remove('hidden');
@@ -210,4 +213,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
+
 </html>
