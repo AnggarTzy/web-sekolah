@@ -366,7 +366,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         folder
                                     </span>
 
-                                    <?= htmlspecialchars(ucfirst($berita['kategori'])) ?>
+                                    <?= htmlspecialchars(ucfirst($berita['deskripsi'])) ?>
 
                                 </span>
 

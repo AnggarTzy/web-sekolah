@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $jabatan = mysqli_real_escape_string($conn, $_POST['jabatan']);
     $bidang_studi = mysqli_real_escape_string($conn, $_POST['bidang_studi']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
 
     $foto_lama = $guru['foto'];
     $foto = $foto_lama;
@@ -37,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $query = mysqli_query($conn, "UPDATE guru SET 
-                                  nama = '$nama', jabatan = '$jabatan', bidang_studi = '$bidang_studi', 
-                                  email = '$email', foto = '$foto' 
+                                  nama = '$nama', jabatan = '$jabatan', 
+                                  bidang_studi = '$bidang_studi', foto = '$foto' 
                                   WHERE id = '$id'");
 
     if ($query) {
@@ -53,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </head>
-
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
@@ -161,14 +158,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
-                        <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
-                            <input type="email" name="email" value="<?= htmlspecialchars($guru['email']) ?>" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                        </div>
-                    </div>
-
-                    <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Foto Saat Ini</label>
                         <?php if ($guru['foto']) : ?>
                             <div class="mb-3"><img src="../../uploads/<?= $guru['foto'] ?>" class="w-24 h-24 object-cover rounded-full border border-slate-200"></div>
@@ -213,5 +202,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
-
 </html>

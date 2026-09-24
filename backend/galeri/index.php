@@ -9,27 +9,29 @@ if (!isset($_SESSION['login'])) {
 include '../config/koneksi.php';
 
 $status = $_GET['status'] ?? '';
+
 if ($status === 'created') {
-    $notif = '<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-4">✅ Berhasil menambahkan berita.</div>';
+    $notif = '<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-4">✅ Berhasil menambahkan galeri.</div>';
 } elseif ($status === 'updated') {
-    $notif = '<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-4">✅ Berhasil memperbarui berita.</div>';
+    $notif = '<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-4">✅ Berhasil memperbarui galeri.</div>';
 } elseif ($status === 'deleted') {
-    $notif = '<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-4">✅ Berhasil menghapus berita.</div>';
+    $notif = '<div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-4">✅ Berhasil menghapus galeri.</div>';
 } elseif ($status === 'error') {
     $notif = '<div class="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-xl mb-4">❌ Gagal!</div>';
 } else {
     $notif = '';
 }
 
-$query = mysqli_query($conn, "SELECT * FROM berita ORDER BY tanggal_posting DESC");
+$query = mysqli_query($conn, "SELECT * FROM galeri ORDER BY tanggal DESC, id DESC");
 ?>
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kelola Berita | Admin SMP Muhammadiyah 6 Krian</title>
+    <title>Kelola Galeri | Admin SMP Muhammadiyah 6 Krian</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,9 +58,14 @@ $query = mysqli_query($conn, "SELECT * FROM berita ORDER BY tanggal_posting DESC
     </script>
 
     <style>
-        .material-icons { font-size: 20px; vertical-align: middle; margin-right: 4px; }
+        .material-icons {
+            font-size: 20px;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50 font-sans text-slate-700 antialiased">
 
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
@@ -91,17 +98,17 @@ $query = mysqli_query($conn, "SELECT * FROM berita ORDER BY tanggal_posting DESC
             <div>
                 <div class="flex items-center gap-3 mb-2">
                     <div class="w-11 h-11 bg-blue-100 text-primary rounded-xl flex items-center justify-center">
-                        <span class="material-icons">article</span>
+                        <span class="material-icons">photo_library</span>
                     </div>
                     <div>
-                        <h1 class="font-headline font-extrabold text-2xl sm:text-3xl text-primary">Kelola Berita</h1>
-                        <p class="text-sm text-slate-500">Manajemen berita dan pengumuman sekolah.</p>
+                        <h1 class="font-headline font-extrabold text-2xl sm:text-3xl text-primary">Kelola Galeri</h1>
+                        <p class="text-sm text-slate-500">Manajemen dokumentasi kegiatan sekolah.</p>
                     </div>
                 </div>
             </div>
             <a href="tambah.php" class="flex items-center gap-2 px-6 py-3 bg-primary text-white rounded-xl font-semibold text-sm hover:bg-opacity-90 transition shadow-lg">
                 <span class="material-icons text-lg">add</span>
-                Tambah Berita
+                Tambah Galeri
             </a>
         </div>
 
@@ -113,33 +120,57 @@ $query = mysqli_query($conn, "SELECT * FROM berita ORDER BY tanggal_posting DESC
                     <thead class="bg-slate-50">
                         <tr>
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">ID</th>
-                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Gambar</th>
-                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Judul</th>
-                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Deskripsi</th>
+                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Foto</th>
+                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Kegiatan</th>
+                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Tentang</th>
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">Tanggal</th>
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        <?php while ($row = mysqli_fetch_assoc($query)) : ?>
-                            <tr class="hover:bg-slate-50 transition">
-                                <td class="px-6 py-4"><?= $row['id'] ?></td>
-                                <td class="px-6 py-4">
-                                    <?php if ($row['gambar']) : ?>
-                                        <img src="../../uploads/<?= $row['gambar'] ?>" class="w-20 h-14 object-cover rounded-lg border border-slate-200" alt="Gambar">
-                                    <?php else : ?>
-                                        <span class="text-slate-400">-</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-slate-800 max-w-xs truncate"><?= htmlspecialchars($row['judul']) ?></td>
-                                <td class="px-6 py-4 text-slate-500 max-w-xs truncate"><?= htmlspecialchars($row['deskripsi'] ?? '-') ?></td>
-                                <td class="px-6 py-4 text-slate-500"><?= date('d M Y', strtotime($row['tanggal_posting'])) ?></td>
-                                <td class="px-6 py-4">
-                                    <a href="edit.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 font-semibold mr-3">Edit</a>
-                                    <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin mau hapus berita ini?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</a>
+                        <?php if (mysqli_num_rows($query) > 0) : ?>
+                            <?php while ($row = mysqli_fetch_assoc($query)) : ?>
+                                <tr class="hover:bg-slate-50 transition">
+                                    <td class="px-6 py-4"><?= $row['id'] ?></td>
+                                    <td class="px-6 py-4">
+                                        <?php if (!empty($row['gambar'])) : ?>
+                                            <img src="../../uploads/<?= htmlspecialchars($row['gambar']) ?>"
+                                                class="w-24 h-16 object-cover rounded-lg border border-slate-200"
+                                                alt="Foto galeri">
+                                        <?php else : ?>
+                                            <span class="text-slate-400">-</span>
+                                        <?php endif; ?>
+                                    </td>
+                                    <td class="px-6 py-4 font-medium text-slate-800 max-w-xs">
+                                        <?= htmlspecialchars($row['judul']) ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500 max-w-sm">
+                                        <?= htmlspecialchars($row['tentang'] ?? '-') ?>
+                                    </td>
+                                    <td class="px-6 py-4 text-slate-500">
+                                        <?= date('d M Y', strtotime($row['tanggal'])) ?>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <a href="edit.php?id=<?= $row['id'] ?>"
+                                            class="text-blue-600 hover:text-blue-800 font-semibold mr-3">
+                                            Edit
+                                        </a>
+                                        <a href="hapus.php?id=<?= $row['id'] ?>"
+                                            onclick="return confirm('Yakin mau hapus galeri ini?')"
+                                            class="text-red-600 hover:text-red-800 font-semibold">
+                                            Hapus
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        <?php else : ?>
+                            <tr>
+                                <td colspan="6" class="px-6 py-12 text-center">
+                                    <span class="material-icons text-5xl text-slate-300">photo_library</span>
+                                    <p class="mt-3 text-slate-500">Belum ada data galeri.</p>
                                 </td>
                             </tr>
-                        <?php endwhile; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>
@@ -148,4 +179,5 @@ $query = mysqli_query($conn, "SELECT * FROM berita ORDER BY tanggal_posting DESC
     </main>
 
 </body>
+
 </html>

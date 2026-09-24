@@ -80,12 +80,29 @@ if ($query_total_ekskul) {
 
 
 /* =====================================================
+   TOTAL GALERI
+===================================================== */
+
+$query_total_galeri = mysqli_query(
+    $conn,
+    "SELECT COUNT(*) AS total FROM galeri"
+);
+
+$total_galeri = 0;
+
+if ($query_total_galeri) {
+    $data_total = mysqli_fetch_assoc($query_total_galeri);
+    $total_galeri = $data_total['total'];
+}
+
+
+/* =====================================================
    BERITA TERBARU
 ===================================================== */
 
 $query_berita = mysqli_query(
     $conn,
-    "SELECT id, judul, kategori, status, gambar, tanggal_posting
+    "SELECT id, judul, deskripsi, status, gambar, tanggal_posting
      FROM berita
      ORDER BY tanggal_posting DESC
      LIMIT 2"
@@ -101,7 +118,7 @@ $query_aktivitas = mysqli_query(
     "SELECT id, modul, aksi, judul, waktu
      FROM aktivitas
      ORDER BY waktu DESC
-     LIMIT 8"
+     LIMIT 10"
 );
 
 ?>
@@ -127,7 +144,10 @@ $query_aktivitas = mysqli_query(
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap"
@@ -213,12 +233,16 @@ $query_aktivitas = mysqli_query(
 
                     <div
                         class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center font-headline font-bold text-primary text-lg">
+
                         S
+
                     </div>
 
                     <span
                         class="font-headline font-bold text-lg">
+
                         Admin Panel
+
                     </span>
 
                 </div>
@@ -245,7 +269,9 @@ $query_aktivitas = mysqli_query(
                     <a
                         href="logout.php"
                         class="px-4 py-2 bg-red-500 hover:bg-red-600 rounded-lg text-sm font-semibold transition">
+
                         Logout
+
                     </a>
 
                 </div>
@@ -364,6 +390,21 @@ $query_aktivitas = mysqli_query(
 
                 </a>
 
+
+                <!-- GALERI -->
+
+                <a
+                    href="../galeri/index.php"
+                    class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-primary font-semibold text-sm transition">
+
+                    <span class="material-icons">
+                        photo_library
+                    </span>
+
+                    Kelola Galeri
+
+                </a>
+
             </div>
 
         </aside>
@@ -385,11 +426,15 @@ $query_aktivitas = mysqli_query(
 
                 <h1
                     class="font-headline font-extrabold text-3xl text-primary">
+
                     Dashboard
+
                 </h1>
 
                 <p class="text-gray-500 mt-1">
+
                     Selamat datang kembali di panel administrasi.
+
                 </p>
 
             </div>
@@ -397,11 +442,11 @@ $query_aktivitas = mysqli_query(
 
 
             <!-- =================================================
-                 KARTU STATISTIK (BISA DIKLIK)
+                 KARTU STATISTIK
             ================================================== -->
 
             <div
-                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
 
 
                 <!-- TOTAL BERITA -->
@@ -427,10 +472,13 @@ $query_aktivitas = mysqli_query(
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
+
                         Total Berita
+
                     </p>
 
                 </a>
+
 
 
                 <!-- TOTAL PRESTASI -->
@@ -456,10 +504,13 @@ $query_aktivitas = mysqli_query(
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
+
                         Total Prestasi
+
                     </p>
 
                 </a>
+
 
 
                 <!-- TOTAL GURU -->
@@ -485,10 +536,13 @@ $query_aktivitas = mysqli_query(
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
+
                         Total Guru
+
                     </p>
 
                 </a>
+
 
 
                 <!-- TOTAL EKSTRAKURIKULER -->
@@ -514,7 +568,41 @@ $query_aktivitas = mysqli_query(
                     </p>
 
                     <p class="text-sm text-gray-500 mt-1">
+
                         Ekstrakurikuler
+
+                    </p>
+
+                </a>
+
+
+
+                <!-- TOTAL GALERI -->
+
+                <a
+                    href="../galeri/index.php"
+                    class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md hover:border-primary transition block">
+
+                    <div
+                        class="w-12 h-12 bg-pink-50 rounded-xl flex items-center justify-center mb-4">
+
+                        <span class="text-2xl">
+                            🖼️
+                        </span>
+
+                    </div>
+
+                    <p
+                        class="text-3xl font-headline font-bold text-gray-800">
+
+                        <?= $total_galeri ?>
+
+                    </p>
+
+                    <p class="text-sm text-gray-500 mt-1">
+
+                        Total Galeri
+
                     </p>
 
                 </a>
@@ -524,267 +612,578 @@ $query_aktivitas = mysqli_query(
 
 
             <!-- =================================================
-                 BERITA TERBARU
+                 GRID 2 KOLOM
             ================================================== -->
 
-            <div
-                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
 
-                <!-- HEADER BERITA -->
+                <!-- =================================================
+                     KIRI (2/3): BERITA TERBARU
+                ================================================== -->
 
-                <div
-                    class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                <div class="lg:col-span-2">
 
-                    <h2
-                        class="font-headline font-bold text-lg text-primary">
-                        Berita Terbaru
-                    </h2>
+                    <div
+                        class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
 
 
-                    <a
-                        href="../berita/index.php"
-                        class="text-sm text-primary hover:underline">
-                        Lihat Semua →
-                    </a>
+                        <!-- HEADER BERITA -->
+
+                        <div
+                            class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+
+                            <h2
+                                class="font-headline font-bold text-lg text-primary">
+
+                                Berita Terbaru
+
+                            </h2>
+
+
+                            <a
+                                href="../berita/index.php"
+                                class="text-sm text-primary hover:underline">
+
+                                Lihat Semua →
+
+                            </a>
+
+                        </div>
+
+
+
+                        <!-- TABEL -->
+
+                        <div class="overflow-x-auto">
+
+                            <table class="w-full text-sm">
+
+
+                                <!-- HEADER TABEL -->
+
+                                <thead class="bg-gray-50">
+
+                                    <tr>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            Gambar
+
+                                        </th>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            ID
+
+                                        </th>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            Judul
+
+                                        </th>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            Deskripsi
+
+                                        </th>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            Tanggal
+
+                                        </th>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            Status
+
+                                        </th>
+
+                                        <th
+                                            class="px-6 py-3 text-left font-semibold text-gray-500">
+
+                                            Aksi
+
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+
+                                <!-- ISI TABEL -->
+
+                                <tbody class="divide-y divide-gray-100">
+
+
+                                    <?php if ($query_berita && mysqli_num_rows($query_berita) > 0): ?>
+
+
+                                        <?php while ($berita = mysqli_fetch_assoc($query_berita)): ?>
+
+
+                                            <tr
+                                                class="hover:bg-gray-50 transition">
+
+
+                                                <!-- GAMBAR -->
+
+                                                <td class="px-6 py-4">
+
+                                                    <?php if (!empty($berita['gambar'])): ?>
+
+                                                        <img
+                                                            src="../../uploads/<?= htmlspecialchars($berita['gambar']) ?>"
+                                                            alt="<?= htmlspecialchars($berita['judul']) ?>"
+                                                            class="w-16 h-12 object-cover rounded-lg border border-gray-200 shadow-sm"
+                                                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+
+                                                        <div
+                                                            class="hidden w-16 h-12 bg-gray-100 rounded-lg items-center justify-center border border-gray-200">
+
+                                                            <span
+                                                                class="material-icons text-gray-400">
+
+                                                                image
+
+                                                            </span>
+
+                                                        </div>
+
+                                                    <?php else: ?>
+
+                                                        <div
+                                                            class="w-16 h-12 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
+
+                                                            <span
+                                                                class="material-icons text-gray-400">
+
+                                                                image
+
+                                                            </span>
+
+                                                        </div>
+
+                                                    <?php endif; ?>
+
+                                                </td>
+
+
+
+                                                <!-- ID -->
+
+                                                <td class="px-6 py-4">
+
+                                                    <?= htmlspecialchars(
+                                                        $berita['id']
+                                                    ) ?>
+
+                                                </td>
+
+
+
+                                                <!-- JUDUL -->
+
+                                                <td
+                                                    class="px-6 py-4 font-medium text-gray-800 max-w-xs">
+
+                                                    <div
+                                                        class="truncate"
+                                                        title="<?= htmlspecialchars($berita['judul']) ?>">
+
+                                                        <?= htmlspecialchars(
+                                                            $berita['judul']
+                                                        ) ?>
+
+                                                    </div>
+
+                                                </td>
+
+
+
+                                                <!-- DESKRIPSI -->
+
+                                                <td class="px-6 py-4 text-gray-500 max-w-xs truncate">
+
+                                                    <?= htmlspecialchars($berita['deskripsi'] ?? '-') ?>
+
+                                                </td>
+
+
+
+                                                <!-- TANGGAL -->
+
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap">
+
+                                                    <?= date(
+                                                        'd M Y',
+                                                        strtotime(
+                                                            $berita['tanggal_posting']
+                                                        )
+                                                    ) ?>
+
+                                                </td>
+
+
+
+                                                <!-- STATUS -->
+
+                                                <td class="px-6 py-4">
+
+
+                                                    <?php if ($berita['status'] === 'publish'): ?>
+
+                                                        <span
+                                                            class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
+
+                                                            Published
+
+                                                        </span>
+
+                                                    <?php else: ?>
+
+                                                        <span
+                                                            class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">
+
+                                                            Draft
+
+                                                        </span>
+
+                                                    <?php endif; ?>
+
+
+                                                </td>
+
+
+
+                                                <!-- AKSI -->
+
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap">
+
+
+                                                    <a
+                                                        href="../berita/edit.php?id=<?= $berita['id'] ?>"
+                                                        class="text-blue-600 hover:underline">
+
+                                                        Edit
+
+                                                    </a>
+
+
+                                                    <span
+                                                        class="text-gray-300 mx-2">
+
+                                                        |
+
+                                                    </span>
+
+
+                                                    <a
+                                                        href="../berita/hapus.php?id=<?= $berita['id'] ?>"
+                                                        class="text-red-600 hover:underline"
+                                                        onclick="return confirm('Yakin ingin menghapus berita ini?')">
+
+                                                        Hapus
+
+                                                    </a>
+
+
+                                                </td>
+
+
+                                            </tr>
+
+
+                                        <?php endwhile; ?>
+
+
+                                    <?php else: ?>
+
+
+                                        <!-- BELUM ADA BERITA -->
+
+                                        <tr>
+
+                                            <td
+                                                colspan="7"
+                                                class="px-6 py-10 text-center">
+
+                                                <div
+                                                    class="flex flex-col items-center justify-center">
+
+                                                    <div
+                                                        class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-3">
+
+                                                        <span
+                                                            class="material-icons text-gray-400"
+                                                            style="font-size: 28px;">
+
+                                                            article
+
+                                                        </span>
+
+                                                    </div>
+
+
+                                                    <p
+                                                        class="text-gray-500 font-medium">
+
+                                                        Belum ada berita
+
+                                                    </p>
+
+
+                                                    <p
+                                                        class="text-gray-400 text-xs mt-1">
+
+                                                        Berita yang kamu tambahkan akan muncul di sini.
+
+                                                    </p>
+
+                                                </div>
+
+                                            </td>
+
+                                        </tr>
+
+
+                                    <?php endif; ?>
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
 
 
-                <!-- TABEL -->
+                <!-- =================================================
+                     KANAN (1/3): RIWAYAT TERBARU
+                ================================================== -->
 
-                <div class="overflow-x-auto">
+                <div class="lg:col-span-1">
 
-                    <table class="w-full text-sm">
+                    <div
+                        class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
 
 
-                        <!-- HEADER TABEL -->
+                        <!-- HEADER -->
 
-                        <thead class="bg-gray-50">
+                        <div
+                            class="px-6 py-4 border-b border-gray-100">
 
-                            <tr>
+                            <div class="flex items-center gap-2">
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    Gambar
-                                </th>
+                                <span class="material-icons text-primary">
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    ID
-                                </th>
+                                    history
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    Judul
-                                </th>
+                                </span>
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    Kategori
-                                </th>
+                                <h2
+                                    class="font-headline font-bold text-lg text-primary">
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    Tanggal
-                                </th>
+                                    Riwayat Terbaru
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    Status
-                                </th>
+                                </h2>
 
-                                <th
-                                    class="px-6 py-3 text-left font-semibold text-gray-500">
-                                    Aksi
-                                </th>
+                            </div>
 
-                            </tr>
+                            <p class="text-xs text-gray-400 mt-1">
 
-                        </thead>
+                                Aktivitas terakhir di sistem
+
+                            </p>
+
+                        </div>
 
 
 
-                        <!-- ISI TABEL -->
+                        <!-- DAFTAR AKTIVITAS -->
 
-                        <tbody class="divide-y divide-gray-100">
-
-
-                            <?php if ($query_berita && mysqli_num_rows($query_berita) > 0): ?>
+                        <div
+                            class="divide-y divide-gray-100 max-h-[600px] overflow-y-auto">
 
 
-                                <?php while ($berita = mysqli_fetch_assoc($query_berita)): ?>
+                            <?php if ($query_aktivitas && mysqli_num_rows($query_aktivitas) > 0): ?>
 
 
-                                    <tr
-                                        class="hover:bg-gray-50 transition">
+                                <?php while ($aktivitas = mysqli_fetch_assoc($query_aktivitas)): ?>
 
 
-                                        <!-- GAMBAR -->
+                                    <div
+                                        class="flex items-start gap-3 px-5 py-3 hover:bg-gray-50 transition">
 
-                                        <td class="px-6 py-4">
 
-                                            <?php if (!empty($berita['gambar'])): ?>
+                                        <!-- ICON MODUL -->
 
-                                                <img
-                                                    src="../../uploads/<?= htmlspecialchars($berita['gambar']) ?>"
-                                                    alt="<?= htmlspecialchars($berita['judul']) ?>"
-                                                    class="w-16 h-12 object-cover rounded-lg border border-gray-200 shadow-sm"
-                                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                        <div class="flex-shrink-0">
 
-                                                <!-- FALLBACK JIKA GAMBAR GAGAL -->
 
-                                                <div
-                                                    class="hidden w-16 h-12 bg-gray-100 rounded-lg items-center justify-center border border-gray-200">
+                                            <?php if ($aktivitas['modul'] === 'Berita'): ?>
 
-                                                    <span
-                                                        class="material-icons text-gray-400">
-                                                        image
+                                                <span class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        article
+
                                                     </span>
 
-                                                </div>
-
-                                            <?php else: ?>
-
-                                                <!-- JIKA TIDAK ADA GAMBAR -->
-
-                                                <div
-                                                    class="w-16 h-12 bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
-
-                                                    <span
-                                                        class="material-icons text-gray-400">
-                                                        image
-                                                    </span>
-
-                                                </div>
-
-                                            <?php endif; ?>
-
-                                        </td>
-
-
-
-                                        <!-- ID -->
-
-                                        <td class="px-6 py-4">
-
-                                            <?= htmlspecialchars(
-                                                $berita['id']
-                                            ) ?>
-
-                                        </td>
-
-
-
-                                        <!-- JUDUL -->
-
-                                        <td
-                                            class="px-6 py-4 font-medium text-gray-800 max-w-xs">
-
-                                            <div
-                                                class="truncate"
-                                                title="<?= htmlspecialchars($berita['judul']) ?>">
-
-                                                <?= htmlspecialchars(
-                                                    $berita['judul']
-                                                ) ?>
-
-                                            </div>
-
-                                        </td>
-
-
-
-                                        <!-- KATEGORI -->
-
-                                        <td class="px-6 py-4">
-
-                                            <span
-                                                class="px-2 py-1 bg-blue-50 text-blue-600 rounded-full text-xs font-medium">
-
-                                                <?= htmlspecialchars(
-                                                    ucfirst($berita['kategori'])
-                                                ) ?>
-
-                                            </span>
-
-                                        </td>
-
-
-
-                                        <!-- TANGGAL -->
-
-                                        <td class="px-6 py-4 whitespace-nowrap">
-
-                                            <?= date(
-                                                'd M Y',
-                                                strtotime(
-                                                    $berita['tanggal_posting']
-                                                )
-                                            ) ?>
-
-                                        </td>
-
-
-
-                                        <!-- STATUS -->
-
-                                        <td class="px-6 py-4">
-
-
-                                            <?php if ($berita['status'] === 'publish'): ?>
-
-                                                <span
-                                                    class="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold">
-                                                    Published
                                                 </span>
 
+
+                                            <?php elseif ($aktivitas['modul'] === 'Prestasi'): ?>
+
+                                                <span class="w-8 h-8 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        emoji_events
+
+                                                    </span>
+
+                                                </span>
+
+
+                                            <?php elseif ($aktivitas['modul'] === 'Guru'): ?>
+
+                                                <span class="w-8 h-8 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        groups
+
+                                                    </span>
+
+                                                </span>
+
+
+                                            <?php elseif ($aktivitas['modul'] === 'Fasilitas'): ?>
+
+                                                <span class="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        apartment
+
+                                                    </span>
+
+                                                </span>
+
+
+                                            <?php elseif ($aktivitas['modul'] === 'Ekstrakurikuler'): ?>
+
+                                                <span class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        sports_kabaddi
+
+                                                    </span>
+
+                                                </span>
+
+
+                                            <?php elseif ($aktivitas['modul'] === 'Galeri'): ?>
+
+                                                <span class="w-8 h-8 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        photo_library
+
+                                                    </span>
+
+                                                </span>
+
+
                                             <?php else: ?>
 
-                                                <span
-                                                    class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-semibold">
-                                                    Draft
+                                                <span class="w-8 h-8 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center">
+
+                                                    <span class="material-icons text-base">
+
+                                                        info
+
+                                                    </span>
+
                                                 </span>
 
                                             <?php endif; ?>
 
 
-                                        </td>
+                                        </div>
 
 
 
-                                        <!-- AKSI -->
+                                        <!-- INFO -->
 
-                                        <td
-                                            class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex-1 min-w-0">
 
+                                            <p
+                                                class="text-xs font-semibold text-slate-800 truncate">
 
-                                            <a
-                                                href="../berita/edit.php?id=<?= $berita['id'] ?>"
-                                                class="text-blue-600 hover:underline">
-                                                Edit
-                                            </a>
+                                                <?= htmlspecialchars(
+                                                    $aktivitas['judul']
+                                                ) ?>
 
-
-                                            <span
-                                                class="text-gray-300 mx-2">
-                                                |
-                                            </span>
+                                            </p>
 
 
-                                            <a
-                                                href="../berita/hapus.php?id=<?= $berita['id'] ?>"
-                                                class="text-red-600 hover:underline"
-                                                onclick="return confirm('Yakin ingin menghapus berita ini?')">
-                                                Hapus
-                                            </a>
+                                            <p
+                                                class="text-[10px] text-slate-500 mt-0.5">
+
+                                                <span
+                                                    class="font-medium text-primary">
+
+                                                    <?= htmlspecialchars(
+                                                        $aktivitas['modul']
+                                                    ) ?>
+
+                                                </span>
+
+                                                •
+
+                                                <?= htmlspecialchars(
+                                                    $aktivitas['aksi']
+                                                ) ?>
+
+                                            </p>
 
 
-                                        </td>
+                                            <p
+                                                class="text-[10px] text-slate-400 mt-0.5">
 
+                                                <?= date(
+                                                    'd M Y H:i',
+                                                    strtotime(
+                                                        $aktivitas['waktu']
+                                                    )
+                                                ) ?>
 
-                                    </tr>
+                                            </p>
+
+                                        </div>
+
+                                    </div>
 
 
                                 <?php endwhile; ?>
@@ -793,210 +1192,37 @@ $query_aktivitas = mysqli_query(
                             <?php else: ?>
 
 
-                                <!-- BELUM ADA BERITA -->
+                                <!-- BELUM ADA RIWAYAT -->
 
-                                <tr>
+                                <div
+                                    class="px-5 py-10 text-center">
 
-                                    <td
-                                        colspan="7"
-                                        class="px-6 py-10 text-center">
+                                    <span
+                                        class="material-icons text-4xl text-gray-300">
 
-                                        <div
-                                            class="flex flex-col items-center justify-center">
+                                        history
 
-                                            <div
-                                                class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-3">
+                                    </span>
 
-                                                <span
-                                                    class="material-icons text-gray-400"
-                                                    style="font-size: 28px;">
-                                                    article
-                                                </span>
+                                    <p
+                                        class="text-sm text-gray-500 mt-2">
 
-                                            </div>
+                                        Belum ada riwayat
 
+                                    </p>
 
-                                            <p
-                                                class="text-gray-500 font-medium">
-                                                Belum ada berita
-                                            </p>
-
-
-                                            <p
-                                                class="text-gray-400 text-xs mt-1">
-                                                Berita yang kamu tambahkan akan muncul di sini.
-                                            </p>
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
+                                </div>
 
 
                             <?php endif; ?>
 
 
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 RIWAYAT TERBARU
-            ================================================== -->
-
-            <div
-                class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-
-
-                <!-- HEADER -->
-
-                <div
-                    class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-
-                    <h2
-                        class="font-headline font-bold text-lg text-primary">
-                        Riwayat Terbaru
-                    </h2>
-
-                    <span class="text-xs text-gray-400">
-                        Aktivitas terakhir di sistem
-                    </span>
-
-                </div>
-
-
-
-                <!-- DAFTAR AKTIVITAS -->
-
-                <div class="divide-y divide-gray-100">
-
-                    <?php if ($query_aktivitas && mysqli_num_rows($query_aktivitas) > 0): ?>
-
-
-                        <?php while ($aktivitas = mysqli_fetch_assoc($query_aktivitas)): ?>
-
-
-                            <div class="flex items-center gap-4 px-6 py-4 hover:bg-gray-50 transition">
-
-
-                                <!-- ICON MODUL -->
-
-                                <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0">
-
-                                    <?php if ($aktivitas['modul'] === 'Berita'): ?>
-
-                                        <span class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center">
-                                            <span class="material-icons">article</span>
-                                        </span>
-
-                                    <?php elseif ($aktivitas['modul'] === 'Prestasi'): ?>
-
-                                        <span class="w-10 h-10 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center">
-                                            <span class="material-icons">emoji_events</span>
-                                        </span>
-
-                                    <?php elseif ($aktivitas['modul'] === 'Guru'): ?>
-
-                                        <span class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                                            <span class="material-icons">groups</span>
-                                        </span>
-
-                                    <?php elseif ($aktivitas['modul'] === 'Fasilitas'): ?>
-
-                                        <span class="w-10 h-10 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
-                                            <span class="material-icons">apartment</span>
-                                        </span>
-
-                                    <?php elseif ($aktivitas['modul'] === 'Ekstrakurikuler'): ?>
-
-                                        <span class="w-10 h-10 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center">
-                                            <span class="material-icons">sports_kabaddi</span>
-                                        </span>
-
-                                    <?php else: ?>
-
-                                        <span class="w-10 h-10 bg-gray-100 text-gray-600 rounded-full flex items-center justify-center">
-                                            <span class="material-icons">info</span>
-                                        </span>
-
-                                    <?php endif; ?>
-
-                                </div>
-
-
-
-                                <!-- INFO -->
-
-                                <div class="flex-1 min-w-0">
-
-                                    <p class="text-sm font-semibold text-slate-800 truncate">
-                                        <?= htmlspecialchars($aktivitas['judul']) ?>
-                                    </p>
-
-                                    <p class="text-xs text-slate-500 mt-0.5">
-
-                                        <span class="font-medium text-primary">
-                                            <?= htmlspecialchars($aktivitas['modul']) ?>
-                                        </span>
-
-                                        •
-
-                                        <?= htmlspecialchars($aktivitas['aksi']) ?>
-
-                                        •
-
-                                        <?= date('d M Y H:i', strtotime($aktivitas['waktu'])) ?>
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-
-                        <?php endwhile; ?>
-
-
-                    <?php else: ?>
-
-
-                        <!-- BELUM ADA RIWAYAT -->
-
-                        <div class="px-6 py-10 text-center">
-
-                            <div class="w-14 h-14 bg-gray-100 rounded-full flex items-center justify-center mb-3 mx-auto">
-
-                                <span
-                                    class="material-icons text-gray-400"
-                                    style="font-size: 28px;">
-                                    history
-                                </span>
-
-                            </div>
-
-
-                            <p class="text-gray-500 font-medium">
-                                Belum ada riwayat aktivitas
-                            </p>
-
-
-                            <p class="text-gray-400 text-xs mt-1">
-                                Tambahkan data baru, maka riwayat akan muncul di sini.
-                            </p>
-
                         </div>
 
-
-                    <?php endif; ?>
+                    </div>
 
                 </div>
+
 
             </div>
 

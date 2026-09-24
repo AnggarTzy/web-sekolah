@@ -57,7 +57,6 @@ $query = mysqli_query($conn, "SELECT * FROM fasilitas ORDER BY nama ASC");
 </head>
 <body class="bg-gray-50 font-sans text-slate-700 antialiased">
 
-    <!-- NAVBAR -->
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -82,7 +81,6 @@ $query = mysqli_query($conn, "SELECT * FROM fasilitas ORDER BY nama ASC");
         </div>
     </nav>
 
-    <!-- KONTEN -->
     <main class="max-w-7xl mx-auto p-6 sm:p-8">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div>
@@ -113,8 +111,7 @@ $query = mysqli_query($conn, "SELECT * FROM fasilitas ORDER BY nama ASC");
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">Gambar</th>
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">Nama</th>
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">Kategori</th>
-                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Lokasi</th>
-                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Kapasitas</th>
+                            <th class="px-6 py-4 text-left font-semibold text-slate-500">Deskripsi</th>
                             <th class="px-6 py-4 text-left font-semibold text-slate-500">Aksi</th>
                         </tr>
                     </thead>
@@ -136,8 +133,7 @@ $query = mysqli_query($conn, "SELECT * FROM fasilitas ORDER BY nama ASC");
                                     <?= htmlspecialchars($row['kategori']) ?>
                                 </span>
                             </td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($row['lokasi']) ?></td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($row['kapasitas']) ?></td>
+                            <td class="px-6 py-4 text-slate-500 max-w-xs truncate"><?= htmlspecialchars($row['deskripsi'] ?? '-') ?></td>
                             <td class="px-6 py-4">
                                 <a href="edit.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 font-semibold mr-3">Edit</a>
                                 <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin mau hapus?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</a>

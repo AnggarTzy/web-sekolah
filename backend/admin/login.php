@@ -498,7 +498,8 @@ if (isset($_SESSION['login'])) {
 
 
         <div class="form-note">
-            © 2026 Sistem Informasi Sekolah
+            © 2026 SMP Muhammadiyah 6 Krian. All rights reserved.
+            <br> Supported by RPL SMK Krian 1 Sidoarjo
         </div>
 
     </div>

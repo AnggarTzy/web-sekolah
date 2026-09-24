@@ -12,7 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $jabatan = mysqli_real_escape_string($conn, $_POST['jabatan']);
     $bidang_studi = mysqli_real_escape_string($conn, $_POST['bidang_studi']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
 
     $foto = null;
     if (!empty($_FILES['foto']['name'])) {
@@ -24,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $query = mysqli_query($conn, "INSERT INTO guru (nama, jabatan, bidang_studi, foto, email) 
-                                  VALUES ('$nama', '$jabatan', '$bidang_studi', '$foto', '$email')");
+    $query = mysqli_query($conn, "INSERT INTO guru (nama, jabatan, bidang_studi, foto) 
+                                  VALUES ('$nama', '$jabatan', '$bidang_studi', '$foto')");
 
     if ($query) {
         catat_aktivitas($conn, 'Guru', 'Menambah', $nama);
@@ -39,7 +38,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,10 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </head>
-
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
-    <!-- NAVBAR -->
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -97,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </nav>
 
-    <!-- KONTEN -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="px-6 py-5 border-b border-slate-100">
@@ -149,14 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Email</label>
-                        <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">mail</span>
-                            <input type="email" name="email" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Contoh: guru@sekolah.sch.id">
-                        </div>
-                    </div>
-
-                    <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Foto</label>
                         <label for="foto" class="block border-2 border-dashed border-slate-300 hover:border-primary rounded-2xl p-7 text-center cursor-pointer transition bg-slate-50 hover:bg-blue-50/40">
                             <span class="material-icons text-4xl text-primary">cloud_upload</span>
@@ -195,5 +182,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
-
 </html>
