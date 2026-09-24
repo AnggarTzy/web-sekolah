@@ -11,8 +11,6 @@ include '../config/koneksi.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $lokasi = mysqli_real_escape_string($conn, $_POST['lokasi']);
-    $kapasitas = mysqli_real_escape_string($conn, $_POST['kapasitas']);
     $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
 
     $gambar = null;
@@ -25,10 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $query = mysqli_query($conn, "INSERT INTO fasilitas (nama, kategori, lokasi, kapasitas, deskripsi, gambar) 
-                                  VALUES ('$nama', '$kategori', '$lokasi', '$kapasitas', '$deskripsi', '$gambar')");
+    $query = mysqli_query($conn, "INSERT INTO fasilitas (nama, kategori, deskripsi, gambar) 
+                                  VALUES ('$nama', '$kategori', '$deskripsi', '$gambar')");
 
     if ($query) {
+        catat_aktivitas($conn, 'Fasilitas', 'Menambah', $nama);
         header("Location: index.php");
         exit;
     } else {
@@ -70,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
-    <!-- NAVBAR -->
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -95,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </nav>
 
-    <!-- KONTEN -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="px-6 py-5 border-b border-slate-100">
@@ -141,22 +138,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Lokasi</label>
-                        <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">place</span>
-                            <input type="text" name="lokasi" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Contoh: Lantai 2, Gedung A">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Kapasitas</label>
-                        <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">people</span>
-                            <input type="text" name="kapasitas" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition" placeholder="Contoh: 40 siswa">
-                        </div>
-                    </div>
-
-                    <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
                         <textarea name="deskripsi" rows="5" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y" placeholder="Tulis deskripsi fasilitas..."></textarea>
                     </div>
@@ -190,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         const gambarInput = document.getElementById('gambar');
         const fileName = document.getElementById('file-name');
-        gambarInput.addEventListener('change', function () {
+        gambarInput.addEventListener('change', function() {
             if (this.files.length > 0) {
                 fileName.textContent = "File dipilih: " + this.files[0].name;
                 fileName.classList.remove('hidden');

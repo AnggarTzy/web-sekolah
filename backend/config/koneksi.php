@@ -1,7 +1,7 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = "";
+$host = "10.16.5.238";
+$user = "meka";
+$pass = "meka123";
 $db   = "db_sekolah";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
@@ -9,19 +9,6 @@ $conn = mysqli_connect($host, $user, $pass, $db);
 if (!$conn) {
     die("Koneksi gagal: " . mysqli_connect_error() . 
         "<br>Host: $host | User: $user | DB: $db");
-}
-?>
-
-<?php
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_sekolah";
-
-$conn = mysqli_connect($host, $user, $pass, $db);
-
-if (!$conn) {
-    die("Koneksi gagal: " . mysqli_connect_error());
 }
 
 // =====================================================

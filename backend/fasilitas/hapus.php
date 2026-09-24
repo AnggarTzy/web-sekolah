@@ -20,10 +20,10 @@ if ($fasilitas && $fasilitas['gambar'] && file_exists("../../uploads/" . $fasili
 $query = mysqli_query($conn, "DELETE FROM fasilitas WHERE id = '$id'");
 
 if ($query) {
+    catat_aktivitas($conn, 'Fasilitas', 'Menghapus', $fasilitas['nama']);
     header("Location: index.php?status=success");
     exit;
 } else {
     header("Location: index.php?status=error");
     exit;
 }
-?>

@@ -20,10 +20,10 @@ if ($ekskul && $ekskul['gambar'] && file_exists("../../uploads/" . $ekskul['gamb
 $query = mysqli_query($conn, "DELETE FROM ekstrakurikuler WHERE id = '$id'");
 
 if ($query) {
+    catat_aktivitas($conn, 'Ekstrakurikuler', 'Menghapus', $ekskul['nama']);
     header("Location: index.php?status=success");
     exit;
 } else {
     header("Location: index.php?status=error");
     exit;
 }
-?>

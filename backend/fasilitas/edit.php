@@ -20,8 +20,6 @@ if (!$fasilitas) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nama = mysqli_real_escape_string($conn, $_POST['nama']);
     $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $lokasi = mysqli_real_escape_string($conn, $_POST['lokasi']);
-    $kapasitas = mysqli_real_escape_string($conn, $_POST['kapasitas']);
     $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
 
     $gambar_lama = $fasilitas['gambar'];
@@ -38,11 +36,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $query = mysqli_query($conn, "UPDATE fasilitas SET 
-                                  nama = '$nama', kategori = '$kategori', lokasi = '$lokasi', 
-                                  kapasitas = '$kapasitas', deskripsi = '$deskripsi', gambar = '$gambar' 
+                                  nama = '$nama', kategori = '$kategori', 
+                                  deskripsi = '$deskripsi', gambar = '$gambar' 
                                   WHERE id = '$id'");
 
     if ($query) {
+        catat_aktivitas($conn, 'Fasilitas', 'Mengedit', $nama);
         header("Location: index.php");
         exit;
     } else {
@@ -153,22 +152,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Lokasi</label>
-                        <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">place</span>
-                            <input type="text" name="lokasi" value="<?= htmlspecialchars($fasilitas['lokasi']) ?>" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Kapasitas</label>
-                        <div class="relative">
-                            <span class="material-icons absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">people</span>
-                            <input type="text" name="kapasitas" value="<?= htmlspecialchars($fasilitas['kapasitas']) ?>" class="w-full pl-12 pr-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition">
-                        </div>
-                    </div>
-
-                    <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Deskripsi</label>
                         <textarea name="deskripsi" rows="5" class="w-full px-4 py-3.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition resize-y"><?= htmlspecialchars($fasilitas['deskripsi']) ?></textarea>
                     </div>
@@ -208,7 +191,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script>
         const gambarInput = document.getElementById('gambar');
         const fileName = document.getElementById('file-name');
-        gambarInput.addEventListener('change', function () {
+        gambarInput.addEventListener('change', function() {
             if (this.files.length > 0) {
                 fileName.textContent = "File dipilih: " + this.files[0].name;
                 fileName.classList.remove('hidden');
