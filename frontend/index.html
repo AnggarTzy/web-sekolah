@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SMP Muhammadiyah 6 Krian | Islamic & Technology Based School</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,171 +20,40 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         rel="stylesheet" />
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="./src/output.css">
 
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        mho: {
-                            blue: '#1E65B5',
-                            'blue-hover': '#165196',
-                            'blue-light': '#F0F6FC',
-                            green: '#E58A2B',
-                            'green-hover': '#D07A22',
-                            'green-light': '#FEF7F0',
-                            dark: '#0B1F36',
-                            bg: '#FFFFFF',
-                            surface: '#F8FAFC'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ["Inter", "sans-serif"],
-                        headline: ["Plus Jakarta Sans", "sans-serif"],
-                        serifAcc: ["Playfair Display", "serif"],
-                    }
-                },
-            },
-        };
-    </script>
-
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        @keyframes marqueeScroll {
-            0% {
-                transform: translateX(0);
-            }
-
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .animate-marquee {
-            display: flex;
-            width: 200%;
-            animation: marqueeScroll 22s linear infinite;
-        }
-
-        .animate-marquee:hover {
-            animation-play-state: paused;
-        }
-
-        @keyframes spinSlow {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .animate-spin-slow {
-            animation: spinSlow 30s linear infinite;
-        }
-
-        @keyframes floatSlow {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        .animate-float {
-            animation: floatSlow 4s ease-in-out infinite;
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .text-gradient-custom {
-            background: linear-gradient(135deg, #F97316 0%, #FACC15 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bg-gold-pattern {
-            background-image: radial-gradient(rgba(229, 138, 43, 0.12) 1.5px, transparent 1.5px), radial-gradient(rgba(250, 204, 21, 0.1) 1.5px, transparent 1.5px);
-            background-size: 32px 32px;
-            background-position: 0 0, 16px 16px;
-        }
-
-        @keyframes pulseSkeleton {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.4;
-            }
-        }
-
-        .skeleton-loader {
-            background: #e2e8f0;
-            animation: pulseSkeleton 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-            border-radius: 0.75rem;
-        }
-    </style>
 </head>
 
 <body
-    class="bg-white font-sans text-slate-700 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
+    class="bg-white font-sans text-slate-600 antialiased selection:bg-mho-blue selection:text-white overflow-x-hidden">
 
     <!-- ============================================================ -->
     <!-- HEADER NAVBAR -->
     <!-- ============================================================ -->
     <header
-        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/95 backdrop-blur-md shadow-sm/5"
+        class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-slate-100 bg-white/90 backdrop-blur-md"
         id="mainHeader">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
 
-                <!-- Logo Identitas -->
-                <a href="index.html" class="flex items-center gap-3 group">
+                <a href="index.html" class="flex items-center gap-3.5 group">
                     <img alt="Logo SMP Muhammadiyah 6 Krian"
-                        class="h-9 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105"
-                        src="assets/images/smpmeka.png" />
+                        class="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+                        src="assets/images/logosmpmeka.png" />
                     <div class="flex flex-col">
-                        <span
-                            class="font-headline font-extrabold text-sm sm:text-lg text-mho-blue leading-none tracking-tight">SMP
+                        <span class="font-headline font-extrabold text-lg text-mho-blue leading-none tracking-tight">SMP
                             MEKA</span>
-                        <span
-                            class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami
-                            • Unggul • Berkemajuan</span>
+                        <span class="text-[10px] font-semibold uppercase tracking-widest text-mho-green mt-1">Islami •
+                            Unggul • Berkemajuan</span>
                     </div>
                 </a>
 
-                <!-- Navigasi Desktop -->
                 <nav class="hidden lg:flex items-center gap-1.5">
                     <a href="index.html"
                         class="px-4 py-2 rounded-xl text-xs font-bold text-mho-blue bg-mho-blue-light border border-mho-blue/20">Beranda</a>
 
-                    <!-- Dropdown: Tentang Kami -->
                     <div class="relative group">
                         <button
                             class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
@@ -190,7 +63,7 @@
                         </button>
                         <div
                             class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-soft border border-slate-200 p-2 space-y-1">
                                 <a href="profile.html"
                                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">school</span> Profil
@@ -210,7 +83,6 @@
                         </div>
                     </div>
 
-                    <!-- Dropdown: Informasi -->
                     <div class="relative group">
                         <button
                             class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
@@ -220,7 +92,7 @@
                         </button>
                         <div
                             class="absolute left-0 top-full pt-2 w-64 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-soft border border-slate-200 p-2 space-y-1">
                                 <a href="kalender.html"
                                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">calendar_month</span>
@@ -240,7 +112,6 @@
                         </div>
                     </div>
 
-                    <!-- MENU PUBLIKASI (hanya Berita & Galeri) -->
                     <div class="relative group">
                         <button
                             class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
@@ -250,7 +121,7 @@
                         </button>
                         <div
                             class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-soft border border-slate-200 p-2 space-y-1">
                                 <a href="berita.html"
                                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">newspaper</span>
@@ -265,7 +136,6 @@
                         </div>
                     </div>
 
-                    <!-- MENU RUANG ASPIRASI (Dropdown) -->
                     <div class="relative group">
                         <button
                             class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-700 hover:text-mho-blue hover:bg-slate-100 flex items-center gap-1 transition-all">
@@ -275,7 +145,7 @@
                         </button>
                         <div
                             class="absolute left-0 top-full pt-2 w-60 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-                            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-2 space-y-1">
+                            <div class="bg-white rounded-2xl shadow-soft border border-slate-200 p-2 space-y-1">
                                 <a href="kritik-saran.html"
                                     class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium text-slate-700 hover:bg-mho-blue-light hover:text-mho-blue transition-all">
                                     <span class="material-symbols-outlined text-mho-blue text-lg">forum</span> Kritik &
@@ -291,26 +161,23 @@
                     </div>
                 </nav>
 
-                <!-- Right Action -->
                 <div class="hidden lg:flex items-center gap-4">
                     <a href="daftar.html"
-                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-sm hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
+                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-soft hover:shadow-md hover:-translate-y-0.5 active:translate-y-0">
                         <span>INFO PPDB</span>
                         <span class="material-symbols-outlined text-sm">open_in_new</span>
                     </a>
                 </div>
 
-                <!-- Mobile Menu Toggle -->
                 <button id="mobileMenuBtn" onclick="toggleMobileNav()"
-                    class="lg:hidden p-2 rounded-xl text-mho-blue hover:bg-slate-100 transition-all focus:outline-none">
+                    class="lg:hidden p-2 rounded-xl text-mho-blue hover:bg-slate-100 transition-all">
                     <span class="material-symbols-outlined text-3xl">menu</span>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
         <div id="mobileNav"
-            class="hidden lg:hidden bg-white border-b border-slate-200 px-4 sm:px-6 py-6 space-y-3 max-h-[80vh] overflow-y-auto shadow-2xl">
+            class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-3 max-h-[80vh] overflow-y-auto">
             <a href="index.html"
                 class="block px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-mho-blue">Beranda</a>
 
@@ -353,7 +220,6 @@
                 </div>
             </div>
 
-            <!-- PUBLIKASI MOBILE (hanya Berita & Galeri) -->
             <div class="space-y-1">
                 <button onclick="toggleMobileSubmenu(this)"
                     class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">
@@ -390,8 +256,8 @@
 
             <div class="pt-3">
                 <a href="daftar.html"
-                    class="block w-full text-center py-3.5 rounded-xl bg-mho-green text-white font-headline font-extrabold text-xs uppercase tracking-wider shadow-md">
-                    Daftar PPDB Online
+                    class="block w-full text-center py-3.5 rounded-xl bg-mho-blue text-white font-headline font-extrabold text-xs uppercase tracking-wider">
+                    INFO PPDB
                 </a>
             </div>
         </div>
@@ -399,13 +265,17 @@
 
     <main class="pt-20">
 
+        <!-- ============================================================ -->
         <!-- HERO SECTION -->
+        <!-- ============================================================ -->
         <section
             class="relative min-h-[85vh] sm:min-h-[88vh] flex items-center bg-gradient-to-b from-slate-50/60 via-white to-slate-50/40 bg-gold-pattern border-b border-slate-100 overflow-hidden z-10 py-12 lg:py-0">
 
-            <div
-                class="absolute -top-10 -right-20 w-[450px] h-[450px] pointer-events-none opacity-30 rotate-45 hidden sm:block">
-                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Blob dekorasi -->
+            <div class="absolute -top-10 -right-20 w-[450px] h-[450px] pointer-events-none animate-blob-1 hidden sm:block"
+                style="opacity: 0.3;">
+                <svg viewBox="0 0 500 500" class="w-full h-full rotate-45" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#hero-leaf-grad)" />
                     <defs>
                         <linearGradient id="hero-leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -416,8 +286,10 @@
                 </svg>
             </div>
 
-            <div class="absolute bottom-5 -left-32 w-96 h-96 pointer-events-none opacity-25 -rotate-12 hidden sm:block">
-                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div class="absolute bottom-5 -left-32 w-96 h-96 pointer-events-none animate-blob-2 hidden sm:block"
+                style="opacity: 0.25;">
+                <svg viewBox="0 0 500 500" class="w-full h-full -rotate-12" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#hero-leaf-grad2)" />
                     <defs>
                         <linearGradient id="hero-leaf-grad2" x1="0%" y1="100%" x2="100%" y2="0%">
@@ -428,6 +300,35 @@
                 </svg>
             </div>
 
+            <div class="absolute top-24 left-[5%] w-56 h-56 pointer-events-none animate-blob-3 hidden lg:block"
+                style="opacity: 0.22;">
+                <svg viewBox="0 0 500 500" class="w-full h-full rotate-45" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#hero-leaf-grad3)" />
+                    <defs>
+                        <linearGradient id="hero-leaf-grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#F97316" stop-opacity="0.5" />
+                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.2" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <div class="absolute bottom-10 right-[8%] w-64 h-64 pointer-events-none animate-blob-4 hidden md:block"
+                style="opacity: 0.2;">
+                <svg viewBox="0 0 500 500" class="w-full h-full -rotate-30" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#hero-leaf-grad4)" />
+                    <defs>
+                        <linearGradient id="hero-leaf-grad4" x1="50%" y1="0%" x2="50%" y2="100%">
+                            <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.5" />
+                            <stop offset="100%" stop-color="#F97316" stop-opacity="0.15" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Wave SVG Bottom -->
             <div
                 class="absolute bottom-0 left-0 right-0 w-full overflow-hidden leading-none pointer-events-none opacity-20">
                 <svg class="relative block w-full h-24 sm:h-48 lg:h-64" viewBox="0 0 1200 120"
@@ -439,60 +340,73 @@
                 </svg>
             </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-16 relative z-10 w-full">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 2xl:max-w-[1500px] py-6 lg:py-16 relative z-10 w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
 
-                    <div class="lg:col-span-7 space-y-5 sm:space-y-7" data-aos="fade-right" data-aos-duration="700">
+                    <!-- Kolom Teks -->
+                    <div class="lg:col-span-7 space-y-5 sm:space-y-7 text-center lg:text-left" data-aos="fade-right"
+                        data-aos-duration="700">
                         <div
-                            class="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-mho-green-light border border-mho-green/20 shadow-xs">
-                            <span class="w-2 h-2 rounded-full bg-mho-green animate-pulse"></span>
-                            <span class="text-[11px] sm:text-xs font-bold text-mho-green uppercase tracking-wider">PPDB
+                            class="inline-flex items-center gap-2.5 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-mho-blue-light border border-mho-blue/20 shadow-xs mx-auto lg:mx-0">
+                            <span class="w-2 h-2 rounded-full bg-mho-blue animate-pulse"></span>
+                            <span class="text-[11px] sm:text-xs font-bold text-mho-blue uppercase tracking-wider">PPDB
                                 TA 2026/2027 Dibuka</span>
                         </div>
 
                         <h1
-                            class="font-headline font-extrabold text-slate-900 text-3xl sm:text-5xl lg:text-6xl leading-[1.15] tracking-tight">
+                            class="font-headline font-extrabold text-slate-900 text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.15] tracking-tight">
                             <span class="text-gradient-custom">Berakhlak, Peduli</span><br />
                             <span class="text-slate-900">& Berprestasi</span><br />
                             <span
-                                class="font-serifAcc italic font-bold text-mho-blue text-2xl sm:text-4xl lg:text-5xl">Di
+                                class="font-serifAcc italic font-bold text-mho-blue text-2xl sm:text-3xl md:text-4xl lg:text-5xl">Di
                                 Era Teknologi</span>
                         </h1>
 
-                        <p class="text-slate-600 text-xs sm:text-base leading-relaxed max-w-xl font-normal">
+                        <p
+                            class="text-slate-600 text-xs sm:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
                             SMP Muhammadiyah 6 Krian menyelenggarakan pendidikan unggul berbasis Al-Islam dan
                             Kemuhammadiyahan yang terintegrasi dengan penguasaan sains, teknologi, serta kepemimpinan
                             masa depan.
                         </p>
 
-                        <div class="flex flex-wrap gap-3 sm:gap-4 pt-1 sm:pt-2">
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 pt-1 sm:pt-2">
                             <a href="daftar.html"
-                                class="inline-flex items-center gap-2.5 sm:gap-3 px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-mho-blue/20 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
+                                class="inline-flex items-center gap-2.5 sm:gap-3 px-5 sm:px-7 py-3 sm:py-3.5 min-h-[44px] rounded-xl bg-mho-blue hover:bg-mho-blue-hover text-white font-headline font-bold text-xs uppercase tracking-wider transition-all duration-200 shadow-md shadow-mho-blue/20 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0">
                                 <span>INFORMASI PPDB</span>
                                 <span class="material-symbols-outlined text-base sm:text-lg">arrow_forward</span>
                             </a>
                             <button onclick="toggleVideoModal()"
-                                class="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-white hover:bg-mho-green-light text-mho-green font-headline font-semibold text-xs uppercase tracking-wider border border-mho-green/30 transition-all shadow-xs hover:shadow-sm">
+                                class="inline-flex items-center gap-2 px-5 sm:px-7 py-3 sm:py-3.5 min-h-[44px] rounded-xl bg-white hover:bg-mho-green-light text-mho-green font-headline font-semibold text-xs uppercase tracking-wider border border-mho-green/30 transition-all shadow-xs hover:shadow-sm">
                                 <span class="material-symbols-outlined text-base sm:text-lg">play_circle</span>
                                 <span>Tur Sekolah</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="lg:col-span-5 relative mt-6 lg:mt-0" data-aos="zoom-in" data-aos-duration="800">
+                    <!-- Kolom Foto -->
+                    <div class="lg:col-span-5 relative mt-4 lg:mt-0" data-aos="zoom-in" data-aos-duration="800">
                         <div
-                            class="relative w-full max-w-sm sm:max-w-lg mx-auto flex justify-center items-end min-h-[360px] sm:min-h-[500px]">
+                            class="hero-people-wrap relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] h-[300px] sm:h-[380px] lg:h-[420px] mx-auto">
+
+                            <!-- Lingkaran dekoratif -->
                             <div
-                                class="absolute bottom-4 sm:bottom-6 w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-white border border-slate-100 shadow-xl shadow-slate-100 flex items-center justify-center overflow-hidden">
+                                class="absolute top-6 sm:top-10 left-1/2 -translate-x-1/2 w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] lg:w-[460px] lg:h-[460px] rounded-full bg-white border border-slate-100 shadow-xl shadow-slate-100 flex items-center justify-center">
                                 <div
                                     class="w-[92%] h-[92%] rounded-full border border-dashed border-mho-blue/20 animate-spin-slow opacity-60">
                                 </div>
                             </div>
-                            <img src="assets/images/woman.png" alt="Siswi SMP Muhammadiyah 6 Krian"
-                                class="relative z-10 w-auto h-[380px] sm:h-[520px] max-w-none object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.06)] -mb-8 sm:-mb-16" />
 
+                            <!-- Foto utama -->
                             <div
-                                class="absolute top-4 left-1 sm:top-8 sm:-left-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3 animate-float scale-90 sm:scale-100 origin-left">
+                                class="hero-photo-clip absolute z-10 left-0 right-0 top-0 sm:top-4 lg:top-8 flex justify-center">
+                                <img src="assets/images/fotoorangberanda.png" alt="Siswa SMP Muhammadiyah 6 Krian"
+                                    class="hero-people-image w-auto h-[420px] sm:h-[540px] lg:h-[680px] max-w-none object-contain object-top drop-shadow-[0_20px_25px_rgba(0,0,0,0.06)]"
+                                    style="transform: translateX(0);" />
+                            </div>
+
+                            <!-- Floating badge kiri -->
+                            <div
+                                class="absolute top-[260px] left-0 sm:top-[320px] sm:left-2 lg:top-[360px] lg:left-0 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3 animate-float scale-90 sm:scale-100 origin-left">
                                 <div
                                     class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-mho-green-light text-mho-green flex items-center justify-center font-bold">
                                     <span class="material-symbols-outlined text-xl sm:text-2xl">verified</span>
@@ -505,7 +419,8 @@
                                 </div>
                             </div>
 
-                            <div class="absolute bottom-8 right-1 sm:bottom-16 sm:-right-4 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3 animate-float scale-90 sm:scale-100 origin-right"
+                            <!-- Floating badge kanan -->
+                            <div class="absolute bottom-0 right-0 sm:bottom-2 sm:right-2 lg:right-0 z-20 bg-white/95 backdrop-blur-md text-slate-900 rounded-2xl p-3 sm:p-4 shadow-xl shadow-slate-200/50 border border-slate-100 flex items-center gap-3 animate-float scale-90 sm:scale-100 origin-right"
                                 style="animation-delay: 2s;">
                                 <div
                                     class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-mho-blue-light text-mho-blue flex items-center justify-center font-bold">
@@ -525,39 +440,38 @@
             </div>
         </section>
 
-        <!-- MARQUEE BERGAYA BANNER MIRING - SEAMLESS -->
-        <div class="relative z-30 -mt-5 sm:-mt-6 overflow-hidden py-3 sm:py-4 select-none">
-            <div class="bg-mho-blue shadow-lg py-3 sm:py-3.5"
-                style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
+        <!-- ============================================================ -->
+        <!-- MARQUEE -->
+        <!-- ============================================================ -->
+        <div class="relative z-30 -mt-4 overflow-hidden py-3 select-none">
+            <div class="bg-mho-blue shadow-soft py-3" style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);">
                 <div class="flex overflow-hidden whitespace-nowrap">
                     <div
-                        class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white">
+                        class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white">
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">verified</span> Berakhlak, Peduli
-                            & Berprestasi Di Era Teknologi</span>
+                                class="material-symbols-outlined text-base">verified</span> Berakhlak, Peduli &
+                            Berprestasi Di Era Teknologi</span>
                         <span class="text-white/40">•</span>
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">star</span> Unggul &
-                            Berkemajuan</span>
+                                class="material-symbols-outlined text-base">star</span> Unggul & Berkemajuan</span>
                         <span class="text-white/40">•</span>
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">school</span> Islamic &
-                            Technology School</span>
+                                class="material-symbols-outlined text-base">school</span> Islamic & Technology
+                            School</span>
                         <span class="text-white/40">•</span>
                     </div>
-                    <div class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-[11px] sm:text-sm uppercase tracking-widest text-white"
+                    <div class="animate-marquee flex items-center gap-8 sm:gap-12 font-headline font-bold text-xs sm:text-sm uppercase tracking-widest text-white"
                         aria-hidden="true">
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">verified</span> Berakhlak, Peduli
-                            & Berprestasi Di Era Teknologi</span>
+                                class="material-symbols-outlined text-base">verified</span> Berakhlak, Peduli &
+                            Berprestasi Di Era Teknologi</span>
                         <span class="text-white/40">•</span>
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">star</span> Unggul &
-                            Berkemajuan</span>
+                                class="material-symbols-outlined text-base">star</span> Unggul & Berkemajuan</span>
                         <span class="text-white/40">•</span>
                         <span class="flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm sm:text-base">school</span> Islamic &
-                            Technology School</span>
+                                class="material-symbols-outlined text-base">school</span> Islamic & Technology
+                            School</span>
                         <span class="text-white/40">•</span>
                     </div>
                 </div>
@@ -567,35 +481,33 @@
         <!-- ============================================================ -->
         <!-- STATISTIK SEKOLAH -->
         <!-- ============================================================ -->
-        <section class="relative z-20 py-8 sm:py-12">
+        <section class="relative z-20 py-12 sm:py-16">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div
-                    class="bg-white border border-slate-100 rounded-2xl p-6 sm:p-10 shadow-xl shadow-slate-100 transition-shadow">
+                <div class="bg-white border border-slate-100 rounded-2xl p-6 sm:p-10 shadow-soft-lg" data-aos="fade-up">
                     <div
                         class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
-                        <div class="p-2" data-aos="fade-up" data-aos-delay="0">
+                        <div class="p-2">
                             <p class="font-headline font-extrabold text-3xl sm:text-5xl text-mho-blue" data-target="850"
                                 data-suffix="+">0</p>
                             <p
                                 class="text-[11px] sm:text-xs font-semibold text-slate-600 mt-2 uppercase tracking-widest">
-                                Siswa Aktif
-                            </p>
+                                Siswa Aktif</p>
                         </div>
-                        <div class="p-2 pt-5 sm:pt-2" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-2 pt-5 sm:pt-2">
                             <p class="font-headline font-extrabold text-3xl sm:text-5xl text-slate-900" data-target="45"
                                 data-suffix="">0</p>
                             <p
                                 class="text-[11px] sm:text-xs font-semibold text-slate-600 mt-2 uppercase tracking-widest">
                                 Guru & Pendidik</p>
                         </div>
-                        <div class="p-2 pt-5 sm:pt-2" data-aos="fade-up" data-aos-delay="200">
+                        <div class="p-2 pt-5 sm:pt-2">
                             <p class="font-headline font-extrabold text-3xl sm:text-5xl text-mho-green"
                                 data-target="120" data-suffix="+">0</p>
                             <p
                                 class="text-[11px] sm:text-xs font-semibold text-slate-600 mt-2 uppercase tracking-widest">
                                 Penghargaan Juara</p>
                         </div>
-                        <div class="p-2 pt-5 sm:pt-2" data-aos="fade-up" data-aos-delay="300">
+                        <div class="p-2 pt-5 sm:pt-2">
                             <p class="font-headline font-extrabold text-3xl sm:text-5xl text-mho-blue" data-target="24"
                                 data-suffix="+">0</p>
                             <p
@@ -692,52 +604,36 @@
         <!-- PROGRAM UNGGULAN -->
         <!-- ============================================================ -->
         <section
-            class="py-16 sm:py-24 bg-slate-50/50 bg-gold-pattern border-t border-slate-100 relative overflow-hidden"
+            class="py-16 sm:py-20 bg-slate-50/50 bg-gold-pattern border-t border-slate-100 relative overflow-hidden"
             id="program">
 
-            <div
-                class="absolute -top-12 -right-12 w-[400px] h-[400px] pointer-events-none opacity-30 -rotate-45 hidden sm:block">
-                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#prog-leaf-grad)" />
-                    <defs>
-                        <linearGradient id="prog-leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.45" />
-                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.15" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none">
             </div>
-
-            <div
-                class="absolute -bottom-16 -left-16 w-96 h-96 pointer-events-none opacity-25 rotate-12 hidden sm:block">
-                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="url(#prog-leaf-grad2)" />
-                    <defs>
-                        <linearGradient id="prog-leaf-grad2" x1="100%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.4" />
-                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.12" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-300/8 rounded-full blur-3xl pointer-events-none">
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                <div class="max-w-2xl mb-10 sm:mb-14" data-aos="fade-up">
-                    <div class="flex items-center gap-2">
-                        <span class="w-8 h-0.5 bg-mho-green rounded-full"></span>
-                        <span class="text-xs font-bold uppercase tracking-widest text-mho-green">Program Unggulan</span>
+                <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
+                    <div
+                        class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green mb-3">
+                        <span class="w-2 h-2 rounded-full bg-mho-green"></span>
+                        <span>Program Unggulan</span>
+                        <span class="w-2 h-2 rounded-full bg-mho-green"></span>
                     </div>
-                    <h2 class="font-headline font-extrabold text-2xl sm:text-4xl text-slate-900 tracking-tight mt-2">
-                        Empat Pilar <span
-                            class="font-serifAcc italic font-normal text-mho-blue text-3xl sm:text-5xl">Utama</span>
-                        Pengembangan Siswa
+                    <h2
+                        class="font-headline font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight">
+                        Empat Pilar <span class="font-serifAcc italic font-normal text-mho-blue">Utama</span>
                     </h2>
+                    <p class="text-slate-500 text-sm mt-4 max-w-xl mx-auto leading-relaxed">
+                        Pengembangan siswa yang dirancang untuk membentuk pribadi unggul, berkarakter, dan siap
+                        menghadapi tantangan global.
+                    </p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                    <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-mho-green/40 shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                         data-aos="fade-up" data-aos-delay="0">
                         <div class="space-y-3 sm:space-y-4">
                             <span
@@ -756,7 +652,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-mho-green/40 shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                         data-aos="fade-up" data-aos-delay="100">
                         <div class="space-y-3 sm:space-y-4">
                             <span
@@ -775,7 +671,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-mho-green/40 shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                         data-aos="fade-up" data-aos-delay="200">
                         <div class="space-y-3 sm:space-y-4">
                             <span
@@ -794,7 +690,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white/95 backdrop-blur-md p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-100 hover:border-mho-green/40 shadow-soft hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
                         data-aos="fade-up" data-aos-delay="300">
                         <div class="space-y-3 sm:space-y-4">
                             <span
@@ -899,34 +795,12 @@
         <!-- JEJAK ALUMNI -->
         <!-- ============================================================ -->
         <section
-            class="py-16 sm:py-24 bg-slate-50/80 bg-gold-pattern border-t border-slate-200/60 overflow-hidden relative"
+            class="py-16 sm:py-20 bg-slate-50/50 bg-gold-pattern border-t border-slate-100 overflow-hidden relative"
             id="alumni">
 
-            <div
-                class="absolute top-10 -left-20 w-[420px] h-[420px] pointer-events-none opacity-25 rotate-12 hidden sm:block">
-                <svg viewBox="0 0 500 500" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z"
-                        fill="url(#alumni-leaf-grad)" />
-                    <defs>
-                        <linearGradient id="alumni-leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.45" />
-                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.15" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-amber-400/10 rounded-full blur-3xl pointer-events-none">
             </div>
-
-            <div class="absolute bottom-0 right-0 w-1/2 h-full pointer-events-none opacity-20 hidden sm:block">
-                <svg class="w-full h-full" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M100,100 C300,50 550,250 500,500 C450,750 100,550 100,100 Z"
-                        fill="url(#alumni-wave-grad)" />
-                    <defs>
-                        <linearGradient id="alumni-wave-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#E58A2B" stop-opacity="0.45" />
-                            <stop offset="100%" stop-color="#FACC15" stop-opacity="0.15" />
-                        </linearGradient>
-                    </defs>
-                </svg>
+            <div class="absolute bottom-0 left-0 w-80 h-80 bg-orange-300/8 rounded-full blur-3xl pointer-events-none">
             </div>
 
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -946,12 +820,12 @@
 
                     <div class="flex items-center gap-3 mt-4 md:mt-0">
                         <button onclick="scrollAlumni('left')"
-                            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-green hover:text-white hover:border-mho-green transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95 cursor-pointer"
+                            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-blue hover:text-white hover:border-mho-blue transition-all duration-200 flex items-center justify-center shadow-soft active:scale-95 cursor-pointer"
                             aria-label="Sebelumnya">
                             <span class="material-symbols-outlined text-xl">arrow_back</span>
                         </button>
                         <button onclick="scrollAlumni('right')"
-                            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-green hover:text-white hover:border-mho-green transition-all duration-200 flex items-center justify-center shadow-sm active:scale-95 cursor-pointer"
+                            class="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-mho-blue hover:text-white hover:border-mho-blue transition-all duration-200 flex items-center justify-center shadow-soft active:scale-95 cursor-pointer"
                             aria-label="Berikutnya">
                             <span class="material-symbols-outlined text-xl">arrow_forward</span>
                         </button>
@@ -962,7 +836,7 @@
                     data-aos="fade-up">
 
                     <div
-                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-mho-green/40 shadow-soft hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-3 sm:space-y-4">
                             <span
                                 class="material-symbols-outlined text-mho-green/40 text-3xl sm:text-4xl">format_quote</span>
@@ -986,7 +860,7 @@
                     </div>
 
                     <div
-                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-mho-green/40 shadow-soft hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-3 sm:space-y-4">
                             <span
                                 class="material-symbols-outlined text-mho-green/40 text-3xl sm:text-4xl">format_quote</span>
@@ -1004,15 +878,13 @@
                                 <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900">Aisyah Nur
                                     Syafiqah</h4>
                                 <p class="text-[10px] sm:text-[11px] text-mho-green font-semibold">Mahasiswi Kedokteran
-                                    •
-                                    Alumni 2020
-                                </p>
+                                    • Alumni 2020</p>
                             </div>
                         </div>
                     </div>
 
                     <div
-                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-mho-green/40 shadow-soft hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-3 sm:space-y-4">
                             <span
                                 class="material-symbols-outlined text-mho-green/40 text-3xl sm:text-4xl">format_quote</span>
@@ -1028,8 +900,7 @@
                                 class="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover border border-slate-200" />
                             <div>
                                 <h4 class="font-headline font-bold text-xs sm:text-sm text-slate-900">Fajar Kurniawan,
-                                    SE
-                                </h4>
+                                    SE</h4>
                                 <p class="text-[10px] sm:text-[11px] text-mho-green font-semibold">Financial Analyst •
                                     Alumni 2017</p>
                             </div>
@@ -1037,7 +908,7 @@
                     </div>
 
                     <div
-                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white/95 backdrop-blur-sm p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-[#E58A2B]/40 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                        class="w-[280px] sm:w-[380px] flex-shrink-0 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/80 hover:border-mho-green/40 shadow-soft hover:shadow-md transition-all flex flex-col justify-between">
                         <div class="space-y-3 sm:space-y-4">
                             <span
                                 class="material-symbols-outlined text-mho-green/40 text-3xl sm:text-4xl">format_quote</span>
@@ -1070,14 +941,24 @@
         <!-- ============================================================ -->
         <section class="py-16 sm:py-20 bg-white border-t border-slate-100">
             <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center space-y-2 mb-10 sm:mb-12" data-aos="fade-up">
-                    <span class="text-xs font-bold uppercase tracking-widest text-mho-green">Pertanyaan Umum</span>
-                    <h2 class="font-headline font-extrabold text-2xl sm:text-3xl text-slate-900">FAQ Pendaftaran PPDB
+                <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16" data-aos="fade-up">
+                    <div
+                        class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest text-mho-green mb-3">
+                        <span class="w-2 h-2 rounded-full bg-mho-green"></span>
+                        <span>Pertanyaan Umum</span>
+                        <span class="w-2 h-2 rounded-full bg-mho-green"></span>
+                    </div>
+                    <h2
+                        class="font-headline font-extrabold text-3xl sm:text-4xl lg:text-5xl text-slate-900 tracking-tight">
+                        FAQ <span class="font-serifAcc italic font-normal text-mho-blue">PPDB</span>
                     </h2>
+                    <p class="text-slate-500 text-sm mt-4 max-w-xl mx-auto leading-relaxed">
+                        Jawaban atas pertanyaan yang paling sering ditanyakan seputar pendaftaran peserta didik baru.
+                    </p>
                 </div>
 
                 <div class="space-y-3" data-aos="fade-up">
-                    <div class="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-soft">
                         <button onclick="toggleFaq(this)"
                             class="w-full px-5 sm:px-6 py-4 text-left font-headline font-bold text-xs sm:text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                             <span>Kapan gelombang pendaftaran PPDB TA 2026/2027 dibuka?</span>
@@ -1091,7 +972,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-soft">
                         <button onclick="toggleFaq(this)"
                             class="w-full px-5 sm:px-6 py-4 text-left font-headline font-bold text-xs sm:text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                             <span>Apa saja dokumen persyaratan pendaftaran?</span>
@@ -1105,7 +986,7 @@
                         </div>
                     </div>
 
-                    <div class="bg-white rounded-xl border border-slate-200/80 overflow-hidden shadow-xs">
+                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-soft">
                         <button onclick="toggleFaq(this)"
                             class="w-full px-5 sm:px-6 py-4 text-left font-headline font-bold text-xs sm:text-sm text-slate-900 flex justify-between items-center hover:bg-slate-50 transition-colors">
                             <span>Apakah ada tes pemetaan kemampuan siswa?</span>
@@ -1129,14 +1010,13 @@
     <!-- ============================================================ -->
     <div class="fixed bottom-6 right-6 z-50 hidden sm:flex flex-col gap-3 items-end">
         <button id="backToTopBtn" onclick="scrollToTop()"
-            class="hidden bg-mho-blue hover:bg-mho-blue-hover text-white p-3 rounded-full shadow-lg transition-all duration-200 active:scale-95">
+            class="hidden bg-mho-blue hover:bg-mho-blue-hover text-white p-3 rounded-full shadow-soft transition-all duration-200 active:scale-95 cursor-pointer">
             <span class="material-symbols-outlined text-xl">arrow_upward</span>
         </button>
     </div>
 
-    <!-- Mobile Floating Bottom Bar -->
     <div
-        class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 flex items-center justify-between sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+        class="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 flex items-center justify-between sm:hidden shadow-[0_-2px_10px_rgba(0,0,0,0.04)]">
         <a href="index.html" class="flex flex-col items-center text-mho-blue">
             <span class="material-symbols-outlined text-xl">home</span>
             <span class="text-[10px] font-bold mt-0.5">Beranda</span>
@@ -1150,7 +1030,7 @@
             <span class="text-[10px] font-semibold mt-0.5">Berita</span>
         </a>
         <a href="daftar.html"
-            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-mho-green text-white font-headline font-extrabold text-[11px] shadow-sm">
+            class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-mho-blue text-white font-headline font-extrabold text-[11px] shadow-soft">
             <span>PPDB</span>
             <span class="material-symbols-outlined text-xs">open_in_new</span>
         </a>
@@ -1175,8 +1055,24 @@
         </div>
     </div>
 
+    <!-- ============================================================ -->
     <!-- FOOTER -->
+    <!-- ============================================================ -->
     <footer class="bg-mho-dark text-white pt-12 sm:pt-16 pb-20 sm:pb-12 relative overflow-hidden">
+
+        <div class="absolute top-0 right-0 w-96 h-96 pointer-events-none animate-blob-1"
+            style="opacity: 0.06; animation-delay: 3s;">
+            <svg viewBox="0 0 500 500" class="w-full h-full rotate-45" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="#E58A2B" />
+            </svg>
+        </div>
+        <div class="absolute bottom-0 left-0 w-80 h-80 pointer-events-none animate-blob-3"
+            style="opacity: 0.05; animation-delay: 7s;">
+            <svg viewBox="0 0 500 500" class="w-full h-full -rotate-12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100,250 C100,50 450,50 450,250 C450,450 100,450 100,250 Z" fill="#F97316" />
+            </svg>
+        </div>
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
             <div
@@ -1185,39 +1081,66 @@
                 <div class="lg:col-span-4 space-y-4 sm:space-y-5">
                     <div class="flex items-center justify-center sm:justify-start gap-3.5">
                         <img alt="Logo SMP Muhammadiyah 6 Krian" class="h-8 sm:h-10 w-auto"
-                            src="assets/images/smpmeka.png" />
+                            src="assets/images/logosmpmeka.png" loading="lazy" />
                         <div>
                             <span
                                 class="font-headline font-extrabold text-base sm:text-lg text-white block leading-none">SMP
                                 Muhammadiyah 6 KRIAN</span>
                             <span
-                                class="text-[9px] text-amber-400 font-semibold tracking-widest uppercase mt-1 block">Islamic
-                                & Technology School</span>
+                                class="text-[9px] text-amber-400 font-semibold tracking-widest uppercase mt-1 block">Sekolah
+                                Kreatif, Berprestasi & Berakhlak</span>
                         </div>
                     </div>
-                    <p class="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto sm:mx-0">
-                        Jl. Kyai Mojo No. 12, Krian, Kabupaten Sidoarjo, Jawa Timur 61262. Lembaga pendidikan menengah
-                        pertama berbasis Al-Islam dan IPTEK unggulan.
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed max-w-sm mx-auto sm:mx-0">
+                        Jl. Raya Kemasan Mojosantren No.26, Mojosanten, Kemasan, Kec. Krian, Kabupaten Sidoarjo, Jawa
+                        Timur 61262
                     </p>
 
-                    <div class="pt-2 space-y-2 text-xs text-slate-300">
+                    <div class="pt-2 space-y-2 text-xs sm:text-sm text-slate-300">
                         <div class="flex items-center justify-center sm:justify-start gap-3"><span
-                                class="material-symbols-outlined text-amber-500 text-base">call</span> (031) 8971234
+                                class="material-symbols-outlined text-amber-500 text-base">call</span> (031) 8975188
                         </div>
                         <div class="flex items-center justify-center sm:justify-start gap-3"><span
+                                class="material-symbols-outlined text-amber-500 text-base">chat</span> 082142028143 (
+                            WhatsApp )</div>
+                        <div class="flex items-center justify-center sm:justify-start gap-3"><span
                                 class="material-symbols-outlined text-amber-500 text-base">mail</span>
-                            info@smpm6krian.sch.id</div>
+                            smpmuh6krian@gmail.com</div>
+                    </div>
+
+                    <div class="pt-2 space-y-2">
+                        <p class="text-xs font-bold text-amber-400 uppercase tracking-widest">Sosial Media</p>
+                        <div class="flex items-center justify-center sm:justify-start gap-3">
+                            <a href="https://instagram.com/smpmeka" target="_blank"
+                                aria-label="Instagram SMP Muhammadiyah 6 Krian"
+                                class="flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] rounded-xl bg-white/10 hover:bg-amber-500 hover:text-slate-900 transition-colors text-white text-xs font-semibold">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                                </svg>
+                                <span>@smpmeka</span>
+                            </a>
+                            <a href="https://tiktok.com" target="_blank" aria-label="TikTok SMP Muhammadiyah 6 Krian"
+                                class="flex items-center gap-2 px-3.5 py-2.5 min-h-[44px] rounded-xl bg-white/10 hover:bg-amber-500 hover:text-slate-900 transition-colors text-white text-xs font-semibold">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                    <path
+                                        d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+                                </svg>
+                                <span>all in meka</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="lg:col-span-2 space-y-3 sm:space-y-4">
                     <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Tautan Utama
                     </h4>
-                    <ul class="space-y-2 sm:space-y-2.5 text-xs text-slate-400">
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-400">
                         <li><a href="index.html" class="hover:text-white transition-colors">Beranda</a></li>
                         <li><a href="profile.html" class="hover:text-white transition-colors">Profil Sekolah</a></li>
                         <li><a href="#program" class="hover:text-white transition-colors">Program Unggulan</a></li>
-                        <li><a href="berita.html" class="hover:text-white transition-colors">Warta & Pengumuman</a></li>
+                        <li><a href="berita.html" class="hover:text-white transition-colors">Berita & Pengumuman</a>
+                        </li>
                         <li><a href="#alumni" class="hover:text-white transition-colors">Jejak Alumni</a></li>
                     </ul>
                 </div>
@@ -1225,16 +1148,16 @@
                 <div class="lg:col-span-3 space-y-3 sm:space-y-4">
                     <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Jam Operasional
                     </h4>
-                    <ul class="space-y-2 text-xs text-slate-400 max-w-xs mx-auto sm:mx-0">
-                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-400 max-w-xs mx-auto sm:mx-0">
+                        <li class="flex justify-between border-b border-white/5 pb-2">
                             <span>Senin - Kamis:</span>
                             <span class="text-slate-200 font-medium">07:00 - 15:30 WIB</span>
                         </li>
-                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
+                        <li class="flex justify-between border-b border-white/5 pb-2">
                             <span>Jum'at:</span>
                             <span class="text-slate-200 font-medium">07:00 - 11:30 WIB</span>
                         </li>
-                        <li class="flex justify-between border-b border-white/5 pb-1.5 sm:pb-2">
+                        <li class="flex justify-between border-b border-white/5 pb-2">
                             <span>Sabtu (Ekstrakurikuler):</span>
                             <span class="text-slate-200 font-medium">08:00 - 12:00 WIB</span>
                         </li>
@@ -1244,10 +1167,11 @@
                 <div class="lg:col-span-3 space-y-3 sm:space-y-4">
                     <h4 class="font-headline font-bold text-xs text-amber-400 uppercase tracking-widest">Peta Lokasi
                     </h4>
-                    <div class="w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-white/10 shadow-sm">
+                    <div class="w-full h-32 sm:h-36 rounded-xl overflow-hidden border border-white/10 shadow-soft">
                         <iframe title="Lokasi SMP Muhammadiyah 6 Krian"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.883713835697!2d112.58000000000001!3d-7.400000000000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMjQnMDAuMCJTIDExMsKwMzQnODAuMCJF!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid"
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.5923599258635!2d112.58940857411422!3d-7.39948837285483!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7809824ff67817%3A0xaa62b3907708f892!2sSMP%20MUHAMMADIYAH%206%20KRIAN!5e0!3m2!1sen!2sid!4v1789956140321!5m2!1sen!2sid"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
                 </div>
 
@@ -1255,7 +1179,7 @@
 
             <div
                 class="pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs text-slate-400 text-center sm:text-left">
-                <p>© 2026 SMP Muhammadiyah 6 Krian. All rights reserved.</p>
+                <p>© 2026 SMP Muhammadiyah 6 Krian All rights reserved. <br> Supported by RPL SMK Krian 1 Sidoarjo.</p>
                 <div class="flex gap-4 sm:gap-6">
                     <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
                     <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
@@ -1265,134 +1189,12 @@
         </div>
     </footer>
 
-    <!-- AOS Script & Custom Interactive Logic -->
+    <!-- AOS Library -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('beforeunload', () => {
-            window.scrollTo(0, 0);
-        });
 
-        AOS.init({
-            duration: 600,
-            once: true,
-            offset: 40,
-            easing: 'cubic-bezier(0.16, 1, 0.3, 1)'
-        });
-
-        const backToTopBtn = document.getElementById('backToTopBtn');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                if (backToTopBtn) backToTopBtn.classList.remove('hidden');
-            } else {
-                if (backToTopBtn) backToTopBtn.classList.add('hidden');
-            }
-        });
-
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function toggleMobileNav() {
-            const menu = document.getElementById('mobileNav');
-            menu.classList.toggle('hidden');
-        }
-
-        function toggleMobileSubmenu(btn) {
-            const subMenu = btn.nextElementSibling;
-            const icon = btn.querySelector('.material-symbols-outlined');
-            subMenu.classList.toggle('hidden');
-            icon.style.transform = subMenu.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-        }
-
-        function toggleFaq(btn) {
-            const content = btn.nextElementSibling;
-            const icon = btn.querySelector('.material-symbols-outlined');
-            content.classList.toggle('hidden');
-            if (content.classList.contains('hidden')) {
-                icon.textContent = 'add';
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                icon.textContent = 'remove';
-                icon.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        function toggleVideoModal() {
-            const modal = document.getElementById('videoModal');
-            const iframe = document.getElementById('youtubeIframe');
-            modal.classList.toggle('hidden');
-
-            if (!modal.classList.contains('hidden')) {
-                iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
-            } else {
-                iframe.src = "";
-            }
-        }
-
-        function scrollAlumni(direction) {
-            const container = document.getElementById('alumniSlider');
-            const scrollAmount = container.clientWidth > 768 ? 380 : 300;
-            if (direction === 'left') {
-                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-            } else {
-                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-            }
-        }
-
-        // --- COUNTER DINAMIS ---
-        function startCounters() {
-            const counters = document.querySelectorAll('[data-target]');
-            const speed = 200;
-
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const suffix = counter.getAttribute('data-suffix') || '';
-                let count = 0;
-
-                const updateCount = () => {
-                    const inc = target / speed;
-                    if (count < target) {
-                        count += inc;
-                        counter.innerText = Math.ceil(count) + suffix;
-                        setTimeout(updateCount, 15);
-                    } else {
-                        counter.innerText = target + suffix;
-                    }
-                };
-
-                updateCount();
-            });
-        }
-
-        const observerOptions = {
-            root: null,
-            threshold: 0.3
-        };
-
-        const statsSection = document.querySelector('.relative.z-20.py-8');
-        let counted = false;
-
-        const statsObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !counted) {
-                    startCounters();
-                    counted = true;
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        if (statsSection) {
-            statsObserver.observe(statsSection);
-        }
-
-        window.addEventListener('load', () => {
-            document.body.classList.remove('is-loading');
-        });
-    </script>
+    <!-- Custom Scripts -->
+    <script src="./js/main.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
