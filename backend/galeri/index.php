@@ -1,12 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
+
+cek_login();
 
 $status = $_GET['status'] ?? '';
 
@@ -128,7 +125,7 @@ $query = mysqli_query($conn, "SELECT * FROM galeri ORDER BY tanggal DESC, id DES
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        <?php if (mysqli_num_rows($query) > 0) : ?>
+                        <?php if ($query && mysqli_num_rows($query) > 0) : ?>
                             <?php while ($row = mysqli_fetch_assoc($query)) : ?>
                                 <tr class="hover:bg-slate-50 transition">
                                     <td class="px-6 py-4"><?= $row['id'] ?></td>

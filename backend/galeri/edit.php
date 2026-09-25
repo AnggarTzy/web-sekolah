@@ -1,18 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$id = (int) $id;
+cek_login();
 
-$result = mysqli_query($conn, "SELECT * FROM galeri WHERE id = '$id'");
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM galeri WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $galeri = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$galeri) {
     header("Location: index.php");
@@ -21,70 +21,42 @@ if (!$galeri) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $tentang = mysqli_real_escape_string($conn, $_POST['tentang']);
-    $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal']);
+    $judul   = trim($_POST['judul'] ?? '');
+    $tentang = trim($_POST['tentang'] ?? '');
+    $tanggal = trim($_POST['tanggal'] ?? '');
 
-    $gambar_lama = $galeri['gambar'];
-    $gambar = $gambar_lama;
+    if ($judul === '' || $tanggal === '') {
+        $error = "Nama kegiatan dan tanggal wajib diisi.";
+    } else {
+        $gambar = $galeri['gambar'];
 
-    if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] !== UPLOAD_ERR_NO_FILE) {
-
-        if ($_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
-
-            $target_dir = "../../uploads/";
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0777, true);
-            }
-
-            $allowed_types = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-            $file_type = mime_content_type($_FILES['gambar']['tmp_name']);
-
-            if (in_array($file_type, $allowed_types)) {
-
-                if ($_FILES['gambar']['size'] <= 5 * 1024 * 1024) {
-
-                    $extension = strtolower(pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION));
-                    $file_name = time() . '_' . uniqid() . '.' . $extension;
-                    $target_file = $target_dir . $file_name;
-
-                    if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file)) {
-                        if (!empty($gambar_lama) && file_exists($target_dir . $gambar_lama)) {
-                            unlink($target_dir . $gambar_lama);
-                        }
-                        $gambar = $file_name;
-                    }
-
-                } else {
-                    $error = "Ukuran gambar terlalu besar. Maksimal 5MB.";
-                }
-
+        // Upload foto baru (opsional di edit)
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                hapus_gambar($galeri['gambar']);
+                $gambar = $upload['filename'];
             } else {
-                $error = "Format gambar tidak diperbolehkan. Gunakan JPG, JPEG, PNG, atau WEBP.";
+                $error = $upload['error'];
             }
-
-        } else {
-            $error = "Terjadi kesalahan saat mengupload gambar.";
         }
-    }
 
-    if (!isset($error)) {
-        $query = mysqli_query(
-            $conn,
-            "UPDATE galeri SET
-                judul = '$judul',
-                tentang = '$tentang',
-                gambar = '$gambar',
-                tanggal = '$tanggal'
-             WHERE id = '$id'"
-        );
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE galeri SET judul=?, tentang=?, gambar=?, tanggal=? WHERE id=?"
+            );
+            mysqli_stmt_bind_param($stmt, "ssssi", $judul, $tentang, $gambar, $tanggal, $id);
 
-        if ($query) {
-            catat_aktivitas($conn, 'Galeri', 'Mengedit', $judul);
-            header("Location: index.php?status=updated");
-            exit;
-        } else {
-            $error = "Gagal mengupdate galeri: " . mysqli_error($conn);
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Galeri', 'Mengedit', $judul);
+                header("Location: index.php?status=updated");
+                exit;
+            } else {
+                $error = "Gagal mengupdate galeri: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
         }
     }
 }

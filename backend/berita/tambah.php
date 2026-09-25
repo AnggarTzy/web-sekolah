@@ -1,64 +1,51 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
+cek_login();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
-    $konten = mysqli_real_escape_string($conn, $_POST['konten']);
-    $penulis = mysqli_real_escape_string($conn, $_POST['penulis']);
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
+    $judul     = trim($_POST['judul'] ?? '');
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
+    $konten    = trim($_POST['konten'] ?? '');
+    $penulis   = trim($_POST['penulis'] ?? 'Admin');
+    $status    = $_POST['status'] ?? 'draft';
 
-    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
-    $slug = trim($slug, '-');
+    // Validasi
+    if ($judul === '' || $konten === '') {
+        $error = "Judul dan konten wajib diisi.";
+    } else {
+        $slug = buat_slug($judul);
+        $gambar = null;
 
-    $gambar = null;
-    if (!empty($_FILES['gambar']['name'])) {
-
-        $allowed_types = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-        $file_type = mime_content_type($_FILES['gambar']['tmp_name']);
-        $max_size = 5 * 1024 * 1024;
-
-        if (in_array($file_type, $allowed_types)) {
-            if ($_FILES['gambar']['size'] <= $max_size) {
-                $target_dir = "../../uploads/";
-                if (!is_dir($target_dir)) {
-                    mkdir($target_dir, 0777, true);
-                }
-
-                $extension = strtolower(pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION));
-                $file_name = time() . '_' . uniqid() . '.' . $extension;
-                $target_file = $target_dir . $file_name;
-
-                if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file)) {
-                    $gambar = $file_name;
-                } else {
-                    $error = "Gagal mengupload gambar.";
-                }
+        // Upload gambar (opsional)
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                $gambar = $upload['filename'];
             } else {
-                $error = "Ukuran gambar terlalu besar. Maksimal 5MB.";
+                $error = $upload['error'];
             }
-        } else {
-            $error = "Format gambar tidak diperbolehkan. Gunakan JPG, JPEG, PNG, atau WEBP.";
         }
-    }
 
-    if (!isset($error)) {
-        $query = mysqli_query($conn, "INSERT INTO berita (judul, slug, konten, gambar, deskripsi, penulis, status) 
-                                      VALUES ('$judul', '$slug', '$konten', '$gambar', '$deskripsi', '$penulis', '$status')");
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO berita (judul, slug, konten, gambar, deskripsi, penulis, status) 
+                 VALUES (?, ?, ?, ?, ?, ?, ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "sssssss", $judul, $slug, $konten, $gambar, $deskripsi, $penulis, $status);
 
-        if ($query) {
-            catat_aktivitas($conn, 'Berita', 'Menambah', $judul);
-            header("Location: index.php?status=created");
-            exit;
-        } else {
-            $error = "Gagal menyimpan berita: " . mysqli_error($conn);
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Berita', 'Menambah', $judul);
+                header("Location: index.php?status=created");
+                exit;
+            } else {
+                $error = "Gagal menyimpan berita: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
         }
     }
 }

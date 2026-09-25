@@ -1,12 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
+
+cek_login();
 
 $status = $_GET['status'] ?? '';
 if ($status === 'success') {
@@ -116,25 +113,31 @@ $query = mysqli_query($conn, "SELECT * FROM guru ORDER BY nama ASC");
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
-                        <?php while ($row = mysqli_fetch_assoc($query)) : ?>
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="px-6 py-4"><?= $row['id'] ?></td>
-                            <td class="px-6 py-4">
-                                <?php if ($row['foto']) : ?>
-                                    <img src="../../uploads/<?= $row['foto'] ?>" class="w-12 h-12 object-cover rounded-full border border-slate-200">
-                                <?php else : ?>
-                                    <span class="text-slate-400">-</span>
-                                <?php endif; ?>
-                            </td>
-                            <td class="px-6 py-4 font-medium text-slate-800"><?= htmlspecialchars($row['nama']) ?></td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($row['jabatan']) ?></td>
-                            <td class="px-6 py-4"><?= htmlspecialchars($row['bidang_studi']) ?></td>
-                            <td class="px-6 py-4">
-                                <a href="edit.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 font-semibold mr-3">Edit</a>
-                                <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin mau hapus?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</a>
-                            </td>
-                        </tr>
-                        <?php endwhile; ?>
+                        <?php if ($query && mysqli_num_rows($query) > 0): ?>
+                            <?php while ($row = mysqli_fetch_assoc($query)) : ?>
+                            <tr class="hover:bg-slate-50 transition">
+                                <td class="px-6 py-4"><?= $row['id'] ?></td>
+                                <td class="px-6 py-4">
+                                    <?php if ($row['foto']) : ?>
+                                        <img src="../../uploads/<?= htmlspecialchars($row['foto']) ?>" class="w-12 h-12 object-cover rounded-full border border-slate-200">
+                                    <?php else : ?>
+                                        <span class="text-slate-400">-</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td class="px-6 py-4 font-medium text-slate-800"><?= htmlspecialchars($row['nama']) ?></td>
+                                <td class="px-6 py-4"><?= htmlspecialchars($row['jabatan']) ?></td>
+                                <td class="px-6 py-4"><?= htmlspecialchars($row['bidang_studi']) ?></td>
+                                <td class="px-6 py-4">
+                                    <a href="edit.php?id=<?= $row['id'] ?>" class="text-blue-600 hover:text-blue-800 font-semibold mr-3">Edit</a>
+                                    <a href="hapus.php?id=<?= $row['id'] ?>" onclick="return confirm('Yakin mau hapus?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</a>
+                                </td>
+                            </tr>
+                            <?php endwhile; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" class="px-6 py-10 text-center text-slate-400">Belum ada data guru</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </div>

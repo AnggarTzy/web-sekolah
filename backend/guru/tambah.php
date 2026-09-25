@@ -1,37 +1,46 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
+cek_login();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $jabatan = mysqli_real_escape_string($conn, $_POST['jabatan']);
-    $bidang_studi = mysqli_real_escape_string($conn, $_POST['bidang_studi']);
+    $nama          = trim($_POST['nama'] ?? '');
+    $jabatan       = trim($_POST['jabatan'] ?? '');
+    $bidang_studi  = trim($_POST['bidang_studi'] ?? '');
 
-    $foto = null;
-    if (!empty($_FILES['foto']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['foto']['name']);
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_dir . $file_name)) {
-            $foto = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "INSERT INTO guru (nama, jabatan, bidang_studi, foto) 
-                                  VALUES ('$nama', '$jabatan', '$bidang_studi', '$foto')");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Guru', 'Menambah', $nama);
-        header("Location: index.php");
-        exit;
+    if ($nama === '') {
+        $error = "Nama wajib diisi.";
     } else {
-        $error = "Gagal menyimpan: " . mysqli_error($conn);
+        $foto = null;
+
+        if (!empty($_FILES['foto']['name'])) {
+            $upload = upload_gambar($_FILES['foto']);
+            if ($upload['success']) {
+                $foto = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO guru (nama, jabatan, bidang_studi, foto) VALUES (?, ?, ?, ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "ssss", $nama, $jabatan, $bidang_studi, $foto);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Guru', 'Menambah', $nama);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal menyimpan: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>

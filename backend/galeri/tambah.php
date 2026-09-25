@@ -1,71 +1,49 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
+
+cek_login();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $tentang = mysqli_real_escape_string($conn, $_POST['tentang']);
-    $tanggal = mysqli_real_escape_string($conn, $_POST['tanggal']);
+    $judul   = trim($_POST['judul'] ?? '');
+    $tentang = trim($_POST['tentang'] ?? '');
+    $tanggal = trim($_POST['tanggal'] ?? '');
 
-    $gambar = null;
+    if ($judul === '' || $tanggal === '') {
+        $error = "Nama kegiatan dan tanggal wajib diisi.";
+    } else {
+        $gambar = null;
 
-    if (!empty($_FILES['gambar']['name'])) {
-
-        $allowed_types = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-        $file_type = mime_content_type($_FILES['gambar']['tmp_name']);
-        $max_size = 5 * 1024 * 1024;
-
-        if (in_array($file_type, $allowed_types)) {
-
-            if ($_FILES['gambar']['size'] <= $max_size) {
-
-                $target_dir = "../../uploads/";
-                if (!is_dir($target_dir)) {
-                    mkdir($target_dir, 0777, true);
-                }
-
-                $extension = strtolower(pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION));
-                $file_name = time() . '_' . uniqid() . '.' . $extension;
-                $target_file = $target_dir . $file_name;
-
-                if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file)) {
-                    $gambar = $file_name;
-                } else {
-                    $error = "Gagal mengupload gambar.";
-                }
-
-            } else {
-                $error = "Ukuran gambar terlalu besar. Maksimal 5MB.";
-            }
-
+        // Foto WAJIB diupload di galeri
+        if (empty($_FILES['gambar']['name'])) {
+            $error = "Foto kegiatan wajib diupload.";
         } else {
-            $error = "Format gambar tidak diperbolehkan. Gunakan JPG, JPEG, PNG, atau WEBP.";
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
         }
 
-    } else {
-        $error = "Foto kegiatan wajib diupload.";
-    }
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO galeri (judul, tentang, gambar, tanggal) VALUES (?, ?, ?, ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "ssss", $judul, $tentang, $gambar, $tanggal);
 
-    if (!isset($error)) {
-        $query = mysqli_query(
-            $conn,
-            "INSERT INTO galeri (judul, tentang, gambar, tanggal)
-             VALUES ('$judul', '$tentang', '$gambar', '$tanggal')"
-        );
-
-        if ($query) {
-            catat_aktivitas($conn, 'Galeri', 'Menambah', $judul);
-            header("Location: index.php?status=created");
-            exit;
-        } else {
-            $error = "Gagal menyimpan galeri: " . mysqli_error($conn);
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Galeri', 'Menambah', $judul);
+                header("Location: index.php?status=created");
+                exit;
+            } else {
+                $error = "Gagal menyimpan galeri: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
         }
     }
 }

@@ -1,16 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$result = mysqli_query($conn, "SELECT * FROM fasilitas WHERE id = '$id'");
+cek_login();
+
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM fasilitas WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $fasilitas = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$fasilitas) {
     header("Location: index.php");
@@ -18,34 +20,42 @@ if (!$fasilitas) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
+    $nama      = trim($_POST['nama'] ?? '');
+    $kategori  = trim($_POST['kategori'] ?? '');
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-    $gambar_lama = $fasilitas['gambar'];
-    $gambar = $gambar_lama;
-
-    if (!empty($_FILES['gambar']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['gambar']['name']);
-        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            if ($gambar_lama && file_exists($target_dir . $gambar_lama)) unlink($target_dir . $gambar_lama);
-            $gambar = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "UPDATE fasilitas SET 
-                                  nama = '$nama', kategori = '$kategori', 
-                                  deskripsi = '$deskripsi', gambar = '$gambar' 
-                                  WHERE id = '$id'");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Fasilitas', 'Mengedit', $nama);
-        header("Location: index.php");
-        exit;
+    if ($nama === '') {
+        $error = "Nama fasilitas wajib diisi.";
     } else {
-        $error = "Gagal mengupdate: " . mysqli_error($conn);
+        $gambar = $fasilitas['gambar'];
+
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                hapus_gambar($fasilitas['gambar']);
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE fasilitas SET nama=?, kategori=?, deskripsi=?, gambar=? WHERE id=?"
+            );
+            mysqli_stmt_bind_param($stmt, "ssssi", $nama, $kategori, $deskripsi, $gambar, $id);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Fasilitas', 'Mengedit', $nama);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal mengupdate: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>

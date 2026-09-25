@@ -1,37 +1,46 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
+cek_login();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
+    $nama      = trim($_POST['nama'] ?? '');
+    $kategori  = trim($_POST['kategori'] ?? '');
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-    $gambar = null;
-    if (!empty($_FILES['gambar']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['gambar']['name']);
-        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            $gambar = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "INSERT INTO fasilitas (nama, kategori, deskripsi, gambar) 
-                                  VALUES ('$nama', '$kategori', '$deskripsi', '$gambar')");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Fasilitas', 'Menambah', $nama);
-        header("Location: index.php");
-        exit;
+    if ($nama === '') {
+        $error = "Nama fasilitas wajib diisi.";
     } else {
-        $error = "Gagal menyimpan: " . mysqli_error($conn);
+        $gambar = null;
+
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO fasilitas (nama, kategori, deskripsi, gambar) VALUES (?, ?, ?, ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "ssss", $nama, $kategori, $deskripsi, $gambar);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Fasilitas', 'Menambah', $nama);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal menyimpan: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>

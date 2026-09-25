@@ -1,16 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$result = mysqli_query($conn, "SELECT * FROM guru WHERE id = '$id'");
+cek_login();
+
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM guru WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $guru = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$guru) {
     header("Location: index.php");
@@ -18,34 +20,42 @@ if (!$guru) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $jabatan = mysqli_real_escape_string($conn, $_POST['jabatan']);
-    $bidang_studi = mysqli_real_escape_string($conn, $_POST['bidang_studi']);
+    $nama          = trim($_POST['nama'] ?? '');
+    $jabatan       = trim($_POST['jabatan'] ?? '');
+    $bidang_studi  = trim($_POST['bidang_studi'] ?? '');
 
-    $foto_lama = $guru['foto'];
-    $foto = $foto_lama;
-
-    if (!empty($_FILES['foto']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['foto']['name']);
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_dir . $file_name)) {
-            if ($foto_lama && file_exists($target_dir . $foto_lama)) unlink($target_dir . $foto_lama);
-            $foto = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "UPDATE guru SET 
-                                  nama = '$nama', jabatan = '$jabatan', 
-                                  bidang_studi = '$bidang_studi', foto = '$foto' 
-                                  WHERE id = '$id'");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Guru', 'Mengedit', $nama);
-        header("Location: index.php");
-        exit;
+    if ($nama === '') {
+        $error = "Nama wajib diisi.";
     } else {
-        $error = "Gagal mengupdate: " . mysqli_error($conn);
+        $foto = $guru['foto'];
+
+        if (!empty($_FILES['foto']['name'])) {
+            $upload = upload_gambar($_FILES['foto']);
+            if ($upload['success']) {
+                hapus_gambar($guru['foto']);
+                $foto = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE guru SET nama=?, jabatan=?, bidang_studi=?, foto=? WHERE id=?"
+            );
+            mysqli_stmt_bind_param($stmt, "ssssi", $nama, $jabatan, $bidang_studi, $foto, $id);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Guru', 'Mengedit', $nama);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal mengupdate: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>

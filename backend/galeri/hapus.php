@@ -1,18 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$id = (int) $id;
+cek_login();
 
-$result = mysqli_query($conn, "SELECT * FROM galeri WHERE id = '$id'");
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM galeri WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $galeri = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$galeri) {
     header("Location: index.php");
@@ -21,18 +21,19 @@ if (!$galeri) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    if (!empty($galeri['gambar']) && file_exists("../../uploads/" . $galeri['gambar'])) {
-        unlink("../../uploads/" . $galeri['gambar']);
-    }
+    hapus_gambar($galeri['gambar']);
 
-    $query = mysqli_query($conn, "DELETE FROM galeri WHERE id = '$id'");
+    $stmt = mysqli_prepare($conn, "DELETE FROM galeri WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
 
-    if ($query) {
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt);
         catat_aktivitas($conn, 'Galeri', 'Menghapus', $galeri['judul']);
         header("Location: index.php?status=deleted");
         exit;
     } else {
         $error = "Gagal menghapus galeri: " . mysqli_error($conn);
+        mysqli_stmt_close($stmt);
     }
 }
 ?>

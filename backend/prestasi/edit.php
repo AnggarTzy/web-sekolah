@@ -1,16 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$result = mysqli_query($conn, "SELECT * FROM prestasi WHERE id = '$id'");
+cek_login();
+
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM prestasi WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $prestasi = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$prestasi) {
     header("Location: index.php");
@@ -18,36 +20,44 @@ if (!$prestasi) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $tingkat = mysqli_real_escape_string($conn, $_POST['tingkat']);
-    $tahun = mysqli_real_escape_string($conn, $_POST['tahun']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
+    $judul     = trim($_POST['judul'] ?? '');
+    $kategori  = trim($_POST['kategori'] ?? '');
+    $tingkat   = trim($_POST['tingkat'] ?? '');
+    $tahun     = (int) ($_POST['tahun'] ?? 0);
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-    $gambar_lama = $prestasi['gambar'];
-    $gambar = $gambar_lama;
-
-    if (!empty($_FILES['gambar']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['gambar']['name']);
-        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            if ($gambar_lama && file_exists($target_dir . $gambar_lama)) unlink($target_dir . $gambar_lama);
-            $gambar = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "UPDATE prestasi SET 
-                                  judul = '$judul', kategori = '$kategori', tingkat = '$tingkat', 
-                                  tahun = '$tahun', deskripsi = '$deskripsi', gambar = '$gambar' 
-                                  WHERE id = '$id'");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Prestasi', 'Mengedit', $judul);
-        header("Location: index.php");
-        exit;
+    if ($judul === '' || $tahun === 0) {
+        $error = "Judul dan tahun wajib diisi.";
     } else {
-        $error = "Gagal mengupdate: " . mysqli_error($conn);
+        $gambar = $prestasi['gambar'];
+
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                hapus_gambar($prestasi['gambar']);
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE prestasi SET judul=?, kategori=?, tingkat=?, tahun=?, deskripsi=?, gambar=? WHERE id=?"
+            );
+            mysqli_stmt_bind_param($stmt, "sssissi", $judul, $kategori, $tingkat, $tahun, $deskripsi, $gambar, $id);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Prestasi', 'Mengedit', $judul);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal mengupdate: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>

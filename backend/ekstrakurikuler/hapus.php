@@ -7,28 +7,27 @@ cek_login();
 
 $id = (int) ($_GET['id'] ?? 0);
 
-$stmt = mysqli_prepare($conn, "SELECT * FROM guru WHERE id = ?");
+$stmt = mysqli_prepare($conn, "SELECT * FROM ekstrakurikuler WHERE id = ?");
 mysqli_stmt_bind_param($stmt, "i", $id);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
-$guru = mysqli_fetch_assoc($result);
+$ekskul = mysqli_fetch_assoc($result);
 mysqli_stmt_close($stmt);
 
-if (!$guru) {
+if (!$ekskul) {
     header("Location: index.php");
     exit;
 }
 
-// Proses hapus
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    hapus_gambar($guru['foto']);
+    hapus_gambar($ekskul['gambar']);
 
-    $stmt = mysqli_prepare($conn, "DELETE FROM guru WHERE id = ?");
+    $stmt = mysqli_prepare($conn, "DELETE FROM ekstrakurikuler WHERE id = ?");
     mysqli_stmt_bind_param($stmt, "i", $id);
 
     if (mysqli_stmt_execute($stmt)) {
         mysqli_stmt_close($stmt);
-        catat_aktivitas($conn, 'Guru', 'Menghapus', $guru['nama']);
+        catat_aktivitas($conn, 'Ekstrakurikuler', 'Menghapus', $ekskul['nama']);
         header("Location: index.php?status=success");
         exit;
     } else {
@@ -43,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hapus Guru | Admin SMP Muhammadiyah 6 Krian</title>
+    <title>Hapus Ekstrakurikuler | Admin SMP Muhammadiyah 6 Krian</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-red-100 flex items-center justify-center">
                         <span class="material-icons text-4xl sm:text-5xl text-red-600">delete_forever</span>
                     </div>
-                    <h1 class="font-headline font-extrabold text-3xl sm:text-4xl text-primary mt-6">Hapus Data Guru?</h1>
+                    <h1 class="font-headline font-extrabold text-3xl sm:text-4xl text-primary mt-6">Hapus Ekstrakurikuler?</h1>
                     <p class="text-slate-500 mt-2 text-sm sm:text-base">Tindakan ini tidak dapat dibatalkan.</p>
                 </div>
             </div>
@@ -118,47 +117,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
                 <div class="px-5 sm:px-7 py-5 border-b border-slate-100">
-                    <h2 class="font-headline font-bold text-lg sm:text-xl text-slate-800">Data yang akan dihapus</h2>
+                    <h2 class="font-headline font-bold text-lg sm:text-xl text-slate-800">Ekstrakurikuler yang akan dihapus</h2>
                     <p class="text-sm text-slate-500 mt-1">Periksa kembali data sebelum menghapusnya.</p>
                 </div>
 
                 <div class="p-5 sm:p-7">
                     <div class="flex flex-col md:flex-row gap-6 p-5 bg-slate-50 rounded-2xl border border-slate-200">
 
-                        <div class="w-full md:w-72 lg:w-80 flex-shrink-0 flex justify-center md:justify-start">
-                            <?php if (!empty($guru['foto'])) : ?>
-                                <img src="../../uploads/<?= htmlspecialchars($guru['foto']) ?>"
-                                     alt="Foto guru"
-                                     class="w-32 h-32 md:w-48 md:h-48 object-cover rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="w-full md:w-72 lg:w-80 flex-shrink-0">
+                            <?php if (!empty($ekskul['gambar'])) : ?>
+                                <img src="../../uploads/<?= htmlspecialchars($ekskul['gambar']) ?>"
+                                     alt="Gambar ekstrakurikuler"
+                                     class="w-full h-52 md:h-48 lg:h-52 object-cover rounded-2xl border border-slate-200 shadow-sm">
                             <?php else : ?>
-                                <div class="w-32 h-32 md:w-48 md:h-48 bg-slate-200 rounded-2xl flex items-center justify-center">
-                                    <span class="material-icons text-5xl text-slate-400">person</span>
+                                <div class="w-full h-52 md:h-48 lg:h-52 bg-slate-200 rounded-2xl flex items-center justify-center">
+                                    <span class="material-icons text-5xl text-slate-400">image</span>
                                 </div>
                             <?php endif; ?>
                         </div>
 
-                        <div class="flex-1 min-w-0 flex flex-col justify-center text-center md:text-left">
+                        <div class="flex-1 min-w-0 flex flex-col justify-center">
+                            <div class="mb-3">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-100 text-primary text-xs font-bold rounded-lg">
+                                    <span class="material-icons text-sm">folder</span>
+                                    <?= htmlspecialchars(ucfirst($ekskul['kategori'])) ?>
+                                </span>
+                            </div>
+
                             <h3 class="font-headline font-extrabold text-2xl sm:text-3xl text-slate-800 leading-tight">
-                                <?= htmlspecialchars($guru['nama']) ?>
+                                <?= htmlspecialchars($ekskul['nama']) ?>
                             </h3>
 
-                            <div class="flex items-center justify-center md:justify-start gap-2 mt-5 text-sm text-slate-500">
+                            <div class="flex items-center gap-2 mt-5 text-sm text-slate-500">
                                 <span class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center">
-                                    <span class="material-icons text-base">work</span>
+                                    <span class="material-icons text-base">person</span>
                                 </span>
                                 <div>
-                                    <p class="text-xs text-slate-400">Jabatan</p>
-                                    <p class="font-semibold text-slate-700"><?= htmlspecialchars($guru['jabatan']) ?></p>
+                                    <p class="text-xs text-slate-400">Pembina</p>
+                                    <p class="font-semibold text-slate-700"><?= htmlspecialchars($ekskul['pembina']) ?></p>
                                 </div>
                             </div>
 
-                            <div class="flex items-center justify-center md:justify-start gap-2 mt-4">
+                            <div class="flex items-center gap-2 mt-4">
                                 <span class="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center">
-                                    <span class="material-icons text-base">book</span>
+                                    <span class="material-icons text-base">schedule</span>
                                 </span>
                                 <div>
-                                    <p class="text-xs text-slate-400">Bidang Studi</p>
-                                    <p class="font-semibold text-slate-700"><?= htmlspecialchars($guru['bidang_studi']) ?></p>
+                                    <p class="text-xs text-slate-400">Jadwal</p>
+                                    <p class="font-semibold text-slate-700"><?= htmlspecialchars($ekskul['jadwal']) ?></p>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div>
                         <h3 class="font-headline font-bold text-amber-800">Perhatian</h3>
                         <p class="text-sm text-amber-700 mt-1 leading-relaxed">
-                            Data guru ini akan dihapus secara permanen dari database beserta foto yang tersimpan. Data yang sudah dihapus tidak dapat dikembalikan.
+                            Ekstrakurikuler ini akan dihapus secara permanen dari database beserta gambar yang tersimpan. Data yang sudah dihapus tidak dapat dikembalikan.
                         </p>
                     </div>
                 </div>
@@ -191,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <button type="submit"
                                 class="flex items-center justify-center gap-2 px-7 py-3.5 bg-red-600 hover:bg-red-700 text-white rounded-xl font-semibold text-sm transition shadow-lg shadow-red-600/20 sm:min-w-[200px]">
                             <span class="material-icons text-lg">delete</span>
-                            Ya, Hapus Guru
+                            Ya, Hapus Ekstrakurikuler
                         </button>
                     </div>
                 </form>

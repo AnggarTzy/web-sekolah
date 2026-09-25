@@ -1,22 +1,19 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-// Ambil ID dari URL
-$id = $_GET['id'] ?? 0;
-$id = (int) $id;
+cek_login();
 
-// Ambil data berita
-$result = mysqli_query($conn, "SELECT * FROM berita WHERE id = '$id'");
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM berita WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $berita = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
-// Jika berita tidak ditemukan
 if (!$berita) {
     header("Location: index.php");
     exit;
@@ -30,28 +27,20 @@ if (!$berita) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Hapus gambar dari folder uploads
-    if (
-        !empty($berita['gambar']) &&
-        file_exists("../../uploads/" . $berita['gambar'])
-    ) {
-        unlink("../../uploads/" . $berita['gambar']);
-    }
+    hapus_gambar($berita['gambar']);
 
     // Hapus data dari database
-    $query = mysqli_query(
-        $conn,
-        "DELETE FROM berita WHERE id = '$id'"
-    );
+    $stmt = mysqli_prepare($conn, "DELETE FROM berita WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
 
-    if ($query) {
-
+    if (mysqli_stmt_execute($stmt)) {
+        mysqli_stmt_close($stmt);
         catat_aktivitas($conn, 'Berita', 'Menghapus', $berita['judul']);
-
         header("Location: index.php?status=deleted");
         exit;
     } else {
-
         $error = "Gagal menghapus berita: " . mysqli_error($conn);
+        mysqli_stmt_close($stmt);
     }
 }
 ?>

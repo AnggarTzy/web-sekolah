@@ -1,16 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$result = mysqli_query($conn, "SELECT * FROM ekstrakurikuler WHERE id = '$id'");
+cek_login();
+
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM ekstrakurikuler WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $ekskul = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$ekskul) {
     header("Location: index.php");
@@ -18,43 +20,50 @@ if (!$ekskul) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $pembina = mysqli_real_escape_string($conn, $_POST['pembina']);
-    $jadwal = mysqli_real_escape_string($conn, $_POST['jadwal']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
+    $nama      = trim($_POST['nama'] ?? '');
+    $kategori  = trim($_POST['kategori'] ?? '');
+    $pembina   = trim($_POST['pembina'] ?? '');
+    $jadwal    = trim($_POST['jadwal'] ?? '');
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-    $gambar_lama = $ekskul['gambar'];
-    $gambar = $gambar_lama;
-
-    if (!empty($_FILES['gambar']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['gambar']['name']);
-        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            if ($gambar_lama && file_exists($target_dir . $gambar_lama)) unlink($target_dir . $gambar_lama);
-            $gambar = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "UPDATE ekstrakurikuler SET 
-                                  nama = '$nama', kategori = '$kategori', pembina = '$pembina', 
-                                  jadwal = '$jadwal', deskripsi = '$deskripsi', gambar = '$gambar' 
-                                  WHERE id = '$id'");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Ekstrakurikuler', 'Mengedit', $nama);
-        header("Location: index.php");
-        exit;
+    if ($nama === '') {
+        $error = "Nama ekstrakurikuler wajib diisi.";
     } else {
-        $error = "Gagal mengupdate: " . mysqli_error($conn);
+        $gambar = $ekskul['gambar'];
+
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                hapus_gambar($ekskul['gambar']);
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE ekstrakurikuler SET nama=?, kategori=?, pembina=?, jadwal=?, deskripsi=?, gambar=? WHERE id=?"
+            );
+            mysqli_stmt_bind_param($stmt, "ssssssi", $nama, $kategori, $pembina, $jadwal, $deskripsi, $gambar, $id);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Ekstrakurikuler', 'Mengedit', $nama);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal mengupdate: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,7 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </head>
-
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
@@ -222,5 +230,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
-
 </html>

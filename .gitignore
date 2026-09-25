@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Kredensial (JANGAN di-upload!)
+backend/config/credential.php
+backend/config/reset_code.php
+.env
+
+# Upload folder (data user, bukan kode)
+uploads/*
+!uploads/.gitkeep
+
+# File sistem operasi
+.DS_Store
+Thumbs.db
+
+# File IDE
+.vscode/
+.idea/

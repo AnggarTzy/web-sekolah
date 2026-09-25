@@ -1,18 +1,18 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
-$id = $_GET['id'] ?? 0;
-$id = (int) $id;
+cek_login();
 
-$result = mysqli_query($conn, "SELECT * FROM berita WHERE id = '$id'");
+$id = (int) ($_GET['id'] ?? 0);
+
+$stmt = mysqli_prepare($conn, "SELECT * FROM berita WHERE id = ?");
+mysqli_stmt_bind_param($stmt, "i", $id);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 $berita = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
 if (!$berita) {
     header("Location: index.php");
@@ -20,76 +20,45 @@ if (!$berita) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $judul     = trim($_POST['judul'] ?? '');
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
+    $konten    = trim($_POST['konten'] ?? '');
+    $penulis   = trim($_POST['penulis'] ?? 'Admin');
+    $status    = $_POST['status'] ?? 'draft';
 
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
-    $konten = mysqli_real_escape_string($conn, $_POST['konten']);
-    $penulis = mysqli_real_escape_string($conn, $_POST['penulis']);
-    $status = mysqli_real_escape_string($conn, $_POST['status']);
+    if ($judul === '' || $konten === '') {
+        $error = "Judul dan konten wajib diisi.";
+    } else {
+        $slug = buat_slug($judul);
+        $gambar = $berita['gambar'];
 
-    $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $judul)));
-    $slug = trim($slug, '-');
-
-    $gambar_lama = $berita['gambar'];
-    $gambar = $gambar_lama;
-
-    if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] !== UPLOAD_ERR_NO_FILE) {
-
-        if ($_FILES['gambar']['error'] === UPLOAD_ERR_OK) {
-
-            $target_dir = "../../uploads/";
-            if (!is_dir($target_dir)) {
-                mkdir($target_dir, 0777, true);
-            }
-
-            $allowed_types = ['image/jpeg', 'image/png', 'image/jpg', 'image/webp'];
-            $file_type = mime_content_type($_FILES['gambar']['tmp_name']);
-
-            if (in_array($file_type, $allowed_types)) {
-
-                if ($_FILES['gambar']['size'] <= 5 * 1024 * 1024) {
-
-                    $extension = strtolower(pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION));
-                    $file_name = time() . '_' . uniqid() . '.' . $extension;
-                    $target_file = $target_dir . $file_name;
-
-                    if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file)) {
-
-                        if (!empty($gambar_lama) && file_exists($target_dir . $gambar_lama)) {
-                            unlink($target_dir . $gambar_lama);
-                        }
-
-                        $gambar = $file_name;
-                    }
-                } else {
-                    $error = "Ukuran gambar terlalu besar. Maksimal 5MB.";
-                }
+        // Upload gambar baru (opsional)
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                hapus_gambar($berita['gambar']);
+                $gambar = $upload['filename'];
             } else {
-                $error = "Format gambar tidak diperbolehkan. Gunakan JPG, JPEG, PNG, atau WEBP.";
+                $error = $upload['error'];
             }
-        } else {
-            $error = "Terjadi kesalahan saat mengupload gambar.";
         }
-    }
 
-    if (!isset($error)) {
-        $query = mysqli_query($conn, "UPDATE berita SET 
-            judul = '$judul',
-            slug = '$slug',
-            konten = '$konten',
-            gambar = '$gambar',
-            deskripsi = '$deskripsi',
-            penulis = '$penulis',
-            status = '$status'
-            WHERE id = '$id'
-        ");
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "UPDATE berita SET judul=?, slug=?, konten=?, gambar=?, deskripsi=?, penulis=?, status=? WHERE id=?"
+            );
+            mysqli_stmt_bind_param($stmt, "sssssssi", $judul, $slug, $konten, $gambar, $deskripsi, $penulis, $status, $id);
 
-        if ($query) {
-            catat_aktivitas($conn, 'Berita', 'Mengedit', $judul);
-            header("Location: index.php?status=updated");
-            exit;
-        } else {
-            $error = "Gagal mengupdate berita: " . mysqli_error($conn);
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Berita', 'Mengedit', $judul);
+                header("Location: index.php?status=updated");
+                exit;
+            } else {
+                $error = "Gagal mengupdate berita: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
         }
     }
 }

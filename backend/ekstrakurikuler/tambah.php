@@ -1,46 +1,55 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
+cek_login();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $pembina = mysqli_real_escape_string($conn, $_POST['pembina']);
-    $jadwal = mysqli_real_escape_string($conn, $_POST['jadwal']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
+    $nama      = trim($_POST['nama'] ?? '');
+    $kategori  = trim($_POST['kategori'] ?? '');
+    $pembina   = trim($_POST['pembina'] ?? '');
+    $jadwal    = trim($_POST['jadwal'] ?? '');
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-    $gambar = null;
-    if (!empty($_FILES['gambar']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['gambar']['name']);
-        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            $gambar = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "INSERT INTO ekstrakurikuler (nama, kategori, pembina, jadwal, deskripsi, gambar) 
-                                  VALUES ('$nama', '$kategori', '$pembina', '$jadwal', '$deskripsi', '$gambar')");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Ekstrakurikuler', 'Menambah', $nama);
-        header("Location: index.php");
-        exit;
+    if ($nama === '') {
+        $error = "Nama ekstrakurikuler wajib diisi.";
     } else {
-        $error = "Gagal menyimpan: " . mysqli_error($conn);
+        $gambar = null;
+
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO ekstrakurikuler (nama, kategori, pembina, jadwal, deskripsi, gambar) 
+                 VALUES (?, ?, ?, ?, ?, ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "ssssss", $nama, $kategori, $pembina, $jadwal, $deskripsi, $gambar);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Ekstrakurikuler', 'Menambah', $nama);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal menyimpan: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,10 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </head>
-
 <body class="bg-slate-50 font-sans text-slate-700 antialiased">
 
-    <!-- NAVBAR -->
     <nav class="bg-primary text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -98,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </nav>
 
-    <!-- KONTEN -->
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
             <div class="px-6 py-5 border-b border-slate-100">
@@ -204,5 +210,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         });
     </script>
 </body>
-
 </html>

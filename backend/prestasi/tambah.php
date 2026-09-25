@@ -1,39 +1,49 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['login'])) {
-    header("Location: ../admin/login.php");
-    exit;
-}
-
 include '../config/koneksi.php';
 
+cek_login();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $judul = mysqli_real_escape_string($conn, $_POST['judul']);
-    $kategori = mysqli_real_escape_string($conn, $_POST['kategori']);
-    $tingkat = mysqli_real_escape_string($conn, $_POST['tingkat']);
-    $tahun = mysqli_real_escape_string($conn, $_POST['tahun']);
-    $deskripsi = mysqli_real_escape_string($conn, $_POST['deskripsi']);
+    $judul     = trim($_POST['judul'] ?? '');
+    $kategori  = trim($_POST['kategori'] ?? '');
+    $tingkat   = trim($_POST['tingkat'] ?? '');
+    $tahun     = (int) ($_POST['tahun'] ?? 0);
+    $deskripsi = trim($_POST['deskripsi'] ?? '');
 
-    $gambar = null;
-    if (!empty($_FILES['gambar']['name'])) {
-        $target_dir = "../../uploads/";
-        if (!is_dir($target_dir)) mkdir($target_dir, 0777, true);
-        $file_name = time() . "_" . basename($_FILES['gambar']['name']);
-        if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_dir . $file_name)) {
-            $gambar = $file_name;
-        }
-    }
-
-    $query = mysqli_query($conn, "INSERT INTO prestasi (judul, kategori, tingkat, tahun, deskripsi, gambar) 
-                                  VALUES ('$judul', '$kategori', '$tingkat', '$tahun', '$deskripsi', '$gambar')");
-
-    if ($query) {
-        catat_aktivitas($conn, 'Prestasi', 'Menambah', $judul);
-        header("Location: index.php");
-        exit;
+    if ($judul === '' || $tahun === 0) {
+        $error = "Judul dan tahun wajib diisi.";
     } else {
-        $error = "Gagal menyimpan: " . mysqli_error($conn);
+        $gambar = null;
+
+        if (!empty($_FILES['gambar']['name'])) {
+            $upload = upload_gambar($_FILES['gambar']);
+            if ($upload['success']) {
+                $gambar = $upload['filename'];
+            } else {
+                $error = $upload['error'];
+            }
+        }
+
+        if (!isset($error)) {
+            $stmt = mysqli_prepare(
+                $conn,
+                "INSERT INTO prestasi (judul, kategori, tingkat, tahun, deskripsi, gambar) 
+                 VALUES (?, ?, ?, ?, ?, ?)"
+            );
+            mysqli_stmt_bind_param($stmt, "sssiss", $judul, $kategori, $tingkat, $tahun, $deskripsi, $gambar);
+
+            if (mysqli_stmt_execute($stmt)) {
+                mysqli_stmt_close($stmt);
+                catat_aktivitas($conn, 'Prestasi', 'Menambah', $judul);
+                header("Location: index.php?status=success");
+                exit;
+            } else {
+                $error = "Gagal menyimpan: " . mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+            }
+        }
     }
 }
 ?>
